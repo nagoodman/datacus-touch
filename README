@@ -14,3 +14,21 @@ Ryan Daubert - ryan.daubert@colorado.edu
 Ian Smith - ianhenrysmith@gmail.com
 Adam Jackson - adam.jackson@colorado.edu
 Matt Smith - elementalsk816@me.com
+
+API's
+*****
+TOUCH
+  TUIO - tuio as3 lib
+    bubblebird.at/tuioflash/tuio-as3-library
+
+GRAPHICS
+  UI
+    degrafa
+  Charts
+    flex charts?
+
+SERVER
+  Mondrian Connector
+    BlazeDS
+      OLAP4J
+
