@@ -9,11 +9,7 @@ The multi-touch data explorer
 
 Contributors
 ************
-<<<<<<< HEAD
 Buck Heroux  - tmbuckheroux@gmail.com - asus g1 lnx & win7
-=======
-Buck Heroux  - tmbuckheroux@gmail.com
->>>>>>> 60cf6a52bcc52b63930b08dedec0307fe050badc
 Ryan Daubert - ryan.daubert@colorado.edu
 Ian Smith    - ianhenrysmith@gmail.com
 Adam Jackson - adam.jackson@colorado.edu
@@ -24,8 +20,6 @@ API's
 TOUCH
   TUIO - tuio as3 lib
     -bubblebird.at/tuioflash/tuio-as3-library
-<<<<<<< HEAD
-=======
 	after startup need to run TUIO tracker
 
 	for 64-bit distro
@@ -42,7 +36,6 @@ TOUCH
 
 	
 
->>>>>>> 60cf6a52bcc52b63930b08dedec0307fe050badc
 
 GRAPHICS
   UI
