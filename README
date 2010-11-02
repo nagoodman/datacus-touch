@@ -1,0 +1,41 @@
+*********
+*DATACUS*
+*********
+
+Sept. 7th, 2010
+
+The multi-touch data explorer
+*****************************
+
+Contributors
+************
+Buck Heroux  - tmbuckheroux@gmail.com - asus g1 lnx & win7
+Ryan Daubert - ryan.daubert@colorado.edu
+Ian Smith    - ianhenrysmith@gmail.com
+Adam Jackson - adam.jackson@colorado.edu
+Matt Smith   - elementalsk816@me.com
+
+API's
+*****
+TOUCH
+  TUIO - tuio as3 lib
+    -bubblebird.at/tuioflash/tuio-as3-library
+
+GRAPHICS
+  UI
+    degrafa
+     -http://www.degrafa.org/
+  Charts
+    flex charts?
+     -http://www.flex-blog.com/samples/sample13/srcview/index.html
+ 
+SERVER
+  Server Connector
+    BlazeDS
+      -http://en.wikipedia.org/wiki/BlazeDS
+    OLAP4J
+      -http://www.olap4j.org/
+
+FLASH
+  Flash Apps: http://www.adobe.com/support/flash/applications/app_design/app_design04.html
+  App Server: http://www.adobe.com/support/flash/applications/app_design/app_design06.html

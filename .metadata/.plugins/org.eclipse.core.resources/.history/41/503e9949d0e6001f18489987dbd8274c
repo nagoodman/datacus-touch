@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<degrafa:GraphicBoderSkin xmlns:Degrafa="http://www.degrafa.com/2007"
+	xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			private var awidth:Number-0;
+		
+			[Bindable]
+			private var aheight:Number-0;		
+		]]>
+	</mx:Script>
+
+</degrafa:GraphicBoderSkin>

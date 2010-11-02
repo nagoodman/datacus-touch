@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Degrafa:GraphicBorderSkin xmlns:Degrafa="http://www.degrafa.com/2007"
+						   xmlns:mx="library://ns.adobe.com/flex/mx" 
+						   xmlns:geometry="com.degrafa.geometry.*"
+						   xmlns:fx="http://ns.adobe.com/mxml/2009" >
+	
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			private var awidth:Number;
+			
+			[Bindable]
+			private var aheight:Number;
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				awidth = unscaledWidth;
+				aheight = unscaledHeight;
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<Degrafa:SolidStroke id="mainStroke" alpha="1" color="#000000" caps="round" weight="3"/>
+		<Degrafa:SolidFill id="mainFill" alpha="1" color="#FFFFFF"/>	
+	</fx:Declarations>
+	<geometry:Geometry>
+		<Degrafa:RegularRectangle width="{awidth}" height="{aheight}" fill="{mainFill}" stroke="{mainStroke}" />
+	</geometry:Geometry>
+</Degrafa:GraphicBorderSkin>
