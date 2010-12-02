@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+	                   xmlns:dg="http://www.degrafa.com/2007"
+					   xmlns:components="components.*"
+					   creationComplete="onCreationComplete()"
+					   minWidth="1024"
+					   minHeight="768">  
+	
+	<!--<mx:Button verticalCenter="-92" horizontalCenter="-73" label="Datacus!"
+			   overSkin="buttonOverState" upSkin="buttonUpState" width="200" height="150"/>-->
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.display.Stage;
+			
+			import org.tuio.*;
+			import org.tuio.TouchEvent;
+			import org.tuio.TuioClient;
+			import org.tuio.connectors.UDPConnector;
+			import org.tuio.debug.TuioDebug;
+			import org.tuio.mouse.MouseToTouchDispatcher;
+			import org.tuio.windows7.*;
+
+			//need to run hook?
+			private var tc:TuioClient;
+			private var tm:TuioManager;
+			private var winTouch:Windows7TouchToTuioDispatcher;
+			private var mTouch:MouseToTouchDispatcher;
+			private var tDbg:TuioDebug;
+
+			protected function onCreationComplete():void {
+				var stage:Stage = this.systemManager.stage;
+				tc = new TuioClient(new UDPConnector());
+				tm = TuioManager.init(stage, tc);
+				winTouch = new Windows7TouchToTuioDispatcher(stage);
+				//mTouch = new MouseToTouchDispatcher(stage);
+				tDbg = TuioDebug.init(stage);
+				trace("init");
+				this.addEventListener(org.tuio.TouchEvent.TOUCH_DOWN, handleDown);
+				this.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
+				this.addEventListener(org.tuio.TouchEvent.TOUCH_UP, handleUp);	
+			}
+			
+			
+			public function handleDown(e:org.tuio.TouchEvent):void {
+				trace("TOUCHDOWN!");
+			}
+			
+			public function handleUp(e:org.tuio.TouchEvent):void {
+				trace("TOUCHUP!");
+			}
+			
+			public function handleMove(e:TouchEvent):void {
+				trace("moving");
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<components:CategoriesPanel x="150" y="517">
+	</components:CategoriesPanel>
+	<components:MeasuresPanel x="-1" y="167">
+	</components:MeasuresPanel>
+	<mx:ColumnChart id="columnchart1" height="352" width="700" x="203" y="163">
+		<mx:series>
+			<mx:ColumnSeries displayName="Series 1" yField=""/>
+		</mx:series>
+	</mx:ColumnChart>
+	<s:Button x="42" y="78" label="Home"/>
+	<components:SeriesPanel x="150" y="38">
+	</components:SeriesPanel>
+	<s:Button x="1023" y="102" label="Sets"/>
+</s:WindowedApplication>

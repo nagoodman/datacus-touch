@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:s="library://ns.adobe.com/flex/spark" xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt" autoDrawBackground="false" xmlns:mx="library://ns.adobe.com/flex/mx">
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hovered"/>
+		<s:State name="selected"/>
+	</s:states>
+	<mx:Image height="57" id="bitmapimage2" source="{data.image1}" d:userLabel="ThirdLevel" width="109" x="0" y="0" smoothBitmapContent="true" maintainAspectRatio="false"/>
+	<s:Rect d:userLabel="Item Highlight Rectangle" width="109" height="57" alpha.normal="0" alpha.hovered="0.3" alpha.selected="0.5">
+		<s:fill>
+			<s:SolidColor color="0xCED7EE"/>
+		</s:fill>
+	</s:Rect>
+</s:ItemRenderer>

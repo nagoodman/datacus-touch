@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:s="library://ns.adobe.com/flex/spark" xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+	<s:Group x="0" y="0">
+		<s:Rect alpha="0.79" height="99" id="rect2" radiusX="7" d:userLabel="Server_Status" width="140" x="0.5" y="0.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext3" tabStops="S0 S50 S100" text="Server State" x="20" y="45"/>
+	</s:Group>
+</s:Group>

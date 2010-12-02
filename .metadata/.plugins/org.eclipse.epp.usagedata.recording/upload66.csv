@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1289338860211
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1289338860367
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338874893
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338875461
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338875837
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.file.save,1289338876685
+activated,view,org.eclipse.ui.views,3.3.1.M20081112-0800,org.eclipse.ui.views.ContentOutline,1289338878527
+no handler,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338883901
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1289338884487
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338885023
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338885513
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.file.save,1289338886372
+activated,view,org.eclipse.ui.views,3.3.1.M20081112-0800,org.eclipse.ui.views.ContentOutline,1289338888291
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1289338891204
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338895655
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338896127
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338896556
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338896998
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1289338897405
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.selectAll,1289338898389
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.file.save,1289338899641
+activated,view,org.eclipse.ui.views,3.3.1.M20081112-0800,org.eclipse.ui.views.ContentOutline,1289338905951
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1289338907442
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1289338909028
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1289338913281

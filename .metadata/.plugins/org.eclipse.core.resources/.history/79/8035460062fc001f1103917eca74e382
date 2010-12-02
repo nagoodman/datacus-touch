@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:fc="http://ns.adobe.com/flashcatalyst/2009" xmlns:components="components.*" backgroundColor="#FFFFFF" height="1200" preloaderChromeColor="#FFFFFF" width="1920">
+	<fx:Script><![CDATA[
+			protected function pickerCustomComponent2_clickHandler():void
+			{
+				const state:String = currentState;
+				if ( state == 'Page1' ) {
+					currentState='Page2';
+				}
+				if ( state == 'Page2' ) {
+					currentState='Page1';
+				}
+			}
+		]]></fx:Script>
+	<s:states>
+		<s:State name="Page1"/>
+		<s:State name="Page2"/>
+	</s:states>
+	<fx:DesignLayer d:userLabel="Background">
+		<s:Rect height="1200" d:userLabel="Background" width="1920" x="0" y="0">
+			<s:fill>
+				<s:SolidColor color="#CFE8FF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="0x5380d0" inner="true" knockout="false" quality="2" strength="1"/>
+			</s:filters>
+		</s:Rect>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="100" id="richtext1" tabStops="S0 S50 S100 S150 S200 S250 S300 S350 S400 S450 S500 S550 S600 S650 S700 S750" whiteSpaceCollapse="preserve" x="562" y="480">
+			<s:content><s:p><s:span>This is a graph</s:span></s:p><s:p><s:span><![CDATA[and the graph is ]]></s:span></s:p><s:p><s:span>AWESOME</s:span></s:p></s:content>
+		</s:RichText>
+	</fx:DesignLayer>
+	<fx:DesignLayer d:userLabel="Modules">
+		<s:Rect height="120" radiusX="7" d:userLabel="Series" width="1520" x="199.5" y="159.5" alpha="0.79" id="rect3">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect height="260" radiusX="7" d:userLabel="Home" width="160" x="19.5" y="19.5" alpha="0.79" id="rect6">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect height="120" radiusX="7" d:userLabel="Pager" width="1520" x="199.5" y="19.5" alpha="0.79" id="rect1">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect height="160" radiusX="7" d:userLabel="Undo_Redo" width="159" x="20.5" y="1019.5" alpha="0.79" id="rect9">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect height="700" radiusX="7" d:userLabel="Measures" width="159" x="20.5" y="299.5" alpha="0.79" id="rect8">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect height="159" radiusX="7" d:userLabel="Categories" width="1520" x="199.5" y="1020.5" alpha="0.79" id="rect4">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect height="159" radiusX="7" d:userLabel="Delete" width="159" x="1741.5" y="1020.5" alpha="0.79" id="rect5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<components:PickerCustomComponent2 click="pickerCustomComponent2_clickHandler()" currentState.Page2="State2" id="pickercustomcomponent21" x="200" y="299" alpha.Page2="1"/>
+		<s:Rect height="120" radiusX="7" d:userLabel="Server_Status" width="160" x="1739.5" y="19.5" alpha="0.79" id="rect2">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect height="120" radiusX="7" d:userLabel="Saved_Sets" width="159" x="1740.5" y="159.5" alpha="0.79" id="rect7">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+	</fx:DesignLayer>
+	<fx:DesignLayer d:userLabel="Labels">
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Server State" x="1768" y="65"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100 S150" text="Saved Sets" x="1777" y="205"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Picker" x="1800" y="425"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Delete" x="1800" y="1091"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Categories" x="920" y="1085"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100 S150" text="Undo/Redo" x="58" y="1085"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Measures" x="60" y="405"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Home" x="80" y="100"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Pager" x="920" y="71"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" tabStops="S0 S50 S100" text="Series" x="923" y="200"/>
+	</fx:DesignLayer>
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{pickercustomcomponent21}">
+					<s:SetAction d:noAutoDelete="true" property="currentState" value="State2"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{pickercustomcomponent21}">
+					<s:SetAction d:noAutoDelete="true" property="currentState" value="State1"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+	<fx:Private/>
+</s:Application>

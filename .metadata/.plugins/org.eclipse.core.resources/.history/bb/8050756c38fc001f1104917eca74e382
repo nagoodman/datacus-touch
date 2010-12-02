@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:d="http://ns.adobe.com/fxg/2008/dt" 
+					   xmlns:fc="http://ns.adobe.com/flashcatalyst/2009" 
+					   xmlns:components="components.*"
+					   backgroundColor="#FFFFFF" 
+					   height="900" 
+					   width="1440"
+					   creationComplete="init()"
+					   preloaderChromeColor="#FFFFFF">
+					
+	<fx:Script><![CDATA[
+			import flash.display.Stage;
+			
+			import org.tuio.*;
+			import org.tuio.TouchEvent;
+			import org.tuio.TuioClient;
+			import org.tuio.connectors.UDPConnector;
+			import org.tuio.debug.TuioDebug;
+			import org.tuio.gestures.DragGesture;
+			import org.tuio.gestures.GestureManager;
+			import org.tuio.mouse.MouseToTouchDispatcher;
+			import org.tuio.windows7.*;
+			
+			public var tc:TuioClient;
+			public var tm:TuioManager;
+			//public var gm:GestureManager;
+			private var winTouch:Windows7TouchToTuioDispatcher;
+			private var mTouch:MouseToTouchDispatcher;
+			private var tDbg:TuioDebug;
+			protected var mainStage:Stage;
+			
+			protected function init():void {
+				mainStage = this.systemManager.stage;
+				//will these clients be used for every object?
+				tc = new TuioClient(new UDPConnector());
+				tm = TuioManager.init(mainStage, tc);
+				//gm = GestureManager.init(stage,tc);
+				//GestureManager.addGesture(new DragGesture());
+				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
+				mTouch = new MouseToTouchDispatcher(mainStage);
+				tDbg = TuioDebug.init(mainStage);
+				tc.addListener(tDbg);
+				//these event listeners need to be added to each object
+				pickercustomcomponent21.addEventListener(org.tuio.TouchEvent.TOUCH_DOWN, pickerTapHandler);
+				mainStage.addEventListener(org.tuio.TouchEvent.TOUCH_DOWN, handleDown);
+				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
+				mainStage.addEventListener(org.tuio.TouchEvent.TOUCH_UP, handleUp);	
+				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
+			}
+		
+			public function handleDown(e:org.tuio.TouchEvent):void {
+				trace("TOUCHDOWN!");
+				trace(e.relatedObject);
+			}
+			
+			public function handleUp(e:org.tuio.TouchEvent):void {
+				trace("TOUCHUP!");
+				trace(e.relatedObject);
+			}
+		
+			protected function pickerTapHandler():void
+			{
+				trace("pickerDown!")
+				const state:String = currentState;
+				if ( state == 'Page1' ) {
+					currentState='Page2';
+				}
+				if ( state == 'Page2' ) {
+					currentState='Page1';
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="Page1"/>
+		<s:State name="Page2"/>
+	</s:states>
+	<fx:DesignLayer d:userLabel="Background">
+		<s:Rect height="900" id="rect10" d:userLabel="Background" width="1440" x="0" y="0">
+			<s:fill>
+				<s:SolidColor color="#CFE8FF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="0x5380d0" inner="true" knockout="false" quality="2" strength="1"/>
+			</s:filters>
+		</s:Rect>
+	</fx:DesignLayer>
+	<fx:DesignLayer d:userLabel="Modules">
+		<s:Rect alpha="0.79" height="100" id="rect3" radiusX="7" d:userLabel="Series" width="1079" x="180.5" y="139.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect alpha="0.79" height="220" id="rect6" radiusX="7" d:userLabel="Home" width="140" x="19.5" y="19.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect alpha="0.79" height="100" id="rect1" radiusX="7" d:userLabel="Pager" width="1079" x="180.5" y="19.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect alpha="0.79" height="100" id="rect9" radiusX="7" d:userLabel="Undo_Redo" width="139" x="20.5" y="780.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect alpha="0.79" height="499" id="rect8" radiusX="7" d:userLabel="Measures" width="139" x="20.5" y="260.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect alpha="0.79" height="99" id="rect4" radiusX="7" d:userLabel="Categories" width="1079" x="180.5" y="780.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect alpha="0.79" height="99" id="rect5" radiusX="7" d:userLabel="Delete" width="139" x="1280.5" y="780.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<components:PickerCustomComponent2 
+			id="pickercustomcomponent21" 
+			x="180" y="259"
+			currentState.Page2="State2">
+		</components:PickerCustomComponent2>
+		<s:Rect alpha="0.79" height="99" id="rect2" radiusX="7" d:userLabel="Server_Status" width="140" x="1280.5" y="20.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+		<s:Rect alpha="0.79" height="99" id="rect7" radiusX="7" d:userLabel="Saved_Sets" width="139" x="1280.5" y="140.5">
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+			<s:filters>
+				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+			</s:filters>
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+		</s:Rect>
+	</fx:DesignLayer>
+	<fx:DesignLayer d:userLabel="Labels">
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext3" tabStops="S0 S50 S100" text="Server State" x="1300" y="65"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext2" tabStops="S0 S50 S100 S150" text="Saved Sets" x="1297" y="180"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext4" tabStops="S0 S50 S100" text="Picker" x="1320" y="425"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext8" tabStops="S0 S50 S100" text="Delete" x="1302" y="805"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext9" tabStops="S0 S50 S100" text="Categories" x="663" y="805"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" height="20" id="richtext5" tabStops="S0 S50 S100 S150" text="Undo/Redo" width="102" x="40" y="805"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext11" tabStops="S0 S50 S100" text="Measures" x="52" y="405"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext10" tabStops="S0 S50 S100" text="Home" x="66" y="100"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext6" tabStops="S0 S50 S100" text="Pager" x="680" y="65"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="richtext7" tabStops="S0 S50 S100" text="Series" x="680" y="180"/>
+	</fx:DesignLayer>
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{pickercustomcomponent21}">
+					<s:SetAction d:noAutoDelete="true" property="currentState" value="State2"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{pickercustomcomponent21}">
+					<s:SetAction d:noAutoDelete="true" property="currentState" value="State1"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+	<fx:Private/>
+</s:WindowedApplication>

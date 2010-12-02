@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark" xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+	<fx:Metadata>[HostComponent("spark.components.List")]</fx:Metadata>
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="disabled"/>
+	</s:states>
+	<s:Rect height="551" id="rect2" d:userLabel="Datalist" width="1350" x="0.5" y="0.5">
+		<s:stroke>
+			<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="#FFFFFF"/>
+		</s:fill>
+	</s:Rect>
+	<s:BitmapImage height="78" id="bitmapimage1" includeIn="normal" smooth="true" source="@Embed('/assets/images/picker_panel.png')" x="170.05" y="50"/>
+	<s:Rect alpha="0" height="78" includeIn="normal" d:userLabel="Item Highlight Rectangle" width="150" x="170.05" y="50">
+		<s:fill>
+			<s:SolidColor color="0xCED7EE"/>
+		</s:fill>
+	</s:Rect>
+	<s:DataGroup clipAndEnableScrolling="true" height="128.95" id="dataGroup" includeIn="normal" itemRenderer="components.RepeatedItem5" width="1233" x="67.05" y="140">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle"/>
+		</s:layout>
+	</s:DataGroup>
+	<s:Rect alpha="0" height="78" includeIn="normal" d:userLabel="Item Highlight Rectangle" width="150" x="169.05" y="179.9">
+		<s:fill>
+			<s:SolidColor color="0xCED7EE"/>
+		</s:fill>
+	</s:Rect>
+	<s:BitmapImage height="78" id="bitmapimage6" includeIn="normal" smooth="true" source="@Embed('/assets/images/picker_panel.png')" x="20" y="282"/>
+	<s:Rect alpha="0" height="78" includeIn="normal" d:userLabel="Item Highlight Rectangle" width="150" x="20" y="282">
+		<s:fill>
+			<s:SolidColor color="0xCED7EE"/>
+		</s:fill>
+	</s:Rect>
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="normal" toState="disabled">
+			<s:Parallel>
+				<s:Parallel target="{dataGroup}">
+					<s:Fade duration="0"/>
+				</s:Parallel>
+				<s:Parallel target="{dataGroup}">
+					<s:Fade duration="0"/>
+				</s:Parallel>
+				<s:Parallel target="{dataGroup}">
+					<s:Fade duration="0"/>
+				</s:Parallel>
+				<s:Parallel target="{bitmapimage1}">
+					<s:Fade duration="0"/>
+				</s:Parallel>
+				<s:Parallel target="{dataGroup}">
+					<s:Fade duration="0"/>
+				</s:Parallel>
+				<s:Parallel target="{bitmapimage6}">
+					<s:Fade duration="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+</s:Skin>

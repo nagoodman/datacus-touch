@@ -159,3 +159,2335 @@ org.eclipse.core.runtime.CoreException: Cannot create or restore 'datacus' becau
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
 !SUBENTRY 1 org.eclipse.ltk.core.refactoring 4 0 2010-11-02 16:53:43.636
 !MESSAGE Cannot create or restore 'datacus' because it already exists.
+!SESSION 2010-11-04 22:32:21.243 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.resources 2 10035 2010-11-04 22:32:49.354
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:33:17.643
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:33:17.643
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:33:17.644
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:33:17.646
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:33:17.646
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:33:17.647
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+!SESSION 2010-11-04 22:34:15.502 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.resources 2 10035 2010-11-04 22:34:30.307
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:34:37.643
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:34:37.644
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:34:37.645
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:34:37.647
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:34:37.648
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-04 22:34:37.649
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY CodeModel 2 1 2010-11-04 22:34:39.173
+!MESSAGE Could not decompress SWF element
+!STACK 0
+java.io.IOException: Access is denied
+	at java.io.WinNTFileSystem.createFileExclusively(Native Method)
+	at java.io.File.createNewFile(Unknown Source)
+	at com.adobe.flexbuilder.codemodel.internal.swc.CachedSwcInfo.decompressElement(CachedSwcInfo.java:164)
+	at com.adobe.flexbuilder.codemodel.internal.swc.CachedSwcInfo.decompress(CachedSwcInfo.java:112)
+	at com.adobe.flexbuilder.codemodel.internal.swc.SwcCache.updateSwc(SwcCache.java:127)
+	at com.adobe.flexbuilder.codemodel.internal.swc.SwcManager.updateSwc(SwcManager.java:96)
+	at com.adobe.flexbuilder.codemodel.internal.resourcehandlers.SWCFileHandler.parseFile(SWCFileHandler.java:162)
+	at com.adobe.flexbuilder.codemodel.internal.concurrent.SWCLibraryWorkerFactory$LibraryWorker.run(SWCLibraryWorkerFactory.java:58)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY CodeModel 2 1 2010-11-04 22:35:15.922
+!MESSAGE Could not save SWCIndex
+!STACK 0
+java.io.FileNotFoundException: C:\Users\buck\My Dropbox\datacus\.metadata\.plugins\com.adobe.flexbuilder.codemodel\searchCache\SWCReferenceIndex.index\_5.cfx (The process cannot access the file because it is being used by another process)
+	at java.io.RandomAccessFile.open(Native Method)
+	at java.io.RandomAccessFile.<init>(Unknown Source)
+	at org.apache.lucene.store.FSDirectory.sync(FSDirectory.java:456)
+	at org.apache.lucene.index.IndexWriter.startCommit(IndexWriter.java:4590)
+	at org.apache.lucene.index.IndexWriter.prepareCommit(IndexWriter.java:3365)
+	at org.apache.lucene.index.IndexWriter.commit(IndexWriter.java:3408)
+	at com.adobe.flexbuilder.codemodel.internal.common.AbstractTextDatabase.optimize(AbstractTextDatabase.java:261)
+	at com.adobe.flexbuilder.codemodel.internal.search.SWCSearchDataProvider.indexFiles(SWCSearchDataProvider.java:475)
+	at com.adobe.flexbuilder.codemodel.internal.search.SWCSearchDataProvider$2.run(SWCSearchDataProvider.java:362)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.eclipse.jface 2 0 2010-11-04 22:35:52.383
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-04 22:35:52.383
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-04 22:35:52.383
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2010-11-09 17:52:50.786 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 17:53:49.907
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 17:53:49.922
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 17:53:49.923
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 17:53:49.925
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 17:53:49.926
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 17:53:49.926
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-09 17:54:54.623
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-09 17:54:54.623
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-09 17:54:54.623
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2010-11-09 13:33:51.198 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 13:34:21.110
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 13:34:21.141
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 13:34:21.141
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 13:34:21.141
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 13:34:21.141
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 13:34:21.141
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-09 13:35:42.126
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-09 13:35:42.126
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		ActionHandler(com.adobe.flexbuilder.as.editor.ui.packageexplorer.actions.FlexPackageExplorerFindAllDeclarationsAction@16ce167),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		ActionHandler(com.adobe.flexbuilder.as.editor.ui.packageexplorer.actions.FlexPackageExplorerFindAllDeclarationsAction@16ce167),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-09 13:35:42.126
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		ActionHandler(com.adobe.flexbuilder.as.editor.ui.packageexplorer.actions.FlexPackageExplorerFindAllReferencesAction@142684a),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		ActionHandler(com.adobe.flexbuilder.as.editor.ui.packageexplorer.actions.FlexPackageExplorerFindAllReferencesAction@142684a),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2010-11-09 14:13:33.783 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 14:13:46.713
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 14:13:46.716
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 14:13:46.718
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 14:13:46.720
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 14:13:46.722
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-09 14:13:46.728
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-09 14:13:55.194
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-09 14:13:55.209
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1b9c5cd)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1b9c5cd)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-09 14:13:55.209
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@16946d4)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@16946d4)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.osgi 2 0 2010-11-09 14:14:00.810
+!MESSAGE While loading class "org.eclipse.mylyn.tasks.ui.TasksUiImages", thread "Thread[main,6,main]" timed out waiting (5000ms) for thread "Thread[Worker-6,5,main]" to finish starting bundle "reference:file:plugins\org.eclipse.mylyn.tasks.ui_3.0.5.v20090218-1800-e3x.jar [318]". To avoid deadlock, thread "Thread[main,6,main]" is proceeding but "org.eclipse.mylyn.tasks.ui.TasksUiImages" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: State change in progress for bundle "reference:file:plugins\org.eclipse.mylyn.tasks.ui_3.0.5.v20090218-1800-e3x.jar" by thread "Worker-6".
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1144)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:263)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:400)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:111)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:427)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:193)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:370)
+	at org.eclipse.osgi.framework.internal.core.SingleSourcePackage.loadClass(SingleSourcePackage.java:33)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClassInternal(BundleLoader.java:443)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:399)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:87)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.eclipse.mylyn.context.ui.AbstractFocusViewAction.<init>(AbstractFocusViewAction.java:215)
+	at org.eclipse.mylyn.internal.context.ui.actions.FocusOutlineAction.<init>(FocusOutlineAction.java:43)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at org.eclipse.core.internal.registry.osgi.RegistryStrategyOSGI.createExecutableExtension(RegistryStrategyOSGI.java:170)
+	at org.eclipse.core.internal.registry.ExtensionRegistry.createExecutableExtension(ExtensionRegistry.java:867)
+	at org.eclipse.core.internal.registry.ConfigurationElement.createExecutableExtension(ConfigurationElement.java:243)
+	at org.eclipse.core.internal.registry.ConfigurationElementHandle.createExecutableExtension(ConfigurationElementHandle.java:51)
+	at org.eclipse.ui.internal.WorkbenchPlugin.createExtension(WorkbenchPlugin.java:259)
+	at org.eclipse.ui.internal.PluginAction.createDelegate(PluginAction.java:122)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:275)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:289)
+	at org.eclipse.ui.part.PageBookView$4.run(PageBookView.java:246)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.part.PageBookView$SelectionManager.selectionChanged(PageBookView.java:244)
+	at org.eclipse.ui.part.PageBookView$SelectionProvider.selectionChanged(PageBookView.java:310)
+	at org.eclipse.ui.part.PageBookView.pageSelectionChanged(PageBookView.java:883)
+	at org.eclipse.ui.part.PageBookView.access$2(PageBookView.java:878)
+	at org.eclipse.ui.part.PageBookView$2.selectionChanged(PageBookView.java:154)
+	at org.eclipse.jface.viewers.Viewer$2.run(Viewer.java:162)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:48)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:175)
+	at org.eclipse.jface.viewers.Viewer.fireSelectionChanged(Viewer.java:160)
+	at org.eclipse.jface.viewers.StructuredViewer.updateSelection(StructuredViewer.java:2062)
+	at org.eclipse.jface.viewers.StructuredViewer.setSelection(StructuredViewer.java:1638)
+	at org.eclipse.jface.viewers.TreeViewer.setSelection(TreeViewer.java:1104)
+	at org.eclipse.jface.viewers.Viewer.setSelection(Viewer.java:392)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.setSelection(AbstractFlexOutliner.java:206)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.syncSelection(DesignItemOutlineUpdater.java:431)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.partActivated(DesignItemOutlineUpdater.java:397)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.partActivated(AbstractFlexOutliner.java:235)
+	at org.eclipse.ui.internal.PartListenerList$1.run(PartListenerList.java:72)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.PartListenerList.fireEvent(PartListenerList.java:57)
+	at org.eclipse.ui.internal.PartListenerList.firePartActivated(PartListenerList.java:70)
+	at org.eclipse.ui.internal.PartService.firePartActivated(PartService.java:186)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:305)
+	at org.eclipse.ui.internal.WorkbenchPagePartList.fireActivePartChanged(WorkbenchPagePartList.java:56)
+	at org.eclipse.ui.internal.PartList.setActivePart(PartList.java:126)
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3491)
+	at org.eclipse.ui.internal.WorkbenchPage.activate(WorkbenchPage.java:610)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1086)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1057)
+	at org.eclipse.ui.internal.WorkbenchPage$19.run(WorkbenchPage.java:3773)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.WorkbenchPage.showView(WorkbenchPage.java:3770)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.showViews(CodeAndDesignViewManager.java:709)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.access$4(CodeAndDesignViewManager.java:632)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener$1.run(CodeAndDesignViewManager.java:607)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3800)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3425)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+Caused by: org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	... 95 more
+Root exception:
+org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1144)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:263)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:400)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:111)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:427)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:193)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:370)
+	at org.eclipse.osgi.framework.internal.core.SingleSourcePackage.loadClass(SingleSourcePackage.java:33)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClassInternal(BundleLoader.java:443)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:399)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:87)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.eclipse.mylyn.context.ui.AbstractFocusViewAction.<init>(AbstractFocusViewAction.java:215)
+	at org.eclipse.mylyn.internal.context.ui.actions.FocusOutlineAction.<init>(FocusOutlineAction.java:43)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at org.eclipse.core.internal.registry.osgi.RegistryStrategyOSGI.createExecutableExtension(RegistryStrategyOSGI.java:170)
+	at org.eclipse.core.internal.registry.ExtensionRegistry.createExecutableExtension(ExtensionRegistry.java:867)
+	at org.eclipse.core.internal.registry.ConfigurationElement.createExecutableExtension(ConfigurationElement.java:243)
+	at org.eclipse.core.internal.registry.ConfigurationElementHandle.createExecutableExtension(ConfigurationElementHandle.java:51)
+	at org.eclipse.ui.internal.WorkbenchPlugin.createExtension(WorkbenchPlugin.java:259)
+	at org.eclipse.ui.internal.PluginAction.createDelegate(PluginAction.java:122)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:275)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:289)
+	at org.eclipse.ui.part.PageBookView$4.run(PageBookView.java:246)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.part.PageBookView$SelectionManager.selectionChanged(PageBookView.java:244)
+	at org.eclipse.ui.part.PageBookView$SelectionProvider.selectionChanged(PageBookView.java:310)
+	at org.eclipse.ui.part.PageBookView.pageSelectionChanged(PageBookView.java:883)
+	at org.eclipse.ui.part.PageBookView.access$2(PageBookView.java:878)
+	at org.eclipse.ui.part.PageBookView$2.selectionChanged(PageBookView.java:154)
+	at org.eclipse.jface.viewers.Viewer$2.run(Viewer.java:162)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:48)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:175)
+	at org.eclipse.jface.viewers.Viewer.fireSelectionChanged(Viewer.java:160)
+	at org.eclipse.jface.viewers.StructuredViewer.updateSelection(StructuredViewer.java:2062)
+	at org.eclipse.jface.viewers.StructuredViewer.setSelection(StructuredViewer.java:1638)
+	at org.eclipse.jface.viewers.TreeViewer.setSelection(TreeViewer.java:1104)
+	at org.eclipse.jface.viewers.Viewer.setSelection(Viewer.java:392)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.setSelection(AbstractFlexOutliner.java:206)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.syncSelection(DesignItemOutlineUpdater.java:431)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.partActivated(DesignItemOutlineUpdater.java:397)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.partActivated(AbstractFlexOutliner.java:235)
+	at org.eclipse.ui.internal.PartListenerList$1.run(PartListenerList.java:72)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.PartListenerList.fireEvent(PartListenerList.java:57)
+	at org.eclipse.ui.internal.PartListenerList.firePartActivated(PartListenerList.java:70)
+	at org.eclipse.ui.internal.PartService.firePartActivated(PartService.java:186)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:305)
+	at org.eclipse.ui.internal.WorkbenchPagePartList.fireActivePartChanged(WorkbenchPagePartList.java:56)
+	at org.eclipse.ui.internal.PartList.setActivePart(PartList.java:126)
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3491)
+	at org.eclipse.ui.internal.WorkbenchPage.activate(WorkbenchPage.java:610)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1086)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1057)
+	at org.eclipse.ui.internal.WorkbenchPage$19.run(WorkbenchPage.java:3773)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.WorkbenchPage.showView(WorkbenchPage.java:3770)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.showViews(CodeAndDesignViewManager.java:709)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.access$4(CodeAndDesignViewManager.java:632)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener$1.run(CodeAndDesignViewManager.java:607)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3800)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3425)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+!SESSION 2010-11-18 21:09:41.230 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 21:09:59.791
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 21:09:59.842
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 21:09:59.842
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 21:09:59.846
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 21:09:59.846
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 21:09:59.846
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-18 21:10:11.791
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-18 21:10:11.791
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1469d08)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1469d08)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-18 21:10:11.791
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@ef98ac)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@ef98ac)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2010-11-18 22:37:47.666 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 22:38:04.578
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 22:38:04.603
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 22:38:04.604
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 22:38:04.605
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 22:38:04.605
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-18 22:38:04.606
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-18 22:39:32.029
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-18 22:39:32.029
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1f02fde)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1f02fde)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-18 22:39:32.029
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@1d6af61)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@1d6af61)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.ui 4 4 2010-11-18 22:48:58.346
+!MESSAGE Unable to find view with id: com.adobe.flashbuilder.analytics.ui.SiteCatalystView, when creating perspective com.adobe.flexbuilder.debug.ui.perspectives.debug
+
+!ENTRY com.adobe.flexbuilder.project 4 43 2010-11-18 23:25:40.328
+!MESSAGE Breakpoint does not have an associated marker.
+!STACK 1
+org.eclipse.debug.core.DebugException: Breakpoint does not have an associated marker.
+	at org.eclipse.debug.core.model.Breakpoint.ensureMarker(Breakpoint.java:268)
+	at com.adobe.flexbuilder.debug.breakpoints.FlexBreakpoint.updateMessageAttribute(FlexBreakpoint.java:188)
+	at com.adobe.flexbuilder.debug.breakpoints.FlexBreakpoint.changeInstantiationStatusCount(FlexBreakpoint.java:142)
+	at com.adobe.flexbuilder.debug.breakpoints.FlexBreakpoint.removeInstantiationStatus(FlexBreakpoint.java:114)
+	at com.adobe.flexbuilder.debug.breakpoints.FlexBreakpointMap.clearBreakpointLocations(FlexBreakpointMap.java:122)
+	at com.adobe.flexbuilder.debug.breakpoints.FlexLineBreakpoint.uninstantiate(FlexLineBreakpoint.java:555)
+	at com.adobe.flexbuilder.debug.model.FlexDebugTarget.uninstantiateBreakpoint(FlexDebugTarget.java:1034)
+	at com.adobe.flexbuilder.debug.model.FlexDebugTarget.access$12(FlexDebugTarget.java:1031)
+	at com.adobe.flexbuilder.debug.model.FlexDebugTarget$2.run(FlexDebugTarget.java:1072)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 org.eclipse.debug.core 4 5012 2010-11-18 23:25:40.329
+!MESSAGE Breakpoint does not have an associated marker.
+
+!ENTRY org.eclipse.ui 4 0 2010-11-18 23:27:11.198
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at com.adobe.flexbuilder.launching.ui.ApolloLaunchShortcut.isRightLaunchTypeFor(ApolloLaunchShortcut.java:54)
+	at com.adobe.flexide.launching.AbstractFlexLaunchShortcut.launch(AbstractFlexLaunchShortcut.java:124)
+	at com.adobe.flexide.launching.AbstractFlexLaunchShortcut.launch(AbstractFlexLaunchShortcut.java:98)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.launch(LaunchShortcutExtension.java:434)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler.execute(LaunchShortcutExtension.java:90)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.executeCommand(WorkbenchKeyboard.java:472)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.press(WorkbenchKeyboard.java:824)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.processKeyEvent(WorkbenchKeyboard.java:882)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.filterKeySequenceBindings(WorkbenchKeyboard.java:571)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.access$3(WorkbenchKeyboard.java:512)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard$KeyDownFilter.handleEvent(WorkbenchKeyboard.java:127)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1184)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1002)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1040)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1036)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1352)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:3894)
+	at org.eclipse.swt.widgets.Table.WM_CHAR(Table.java:5480)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3787)
+	at org.eclipse.swt.widgets.Table.windowProc(Table.java:5476)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4528)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2371)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3420)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui 4 0 2010-11-19 00:08:32.403
+!MESSAGE Exceptions during shutdown
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.swt.widgets.Decorations.restoreFocus(Decorations.java:806)
+	at org.eclipse.swt.widgets.Shell.open(Shell.java:1169)
+	at org.eclipse.jface.window.Window.open(Window.java:797)
+	at org.eclipse.jface.dialogs.ProgressMonitorDialog.open(ProgressMonitorDialog.java:676)
+	at org.eclipse.jface.dialogs.ProgressMonitorDialog.aboutToRun(ProgressMonitorDialog.java:579)
+	at org.eclipse.jface.dialogs.ProgressMonitorDialog.run(ProgressMonitorDialog.java:504)
+	at org.eclipse.ui.internal.progress.ProgressMonitorJobsDialog.run(ProgressMonitorJobsDialog.java:275)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.disconnectFromWorkspace(IDEWorkbenchAdvisor.java:398)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.postShutdown(IDEWorkbenchAdvisor.java:315)
+	at org.eclipse.ui.internal.Workbench.shutdown(Workbench.java:2711)
+	at org.eclipse.ui.internal.Workbench.busyClose(Workbench.java:923)
+	at org.eclipse.ui.internal.Workbench.access$15(Workbench.java:840)
+	at org.eclipse.ui.internal.Workbench$23.run(Workbench.java:1084)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1082)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1054)
+	at org.eclipse.ui.internal.Workbench$56.handleEvent(Workbench.java:2255)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:3959)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3054)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2366)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:477)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3877)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:337)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1576)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1937)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4541)
+	at org.eclipse.swt.internal.win32.OS.PeekMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.PeekMessage(OS.java:2880)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3417)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui 4 0 2010-11-19 00:08:32.407
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.checkDevice(Display.java:684)
+	at org.eclipse.swt.widgets.Display.getShells(Display.java:2077)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:72)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1082)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1054)
+	at org.eclipse.ui.internal.Workbench$56.handleEvent(Workbench.java:2255)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:3959)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3054)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2366)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:477)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3877)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:337)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1576)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1937)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4541)
+	at org.eclipse.swt.internal.win32.OS.PeekMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.PeekMessage(OS.java:2880)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3417)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+!SESSION 2010-11-19 01:14:16.196 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.resources 2 10035 2010-11-19 01:14:39.380
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-19 01:15:17.140
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-19 01:15:17.141
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-19 01:15:17.141
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-19 01:15:17.142
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-19 01:15:17.142
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-19 01:15:17.142
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-19 01:19:55.237
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-19 01:19:55.237
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1674f42)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@1674f42)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-19 01:19:55.237
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@1849172)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@1849172)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.ui 4 0 2010-11-19 02:44:49.426
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at com.adobe.flexbuilder.launching.ui.ApolloLaunchShortcut.isRightLaunchTypeFor(ApolloLaunchShortcut.java:54)
+	at com.adobe.flexide.launching.AbstractFlexLaunchShortcut.launch(AbstractFlexLaunchShortcut.java:124)
+	at com.adobe.flexide.launching.AbstractFlexLaunchShortcut.launch(AbstractFlexLaunchShortcut.java:98)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.launch(LaunchShortcutExtension.java:434)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension$LaunchCommandHandler.execute(LaunchShortcutExtension.java:90)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.executeCommand(WorkbenchKeyboard.java:472)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.press(WorkbenchKeyboard.java:824)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.processKeyEvent(WorkbenchKeyboard.java:882)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.filterKeySequenceBindings(WorkbenchKeyboard.java:571)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.access$3(WorkbenchKeyboard.java:512)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard$KeyDownFilter.handleEvent(WorkbenchKeyboard.java:127)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1184)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1002)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1040)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1036)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1352)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:3894)
+	at org.eclipse.swt.widgets.Table.WM_CHAR(Table.java:5480)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3787)
+	at org.eclipse.swt.widgets.Table.windowProc(Table.java:5476)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4528)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2371)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3420)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui.console 4 2 2010-11-30 02:00:32.575
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.console".
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui.console 4 120 2010-11-30 02:00:32.607
+!MESSAGE An exception occurred during console notification
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+!SESSION 2010-11-30 02:09:44.402 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 02:10:28.168
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 02:10:28.172
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 02:10:28.174
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 02:10:28.185
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 02:10:28.190
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 02:10:28.195
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-30 02:13:25.268
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-30 02:13:25.268
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@796fd8)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@796fd8)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-30 02:13:25.268
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@9e0691)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@9e0691)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.adobe.flexbuilder.project 4 43 2010-11-29 19:39:34.790
+!MESSAGE Access is denied
+!STACK 0
+java.io.IOException: Access is denied
+	at java.io.WinNTFileSystem.createFileExclusively(Native Method)
+	at java.io.File.createNewFile(Unknown Source)
+	at com.adobe.flexbuilder.project.fxp.FXPUtility.getFileFromFXP(FXPUtility.java:957)
+	at com.adobe.flexbuilder.project.fxp.FXPUtility.getFXPProperties(FXPUtility.java:847)
+	at com.adobe.flexbuilder.project.fxp.FXPUtility.getProjectNames(FXPUtility.java:1147)
+	at com.adobe.flexbuilder.project.fxp.FXPUtility.getNumProjects(FXPUtility.java:1134)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizardPage.modifyArchiveFileText(ImportWizardPage.java:497)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizardPage.modifyText(ImportWizardPage.java:566)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:167)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1008)
+	at org.eclipse.swt.widgets.Text.wmCommandChild(Text.java:2434)
+	at org.eclipse.swt.widgets.Control.WM_COMMAND(Control.java:3923)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3790)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4528)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:2274)
+	at org.eclipse.swt.widgets.Text.callWindowProc(Text.java:187)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3877)
+	at org.eclipse.swt.widgets.Text.windowProc(Text.java:2078)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4528)
+	at org.eclipse.swt.internal.win32.OS.SetWindowTextW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.SetWindowText(OS.java:3164)
+	at org.eclipse.swt.widgets.Text.setText(Text.java:1869)
+	at org.eclipse.jface.preference.StringFieldEditor.setStringValue(StringFieldEditor.java:444)
+	at org.eclipse.jface.preference.StringButtonFieldEditor$1.widgetSelected(StringButtonFieldEditor.java:119)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:228)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:825)
+	at org.eclipse.jface.window.Window.open(Window.java:801)
+	at org.eclipse.ui.internal.handlers.WizardHandler$Import.executeHandler(WizardHandler.java:146)
+	at org.eclipse.ui.internal.handlers.WizardHandler.execute(WizardHandler.java:273)
+	at org.eclipse.ui.internal.handlers.HandlerProxy.execute(HandlerProxy.java:281)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.handlers.SlaveHandlerService.executeCommand(SlaveHandlerService.java:247)
+	at org.eclipse.ui.internal.actions.CommandAction.runWithEvent(CommandAction.java:157)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:583)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:500)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:411)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY com.adobe.flexbuilder.project 4 43 2010-11-29 19:39:34.794
+!MESSAGE Can't find FXP properties file for file: C:\Users\buck\Downloads\vfy.fxp
+!STACK 0
+com.adobe.flexbuilder.project.fxp.FXPException: Can't find FXP properties file for file: C:\Users\buck\Downloads\vfy.fxp
+	at com.adobe.flexbuilder.project.fxp.FXPUtility.getFXPProperties(FXPUtility.java:854)
+	at com.adobe.flexbuilder.project.fxp.FXPUtility.getProjectNames(FXPUtility.java:1147)
+	at com.adobe.flexbuilder.project.fxp.FXPUtility.getNumProjects(FXPUtility.java:1134)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizardPage.modifyArchiveFileText(ImportWizardPage.java:497)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizardPage.modifyText(ImportWizardPage.java:566)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:167)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1008)
+	at org.eclipse.swt.widgets.Text.wmCommandChild(Text.java:2434)
+	at org.eclipse.swt.widgets.Control.WM_COMMAND(Control.java:3923)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3790)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4528)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:2274)
+	at org.eclipse.swt.widgets.Text.callWindowProc(Text.java:187)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3877)
+	at org.eclipse.swt.widgets.Text.windowProc(Text.java:2078)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4528)
+	at org.eclipse.swt.internal.win32.OS.SetWindowTextW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.SetWindowText(OS.java:3164)
+	at org.eclipse.swt.widgets.Text.setText(Text.java:1869)
+	at org.eclipse.jface.preference.StringFieldEditor.setStringValue(StringFieldEditor.java:444)
+	at org.eclipse.jface.preference.StringButtonFieldEditor$1.widgetSelected(StringButtonFieldEditor.java:119)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:228)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:825)
+	at org.eclipse.jface.window.Window.open(Window.java:801)
+	at org.eclipse.ui.internal.handlers.WizardHandler$Import.executeHandler(WizardHandler.java:146)
+	at org.eclipse.ui.internal.handlers.WizardHandler.execute(WizardHandler.java:273)
+	at org.eclipse.ui.internal.handlers.HandlerProxy.execute(HandlerProxy.java:281)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.handlers.SlaveHandlerService.executeCommand(SlaveHandlerService.java:247)
+	at org.eclipse.ui.internal.actions.CommandAction.runWithEvent(CommandAction.java:157)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:583)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:500)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:411)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY com.adobe.flexbuilder.project 4 43 2010-11-29 20:57:09.051
+!MESSAGE Error
+!STACK 0
+org.eclipse.jface.text.BadLocationException
+	at org.eclipse.jface.text.ListLineTracker.getLineInformation(ListLineTracker.java:180)
+	at org.eclipse.jface.text.AbstractLineTracker.getLineInformation(AbstractLineTracker.java:137)
+	at org.eclipse.jface.text.AbstractDocument.getLineInformation(AbstractDocument.java:895)
+	at com.adobe.flexide.editorcore.document.BasicFlexDocument.getStartColumnForLine(BasicFlexDocument.java:767)
+	at com.adobe.flexide.as.core.format.ASAutoIndent.buildIndentInfo(ASAutoIndent.java:361)
+	at com.adobe.flexide.mxml.core.format.MXMLAutoIndent.handleScriptOrStyleBlock(MXMLAutoIndent.java:502)
+	at com.adobe.flexide.mxml.core.format.MXMLAutoIndent.buildIndentInfo(MXMLAutoIndent.java:196)
+	at com.adobe.flexide.editorcore.strategies.FlexAbstractAutoEditStrategy.smartPaste(FlexAbstractAutoEditStrategy.java:94)
+	at com.adobe.flexide.mxml.core.editor.strategies.MXMLAutoInsertStrategy.customizeDocumentCommand(MXMLAutoInsertStrategy.java:91)
+	at org.eclipse.jface.text.TextViewer.customizeDocumentCommand(TextViewer.java:3568)
+	at org.eclipse.jface.text.TextViewer.handleVerifyEvent(TextViewer.java:3597)
+	at org.eclipse.jface.text.source.projection.ProjectionViewer.handleVerifyEvent(ProjectionViewer.java:1249)
+	at org.eclipse.jface.text.TextViewer$TextVerifyListener.verifyText(TextViewer.java:419)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:249)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:770)
+	at org.eclipse.swt.custom.StyledText.modifyContent(StyledText.java:5844)
+	at org.eclipse.swt.custom.StyledText.sendKeyEvent(StyledText.java:6631)
+	at org.eclipse.swt.custom.StyledText.paste(StyledText.java:5924)
+	at org.eclipse.jface.text.TextViewer.doOperation(TextViewer.java:3747)
+	at org.eclipse.jface.text.source.SourceViewer.doOperation(SourceViewer.java:891)
+	at org.eclipse.jface.text.source.projection.ProjectionViewer.doOperation(ProjectionViewer.java:1506)
+	at com.adobe.flexide.editorcore.editor.FlexSourceViewer.doOperation(FlexSourceViewer.java:190)
+	at org.eclipse.ui.texteditor.TextOperationAction$1.run(TextOperationAction.java:131)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.texteditor.TextOperationAction.run(TextOperationAction.java:129)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:498)
+	at org.eclipse.ui.commands.ActionHandler.execute(ActionHandler.java:185)
+	at org.eclipse.ui.internal.handlers.LegacyHandlerWrapper.execute(LegacyHandlerWrapper.java:109)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.executeCommand(WorkbenchKeyboard.java:472)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.press(WorkbenchKeyboard.java:824)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.processKeyEvent(WorkbenchKeyboard.java:882)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.filterKeySequenceBindings(WorkbenchKeyboard.java:571)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard.access$3(WorkbenchKeyboard.java:512)
+	at org.eclipse.ui.internal.keys.WorkbenchKeyboard$KeyDownFilter.handleEvent(WorkbenchKeyboard.java:127)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1184)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1002)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1040)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1036)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1352)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:3894)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:341)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3787)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:337)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4528)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2371)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3420)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui.console 4 2 2010-11-29 21:40:04.988
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.console".
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui.console 4 120 2010-11-29 21:40:04.990
+!MESSAGE An exception occurred during console notification
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+!SESSION 2010-11-30 19:24:47.267 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 19:25:34.779
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 19:25:34.780
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 19:25:34.781
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 19:25:34.781
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 19:25:34.782
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 19:25:34.782
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-30 19:28:13.591
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-30 19:28:13.591
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@115bbc)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@115bbc)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-30 19:28:13.591
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@19dc6f7)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@19dc6f7)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.adobe.flexbuilder.project 4 43 2010-11-30 19:35:02.565
+!MESSAGE Error
+!STACK 0
+java.lang.reflect.InvocationTargetException
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:119)
+	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:464)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:372)
+	at org.eclipse.jface.wizard.WizardDialog.run(WizardDialog.java:934)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizard.performFinish(ImportWizard.java:117)
+	at org.eclipse.jface.wizard.WizardDialog.finishPressed(WizardDialog.java:742)
+	at org.eclipse.jface.wizard.WizardDialog.buttonPressed(WizardDialog.java:373)
+	at org.eclipse.jface.dialogs.Dialog$2.widgetSelected(Dialog.java:624)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:228)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:825)
+	at org.eclipse.jface.window.Window.open(Window.java:801)
+	at org.eclipse.ui.internal.handlers.WizardHandler$Import.executeHandler(WizardHandler.java:146)
+	at org.eclipse.ui.internal.handlers.WizardHandler.execute(WizardHandler.java:273)
+	at org.eclipse.ui.internal.handlers.HandlerProxy.execute(HandlerProxy.java:281)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.handlers.SlaveHandlerService.executeCommand(SlaveHandlerService.java:247)
+	at org.eclipse.ui.internal.actions.CommandAction.runWithEvent(CommandAction.java:157)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:583)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:500)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:411)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+Caused by: org.eclipse.core.internal.resources.ResourceException: Errors occurred while refreshing resources with the local file system.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refreshResource(FileSystemResourceManager.java:762)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refresh(FileSystemResourceManager.java:743)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refreshRoot(FileSystemResourceManager.java:790)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refresh(FileSystemResourceManager.java:736)
+	at org.eclipse.core.internal.resources.Resource.refreshLocal(Resource.java:1484)
+	at com.adobe.flexbuilder.exportimport.importwizard.ArchivedProjectImporter.importFlexProject(ArchivedProjectImporter.java:487)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizard.importProject(ImportWizard.java:241)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizard$1.execute(ImportWizard.java:111)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation$1.run(WorkspaceModifyOperation.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1800)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:116)
+	... 49 more
+Root exception:
+org.eclipse.core.internal.resources.ResourceException: Errors occurred while refreshing resources with the local file system.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refreshResource(FileSystemResourceManager.java:762)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refresh(FileSystemResourceManager.java:743)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refreshRoot(FileSystemResourceManager.java:790)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refresh(FileSystemResourceManager.java:736)
+	at org.eclipse.core.internal.resources.Resource.refreshLocal(Resource.java:1484)
+	at com.adobe.flexbuilder.exportimport.importwizard.ArchivedProjectImporter.importFlexProject(ArchivedProjectImporter.java:487)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizard.importProject(ImportWizard.java:241)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizard$1.execute(ImportWizard.java:111)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation$1.run(WorkspaceModifyOperation.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1800)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:116)
+	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:464)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:372)
+	at org.eclipse.jface.wizard.WizardDialog.run(WizardDialog.java:934)
+	at com.adobe.flexbuilder.exportimport.importwizard.ImportWizard.performFinish(ImportWizard.java:117)
+	at org.eclipse.jface.wizard.WizardDialog.finishPressed(WizardDialog.java:742)
+	at org.eclipse.jface.wizard.WizardDialog.buttonPressed(WizardDialog.java:373)
+	at org.eclipse.jface.dialogs.Dialog$2.widgetSelected(Dialog.java:624)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:228)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:825)
+	at org.eclipse.jface.window.Window.open(Window.java:801)
+	at org.eclipse.ui.internal.handlers.WizardHandler$Import.executeHandler(WizardHandler.java:146)
+	at org.eclipse.ui.internal.handlers.WizardHandler.execute(WizardHandler.java:273)
+	at org.eclipse.ui.internal.handlers.HandlerProxy.execute(HandlerProxy.java:281)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:476)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.ui.internal.handlers.HandlerService.executeCommand(HandlerService.java:169)
+	at org.eclipse.ui.internal.handlers.SlaveHandlerService.executeCommand(SlaveHandlerService.java:247)
+	at org.eclipse.ui.internal.actions.CommandAction.runWithEvent(CommandAction.java:157)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:583)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:500)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:411)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3823)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3422)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+Contains: The project description file (.project) for 'demo' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+
+!ENTRY org.eclipse.ui.console 4 2 2010-11-30 19:55:47.325
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.console".
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui.console 4 120 2010-11-30 19:55:47.327
+!MESSAGE An exception occurred during console notification
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+!SESSION 2010-11-30 20:04:08.483 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 20:04:24.412
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 20:04:24.413
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 20:04:24.414
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 20:04:24.415
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 20:04:24.415
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-30 20:04:24.416
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-30 20:04:34.343
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-30 20:04:34.343
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@847684)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@847684)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-30 20:04:34.343
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@c03276)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@c03276)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.osgi 2 0 2010-11-30 20:04:39.440
+!MESSAGE While loading class "org.eclipse.mylyn.tasks.ui.TasksUiImages", thread "Thread[main,6,main]" timed out waiting (5000ms) for thread "Thread[Worker-3,5,main]" to finish starting bundle "reference:file:plugins\org.eclipse.mylyn.tasks.ui_3.0.5.v20090218-1800-e3x.jar [318]". To avoid deadlock, thread "Thread[main,6,main]" is proceeding but "org.eclipse.mylyn.tasks.ui.TasksUiImages" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: State change in progress for bundle "reference:file:plugins\org.eclipse.mylyn.tasks.ui_3.0.5.v20090218-1800-e3x.jar" by thread "Worker-3".
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1144)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:263)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:400)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:111)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:427)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:193)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:370)
+	at org.eclipse.osgi.framework.internal.core.SingleSourcePackage.loadClass(SingleSourcePackage.java:33)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClassInternal(BundleLoader.java:443)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:399)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:87)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.eclipse.mylyn.context.ui.AbstractFocusViewAction.<init>(AbstractFocusViewAction.java:215)
+	at org.eclipse.mylyn.internal.context.ui.actions.FocusOutlineAction.<init>(FocusOutlineAction.java:43)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at org.eclipse.core.internal.registry.osgi.RegistryStrategyOSGI.createExecutableExtension(RegistryStrategyOSGI.java:170)
+	at org.eclipse.core.internal.registry.ExtensionRegistry.createExecutableExtension(ExtensionRegistry.java:867)
+	at org.eclipse.core.internal.registry.ConfigurationElement.createExecutableExtension(ConfigurationElement.java:243)
+	at org.eclipse.core.internal.registry.ConfigurationElementHandle.createExecutableExtension(ConfigurationElementHandle.java:51)
+	at org.eclipse.ui.internal.WorkbenchPlugin.createExtension(WorkbenchPlugin.java:259)
+	at org.eclipse.ui.internal.PluginAction.createDelegate(PluginAction.java:122)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:275)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:289)
+	at org.eclipse.ui.part.PageBookView$4.run(PageBookView.java:246)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.part.PageBookView$SelectionManager.selectionChanged(PageBookView.java:244)
+	at org.eclipse.ui.part.PageBookView$SelectionProvider.selectionChanged(PageBookView.java:310)
+	at org.eclipse.ui.part.PageBookView.pageSelectionChanged(PageBookView.java:883)
+	at org.eclipse.ui.part.PageBookView.access$2(PageBookView.java:878)
+	at org.eclipse.ui.part.PageBookView$2.selectionChanged(PageBookView.java:154)
+	at org.eclipse.jface.viewers.Viewer$2.run(Viewer.java:162)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:48)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:175)
+	at org.eclipse.jface.viewers.Viewer.fireSelectionChanged(Viewer.java:160)
+	at org.eclipse.jface.viewers.StructuredViewer.updateSelection(StructuredViewer.java:2062)
+	at org.eclipse.jface.viewers.StructuredViewer.setSelection(StructuredViewer.java:1638)
+	at org.eclipse.jface.viewers.TreeViewer.setSelection(TreeViewer.java:1104)
+	at org.eclipse.jface.viewers.Viewer.setSelection(Viewer.java:392)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.setSelection(AbstractFlexOutliner.java:206)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.syncSelection(DesignItemOutlineUpdater.java:431)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.partActivated(DesignItemOutlineUpdater.java:397)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.partActivated(AbstractFlexOutliner.java:235)
+	at org.eclipse.ui.internal.PartListenerList$1.run(PartListenerList.java:72)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.PartListenerList.fireEvent(PartListenerList.java:57)
+	at org.eclipse.ui.internal.PartListenerList.firePartActivated(PartListenerList.java:70)
+	at org.eclipse.ui.internal.PartService.firePartActivated(PartService.java:186)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:305)
+	at org.eclipse.ui.internal.WorkbenchPagePartList.fireActivePartChanged(WorkbenchPagePartList.java:56)
+	at org.eclipse.ui.internal.PartList.setActivePart(PartList.java:126)
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3491)
+	at org.eclipse.ui.internal.WorkbenchPage.activate(WorkbenchPage.java:610)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1086)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1057)
+	at org.eclipse.ui.internal.WorkbenchPage$19.run(WorkbenchPage.java:3773)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.WorkbenchPage.showView(WorkbenchPage.java:3770)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.showViews(CodeAndDesignViewManager.java:709)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.access$4(CodeAndDesignViewManager.java:632)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener$1.run(CodeAndDesignViewManager.java:607)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3800)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3425)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+Caused by: org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	... 95 more
+Root exception:
+org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1144)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:263)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:400)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:111)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:427)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:193)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findLocalClass(BundleLoader.java:370)
+	at org.eclipse.osgi.framework.internal.core.SingleSourcePackage.loadClass(SingleSourcePackage.java:33)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClassInternal(BundleLoader.java:443)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:399)
+	at org.eclipse.osgi.framework.internal.core.BundleLoader.findClass(BundleLoader.java:387)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:87)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClassInternal(Unknown Source)
+	at org.eclipse.mylyn.context.ui.AbstractFocusViewAction.<init>(AbstractFocusViewAction.java:215)
+	at org.eclipse.mylyn.internal.context.ui.actions.FocusOutlineAction.<init>(FocusOutlineAction.java:43)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at org.eclipse.core.internal.registry.osgi.RegistryStrategyOSGI.createExecutableExtension(RegistryStrategyOSGI.java:170)
+	at org.eclipse.core.internal.registry.ExtensionRegistry.createExecutableExtension(ExtensionRegistry.java:867)
+	at org.eclipse.core.internal.registry.ConfigurationElement.createExecutableExtension(ConfigurationElement.java:243)
+	at org.eclipse.core.internal.registry.ConfigurationElementHandle.createExecutableExtension(ConfigurationElementHandle.java:51)
+	at org.eclipse.ui.internal.WorkbenchPlugin.createExtension(WorkbenchPlugin.java:259)
+	at org.eclipse.ui.internal.PluginAction.createDelegate(PluginAction.java:122)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:275)
+	at org.eclipse.ui.internal.PluginAction.selectionChanged(PluginAction.java:289)
+	at org.eclipse.ui.part.PageBookView$4.run(PageBookView.java:246)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.part.PageBookView$SelectionManager.selectionChanged(PageBookView.java:244)
+	at org.eclipse.ui.part.PageBookView$SelectionProvider.selectionChanged(PageBookView.java:310)
+	at org.eclipse.ui.part.PageBookView.pageSelectionChanged(PageBookView.java:883)
+	at org.eclipse.ui.part.PageBookView.access$2(PageBookView.java:878)
+	at org.eclipse.ui.part.PageBookView$2.selectionChanged(PageBookView.java:154)
+	at org.eclipse.jface.viewers.Viewer$2.run(Viewer.java:162)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:48)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:175)
+	at org.eclipse.jface.viewers.Viewer.fireSelectionChanged(Viewer.java:160)
+	at org.eclipse.jface.viewers.StructuredViewer.updateSelection(StructuredViewer.java:2062)
+	at org.eclipse.jface.viewers.StructuredViewer.setSelection(StructuredViewer.java:1638)
+	at org.eclipse.jface.viewers.TreeViewer.setSelection(TreeViewer.java:1104)
+	at org.eclipse.jface.viewers.Viewer.setSelection(Viewer.java:392)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.setSelection(AbstractFlexOutliner.java:206)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.syncSelection(DesignItemOutlineUpdater.java:431)
+	at com.adobe.flexide.editorcore.ui.outliner.DesignItemOutlineUpdater.partActivated(DesignItemOutlineUpdater.java:397)
+	at com.adobe.flexide.editorcore.ui.outliner.AbstractFlexOutliner.partActivated(AbstractFlexOutliner.java:235)
+	at org.eclipse.ui.internal.PartListenerList$1.run(PartListenerList.java:72)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:880)
+	at org.eclipse.ui.internal.PartListenerList.fireEvent(PartListenerList.java:57)
+	at org.eclipse.ui.internal.PartListenerList.firePartActivated(PartListenerList.java:70)
+	at org.eclipse.ui.internal.PartService.firePartActivated(PartService.java:186)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:305)
+	at org.eclipse.ui.internal.WorkbenchPagePartList.fireActivePartChanged(WorkbenchPagePartList.java:56)
+	at org.eclipse.ui.internal.PartList.setActivePart(PartList.java:126)
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3491)
+	at org.eclipse.ui.internal.WorkbenchPage.activate(WorkbenchPage.java:610)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1086)
+	at org.eclipse.ui.internal.WorkbenchPage.busyShowView(WorkbenchPage.java:1057)
+	at org.eclipse.ui.internal.WorkbenchPage$19.run(WorkbenchPage.java:3773)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.WorkbenchPage.showView(WorkbenchPage.java:3770)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.showViews(CodeAndDesignViewManager.java:709)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener.access$4(CodeAndDesignViewManager.java:632)
+	at com.adobe.flexbuilder.editorcore.editor.CodeAndDesignViewManager$EditorListener$1.run(CodeAndDesignViewManager.java:607)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3800)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3425)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:193)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.debug.core 4 2 2010-11-30 23:45:36.875
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.debug.core".
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsole.resetName(ProcessConsole.java:459)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsole.handleDebugEvents(ProcessConsole.java:441)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1069)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1103)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:374)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.debug.core 4 125 2010-11-30 23:45:36.875
+!MESSAGE An exception occurred while dispatching debug events.
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsole.resetName(ProcessConsole.java:459)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsole.handleDebugEvents(ProcessConsole.java:441)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1069)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1103)
+	at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:374)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.epp.usagedata.recording 4 0 2010-11-30 23:45:37.949
+!MESSAGE Error writing events to file.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\buck\My Dropbox\datacus\.metadata\.plugins\org.eclipse.epp.usagedata.recording\usagedata.csv (The process cannot access the file because it is being used by another process)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileWriter.<init>(Unknown Source)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.createEventWriter(UsageDataRecorder.java:174)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.getWriter(UsageDataRecorder.java:169)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.dumpEvents(UsageDataRecorder.java:145)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.accept(UsageDataRecorder.java:88)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService.dispatchEvent(UsageDataService.java:309)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService.dispatchEvent(UsageDataService.java:296)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService.access$1(UsageDataService.java:290)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService$1.run(UsageDataService.java:158)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.epp.usagedata.recording 4 0 2010-11-30 23:45:37.965
+!MESSAGE Error writing events to file.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\buck\My Dropbox\datacus\.metadata\.plugins\org.eclipse.epp.usagedata.recording\usagedata.csv (The process cannot access the file because it is being used by another process)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileWriter.<init>(Unknown Source)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.createEventWriter(UsageDataRecorder.java:174)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.getWriter(UsageDataRecorder.java:169)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.dumpEvents(UsageDataRecorder.java:145)
+	at org.eclipse.epp.usagedata.internal.recording.UsageDataRecorder.accept(UsageDataRecorder.java:88)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService.dispatchEvent(UsageDataService.java:309)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService.dispatchEvent(UsageDataService.java:296)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService.access$1(UsageDataService.java:290)
+	at org.eclipse.epp.usagedata.internal.gathering.services.UsageDataService$1.run(UsageDataService.java:158)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui.console 4 2 2010-11-30 23:45:39.431
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.console".
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+
+!ENTRY org.eclipse.ui.console 4 120 2010-11-30 23:45:39.431
+!MESSAGE An exception occurred during console notification
+!STACK 0
+org.eclipse.swt.SWTException: Device is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.SWT.error(SWT.java:3666)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1180)
+	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:648)
+	at org.eclipse.ui.internal.console.ConsoleDropDownAction.consolesRemoved(ConsoleDropDownAction.java:150)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.run(ConsoleManager.java:154)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.internal.console.ConsoleManager$ConsoleNotifier.notify(ConsoleManager.java:174)
+	at org.eclipse.ui.internal.console.ConsoleManager.fireUpdate(ConsoleManager.java:262)
+	at org.eclipse.ui.internal.console.ConsoleManager.removeConsoles(ConsoleManager.java:244)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeProcess(ProcessConsoleManager.java:98)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.removeLaunch(ProcessConsoleManager.java:81)
+	at org.eclipse.debug.internal.ui.views.console.ProcessConsoleManager.shutdown(ProcessConsoleManager.java:198)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.stop(DebugUIPlugin.java:388)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$3.run(BundleContextImpl.java:1050)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:1046)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:457)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:531)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1104)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:655)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:312)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.SystemBundle.suspend(SystemBundle.java:236)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:678)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:576)
+	at org.eclipse.osgi.framework.internal.core.OSGi.close(OSGi.java:41)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:424)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:200)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+!SESSION 2010-12-02 14:51:35.373 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-12-02 14:51:50.212
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-12-02 14:51:50.256
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-12-02 14:51:50.257
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-12-02 14:51:50.258
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-12-02 14:51:50.258
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-12-02 14:51:50.258
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-12-02 14:52:06.326
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-12-02 14:52:06.333
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-12-02 14:52:06.333
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)

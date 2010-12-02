@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		 xmlns:components="components.*">
+	<!--		 creationComplete="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.display.DisplayObject;
+			
+			import org.tuio.TouchEvent;
+			
+			
+			protected function init():void {			
+				this.addEventListener(org.tuio.TouchEvent.TOUCH_DOWN, touchDown);
+			}
+			
+			public function touchDown(e:org.tuio.TouchEvent):void {
+				trace("pickerDown!");
+				const state:String = currentState;
+				if ( state == 'Page1' ) {
+					currentState='Page2';
+				}
+				if ( state == 'Page2' ) {
+					currentState='Page1';
+				}
+			}
+		]]>
+	</fx:Script>-->
+	<s:states>
+		<s:State name="State1"/>
+		<s:State name="State2"/>
+	</s:states>
+	<s:Rect alpha="0.79" height="499" id="rect1" radiusX="7" d:userLabel="Picker" width.State1="139" width.State2="1239" x.State1="1100.5" x.State2="0.5" y="0.5">
+		<s:fill>
+			<s:SolidColor color="#FFFFFF"/>
+		</s:fill>
+		<s:filters>
+			<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+			<s:DropShadowFilter alpha="0.5499999999999998" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+		</s:filters>
+		<s:stroke>
+			<s:SolidColorStroke caps="none" color="#999999" joints="miter" miterLimit="4" weight="1"/>
+		</s:stroke>
+	</s:Rect>
+	<components:DatalistsContai_CustomComponent includeIn="State2" id="datalistscontai_customcomponent1" x="100" y="80" d:userLabel="DatalistsContai_CustomComponent"/>
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="State1" toState="State2">
+			<s:Parallel>
+				<s:Parallel target="{rect1}">
+					<s:Move autoCenterTransform="true" duration="2000"/>
+					<s:Resize duration="2000" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{datalistscontai_customcomponent1}">
+					<s:Fade duration="500" startDelay="2000"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="State2" toState="State1">
+			<s:Parallel>
+				<s:Parallel target="{rect1}">
+					<s:Move autoCenterTransform="true" duration="2000" startDelay="500"/>
+					<s:Resize duration="2000" startDelay="500"/>
+				</s:Parallel>
+				<s:Parallel target="{datalistscontai_customcomponent1}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+</s:Group>
