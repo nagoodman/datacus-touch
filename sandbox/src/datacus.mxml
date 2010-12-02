@@ -5,6 +5,8 @@
 	                   xmlns:dg="http://www.degrafa.com/2007"
 					   xmlns:components="components.*"
 					   creationComplete="onCreationComplete()"
+					   backgroundColor="#FFFFFF"
+					   preloaderChromeColor="#FFFFFF"
 					   minWidth="1024"
 					   minHeight="768">  
 	

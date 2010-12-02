@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:components="components.*"
+					   backgroundColor="#FFFFFF"
+					   minWidth="1024"
+					   minHeight="768"
+					   creationComplete="init()">  
+					<!--make it full screen, but for now...-->
+	
+	<fx:Script>
+		<![CDATA[
+			protected function onCreationComplete():void {
+				//initialize
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<components:Categories x="150" y="517">
+	</components:Categories>
+	<components:Graph x="150" y="517">
+	</components:Graph>
+	<components:Series x="150" y="517">
+	</components:Series>
+	<components:Measures x="150" y="517">
+	</components:Measures>
+	<components:Pager x="150" y="517">
+	</components:Pager>
+	<components:Picker x="150" y="517">
+	</components:Picker>
+	<components:ServerStatus x="150" y="517">
+	</components:ServerStatus>
+	<components:Sets x="150" y="517">
+	</components:CategoriesPanel>
+	<components:CategoriesPanel x="150" y="517">
+	</components:CategoriesPanel>
+	<components:CategoriesPanel x="150" y="517">
+	</components:CategoriesPanel>
+</s:WindowedApplication>

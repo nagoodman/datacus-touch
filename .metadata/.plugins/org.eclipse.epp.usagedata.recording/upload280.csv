@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265340
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265342
+executed,command,com.adobe.flexbuilder.editorcore,4.0.1.277662,com.adobe.flexide.editorcore.add.comment,1291329266144
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.file.save,1291329268382
+activated,view,com.adobe.flexbuilder.as.editor,4.0.1.277662,com.adobe.flexbuilder.packageexplorer,1291329270285
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1291329273542
+opened,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329286706
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329286867
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1291329286952
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329293802
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329295380
+closed,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329295383
+closed,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329296188
+closed,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329297658
+closed,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329298757

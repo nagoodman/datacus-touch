@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329220895
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1291329220976
+activated,view,com.adobe.flexbuilder.as.editor,4.0.1.277662,com.adobe.flexbuilder.packageexplorer,1291329221937
+activated,editor,com.adobe.flexbuilder.mxml.editor,4.0.1.277662,com.adobe.flexbuilder.editors.mxml.MXMLEditor,1291329225149
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.selectAll,1291329247330
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1291329260277
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1291329260291
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265284
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265284
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265284
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265284
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265284
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265332
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265332
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265332
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265332
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265332
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265332
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265332
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265333
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265333
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265333
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265333
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265333
+no handler,command,org.eclipse.jdt.ui,3.4.2.r342_v20090107-0800,org.eclipse.jdt.ui.edit.text.java.modify.method.parameters,1291329265333

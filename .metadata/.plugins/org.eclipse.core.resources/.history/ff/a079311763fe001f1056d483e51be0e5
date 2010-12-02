@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:components="components.*"
+					   creationComplete="init()"
+					   minWidth="1024"
+					   minHeight="768">  
+					<!--make it full screen, but for now...-->
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.display.Stage;
+			
+			import tuio.*;
+			import tuio.TouchEvent;
+			import tuio.TuioClient;
+			import org.tuio.connectors.UDPConnector;
+			import org.tuio.debug.TuioDebug;
+			import org.tuio.gestures.DragGesture;
+			import org.tuio.gestures.GestureManager;
+			import org.tuio.mouse.MouseToTouchDispatcher;
+			import org.tuio.windows7.*;
+			
+			public var tc:TuioClient;
+			public var tm:TuioManager;
+			//public var gm:GestureManager;
+			private var winTouch:Windows7TouchToTuioDispatcher;
+			private var mTouch:MouseToTouchDispatcher;
+			private var tDbg:TuioDebug;
+			protected var mainStage:Stage;
+			
+			protected function onCreationComplete():void {
+				mainStage = this.systemManager.stage;
+				//will these clients be used for every object?
+				tc = new TuioClient(new UDPConnector());
+				tm = TuioManager.init(mainStage, tc);
+				//gm = GestureManager.init(stage,tc);
+				//GestureManager.addGesture(new DragGesture());
+				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
+				mTouch = new MouseToTouchDispatcher(mainStage);
+				tDbg = TuioDebug.init(mainStage);
+				tc.addListener(tDbg);
+				trace("init");
+				//these event listeners need to be added to each object
+				//
+				mainStage.addEventListener(tuio.TouchEvent.TOUCH_DOWN, handleDown);
+				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
+				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
+				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
+				
+			}
+			
+			
+			public function handleDrag(e:TransformGestureEvent):void {
+				//trace("dragged");
+			}
+			
+			public function handleDown(e:tuio.TouchEvent):void {
+				trace("TOUCHDOWN!");
+				trace(e.relatedObject);
+			}
+			
+			public function handleUp(e:tuio.TouchEvent):void {
+				//trace("TOUCHUP!");
+				//trace(e.relatedObject);
+			}
+			
+			public function handleMove(e:tuio.TouchEvent):void {
+				//trace("moving");
+			} 
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</s:WindowedApplication>

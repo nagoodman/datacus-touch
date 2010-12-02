@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+	                   xmlns:dg="http://www.degrafa.com/2007"
+					   xmlns:components="components.*"
+					   creationComplete="onCreationComplete()"
+					   backgroundColor="#FFFFFF"
+					   minWidth="1024"
+					   minHeight="768">  
+	
+	<!--<mx:Button verticalCenter="-92" horizontalCenter="-73" label="Datacus!"
+			   overSkin="buttonOverState" upSkin="buttonUpState" width="200" height="150"/>-->
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.display.Stage;
+			
+			import org.tuio.*;
+			import org.tuio.TouchEvent;
+			import org.tuio.TuioClient;
+			import org.tuio.connectors.UDPConnector;
+			import org.tuio.debug.TuioDebug;
+			import org.tuio.gestures.DragGesture;
+			import org.tuio.gestures.GestureManager;
+			import org.tuio.mouse.MouseToTouchDispatcher;
+			import org.tuio.windows7.*;
+
+			public var tc:TuioClient;
+			public var tm:TuioManager;
+			//public var gm:GestureManager;
+			private var winTouch:Windows7TouchToTuioDispatcher;
+			private var mTouch:MouseToTouchDispatcher;
+			private var tDbg:TuioDebug;
+			protected var mainStage:Stage;
+
+			protected function onCreationComplete():void {
+				mainStage = this.systemManager.stage;
+				//will these clients be used for every object?
+				tc = new TuioClient(new UDPConnector());
+				tm = TuioManager.init(mainStage, tc);
+				//gm = GestureManager.init(stage,tc);
+				//GestureManager.addGesture(new DragGesture());
+				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
+				mTouch = new MouseToTouchDispatcher(mainStage);
+				tDbg = TuioDebug.init(mainStage);
+				tc.addListener(tDbg);
+				trace("init");
+				//these event listeners need to be added to each object
+				//
+				mainStage.addEventListener(org.tuio.TouchEvent.TOUCH_DOWN, handleDown);
+				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
+				mainStage.addEventListener(org.tuio.TouchEvent.TOUCH_UP, handleUp);	
+				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
+
+			}
+			
+			
+ 			public function handleDrag(e:TransformGestureEvent):void {
+				//trace("dragged");
+			}
+			
+			public function handleDown(e:org.tuio.TouchEvent):void {
+				trace("TOUCHDOWN!");
+				trace(e.relatedObject);
+			}
+			
+			public function handleUp(e:org.tuio.TouchEvent):void {
+				//trace("TOUCHUP!");
+				//trace(e.relatedObject);
+			}
+			
+			public function handleMove(e:org.tuio.TouchEvent):void {
+				//trace("moving");
+			} 
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<components:CategoriesPanel x="150" y="517">
+	</components:CategoriesPanel>
+	<components:MeasuresPanel x="-1" y="167">
+	</components:MeasuresPanel>
+	<mx:ColumnChart id="columnchart1" height="352" width="700" x="203" y="163">
+		<mx:series>
+			<mx:ColumnSeries displayName="Series 1" yField=""/>
+		</mx:series>
+	</mx:ColumnChart>
+	<s:Button x="42" y="78" label="Home"/>
+	<components:SeriesPanel x="150" y="38">
+	</components:SeriesPanel>
+	<s:Button x="1023" y="102" label="Sets"/>
+</s:WindowedApplication>
