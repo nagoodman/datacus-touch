@@ -10,35 +10,35 @@ package tuio {
 	public class TuioEvent extends Event {
 		
 		/**Triggered if a new object was tracked in the tracking space.*/
-		public static const ADD:String = "org.tuio.TuioEvent.add";
+		public static const ADD:String = "tuio.TuioEvent.add";
 		/**Triggered if a tracked object was updated.*/
-		public static const UPDATE:String = "org.tuio.TuioEvent.update";
+		public static const UPDATE:String = "tuio.TuioEvent.update";
 		/**Triggered if a tracked object was removed from the tracking space.*/
-		public static const REMOVE:String = "org.tuio.TuioEvent.remove";
+		public static const REMOVE:String = "tuio.TuioEvent.remove";
 		
 		/**Triggered if a new object was tracked in the tracking space and was profiled as a TuioObject by the tracker.*/
-		public static const ADD_OBJECT:String = "org.tuio.TuioEvent.addObject";
+		public static const ADD_OBJECT:String = "tuio.TuioEvent.addObject";
 		/**Triggered if a new object was tracked in the tracking space and was profiled as a TuioCursor by the tracker.*/
-		public static const ADD_CURSOR:String = "org.tuio.TuioEvent.addCursor";
+		public static const ADD_CURSOR:String = "tuio.TuioEvent.addCursor";
 		/**Triggered if a new object was tracked in the tracking space and was profiled as a TuioBlob by the tracker.*/
-		public static const ADD_BLOB:String = "org.tuio.TuioEvent.addBlob";
+		public static const ADD_BLOB:String = "tuio.TuioEvent.addBlob";
 		
 		/**Triggered if a TuioObject was updated.*/
-		public static const UPDATE_OBJECT:String = "org.tuio.TuioEvent.updateObject";
+		public static const UPDATE_OBJECT:String = "tuio.TuioEvent.updateObject";
 		/**Triggered if a TuioCursor was updated.*/
-		public static const UPDATE_CURSOR:String = "org.tuio.TuioEvent.updateCursor";
+		public static const UPDATE_CURSOR:String = "tuio.TuioEvent.updateCursor";
 		/**Triggered if a TuioBlob was updated.*/
-		public static const UPDATE_BLOB:String = "org.tuio.TuioEvent.updateBlob";
+		public static const UPDATE_BLOB:String = "tuio.TuioEvent.updateBlob";
 		
 		/**Triggered if a TuioObject was removed.*/
-		public static const REMOVE_OBJECT:String = "org.tuio.TuioEvent.removeObject";
+		public static const REMOVE_OBJECT:String = "tuio.TuioEvent.removeObject";
 		/**Triggered if a TuioCursor was removed.*/
-		public static const REMOVE_CURSOR:String = "org.tuio.TuioEvent.removeCursor";
+		public static const REMOVE_CURSOR:String = "tuio.TuioEvent.removeCursor";
 		/**Triggered if a TuioBlob was removed.*/
-		public static const REMOVE_BLOB:String = "org.tuio.TuioEvent.removeBlob";
+		public static const REMOVE_BLOB:String = "tuio.TuioEvent.removeBlob";
 		
 		/**Triggere if there is a new frameID. The <code>tuioContainer</code> will be <code>null</code> */
-		public static const NEW_FRAME:String = "org.tuio.TuioEvent.newFrame";
+		public static const NEW_FRAME:String = "tuio.TuioEvent.newFrame";
 		
 		private var _tuioContainer:TuioContainer;
 		

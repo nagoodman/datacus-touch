@@ -9,11 +9,11 @@ package tuio {
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
 	
-	import org.tuio.debug.ITuioDebugBlob;
-	import org.tuio.debug.ITuioDebugCursor;
-	import org.tuio.debug.ITuioDebugObject;
-	import org.tuio.debug.ITuioDebugTextSprite;
-	import org.tuio.fiducial.*;
+	import tuio.debug.ITuioDebugBlob;
+	import tuio.debug.ITuioDebugCursor;
+	import tuio.debug.ITuioDebugObject;
+	import tuio.debug.ITuioDebugTextSprite;
+	import tuio.fiducial.*;
 	
 	/**@eventType org.tuio.TuioEvent.ADD*/
 	[Event(name = "org.tuio.TuioEvent.add", type = "tuio.TuioEvent")]

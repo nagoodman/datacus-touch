@@ -11,6 +11,7 @@
 	
 	<fx:Script>
 		<![CDATA[
+<<<<<<< HEAD
 			protected function Picker_clickHandler():void
 			{
 				const state:String = currentState;
@@ -20,7 +21,66 @@
 				if ( state == 'Page2' ) {
 					currentState='Page1';
 				}
+=======
+			import flash.display.Stage;
+			
+			import tuio.*;
+			import tuio.TouchEvent;
+			import tuio.TuioClient;
+			import tuio.connectors.UDPConnector;
+			import tuio.debug.TuioDebug;
+			import tuio.gestures.DragGesture;
+			import tuio.gestures.GestureManager;
+			import tuio.mouse.MouseToTouchDispatcher;
+			import tuio.windows7.*;
+			
+			public var tc:TuioClient;
+			public var tm:TuioManager;
+			//public var gm:GestureManager;
+			private var winTouch:Windows7TouchToTuioDispatcher;
+			private var mTouch:MouseToTouchDispatcher;
+			private var tDbg:TuioDebug;
+			protected var mainStage:Stage;
+			
+			protected function init():void {
+				mainStage = this.systemManager.stage;
+				//makes full screen, but need to make sizinf relative first
+				//mainStage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+				tc = new TuioClient(new UDPConnector());
+				tm = TuioManager.init(mainStage, tc);
+				//gm = GestureManager.init(stage,tc);
+				//GestureManager.addGesture(new DragGesture());
+				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
+				mTouch = new MouseToTouchDispatcher(mainStage);
+				tDbg = TuioDebug.init(mainStage);
+				tc.addListener(tDbg);
+				//these event listeners need to be added to each object
+				mainStage.addEventListener(tuio.TouchEvent.TOUCH_DOWN, handleDown);
+				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
+				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
+				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
+				
+>>>>>>> da18553158b269beaead3dda99e74e871e7a5b50
 			}
+			
+			
+			public function handleDrag(e:TransformGestureEvent):void {
+				//trace("dragged");
+			}
+			
+			public function handleDown(e:tuio.TouchEvent):void {
+				trace("TOUCHDOWN!");
+				trace(e.relatedObject.name);
+			}
+			
+			public function handleUp(e:tuio.TouchEvent):void {
+				//trace("TOUCHUP!");
+				//trace(e.relatedObject);
+			}
+			
+			public function handleMove(e:tuio.TouchEvent):void {
+				//trace("moving");
+			} 
 		]]>
 	</fx:Script>
 	<s:states>
@@ -49,7 +109,7 @@
 			x="20" y="20"
 		/>
 		<components:Measures id="measures"
-			x="20" y="260"
+ 			left="20" top="260"
 		/>
 		<components:StateStep id="stateStep"
 			x="20" y="780"
