@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1100" height="380" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect height="380" id="CategoriesDLContainerrec" d:userLabel="DatalistsContainer" width="1100" x="0" y="0" alpha="0.79">
+		<s:stroke>
+			<s:SolidColorStroke caps="none" color="#5380D0" joints="miter" miterLimit="4" weight="1"/>
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="#FFFFFF"/>
+		</s:fill>
+	</s:Rect>
+	<s:List skinClass="components.CategoriesDatalist1" x="80" y="20" d:userLabel="FirstLevelDatalist">
+		<s:ArrayCollection>
+			<fx:Object image1="@Embed('/assets/images/picker_panel1.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel1.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel1.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel1.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel1.png')"/>
+		</s:ArrayCollection>
+	</s:List>
+	<s:List skinClass="components.CategoriesDatalist2" x="60" y="150" d:userLabel="SecondLevelDatalist">
+		<s:ArrayCollection>
+			<fx:Object image1="@Embed('/assets/images/picker_panel2.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel2.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel2.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel2.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel2.png')"/>
+		</s:ArrayCollection>
+	</s:List>
+	<s:List skinClass="components.CategoriesDatalist3" x="40" y="280" d:userLabel="ThirdLevelDatalist">
+		<s:ArrayCollection>
+			<fx:Object image1="@Embed('/assets/images/picker_panel3.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel3.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel3.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel3.png')"/>
+			<fx:Object image1="@Embed('/assets/images/picker_panel3.png')"/>
+		</s:ArrayCollection>
+	</s:List>
+</s:Group>

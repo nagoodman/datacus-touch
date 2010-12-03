@@ -14,7 +14,7 @@
 	</fx:DesignLayer>
 	<components:CategoriesDatalistsContainer id="CategoriesDLContainer" 
 			includeIn="State2" 
-			d:userLabel="DatalistsContai_CustomComponent" 
+			d:userLabel="DatalistsContainer" 
 			x="120" y="100" alpha="0.79" />
 	
 	<components:SeriesDatalistContainer id="SeriesDLContainer" 
