@@ -5,4 +5,7 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<fx:DesignLayer>
+		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
+	</fx:DesignLayer>	
 </s:Group>

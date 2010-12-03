@@ -11,11 +11,22 @@
 	
 	<fx:Script>
 		<![CDATA[
-			protected function init():void {
-				//initialize
+			protected function Picker_clickHandler():void
+			{
+				const state:String = currentState;
+				if ( state == 'Page1' ) {
+					currentState='Page2';
+				}
+				if ( state == 'Page2' ) {
+					currentState='Page1';
+				}
 			}
 		]]>
 	</fx:Script>
+	<s:states>
+		<s:State name="Page1"/>
+		<s:State name="Page2"/>
+	</s:states>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -62,10 +73,29 @@
 			x="1280" y="140"
 		/>
 		<components:Picker id="picker"
-			x="1280" y="260"
-		/>
+			x="180" y="260"
+			click="Picker_clickHandler()" 
+			currentState.Page2="State2"
+			d:userLabel="Picker">
+		</components:Picker>
 		<components:Trash id="trash"
 			x="1280" y="780"
 		/>	
 	</fx:DesignLayer>
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{picker}">
+					<s:SetAction d:noAutoDelete="true" property="currentState" value="State2"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{picker}">
+					<s:SetAction d:noAutoDelete="true" property="currentState" value="State1"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
 </s:WindowedApplication>

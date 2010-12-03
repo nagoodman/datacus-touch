@@ -5,4 +5,62 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<s:states>
+		<s:State name="State1"/>
+		<s:State name="State2"/>
+	</s:states>
+	<fx:DesignLayer>
+		<s:SkinnableContainer d:userLabel="Picker" height="500" width.State1="140" width.State2="1240" x.State1="1100" x.State2="0" skinClass="skins.Panel" />
+	</fx:DesignLayer>
+	<components:CategoriesDatalistsContainer id="CategoriesDLContainer" 
+			includeIn="State2" 
+			d:userLabel="DatalistsContai_CustomComponent" 
+			x="120" y="100" alpha="0.79" />
+	
+	<components:SeriesDatalistContainer id="SeriesDLContainer" 
+			includeIn="State2" 
+			d:userLabel="SeriesSelectorContainer"
+			x="220" y="20" alpha="0.79"/>
+	
+	<components:AttributesDatalistContainer id="AttributesDLContainer" 
+			includeIn="State2" 
+			d:userLabel="CategoryLevelsContainer"
+			x="20" y="100" alpha="0.79"/>
+	
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="State1" toState="State2">
+			<s:Parallel>
+				<s:Parallel target="{picker}">
+					<s:Move autoCenterTransform="true" duration="2000"/>
+					<s:Resize duration="2000" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{CategoriesDLContainer}">
+					<s:Fade duration="500" startDelay="2000"/>
+				</s:Parallel>
+				<s:Parallel target="{SeriesDLContainer}">
+					<s:Fade duration="500" startDelay="2000"/>
+				</s:Parallel>
+				<s:Parallel target="{AttributesDLContainer}">
+					<s:Fade duration="500" startDelay="2000"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="State2" toState="State1">
+			<s:Parallel>
+				<s:Parallel target="{picker}">
+					<s:Move autoCenterTransform="true" duration="2000" startDelay="500"/>
+					<s:Resize duration="2000" startDelay="500"/>
+				</s:Parallel>
+				<s:Parallel target="{CategoriesDLContainer}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{SeriesDLContainer}">
+					<s:Fade duration="500"/>
+				</s:Parallel>
+				<s:Parallel target="{AttributesDLContainer}">
+					<s:Fade duration="500"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
 </s:Group>
