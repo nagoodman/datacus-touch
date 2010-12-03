@@ -1,6 +1,6 @@
 ﻿package tuio {
 	
-	import org.tuio.osc.*;
+	import tuio.osc.*;
 	
 	/**
 	 * A class for receiving tracking data via the TUIO protocol using a seperate OSC parser 

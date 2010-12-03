@@ -2,12 +2,22 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 xmlns:components="components.*">
-	
+		 creationComplete="init()">	
 	<fx:Script>
 		<![CDATA[
 			//behavior: select measures type via tap or scroll if too many displayed
 			//connections: listen to the categories and series for types of measures
+			import tuio.TouchEvent;
+			import flash.display.DisplayObject;
+			
+			//I am not defining these correctly or I can only use touch on the touch screen
+			protected function init():void {			
+				this.addEventListener(tuio.TouchEvent.TOUCH_DOWN, touchDown);
+			}
+			
+			public function touchDown(e:tuio.TouchEvent):void {
+				trace("measuresDown");
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
