@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;datacus&apos; to &apos;sandbox&apos;" description="Rename resource &apos;datacus&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/datacus" name="sandbox" stamp="1291327969162" updateReferences="true"/>
-</session>
