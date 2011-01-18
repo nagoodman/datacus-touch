@@ -22,7 +22,6 @@
 					currentState='Page1';
 				}
 			}
-
 			import flash.display.Stage;
 			
 			import tuio.*;
