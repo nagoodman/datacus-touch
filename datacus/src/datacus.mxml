@@ -5,7 +5,7 @@
 					   xmlns:components="components.*"
 					   backgroundColor="#FFFFFF"
 					   minWidth="1440"
-					   minHeight="900"
+					   minHeight="920"
 					   creationComplete="init()">  
 					<!--make it full screen, but for now...-->
 	
@@ -33,6 +33,16 @@
 			import tuio.gestures.GestureManager;
 			import tuio.mouse.MouseToTouchDispatcher;
 			import tuio.windows7.*;
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.DragEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.components.List;
+			import spark.layouts.supportClasses.DropLocation;
 			
 			public var tc:TuioClient;
 			public var tm:TuioManager;
@@ -82,6 +92,43 @@
 			public function handleMove(e:tuio.TouchEvent):void {
 				//trace("moving");
 			} 
+			
+			private function createQuery(event:ResultEvent):void
+			{
+				
+			}
+			
+			public function moveToColumns(event:ResultEvent):void
+			{
+				
+			}
+			
+			public function moveToRows(event:ResultEvent):void
+			{
+				
+			}
+			
+			[Bindable]
+			public var dp:ArrayCollection;
+			
+			public function getResults(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				var temp:Array = new Array();
+				var uniqueName:Array = new Array();
+				for (var i:int = 0; i < arr.length; i++){
+					temp.push(arr[i].caption);
+					uniqueName.push(arr[i].uniqueName);
+				}
+				
+				dp = new ArrayCollection(temp);
+				
+				trace(dp);
+				
+			}
+			
+			
 		]]>
 	</fx:Script>
 	<s:states>
@@ -89,7 +136,35 @@
 		<s:State name="Page2"/>
 	</s:states>
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:HTTPService id="initializeQuery" resultFormat="text" 
+			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata" 
+			method="POST" result="createQuery(event)">
+			<s:request>
+				<connection>FoodMart Connection</connection>
+				<cube>Store</cube>
+				<catalog>FoodMart</catalog>
+				<schema>FoodMart</schema>
+			</s:request>
+		</s:HTTPService>
+		<s:HTTPService id="toRows" resultFormat="text"
+			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata/axis/ROWS/dimension/Store%20Type/hierarchy/%5BStore%20Type%5D/%5BStore%20Type%5D.%5BStore%20Type%5D"
+			method="POST" result="moveToRows(event)">
+			<s:request xmlns="">
+				<position>0</position>
+				<memberposition>-1</memberposition>
+			</s:request>
+		</s:HTTPService>
+		<s:HTTPService id="toColumns" resultFormat="text"
+			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata/axis/COLUMNS/dimension/Store/hierarchy/%5BStore%5D/%5BStore%5D.%5BStore%20Country%5D"
+			method="POST" result="moveToColumns(event)">
+			<s:request xmlns="">
+				<position>0</position>
+				<memberposition>-1</memberposition>
+			</s:request>
+		</s:HTTPService>
+		<s:HTTPService id="results" resultFormat="text"
+			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
+			method="GET" result="getResults(event)" />
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
 <!--		I bet there's a better way to do the background		 -->
