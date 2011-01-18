@@ -11,7 +11,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-<<<<<<< HEAD
+
 			protected function Picker_clickHandler():void
 			{
 				const state:String = currentState;
@@ -21,7 +21,8 @@
 				if ( state == 'Page2' ) {
 					currentState='Page1';
 				}
-=======
+			}
+
 			import flash.display.Stage;
 			
 			import tuio.*;
@@ -60,7 +61,7 @@
 				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
 				
->>>>>>> da18553158b269beaead3dda99e74e871e7a5b50
+
 				
 			}
 			
@@ -146,14 +147,14 @@
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
-					<s:SetAction d:noAutoDelete="true" property="currentState" value="State2"/>
+					<s:SetAction property="currentState" value="State2"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
-					<s:SetAction d:noAutoDelete="true" property="currentState" value="State1"/>
+					<s:SetAction property="currentState" value="State1"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
