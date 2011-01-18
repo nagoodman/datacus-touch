@@ -63,8 +63,10 @@
 		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
 	</fx:DesignLayer>	
 	<s:List id="catList"
-			width="1080"
-			height="100"
+			width="1070"
+			height="90"
+			x="5" y="5"
+			alpha="0.8"
 			dataProvider="{catDB}"
 			dragEnter="catList_dragEnterHandler(event)"
 			dragOver="catList_dragOverHandler(event)"

@@ -63,8 +63,10 @@
 		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
 	</fx:DesignLayer>	
 	<s:List id="serList"
-			width="1080"
-			height="100"
+			width="1070"
+			height="90"
+			x="5" y="5"
+			alpha="0.8"
 			dataProvider="{serDB}"
 			dragEnter="serList_dragEnterHandler(event)"
 			dragOver="serList_dragOverHandler(event)"
