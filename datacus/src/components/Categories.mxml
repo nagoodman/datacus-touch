@@ -2,10 +2,93 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.DragEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.components.List;
+			import spark.layouts.supportClasses.DropLocation;
+			
+			
+			[Bindable]
+			private var catDB:ArrayCollection=new ArrayCollection();
+			
+			[Bindable]
+			public var dp:ArrayCollection;
+			
+			protected function catList_dragEnterHandler(event:DragEvent):void
+			{
+				event.preventDefault();
+				var myDragTarget:List=event.currentTarget as List;
+				DragManager.acceptDragDrop(myDragTarget);
+				
+			}
+			
+			
+			protected function catList_dragOverHandler(event:DragEvent):void
+			{
+				var myDropTarget:List=List(event.currentTarget);
+				var pos:DropLocation=this.catList.layout.calculateDropLocation(event);
+				DragManager.showFeedback(DragManager.COPY);
+				myDropTarget.createDropIndicator();
+				myDropTarget.layout.showDropIndicator(pos);
+			}
+			
+			
+			protected function catList_dragDropHandler(event:DragEvent):void
+			{
+				var items:Object=event.dragSource.dataForFormat("itemsByIndex") as Object;
+				var myDropTarget:List=List(event.currentTarget);
+				var pos:DropLocation=this.catList.layout.calculateDropLocation(event);
+				for (var i:int=items.length - 1; i >= 0; i--)
+				{
+					this.catDB.addItemAt(items[i], pos.dropIndex);
+				}
+				myDropTarget.destroyDropIndicator();
+			}
+		]]>
+		
+		
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
 	</fx:DesignLayer>	
+	<s:List id="catList"
+			width="1080"
+			height="100"
+			dataProvider="{catDB}"
+			dragEnter="catList_dragEnterHandler(event)"
+			dragOver="catList_dragOverHandler(event)"
+			dragDrop="catList_dragDropHandler(event)"
+			skinClass="skins.MyDropSkin">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="left"
+								paddingLeft="0"
+								paddingTop="0"/>
+		</s:layout>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"
+												paddingLeft="5"/>
+						</s:layout>
+						<mx:Image source="{data.icon}"/>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+		
+	</s:List>
 </s:Group>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:DesignLayer id="DDLCBackground">
+		<s:Rect height="60" id="DimensionsDLContainer" width="900" x="0" y="0">
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#5380D0" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+		</s:Rect>
+	</fx:DesignLayer>
+	<s:List id="dimensionsList"
+			width="890"
+			height="50"
+			dragEnabled="true"
+			allowMultipleSelection="true"
+			x="5" y="5">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="left"
+								paddingLeft="0"
+								paddingTop="0"/>
+		</s:layout>
+		<s:dataProvider>
+			<s:ArrayList>
+				<fx:Object label="Draggable"/>
+				<fx:Object label="Objects"/>
+				<fx:Object label="List"/>
+			</s:ArrayList>
+		</s:dataProvider>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="top"
+												paddingLeft="0"/>
+						</s:layout>
+						<mx:Image source="{data.icon}"/>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+</s:Group>

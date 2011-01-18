@@ -61,6 +61,7 @@
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
 				
 >>>>>>> da18553158b269beaead3dda99e74e871e7a5b50
+				
 			}
 			
 			
@@ -135,8 +136,7 @@
 		<components:Picker id="picker"
 			x="180" y="260"
 			click="Picker_clickHandler()" 
-			currentState.Page2="State2"
-			d:userLabel="Picker">
+			currentState.Page2="State2">
 		</components:Picker>
 		<components:Trash id="trash"
 			x="1280" y="780"
