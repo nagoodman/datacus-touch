@@ -68,6 +68,8 @@
 			height="90"
 			x="5" y="5"
 			alpha="0.8"
+			dragEnabled="true"
+			dragMoveEnabled="true"
 			dataProvider="{catDB}"
 			dragEnter="catList_dragEnterHandler(event)"
 			dragOver="catList_dragOverHandler(event)"
@@ -86,7 +88,6 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="5"/>
 						</s:layout>
-						<mx:Image source="{data.icon}"/>
 						<s:Label text="{data.label}"/>
 					</s:Group>
 				</s:ItemRenderer>

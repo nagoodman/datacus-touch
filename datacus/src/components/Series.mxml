@@ -69,6 +69,8 @@
 			height="90"
 			x="5" y="5"
 			alpha="0.8"
+			dragEnabled="true"
+			dragMoveEnabled="true"
 			dataProvider="{serDB}"
 			dragEnter="serList_dragEnterHandler(event)"
 			dragOver="serList_dragOverHandler(event)"
@@ -87,7 +89,6 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="5"/>
 						</s:layout>
-						<mx:Image source="{data.icon}"/>
 						<s:Label text="{data.label}"/>
 					</s:Group>
 				</s:ItemRenderer>

@@ -25,6 +25,19 @@
 		<s:ArrayCollection>
 			
 		</s:ArrayCollection>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"
+												paddingLeft="0"/>
+						</s:layout>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
 	</s:List>
 	<s:List x="10" y="135" width="1080" height="110" id="membersLevel2">
 		<s:layout>
@@ -35,6 +48,19 @@
 		<s:ArrayCollection>
 			
 		</s:ArrayCollection>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"
+												paddingLeft="0"/>
+						</s:layout>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
 	</s:List>
 	<s:List x="10" y="260" width="1080" height="110" id="membersLevel3">
 		<s:layout>
@@ -45,5 +71,18 @@
 		<s:ArrayCollection>
 			
 		</s:ArrayCollection>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"
+												paddingLeft="0"/>
+						</s:layout>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
 	</s:List>
 </s:Group>

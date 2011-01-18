@@ -41,7 +41,6 @@
 							<s:HorizontalLayout verticalAlign="top"
 												paddingLeft="0"/>
 						</s:layout>
-						<mx:Image source="{data.icon}"/>
 						<s:Label text="{data.label}"/>
 					</s:Group>
 				</s:ItemRenderer>

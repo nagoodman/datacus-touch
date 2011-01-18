@@ -69,7 +69,8 @@
 				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
 				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
-				
+				initializeQuery.send();
+				//Creates a blank query that will be used for processing data 
 
 				
 			}
@@ -93,24 +94,30 @@
 				//trace("moving");
 			} 
 			
+			//After Query is created this tells it to initiate loading the picker
 			private function createQuery(event:ResultEvent):void
 			{
 				
 			}
 			
+			//This is a public function that allows when array on series panel is changed to update the query
 			public function moveToColumns(event:ResultEvent):void
 			{
 				
+				results.send();//sends service call to get new graph info 
 			}
 			
+			//This is a public function that allows when array on categories panel is changed to update the query
 			public function moveToRows(event:ResultEvent):void
 			{
 				
+				results.send(); //sends service call to get new graph info 
 			}
 			
 			[Bindable]
 			public var dp:ArrayCollection;
 			
+			//function called after results are returned to handle parsing the json into arrays for the graph to read
 			public function getResults(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
@@ -136,6 +143,7 @@
 		<s:State name="Page2"/>
 	</s:states>
 	<fx:Declarations>
+		<!-- request to server to create a blank query -->
 		<s:HTTPService id="initializeQuery" resultFormat="text" 
 			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata" 
 			method="POST" result="createQuery(event)">
@@ -146,6 +154,8 @@
 				<schema>FoodMart</schema>
 			</s:request>
 		</s:HTTPService>
+		
+		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
 		<s:HTTPService id="toRows" resultFormat="text"
 			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata/axis/ROWS/dimension/Store%20Type/hierarchy/%5BStore%20Type%5D/%5BStore%20Type%5D.%5BStore%20Type%5D"
 			method="POST" result="moveToRows(event)">
@@ -154,6 +164,8 @@
 				<memberposition>-1</memberposition>
 			</s:request>
 		</s:HTTPService>
+		
+		<!-- request to server to move a new item to the Columns (Series) axis for graphing-->
 		<s:HTTPService id="toColumns" resultFormat="text"
 			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata/axis/COLUMNS/dimension/Store/hierarchy/%5BStore%5D/%5BStore%5D.%5BStore%20Country%5D"
 			method="POST" result="moveToColumns(event)">
@@ -162,6 +174,8 @@
 				<memberposition>-1</memberposition>
 			</s:request>
 		</s:HTTPService>
+		
+		<!-- request to server to get the new chart information back from the server for graphing values-->
 		<s:HTTPService id="results" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
 			method="GET" result="getResults(event)" />
