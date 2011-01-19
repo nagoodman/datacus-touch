@@ -17,6 +17,7 @@
 				const state:String = currentState;
 				if ( state == 'Page1' ) {
 					currentState='Page2';
+					populatePicker();
 				}
 				if ( state == 'Page2' ) {
 					currentState='Page1';
@@ -130,7 +131,7 @@
 				initializeQuery.send()
 			}
 			
-			public function populatePicker(event:ResultEvent):void{
+			public function populatePicker():void{
 				callDimensions.send();
 			}
 			public function getDimensions(event:ResultEvent):void
