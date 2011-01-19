@@ -22,7 +22,18 @@
 					currentState='Page1';
 				}
 			}
+			import com.adobe.serialization.json.JSON;
+			
 			import flash.display.Stage;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.DragEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.components.List;
+			import spark.layouts.supportClasses.DropLocation;
 			
 			import tuio.*;
 			import tuio.TouchEvent;
@@ -33,16 +44,6 @@
 			import tuio.gestures.GestureManager;
 			import tuio.mouse.MouseToTouchDispatcher;
 			import tuio.windows7.*;
-			import com.adobe.serialization.json.JSON;
-			
-			import mx.collections.ArrayCollection;
-			import mx.controls.Alert;
-			import mx.events.DragEvent;
-			import mx.managers.DragManager;
-			import mx.rpc.events.ResultEvent;
-			
-			import spark.components.List;
-			import spark.layouts.supportClasses.DropLocation;
 			
 			public var tc:TuioClient;
 			public var tm:TuioManager;
@@ -94,11 +95,8 @@
 				//trace("moving");
 			} 
 			
-			//After Query is created this tells it to initiate loading the picker
-			private function createQuery(event:ResultEvent):void
-			{
-				
-			}
+			
+			
 			
 			//This is a public function that allows when array on series panel is changed to update the query
 			public function moveToColumns(event:ResultEvent):void
@@ -114,24 +112,63 @@
 				results.send(); //sends service call to get new graph info 
 			}
 			
+			public function getResults(event:ResultEvent):void
+			{
+				
+			
+			}
+			
 			[Bindable]
 			public var dp:ArrayCollection;
 			
-			//function called after results are returned to handle parsing the json into arrays for the graph to read
-			public function getResults(event:ResultEvent):void
+			[Bindable]
+			public var mp:ArrayCollection;
+			
+			//After Query is created this tells it to initiate loading the picker
+			private function createQuery(event:ResultEvent):void
+			{
+				initializeQuery.send()
+			}
+			
+			public function populatePicker(event:ResultEvent):void{
+				callDimensions.send();
+			}
+			public function getDimensions(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
-				var temp:Array = new Array();
-				var uniqueName:Array = new Array();
-				for (var i:int = 0; i < arr.length; i++){
-					temp.push(arr[i].caption);
-					uniqueName.push(arr[i].uniqueName);
+				dp = new ArrayCollection();
+				mp = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					if(arr[i].caption == 'Measures'){
+						obj.label = arr[i].caption;
+						obj.value = arr[i].uniqueName;
+						mp.addItem(obj);
+					}
+					else{
+						obj.label = arr[i].caption;
+						obj.value = arr[i].uniqueName;
+						dp.addItem(obj);
+					}
 				}
-				
-				dp = new ArrayCollection(temp);
-				
-				trace(dp);
+				picker.DimensionsDLContainer.dimensionsList.dataProvider = dp;
+				trace(mp[0].value);
+				callLevels.send();
+			}
+			
+			public function getLevels(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				dp = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.value = arr[i].uniqueName;
+					dp.addItem(obj);	
+				}
+				picker.LevelsDLContainer.levelsList.dataProvider = dp;
 				
 			}
 			
@@ -146,14 +183,21 @@
 		<!-- request to server to create a blank query -->
 		<s:HTTPService id="initializeQuery" resultFormat="text" 
 			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata" 
-			method="POST" result="createQuery(event)">
+			method="POST" result="populatePicker(event)">
 			<s:request>
-				<connection>FoodMart Connection</connection>
+				<connection>FoodMart%20Connection</connection>
 				<cube>Store</cube>
 				<catalog>FoodMart</catalog>
 				<schema>FoodMart</schema>
 			</s:request>
 		</s:HTTPService>
+		
+		<s:HTTPService id="callDimensions" resultFormat="text"
+			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/"
+			result="getDimensions(event)" />
+		<s:HTTPService id="callLevels" resultFormat="text"
+			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Store/hierarchy/Store/"
+			result="getLevels(event)" />
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
 		<s:HTTPService id="toRows" resultFormat="text"

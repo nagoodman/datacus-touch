@@ -26,13 +26,7 @@
 								paddingLeft="0"
 								paddingTop="0"/>
 		</s:layout>
-		<s:dataProvider>
-			<s:ArrayList>
-				<fx:Object label="Draggable"/>
-				<fx:Object label="Objects"/>
-				<fx:Object label="List"/>
-			</s:ArrayList>
-		</s:dataProvider>
+		
 		<s:itemRenderer>
 			<fx:Component>
 				<s:ItemRenderer>
