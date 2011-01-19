@@ -70,7 +70,7 @@
 				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
 				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
-				initializeQuery.send();
+				createQuery();
 				//Creates a blank query that will be used for processing data 
 
 				
@@ -125,7 +125,7 @@
 			public var mp:ArrayCollection;
 			
 			//After Query is created this tells it to initiate loading the picker
-			private function createQuery(event:ResultEvent):void
+			private function createQuery():void
 			{
 				initializeQuery.send()
 			}
@@ -172,6 +172,21 @@
 				
 			}
 			
+			public function getMembers(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				dp = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.value = arr[i].uniqueName;
+					dp.addItem(obj);	
+				}
+				
+				
+			}
+			
 			
 		]]>
 	</fx:Script>
@@ -183,7 +198,7 @@
 		<!-- request to server to create a blank query -->
 		<s:HTTPService id="initializeQuery" resultFormat="text" 
 			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata" 
-			method="POST" result="populatePicker(event)">
+			method="POST" >
 			<s:request>
 				<connection>FoodMart%20Connection</connection>
 				<cube>Store</cube>
@@ -198,6 +213,9 @@
 		<s:HTTPService id="callLevels" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Store/hierarchy/Store/"
 			result="getLevels(event)" />
+		<s:HTTPService id="callMembers" resultFormat="text"
+			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Store/hierarchy/Store/"
+			result="getMembers(event)"/>
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
 		<s:HTTPService id="toRows" resultFormat="text"

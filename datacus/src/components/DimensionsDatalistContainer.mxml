@@ -19,6 +19,7 @@
 			width="890"
 			height="50"
 			dragEnabled="true"
+			
 			allowMultipleSelection="true"
 			x="5" y="5">
 		<s:layout>
@@ -33,7 +34,8 @@
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="top"
-												paddingLeft="0"/>
+												paddingLeft="5"
+												paddingTop="20"/>
 						</s:layout>
 						<s:Label text="{data.label}"/>
 					</s:Group>
