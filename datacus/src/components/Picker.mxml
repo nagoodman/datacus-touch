@@ -13,8 +13,8 @@
 		<s:SkinnableContainer id="picker" height="500" width.State1="140" width.State2="1240" x.State1="1100" x.State2="0" skinClass="skins.Panel" />
 	</fx:DesignLayer>
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
-										includeIn="State2" 
-										x="20" y="100" alpha="0.79"/>
+		includeIn="State2" 
+		x="20" y="100" alpha="0.79"/>
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
 											includeIn="State2"  

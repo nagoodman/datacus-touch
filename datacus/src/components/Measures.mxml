@@ -25,5 +25,30 @@
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" />
-	</fx:DesignLayer>	
+	</fx:DesignLayer>
+	<s:List id="measuresList"
+			width="130"
+			height="490"
+			x="5" y="5">
+		
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="left"
+							  paddingLeft="0"
+							  paddingTop="0"/>
+		</s:layout>
+		
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"
+												paddingLeft="0"/>
+						</s:layout>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
 </s:Group>

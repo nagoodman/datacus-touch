@@ -71,7 +71,9 @@
 				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
 				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
-				createQuery();
+				
+				
+				//createQuery();
 				//Creates a blank query that will be used for processing data 
 
 				
@@ -120,71 +122,109 @@
 			}
 			
 			[Bindable]
-			public var dp:ArrayCollection;
+			public var dimensionsAC:ArrayCollection;
 			
 			[Bindable]
-			public var mp:ArrayCollection;
+			public var levelsAC:ArrayCollection;
 			
-			//After Query is created this tells it to initiate loading the picker
-			private function createQuery():void
+			[Bindable]
+			public var membersAC:ArrayCollection;
+			
+			[Bindable]
+			public var measuresAC:ArrayCollection;
+			
+			private function createQuery(event:ResultEvent):void
 			{
 				initializeQuery.send()
 			}
 			
 			public function populatePicker():void{
-				callDimensions.send();
+				callDimensions.send()
 			}
 			public function getDimensions(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
-				dp = new ArrayCollection();
-				mp = new ArrayCollection();
+				dimensionsAC = new ArrayCollection();
+				measuresAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					if(arr[i].caption == 'Measures'){
 						obj.label = arr[i].caption;
 						obj.value = arr[i].uniqueName;
-						mp.addItem(obj);
+						measuresAC.addItem(obj);
 					}
 					else{
 						obj.label = arr[i].caption;
 						obj.value = arr[i].uniqueName;
-						dp.addItem(obj);
+						dimensionsAC.addItem(obj);
 					}
 				}
-				picker.DimensionsDLContainer.dimensionsList.dataProvider = dp;
-				trace(mp[0].value);
+				
+				
+				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
+				trace(measuresAC[0].value);
+				callMeasures.send();
 				callLevels.send();
+				
+			}
+			
+			public function getMeasures(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				measuresAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.value = arr[i].uniqueName;
+					measuresAC.addItem(obj);	
+				}
+				measures.measuresList.dataProvider = measuresAC;
+				
 			}
 			
 			public function getLevels(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
-				dp = new ArrayCollection();
+				levelsAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.value = arr[i].uniqueName;
-					dp.addItem(obj);	
+					levelsAC.addItem(obj);	
 				}
-				picker.LevelsDLContainer.levelsList.dataProvider = dp;
+				picker.LevelsDLContainer.levelsList.dataProvider = levelsAC;
+				getMembersFromLevels(levelsAC);
+			}
+			
+			public function getMembersFromLevels(levels:ArrayCollection):void
+			{
+				
+				//callMembers.send();
+				//picker.MembersDLContainer.membersLevel1.dataProvider = firstRow;
+				
+				
+				//picker.MembersDLContainer.membersLevel2.dataProvider = secondRow;
+				
+				
+				//picker.MembersDLContainer.membersLevel3.dataProvider = thirdRow;
 				
 			}
 			
-			public function getMembers(event:ResultEvent):void
+			public function getMembers(event:ResultEvent):ArrayCollection
 			{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
-				dp = new ArrayCollection();
+				membersAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.value = arr[i].uniqueName;
-					dp.addItem(obj);	
+					membersAC.addItem(obj);	
 				}
-				
+				return membersAC;
 				
 			}
 			
@@ -211,6 +251,11 @@
 		<s:HTTPService id="callDimensions" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/"
 			result="getDimensions(event)" />
+		<s:HTTPService
+			id="callMeasures"
+			resultFormat="text"
+			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel"
+			result="getMeasures(event)" />
 		<s:HTTPService id="callLevels" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Store/hierarchy/Store/"
 			result="getLevels(event)" />
