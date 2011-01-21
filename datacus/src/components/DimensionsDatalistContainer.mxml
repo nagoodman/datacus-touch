@@ -2,6 +2,35 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.events.RendererExistenceEvent;
+			
+			private function addClick(event:RendererExistenceEvent):void{
+				event.renderer.addEventListener(flash.events.MouseEvent.CLICK, SelectDimension);
+			}
+			
+			
+			
+			private function SelectDimension(e:Event):void{
+				var currentDimension:String = FlexGlobals.topLevelApplication.currentDimension;
+				var newDimension:String; 
+				if ( e.target.text ){
+					newDimension = e.target.text;
+				}
+				else{
+					newDimension = e.target.label;
+				}
+				currentDimension = newDimension;
+				FlexGlobals.topLevelApplication.createLevels(currentDimension, currentDimension);
+			}
+			
+		]]>
+	</fx:Script>
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
