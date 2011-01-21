@@ -65,7 +65,7 @@
 				//gm = GestureManager.init(stage,tc);
 				//GestureManager.addGesture(new DragGesture());
 				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
-				mTouch = new MouseToTouchDispatcher(mainStage);
+				//mTouch = new MouseToTouchDispatcher(mainStage);
 				tDbg = TuioDebug.init(mainStage);
 				tc.addListener(tDbg);
 				//these event listeners need to be added to each object

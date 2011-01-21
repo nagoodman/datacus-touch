@@ -16,7 +16,7 @@
 		</s:Rect>
 	</fx:DesignLayer>
 	
-	<s:List x="10" y="10" width="1080" height="110" id="membersLevel1">
+	<s:List x="10" y="10" width="1080" height="110" id="membersLevel1" dragEnabled="true">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="0"
@@ -39,7 +39,7 @@
 			</fx:Component>
 		</s:itemRenderer>
 	</s:List>
-	<s:List x="10" y="135" width="1080" height="110" id="membersLevel2">
+	<s:List x="10" y="135" width="1080" height="110" id="membersLevel2" dragEnabled="true">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="0"
@@ -62,7 +62,7 @@
 			</fx:Component>
 		</s:itemRenderer>
 	</s:List>
-	<s:List x="10" y="260" width="1080" height="110" id="membersLevel3">
+	<s:List x="10" y="260" width="1080" height="110" id="membersLevel3" dragEnabled="true">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="0"
