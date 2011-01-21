@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns="http://ns.adobe.com/Fiber/1.0">
+  <annotation name="ActionScriptGeneration">
+    <item name="FullyQualifyReferences">true</item>
+  </annotation>
+  <service name="CreateQuery">
+    <annotation name="ActionScriptGeneration">
+      <item name="ServiceType">HTTPMultiService</item>
+      <item name="Package">services.createquery</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">HTTPService</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="LINKED_FILE"></item>
+    </annotation>
+    <function name="CreateQuery" arguments="user:string,queryName:string,connection:string,cube:string,catalog:string,schema:string" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="ActionScriptGeneration">
+        <item name="method">POST</item>
+        <item name="contentType">application/x-www-form-urlencoded</item>
+        <item name="requestBodyParameter">false</item>
+        <item name="url">http://localhost:8080/saiku/json/saiku/{user}/query/{queryName}</item>
+      </annotation>
+      <annotation name="url group">
+        <item name="completeURL">http://localhost:8080/saiku/json/saiku/{user}/query/{queryName}</item>
+      </annotation>
+      <annotation name="Properties">
+        <item name="urlParamNames">user,queryName</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParamNames">user,queryName,connection,cube,catalog,schema</item>
+        <item name="inputParams">string,string,string,string,string,string</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+  </service>
+</model>

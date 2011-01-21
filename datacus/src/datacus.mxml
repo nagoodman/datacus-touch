@@ -6,7 +6,7 @@
 					   backgroundColor="#FFFFFF"
 					   minWidth="1440"
 					   minHeight="920"
-					   creationComplete="init()">  
+					   creationComplete="init()" xmlns:createquery="services.createquery.*">  
 					<!--make it full screen, but for now...-->
 	
 	<fx:Script>
@@ -32,6 +32,8 @@
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
+			
+			import services.createquery.CreateQuery;
 			
 			import spark.components.List;
 			import spark.layouts.supportClasses.DropLocation;
@@ -73,8 +75,6 @@
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
 				
 				
-				//createQuery();
-				//Creates a blank query that will be used for processing data 
 
 				
 			}
@@ -122,6 +122,9 @@
 			}
 			
 			[Bindable]
+			private var destDB:ArrayCollection=new ArrayCollection();
+			
+			[Bindable]
 			public var dimensionsAC:ArrayCollection;
 			
 			[Bindable]
@@ -133,12 +136,23 @@
 			[Bindable]
 			public var measuresAC:ArrayCollection;
 			
-			private function createQuery(event:ResultEvent):void
-			{
-				initializeQuery.send()
-			}
+			[Bindable]
+			public var queryName:String;
+			
+			[Bindable]
+			public var currentDimension:String;
+			
+			[Bindable]
+			public var currentHierarchy:String;
+			
+			[Bindable]
+			public var currentLevel:int;
+			
 			
 			public function populatePicker():void{
+				queryName = new String();
+				queryName = "chartdata";
+				callDimensions.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/"
 				callDimensions.send()
 			}
 			public function getDimensions(event:ResultEvent):void
@@ -160,10 +174,16 @@
 						dimensionsAC.addItem(obj);
 					}
 				}
-				
-				
 				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
 				trace(measuresAC[0].value);
+				var dimension:String = dimensionsAC[0].label;
+				var hierarchy:String = dimensionsAC[0].label;
+				
+				currentDimension = dimension;
+				currentHierarchy = hierarchy;
+				
+				callLevels.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
+				
 				callMeasures.send();
 				callLevels.send();
 				
@@ -192,6 +212,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
+					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					levelsAC.addItem(obj);	
 				}
@@ -201,19 +222,41 @@
 			
 			public function getMembersFromLevels(levels:ArrayCollection):void
 			{
-				
-				//callMembers.send();
-				//picker.MembersDLContainer.membersLevel1.dataProvider = firstRow;
-				
-				
-				//picker.MembersDLContainer.membersLevel2.dataProvider = secondRow;
-				
-				
-				//picker.MembersDLContainer.membersLevel3.dataProvider = thirdRow;
-				
+				var i:int = 0;
+				if(levels.length > 3){
+					for (i = 0; i < 3; i++){
+						if (i==0){
+							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers1.send();
+						}
+						if (i==1){
+							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers2.send();
+						}
+						if (i==2){
+							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers3.send();
+						}			
+					}
+				}else{
+					for (i = 0; i < levels.length; i ++){
+						if (i==0){
+							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers1.send();
+						}
+						if (i==1){
+							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers2.send();
+						}
+						if (i==2){
+							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers3.send();
+						}				
+					}			
+				}		
 			}
 			
-			public function getMembers(event:ResultEvent):ArrayCollection
+			public function getMembers1(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
@@ -224,10 +267,43 @@
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
-				return membersAC;
-				
+				picker.MembersDLContainer.membersLevel1.dataProvider = membersAC;
 			}
 			
+			public function getMembers2(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.value = arr[i].uniqueName;
+					membersAC.addItem(obj);	
+				}
+				picker.MembersDLContainer.membersLevel2.dataProvider = membersAC;
+			}
+			
+			public function getMembers3(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.value = arr[i].uniqueName;
+					membersAC.addItem(obj);	
+				}
+				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
+			}
+			
+			
+
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				CreateQueryResult.token = createQuery.CreateQuery(userTextInput.text,queryNameTextInput.text,connectionTextInput.text,cubeTextInput.text,catalogTextInput.text,schemaTextInput.text);
+			}
 			
 		]]>
 	</fx:Script>
@@ -236,32 +312,31 @@
 		<s:State name="Page2"/>
 	</s:states>
 	<fx:Declarations>
-		<!-- request to server to create a blank query -->
-		<s:HTTPService id="initializeQuery" resultFormat="text" 
-			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata" 
-			method="POST" >
-			<s:request>
-				<connection>FoodMart%20Connection</connection>
-				<cube>Store</cube>
-				<catalog>FoodMart</catalog>
-				<schema>FoodMart</schema>
-			</s:request>
-		</s:HTTPService>
-		
-		<s:HTTPService id="callDimensions" resultFormat="text"
-			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/"
+		<s:HTTPService
+			id="callDimensions"
+			resultFormat="text"
 			result="getDimensions(event)" />
 		<s:HTTPService
 			id="callMeasures"
 			resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel"
 			result="getMeasures(event)" />
-		<s:HTTPService id="callLevels" resultFormat="text"
-			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Store/hierarchy/Store/"
+		<s:HTTPService
+			id="callLevels"
+			resultFormat="text"
 			result="getLevels(event)" />
-		<s:HTTPService id="callMembers" resultFormat="text"
-			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Store/hierarchy/Store/"
-			result="getMembers(event)"/>
+		<s:HTTPService
+			id="callMembers1"
+			resultFormat="text"
+			result="getMembers1(event)" />
+		<s:HTTPService
+			id="callMembers2"
+			resultFormat="text"
+			result="getMembers2(event)" />
+		<s:HTTPService
+			id="callMembers3"
+			resultFormat="text"
+			result="getMembers3(event)" />
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
 		<s:HTTPService id="toRows" resultFormat="text"
@@ -287,6 +362,8 @@
 		<s:HTTPService id="results" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
 			method="GET" result="getResults(event)" />
+		<createquery:CreateQuery id="createQuery" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<s:CallResponder id="CreateQueryResult"/>
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
 <!--		I bet there's a better way to do the background		 -->
@@ -339,6 +416,27 @@
 			x="1280" y="780"
 		/>	
 	</fx:DesignLayer>
+	<mx:Form includeIn="Page1" defaultButton="{button}" x="400" y="400">
+		<mx:FormItem label="User">
+			<s:TextInput id="userTextInput" text="admin"/>
+		</mx:FormItem>
+		<mx:FormItem label="QueryName">
+			<s:TextInput id="queryNameTextInput" text="chartdata"/>
+		</mx:FormItem>
+		<mx:FormItem label="Connection">
+			<s:TextInput id="connectionTextInput" text="FoodMart Connection"/>
+		</mx:FormItem>
+		<mx:FormItem label="Cube">
+			<s:TextInput id="cubeTextInput" text="Store"/>
+		</mx:FormItem>
+		<mx:FormItem label="Catalog">
+			<s:TextInput id="catalogTextInput" text="FoodMart"/>
+		</mx:FormItem>
+		<mx:FormItem label="Schema">
+			<s:TextInput id="schemaTextInput" text="FoodMart"/>
+		</mx:FormItem>
+		<s:Button label="CreateQuery" id="button" click="button_clickHandler(event)"/>
+	</mx:Form>
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
 			<s:Parallel>
