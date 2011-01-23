@@ -29,7 +29,7 @@
 			}
 			
 		]]>
-	</fx:Script>
+	</fx:Script>	
 	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
@@ -47,10 +47,11 @@
 	<s:List id="dimensionsList"
 			width="890"
 			height="50"
-			dragEnabled="true"
+			dragEnabled="false"
 			
 			allowMultipleSelection="true"
-			x="5" y="5">
+			x="5" y="5"
+			rendererAdd="addClick(event)">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="0"

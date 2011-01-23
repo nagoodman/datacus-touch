@@ -6,19 +6,24 @@
 					   backgroundColor="#FFFFFF"
 					   minWidth="1440"
 					   minHeight="920"
-					   creationComplete="init()" xmlns:createquery="services.createquery.*">  
+					   creationComplete="init()" xmlns:create_query="services.create_query.*">  
 					<!--make it full screen, but for now...-->
 	
 	<fx:Script>
 		<![CDATA[
 
-			protected function Picker_clickHandler():void
+			protected function Picker_open():void
 			{
 				const state:String = currentState;
 				if ( state == 'Page1' ) {
 					currentState='Page2';
 					populatePicker();
 				}
+				
+			}
+			
+			protected function Picker_close():void{
+				const state:String = currentState;
 				if ( state == 'Page2' ) {
 					currentState='Page1';
 				}
@@ -33,10 +38,10 @@
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
 			
-			import services.createquery.CreateQuery;
-			
 			import spark.components.List;
 			import spark.layouts.supportClasses.DropLocation;
+			
+			import services.create_query.*;
 			
 			import tuio.*;
 			import tuio.TouchEvent;
@@ -303,10 +308,11 @@
 			}
 			
 			
+			
 
-			protected function button_clickHandler(event:MouseEvent):void
+			protected function submit_query(event:MouseEvent):void
 			{
-				CreateQueryResult.token = createQuery.CreateQuery(userTextInput.text,queryNameTextInput.text,connectionTextInput.text,cubeTextInput.text,catalogTextInput.text,schemaTextInput.text);
+				CreateQueryResult.token = create_Query.CreateQuery(connectionTextInput.text,cubeTextInput.text,catalogTextInput.text,schemaTextInput.text);
 			}
 			
 		]]>
@@ -366,8 +372,9 @@
 		<s:HTTPService id="results" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
 			method="GET" result="getResults(event)" />
-		<createquery:CreateQuery id="createQuery" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
 		<s:CallResponder id="CreateQueryResult"/>
+		
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
 <!--		I bet there's a better way to do the background		 -->
@@ -413,34 +420,29 @@
 		/>
 		<components:Picker id="picker"
 			x="180" y="260"
-			click="Picker_clickHandler()" 
+			click="Picker_open()" 
 			currentState.Page2="State2">
 		</components:Picker>
 		<components:Trash id="trash"
 			x="1280" y="780"
 		/>	
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{button}" x="400" y="400">
-		<mx:FormItem label="User">
-			<s:TextInput id="userTextInput" text="admin"/>
-		</mx:FormItem>
-		<mx:FormItem label="QueryName">
-			<s:TextInput id="queryNameTextInput" text="chartdata"/>
-		</mx:FormItem>
+	<mx:Form includeIn="Page1" defaultButton="{button}">
 		<mx:FormItem label="Connection">
-			<s:TextInput id="connectionTextInput" text="FoodMart Connection"/>
+			<s:TextInput id="connectionTextInput"/>
 		</mx:FormItem>
 		<mx:FormItem label="Cube">
-			<s:TextInput id="cubeTextInput" text="Store"/>
+			<s:TextInput id="cubeTextInput"/>
 		</mx:FormItem>
 		<mx:FormItem label="Catalog">
-			<s:TextInput id="catalogTextInput" text="FoodMart"/>
+			<s:TextInput id="catalogTextInput"/>
 		</mx:FormItem>
 		<mx:FormItem label="Schema">
-			<s:TextInput id="schemaTextInput" text="FoodMart"/>
+			<s:TextInput id="schemaTextInput"/>
 		</mx:FormItem>
-		<s:Button label="CreateQuery" id="button" click="button_clickHandler(event)"/>
+		<s:Button label="CreateQuery" id="button" click="submit_query(event)"/>
 	</mx:Form>
+	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
 			<s:Parallel>

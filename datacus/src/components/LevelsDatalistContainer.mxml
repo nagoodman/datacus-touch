@@ -20,6 +20,7 @@
 			width="90"
 			height="370"
 			dragEnabled="true"
+			dragMoveEnabled="true"
 			allowMultipleSelection="true"
 			x="5" y="5">
 		
