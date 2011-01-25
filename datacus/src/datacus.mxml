@@ -124,47 +124,78 @@
 				//trace("moving");
 			} 
 			
+			[Bindable]
+			public var seriesList:ArrayCollection = new ArrayCollection;
+			
+			[Bindable]
+			public var categoriesList:ArrayCollection = new ArrayCollection;
+			
 			String.prototype.replace = function(s:String, z:String):String{
 				return unescape(escape(this).split(s).join(z));
 			}
-			/*
+			
 			
 			//This is a public function that allows when array on series panel is changed to update the query
 			public function moveToColumns(members:Object):void
 			{
+				seriesList = new ArrayCollection;
+				seriesList.addItem(members);
 				for (var i:int = 0; i < members.length; i ++){
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
+					hierarchy = hierarchy.replace('[','%5B');
+					hierarchy = hierarchy.replace(']','%5D');
 					var item:String = members[i].value;
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
 					toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-					
-					toColumns.send();//sends service call to get new graph info 
+				
+				toColumns.send();//sends service call to get new graph info 
+				}
 			}
 			
 			//This is a public function that allows when array on categories panel is changed to update the query
 			public function moveToRows(members:Object):void
 			{
+				categoriesList = new ArrayCollection;
+				categoriesList.addItem(item);
 				for (var i:int = 0; i < members.length; i ++){
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
+					hierarchy = hierarchy.replace('[','%5B');
+					hierarchy = hierarchy.replace(']','%5D');
 					var item:String = members[i].value;
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+				
 					toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-					
+				
 					toRows.send();//sends service call to get new graph info 
 				}
-			}*/
+			}
 			
 			public function getResults():void
 			{
-				results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
-				results.send();
+				if((seriesList.length > 0) && (categoriesList.length > 0)){
+					results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
+					results.send();
+				}
 			}
 			
 			public function updateGraph(event:ResultEvent):void
 			{
-				
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
 			}
 			
 			[Bindable]
@@ -262,6 +293,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
+					obj.dimension = arr[i].hierarchy;
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					levelsAC.addItem(obj);	
@@ -394,18 +426,18 @@
 			result="getMembers3(event)" />
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
-		<s:HTTPService id="toRows" resultFormat="text"
-			method="POST" result="getResults()">
-			<s:request xmlns="">
+		<s:HTTPService id="toRows" resultFormat="text" contentType="application/xml"
+					   method="POST" result="getResults()">
+			<s:request>
 				<position>0</position>
 				<memberposition>-1</memberposition>
 			</s:request>
 		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the Columns (Series) axis for graphing-->
-		<s:HTTPService id="toColumns" resultFormat="text"
-			method="POST" result="getResults()">
-			<s:request xmlns="">
+		<s:HTTPService id="toColumns" resultFormat="text" contentType="application/xml"
+					   method="POST" result="getResults()">
+			<s:request>
 				<position>0</position>
 				<memberposition>-1</memberposition>
 			</s:request>
