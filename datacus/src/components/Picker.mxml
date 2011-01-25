@@ -1,34 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*"
+		 creationComplete="Picker_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
+				currentState='State1';
+				var x:int=5;
+			}
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<s:states>
 		<s:State name="State1"/>
 		<s:State name="State2"/>
+		<s:State name="State3"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="picker" height="500" width.State1="140" width.State2="1240" x.State1="1100" x.State2="0" skinClass="skins.Panel" />
+		<s:SkinnableContainer id="picker" height="500"  x.State1="1100" width.State1="140" width.State2="140" width.State3="1240"  x.State2="1100" x.State3="0" skinClass="skins.Panel" />
 	</fx:DesignLayer>
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
-		includeIn="State2" 
+		includeIn="State3" 
 		x="20" y="100" alpha="0.79"/>
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
-											includeIn="State2"  
+											includeIn="State3"  
 											x="220" y="20" alpha="0.79"/>
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
-										  includeIn="State2" 
+										  includeIn="State3" 
 										  x="120" y="100" alpha="0.79" />
 	
 	
 	
-	
 	<s:transitions>
-		<s:Transition autoReverse="true" fromState="State1" toState="State2">
+		<s:Transition autoReverse="true" fromState="Home1" toState="Home2">
+			<s:Parallel>
+				<s:Parallel>
+					<s:Parallel target="{picker}">
+						<s:Move autoCenterTransform="true" duration="500"/>
+						<s:Resize duration="500" startDelay="0"/>
+					</s:Parallel>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Home2" toState="Home1">
+			<s:Parallel>
+				<s:Parallel>
+					<s:Parallel target="{picker}">
+						<s:Move autoCenterTransform="true" duration="500"/>
+						<s:Resize duration="500" startDelay="0"/>
+					</s:Parallel>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Home2" toState="Home3">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
 					<s:Move autoCenterTransform="true" duration="2000"/>
@@ -45,7 +75,7 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="State2" toState="State1">
+		<s:Transition autoReverse="true" fromState="Home3" toState="Home2">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
 					<s:Move autoCenterTransform="true" duration="2000" startDelay="500"/>
@@ -60,7 +90,7 @@
 				<s:Parallel target="{LevelsDLContainer}">
 					<s:Fade duration="500"/>
 				</s:Parallel>
-			</s:Parallel>
+			</s:Parallel>			
 		</s:Transition>
 	</s:transitions>
 </s:Group>

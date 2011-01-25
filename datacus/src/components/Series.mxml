@@ -5,6 +5,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
+			import mx.core.FlexGlobals;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
@@ -46,6 +47,7 @@
 				var items:Object=event.dragSource.dataForFormat("itemsByIndex") as Object;
 				var myDropTarget:List=List(event.currentTarget);
 				var pos:DropLocation=this.serList.layout.calculateDropLocation(event);
+				FlexGlobals.topLevelApplication.moveToColumns(items);
 				for (var i:int=items.length - 1; i >= 0; i--)
 				{
 					this.serDB.addItemAt(items[i], pos.dropIndex);

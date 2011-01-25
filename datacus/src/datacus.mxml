@@ -12,22 +12,43 @@
 	<fx:Script>
 		<![CDATA[
 
-			protected function Picker_open():void
+			protected function Picker_Open():void
 			{
 				const state:String = currentState;
-				if ( state == 'Page1' ) {
-					currentState='Page2';
-					populatePicker();
+				if ( state == 'Page2' ) {
+					currentState='Page3';
 				}
+				populatePicker();
 				
 			}
 			
-			protected function Picker_close():void{
+			protected function Picker_Close():void{
 				const state:String = currentState;
+				if ( state == 'Page3' ) {
+					currentState='Page2';
+				}
+			}
+			
+			protected function Home_Open():void{
+				const state:String = currentState;
+				if ( state == 'Page3' ) {
+					currentState='Page1';
+				}
 				if ( state == 'Page2' ) {
 					currentState='Page1';
 				}
 			}
+			
+			public function Home_Close():void{
+				const state:String = currentState;
+				if ( state == 'Page1' ) {
+					currentState='Page2';
+					var x:int = 5;
+				}
+				submit_query();
+			}
+				
+				
 			import com.adobe.serialization.json.JSON;
 			
 			import flash.display.Stage;
@@ -38,10 +59,10 @@
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
 			
+			import services.create_query.*;
+			
 			import spark.components.List;
 			import spark.layouts.supportClasses.DropLocation;
-			
-			import services.create_query.*;
 			
 			import tuio.*;
 			import tuio.TouchEvent;
@@ -103,27 +124,47 @@
 				//trace("moving");
 			} 
 			
-			
-			
+			String.prototype.replace = function(s:String, z:String):String{
+				return unescape(escape(this).split(s).join(z));
+			}
+			/*
 			
 			//This is a public function that allows when array on series panel is changed to update the query
-			public function moveToColumns(event:ResultEvent):void
+			public function moveToColumns(members:Object):void
 			{
-				
-				results.send();//sends service call to get new graph info 
+				for (var i:int = 0; i < members.length; i ++){
+					var hierarchy:String = members[i].dimension;
+					var dimension:String = hierarchy.replace("[","");
+					dimension = dimension.replace("]","");
+					var item:String = members[i].value;
+					toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					
+					toColumns.send();//sends service call to get new graph info 
 			}
 			
 			//This is a public function that allows when array on categories panel is changed to update the query
-			public function moveToRows(event:ResultEvent):void
+			public function moveToRows(members:Object):void
 			{
-				
-				results.send(); //sends service call to get new graph info 
+				for (var i:int = 0; i < members.length; i ++){
+					var hierarchy:String = members[i].dimension;
+					var dimension:String = hierarchy.replace("[","");
+					dimension = dimension.replace("]","");
+					var item:String = members[i].value;
+					toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					
+					toRows.send();//sends service call to get new graph info 
+				}
+			}*/
+			
+			public function getResults():void
+			{
+				results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
+				results.send();
 			}
 			
-			public function getResults(event:ResultEvent):void
+			public function updateGraph(event:ResultEvent):void
 			{
 				
-			
 			}
 			
 			[Bindable]
@@ -273,6 +314,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -287,6 +329,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -301,6 +344,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -310,9 +354,9 @@
 			
 			
 
-			protected function submit_query(event:MouseEvent):void
+			public function submit_query():void
 			{
-				CreateQueryResult.token = create_Query.CreateQuery(connectionTextInput.text,cubeTextInput.text,catalogTextInput.text,schemaTextInput.text);
+				CreateQueryResult.token = create_Query.CreateQuery(connectionTextInput.text ,cubeTextInput.text,catalogTextInput.text,schemaTextInput.text);
 			}
 			
 		]]>
@@ -320,6 +364,7 @@
 	<s:states>
 		<s:State name="Page1"/>
 		<s:State name="Page2"/>
+		<s:State name="Page3"/>
 	</s:states>
 	<fx:Declarations>
 		<s:HTTPService
@@ -350,8 +395,7 @@
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
 		<s:HTTPService id="toRows" resultFormat="text"
-			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata/axis/ROWS/dimension/Store%20Type/hierarchy/%5BStore%20Type%5D/%5BStore%20Type%5D.%5BStore%20Type%5D"
-			method="POST" result="moveToRows(event)">
+			method="POST" result="getResults()">
 			<s:request xmlns="">
 				<position>0</position>
 				<memberposition>-1</memberposition>
@@ -360,8 +404,7 @@
 		
 		<!-- request to server to move a new item to the Columns (Series) axis for graphing-->
 		<s:HTTPService id="toColumns" resultFormat="text"
-			url="http://localhost:8080/saiku/rest/saiku/admin/query/chartdata/axis/COLUMNS/dimension/Store/hierarchy/%5BStore%5D/%5BStore%5D.%5BStore%20Country%5D"
-			method="POST" result="moveToColumns(event)">
+			method="POST" result="getResults()">
 			<s:request xmlns="">
 				<position>0</position>
 				<memberposition>-1</memberposition>
@@ -371,7 +414,7 @@
 		<!-- request to server to get the new chart information back from the server for graphing values-->
 		<s:HTTPService id="results" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
-			method="GET" result="getResults(event)" />
+			method="GET" result="updateGraph(event)" />
 		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
 		<s:CallResponder id="CreateQueryResult"/>
 		
@@ -393,7 +436,10 @@
 <!--		organized left to right then top to bottom		 -->
 		<components:Home id="home"
 			x="20" y="20"
-		/>
+			click="Home_Open()"
+			currentState.Page2="Home2"
+			currentState.Page3="Home3">
+		</components:Home>
 		<components:Measures id="measures"
  			left="20" top="260"
 		/>
@@ -420,15 +466,16 @@
 		/>
 		<components:Picker id="picker"
 			x="180" y="260"
-			click="Picker_open()" 
-			currentState.Page2="State2">
+			click="Picker_Open()" 
+			currentState.Page2="State2"
+			currentState.Page3="State3">
 		</components:Picker>
 		<components:Trash id="trash"
 			x="1280" y="780"
 		/>	
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{button}">
-		<mx:FormItem label="Connection">
+	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='595' y='450' >
+		<mx:FormItem label="Connection" id="Connection">
 			<s:TextInput id="connectionTextInput"/>
 		</mx:FormItem>
 		<mx:FormItem label="Cube">
@@ -440,23 +487,63 @@
 		<mx:FormItem label="Schema">
 			<s:TextInput id="schemaTextInput"/>
 		</mx:FormItem>
-		<s:Button label="CreateQuery" id="button" click="submit_query(event)"/>
+		<s:Button label="CreateQuery" id="button" click="Home_Close()" />
 	</mx:Form>
-	
+	<s:Button includeIn="Page3" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
+	</s:Button>
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
 			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:SetAction property="currentState" value="Home2" />
+				</s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="100" startDelay="0"/>
+				</s:Parallel>
 				<s:Parallel target="{picker}">
-					<s:SetAction property="currentState" value="State2"/>
+					<s:SetAction property="currentState" value="State2" />
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
 			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:SetAction property="currentState" value="Home1" />
+				</s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="400"/>
+				</s:Parallel>
 				<s:Parallel target="{picker}">
-					<s:SetAction property="currentState" value="State1"/>
+					<s:SetAction property="currentState" value="State1" />
 				</s:Parallel>
 			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
+			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:SetAction property="currentState" value="Home3" />
+				</s:Parallel>
+				<s:Parallel target="{picker}">
+					<s:SetAction property="currentState" value="State3" />
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:SetAction property="currentState" value="Home2" />
+				</s:Parallel>
+				<s:Parallel target="{picker}">
+					<s:SetAction property="currentState" value="State2" />
+				</s:Parallel>
+			</s:Parallel>			
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="400"/>
+				</s:Parallel>
+			</s:Parallel>			
 		</s:Transition>
 	</s:transitions>
 </s:WindowedApplication>

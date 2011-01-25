@@ -1,11 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:components="components.*"
+		 creationComplete="Home_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			protected function Home_creationCompleteHandler(event:FlexEvent):void{
+				currentState = 'Home1';
+				var x:int = 1;
+			}
+			
+			private function send_query(event:MouseEvent):void{
+				this.currentState='Home2';
+				FlexGlobals.topLevelApplication.submit_query(event);
+			}
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	<s:states>
+		<s:State name="Home1"/>
+		<s:State name="Home2"/>
+		<s:State name="Home3"/>
+	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="220" width="140" skinClass="skins.Panel" />
+		<s:SkinnableContainer id="home" height.Home1="400" x.Home1="500" y.Home1="300" x="0" y="0"
+							   height="220" width.Home1="400" width="140" skinClass="skins.Panel" />
 	</fx:DesignLayer>	
+	
+	
+	
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="Home1" toState="Home2">
+			<s:Parallel>	
+				<s:Parallel target="{home}">
+					<s:Move autoCenterTransform="true" duration="500" startDelay="100"/>
+					<s:Resize duration="400" startDelay="100"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Home2" toState="Home1">
+			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:Move autoCenterTransform="true" duration="500" startDelay="0"/>
+					<s:Resize duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Home2" toState="Home3">
+			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:Move autoCenterTransform="true" duration="0" startDelay="0"/>
+					<s:Resize duration="0" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Home3" toState="Home2">
+			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:Move autoCenterTransform="true" duration="0" startDelay="0"/>
+					<s:Resize duration="0" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>			
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Home3" toState="Home1">
+			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:Move autoCenterTransform="true" duration="500" startDelay="0"/>
+					<s:Resize duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>			
+		</s:Transition>
+	</s:transitions>
 </s:Group>
