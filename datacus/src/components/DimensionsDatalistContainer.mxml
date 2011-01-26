@@ -54,8 +54,8 @@
 			rendererAdd="addClick(event)">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="0"
-								paddingTop="0"/>
+								paddingLeft="5"
+								paddingTop="20"/>
 		</s:layout>
 		
 		<s:itemRenderer>
@@ -63,9 +63,7 @@
 				<s:ItemRenderer>
 					<s:Group>
 						<s:layout>
-							<s:HorizontalLayout verticalAlign="top"
-												paddingLeft="5"
-												paddingTop="20"/>
+							<s:HorizontalLayout verticalAlign="top"/>
 						</s:layout>
 						<s:Label text="{data.label}"/>
 					</s:Group>

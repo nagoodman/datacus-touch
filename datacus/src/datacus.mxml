@@ -14,11 +14,13 @@
 
 			protected function Picker_Open():void
 			{
+				
 				const state:String = currentState;
 				if ( state == 'Page2' ) {
 					currentState='Page3';
+					populatePicker();
 				}
-				populatePicker();
+				
 				
 			}
 			
@@ -242,7 +244,6 @@
 					var obj:Object = new Object;
 					if(arr[i].caption == 'Measures'){
 						obj.label = arr[i].caption;
-						obj.text = arr[i].caption;
 						obj.value = arr[i].uniqueName;
 						measuresAC.addItem(obj);
 					}
@@ -253,7 +254,7 @@
 					}
 				}
 				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
-				trace(measuresAC[0].value);
+				
 				var dimension:String = dimensionsAC[0].label;
 				var hierarchy:String = dimensionsAC[0].label;
 				callMeasures.send();
