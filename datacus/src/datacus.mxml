@@ -498,7 +498,7 @@
 			x="1280" y="140"
 		/>
 		<components:Picker id="picker"
-			x="180" y="260"
+			x="1280" y="260"
 			click="Picker_Open()" 
 			currentState.Page2="State2"
 			currentState.Page3="State3">
