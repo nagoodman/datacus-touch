@@ -60,6 +60,10 @@
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
+			import mx.charts.BarChart;
+			import mx.charts.CategoryAxis;
+			import mx.charts.Legend;
+			import mx.charts.series.BarSeries;
 			
 			import services.create_query.*;
 			
@@ -194,10 +198,77 @@
 				}
 			}
 			
-			public function updateGraph(event:ResultEvent):void
+			public function updateGraphData(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
+				for (var i:int; i<arr.length; i++){
+					for (var j:int; j<arr[0].length; j++){
+						var temp:String = arr[0][j].value;
+					}
+				}
+				updateGraph();
+			}
+			[Bindable]
+			public var chartData:ArrayCollection = new ArrayCollection([
+				{Store:'Deluxe Supermarket', Canada:23112, Mexico:61381, USA:61552},
+				{Store:'Gourmet Supermarket', Canada:0, Mexico:23759, USA:23688},
+				{Store:'Mid-Size Grocery', Canada:34452, Mexico:74891, USA:0},
+				{Store:'Small Grocery', Canada:0, Mexico:24597, USA:50684},
+				{Store:'Supermarket', Canada:0, Mexico:58384, USA:135096}
+			]);
+			
+			
+			public var myChart:BarChart;
+			public var series1:BarSeries;
+			public var series2:BarSeries;
+			public var series3:BarSeries;
+			public var legend1:Legend;
+			
+			public function updateGraph():void
+			{
+				/*Create Chart and set basic properties*/
+				myChart = new BarChart();
+				myChart.showDataTips = true;
+				myChart.dataProvider = chartData;
+				myChart.height = 500;
+				myChart.width = 1070;
+				
+				/*Define the category axis */
+				var vAxis:CategoryAxis = new CategoryAxis();
+				vAxis.categoryField = "Store" ;
+				vAxis.dataProvider = chartData;
+				myChart.verticalAxis = vAxis;
+				
+				/*Add the series*/
+				var mySeries:Array=new Array();
+				series1 = new BarSeries();
+				series1.xField="Canada";
+				series1.yField="Store";
+				series1.displayName="Canada";
+				mySeries.push(series1);
+				
+				series2 = new BarSeries();
+				series2.xField="Mexico";
+				series2.yField="Store";
+				series2.displayName="Mexico";
+				mySeries.push(series2);
+				
+				series3 = new BarSeries();
+				series3.xField="USA";
+				series3.yField="Store";
+				series3.displayName="USA";
+				mySeries.push(series3);
+				
+				myChart.series = mySeries;
+				
+				/*Create a legend*/
+				legend1 = new Legend();
+				legend1.dataProvider = myChart;
+				
+				graph.addElement(legend1);
+				graph.addElement(myChart);
+				
 			}
 			
 			[Bindable]
@@ -452,7 +523,7 @@
 		<!-- request to server to get the new chart information back from the server for graphing values-->
 		<s:HTTPService id="results" resultFormat="text"
 			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
-			method="GET" result="updateGraph(event)" />
+			method="GET" result="updateGraphData(event)" />
 		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
 		<s:CallResponder id="CreateQueryResult"/>
 		
@@ -472,12 +543,9 @@
 	</fx:DesignLayer>
 	<fx:DesignLayer id="panels">
 <!--		organized left to right then top to bottom		 -->
-		<components:Home id="home"
-			x="20" y="20"
-			click="Home_Open()"
-			currentState.Page2="Home2"
-			currentState.Page3="Home3">
-		</components:Home>
+		<components:Graph id="graph" 
+						  x="180" y="260"
+						  />
 		<components:Measures id="measures"
  			left="20" top="260"
 		/>
@@ -490,9 +558,6 @@
 		<components:Series id="series"
 			x="180" y="140"
 		/>
-		<components:Graph id="graph" 
-			x="180" y="260"
-		/>
 		<components:Categories id="categories"
 			x="180" y="780"
 		/>
@@ -502,15 +567,22 @@
 		<components:Sets id="sets"
 			x="1280" y="140"
 		/>
+		<components:Trash id="trash"
+						  x="1280" y="780"
+						  />	
+		<components:Home id="home"
+						 x="20" y="20"
+						 click="Home_Open()"
+						 currentState.Page2="Home2"
+						 currentState.Page3="Home3">
+		</components:Home>
 		<components:Picker id="picker"
 			x="1280" y="260"
 			click="Picker_Open()" 
 			currentState.Page2="State2"
 			currentState.Page3="State3">
 		</components:Picker>
-		<components:Trash id="trash"
-			x="1280" y="780"
-		/>	
+		
 	</fx:DesignLayer>
 	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='595' y='450' >
 		<mx:FormItem label="Connection" id="Connection">
