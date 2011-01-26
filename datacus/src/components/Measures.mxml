@@ -9,6 +9,8 @@
 			//connections: listen to the categories and series for types of measures
 			import tuio.TouchEvent;
 			import flash.display.DisplayObject;
+			import mx.core.FlexGlobals;
+			import spark.events.RendererExistenceEvent;
 			
 			//I am not defining these correctly or I can only use touch on the touch screen
 			protected function init():void {			
@@ -17,6 +19,22 @@
 			
 			public function touchDown(e:tuio.TouchEvent):void {
 				trace("measuresDown");
+			}
+			
+			
+			
+			private function addClick(event:RendererExistenceEvent):void{
+				event.renderer.addEventListener(flash.events.MouseEvent.CLICK, SelectMeasure);
+			}
+			
+			
+			
+			private function SelectMeasure(e:Event):void{
+				var currentMeasure:String = FlexGlobals.topLevelApplication.currentMeasure;
+				var newMeasure:String = this.measuresList.selectedItems[0].label;
+				currentMeasure = newMeasure;
+				var items:Object = this.measuresList.selectedItems as Object;
+				FlexGlobals.topLevelApplication.moveToColumns(items);
 			}
 		]]>
 	</fx:Script>
@@ -29,7 +47,8 @@
 	<s:List id="measuresList"
 			width="130"
 			height="490"
-			x="5" y="5">
+			x="5" y="5"
+			rendererAdd="addClick(event)">
 		
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="left"

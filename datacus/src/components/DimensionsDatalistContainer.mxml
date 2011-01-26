@@ -17,13 +17,7 @@
 			
 			private function SelectDimension(e:Event):void{
 				var currentDimension:String = FlexGlobals.topLevelApplication.currentDimension;
-				var newDimension:String; 
-				if ( e.target.text ){
-					newDimension = e.target.text;
-				}
-				else{
-					newDimension = e.target.label;
-				}
+				var newDimension:String = this.dimensionsList.selectedItems[0].label; 
 				currentDimension = newDimension;
 				FlexGlobals.topLevelApplication.createLevels(currentDimension, currentDimension);
 			}

@@ -227,6 +227,9 @@
 			[Bindable]
 			public var currentLevel:int;
 			
+			[Bindable]
+			public var currentMeasure:String;
+			
 			
 			public function populatePicker():void{
 				queryName = new String();
@@ -254,13 +257,14 @@
 					}
 				}
 				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
-				
-				var dimension:String = dimensionsAC[0].label;
-				var hierarchy:String = dimensionsAC[0].label;
-				callMeasures.send();
-				currentDimension = dimension;
-				currentHierarchy = hierarchy;
-				createLevels(currentDimension, currentHierarchy);
+				if (arr.length != 0){
+					var dimension:String = dimensionsAC[0].label;
+					var hierarchy:String = dimensionsAC[0].label;
+					callMeasures.send();
+					currentDimension = dimension;
+					currentHierarchy = hierarchy;
+					createLevels(currentDimension, currentHierarchy);
+				}
 			}
 			
 			public function createLevels(dimension:String, hierarchy:String):void{
@@ -279,6 +283,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
 					obj.value = arr[i].uniqueName;
 					measuresAC.addItem(obj);	
 				}
