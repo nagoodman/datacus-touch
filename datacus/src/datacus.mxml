@@ -55,15 +55,15 @@
 			
 			import flash.display.Stage;
 			
+			import mx.charts.BarChart;
+			import mx.charts.CategoryAxis;
+			import mx.charts.Legend;
+			import mx.charts.series.BarSeries;
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
-			import mx.charts.BarChart;
-			import mx.charts.CategoryAxis;
-			import mx.charts.Legend;
-			import mx.charts.series.BarSeries;
 			
 			import services.create_query.*;
 			
@@ -611,7 +611,7 @@
 					<s:SetAction property="currentState" value="Home2" />
 				</s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="100" startDelay="0"/>
+					<s:Fade duration="800" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{picker}">
 					<s:SetAction property="currentState" value="State2" />
@@ -624,7 +624,7 @@
 					<s:SetAction property="currentState" value="Home1" />
 				</s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="500" startDelay="400"/>
+					<s:Fade duration="2000" startDelay="1200"/>
 				</s:Parallel>
 				<s:Parallel target="{picker}">
 					<s:SetAction property="currentState" value="State1" />
@@ -654,7 +654,7 @@
 		<s:Transition autoReverse="true" fromState="Page3" toState="Page1">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="500" startDelay="400"/>
+					<s:Fade duration="2000" startDelay="1200"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>

@@ -31,6 +31,7 @@
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="home" height.Home1="400" x.Home1="500" y.Home1="300" x="0" y="0"
 							   height="220" width.Home1="400" width="140" skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeLabel" tabStops="S0 S50 S100" text="Home" x="43" y="100" includeIn="Home2,Home3"/>
 	</fx:DesignLayer>	
 	
 	
@@ -39,16 +40,22 @@
 		<s:Transition autoReverse="true" fromState="Home1" toState="Home2">
 			<s:Parallel>	
 				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="500" startDelay="100"/>
-					<s:Resize duration="400" startDelay="100"/>
+					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
+					<s:Resize duration="1100" startDelay="800"/>
+				</s:Parallel>
+				<s:Parallel target="{HomeLabel}">
+					<s:Fade duration="2500" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Home2" toState="Home1">
 			<s:Parallel>
 				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="500" startDelay="0"/>
-					<s:Resize duration="500" startDelay="0"/>
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
+					<s:Resize duration="1000" startDelay="600"/>
+				</s:Parallel>
+				<s:Parallel target="{HomeLabel}">
+					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
@@ -71,8 +78,11 @@
 		<s:Transition autoReverse="true" fromState="Home3" toState="Home1">
 			<s:Parallel>
 				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="500" startDelay="0"/>
-					<s:Resize duration="500" startDelay="0"/>
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
+					<s:Resize duration="1000" startDelay="600"/>
+				</s:Parallel>
+				<s:Parallel target="{HomeLabel}">
+					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>

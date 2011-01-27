@@ -82,11 +82,12 @@
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SeriesLabel" tabStops="S0 S50 S100" text="Series" x="500" y="5"/>
 	</fx:DesignLayer>	
 	<s:List id="serList"
 			width="1070"
-			height="90"
-			x="5" y="5"
+			height="70"
+			x="5" y="25"
 			alpha="0.8"
 			dragEnabled="true"
 			dragMoveEnabled="true"
@@ -97,16 +98,15 @@
 			skinClass="skins.MyDropSkin">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="0"
-								paddingTop="0"/>
+								paddingLeft="5"
+								paddingTop="28"/>
 		</s:layout>
 		<s:itemRenderer>
 			<fx:Component>
 				<s:ItemRenderer>
 					<s:Group>
 						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="5"/>
+							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
 						<s:Label text="{data.label}"/>
 					</s:Group>
