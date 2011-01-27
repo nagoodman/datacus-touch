@@ -604,57 +604,44 @@
 	</mx:Form>
 	<s:Button includeIn="Page3" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
 	</s:Button>
+	
+	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
 			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:SetAction property="currentState" value="Home2" />
-				</s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="800" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{picker}">
-					<s:SetAction property="currentState" value="State2" />
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
 			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:SetAction property="currentState" value="Home1" />
-				</s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="2000" startDelay="1200"/>
-				</s:Parallel>
-				<s:Parallel target="{picker}">
-					<s:SetAction property="currentState" value="State1" />
+					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
 			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:SetAction property="currentState" value="Home3" />
-				</s:Parallel>
-				<s:Parallel target="{picker}">
-					<s:SetAction property="currentState" value="State3" />
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="3000"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
 			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:SetAction property="currentState" value="Home2" />
-				</s:Parallel>
-				<s:Parallel target="{picker}">
-					<s:SetAction property="currentState" value="State2" />
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page3" toState="Page1">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="2000" startDelay="1200"/>
+					<s:Fade duration="500" startDelay="2600"/>
+				</s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>

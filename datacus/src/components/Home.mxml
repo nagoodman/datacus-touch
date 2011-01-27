@@ -41,10 +41,10 @@
 			<s:Parallel>	
 				<s:Parallel target="{home}">
 					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
-					<s:Resize duration="1100" startDelay="800"/>
+					<s:Resize duration="1200" startDelay="800"/>
 				</s:Parallel>
 				<s:Parallel target="{HomeLabel}">
-					<s:Fade duration="2500" startDelay="1600"/>
+					<s:Fade duration="600" startDelay="2000"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
@@ -59,30 +59,14 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Home2" toState="Home3">
-			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="0" startDelay="0"/>
-					<s:Resize duration="0" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Home3" toState="Home2">
-			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="0" startDelay="0"/>
-					<s:Resize duration="0" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>			
-		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Home3" toState="Home1">
 			<s:Parallel>
 				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
-					<s:Resize duration="1000" startDelay="600"/>
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="1500"/>
+					<s:Resize duration="1000" startDelay="1600"/>
 				</s:Parallel>
 				<s:Parallel target="{HomeLabel}">
-					<s:Fade duration="500" startDelay="0"/>
+					<s:Fade duration="1500" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>
