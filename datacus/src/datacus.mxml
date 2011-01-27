@@ -341,6 +341,9 @@
 			public function createLevels(dimension:String, hierarchy:String):void{
 				currentDimension = dimension;
 				currentHierarchy = hierarchy;
+				picker.MembersDLContainer.membersLevel1.dataProvider = null;
+				picker.MembersDLContainer.membersLevel2.dataProvider = null;
+				picker.MembersDLContainer.membersLevel3.dataProvider = null;
 				
 				callLevels.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
 				callLevels.send();
