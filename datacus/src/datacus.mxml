@@ -47,9 +47,12 @@
 					currentState='Page2';
 					var x:int = 5;
 				}
+			}
+			
+			public function submit_form():void{
+				Home_Close();
 				submit_query();
 			}
-				
 				
 			import com.adobe.serialization.json.JSON;
 			
@@ -60,13 +63,14 @@
 			import mx.charts.Legend;
 			import mx.charts.series.BarSeries;
 			import mx.collections.ArrayCollection;
-			import mx.controls.Alert;
+			import mx.controls.*;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
 			
 			import services.create_query.*;
 			
+			import spark.components.DropDownList;
 			import spark.components.List;
 			import spark.layouts.supportClasses.DropLocation;
 			
@@ -105,7 +109,7 @@
 				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
 				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
-				
+				CreateSession.send();
 				
 
 				
@@ -129,6 +133,81 @@
 			public function handleMove(e:tuio.TouchEvent):void {
 				//trace("moving");
 			} 
+			
+			protected function checkResponse(event:ResultEvent):void{
+				if (event.statusCode == 200){
+					GetSourceOptions.send();
+				}
+				
+			}
+			
+			private var connectionDropDown:DropDownList;
+			private var catalogDropDown:DropDownList;
+			private var schemaDropDown:DropDownList;
+			private var cubeDropDown:DropDownList;
+			private var connectionArray:ArrayCollection = new ArrayCollection();
+			private var catalogArray:ArrayCollection = new ArrayCollection();
+			private var schemaArray:ArrayCollection = new ArrayCollection();
+			private var cubeArray:ArrayCollection = new ArrayCollection();
+			
+			private function fillHomeMenu(event:ResultEvent):void{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				
+				for (var i:int =0; i < arr.length; i++){
+					var con:Object = new Object;
+					con.label = arr[i].connectionName;
+					con.data = arr[i].connectionName;
+					connectionArray.addItemAt(con, i);
+					for (var j:int = 0; j< arr[i].catalogs.length; j++){
+						var cat:Object = new Object;
+						cat.label = arr[i].catalogs[j].name;
+						cat.data = arr[i].catalogs[j].name;
+						catalogArray.addItemAt(cat, j);
+						for (var k:int = 0; k < arr[i].catalogs[j].schemas.length; k++){
+							var schem:Object = new Object;
+							schem.label = arr[i].catalogs[j].schemas[k].name;
+							schem.data = arr[i].catalogs[j].schemas[k].name;
+							schemaArray.addItemAt(schem, k);
+							for (var l:int = 0; l < arr[i].catalogs[j].schemas[k].cubes.length; l++){
+								var cube:Object = new Object;
+								cube.label = arr[i].catalogs[j].schemas[k].cubes[l].cubeName;
+								cube.data = arr[i].catalogs[j].schemas[k].cubes[l].cubeName;
+								cubeArray.addItemAt(cube, k);
+							}
+						}
+					}	
+				}
+				connectionDropDown = new DropDownList();
+				connectionDropDown.width=300;
+				connectionDropDown.dataProvider = connectionArray;
+				connectionDropDown.selectedIndex=0;
+				
+				catalogDropDown = new DropDownList();
+				catalogDropDown.width=300;
+				catalogDropDown.dataProvider = catalogArray;
+				catalogDropDown.selectedIndex=0;
+				
+				schemaDropDown = new DropDownList();
+				schemaDropDown.width=300;
+				schemaDropDown.dataProvider = schemaArray;
+				schemaDropDown.selectedIndex=0;
+				
+				cubeDropDown = new DropDownList();
+				cubeDropDown.width=300;
+				cubeDropDown.dataProvider = cubeArray;
+				cubeDropDown.selectedIndex=0;
+
+				ConnectionForm.addChildAt(cubeDropDown,0);
+				ConnectionForm.addChildAt(schemaDropDown,0);
+				ConnectionForm.addChildAt(catalogDropDown,0);
+				ConnectionForm.addChildAt(connectionDropDown,0);
+			}
+			
+			public function submit_query():void
+			{
+				CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
+			}
 			
 			[Bindable]
 			public var seriesList:ArrayCollection = new ArrayCollection;
@@ -466,10 +545,7 @@
 			
 			
 
-			public function submit_query():void
-			{
-				CreateQueryResult.token = create_Query.CreateQuery(connectionTextInput.text ,cubeTextInput.text,catalogTextInput.text,schemaTextInput.text);
-			}
+			
 			
 		]]>
 	</fx:Script>
@@ -479,6 +555,16 @@
 		<s:State name="Page3"/>
 	</s:states>
 	<fx:Declarations>
+		<s:HTTPService
+			id="CreateSession"
+			resultFormat='xml'
+			url='http://localhost:8080/saiku/rest/saiku/session'
+			result="checkResponse(event)" />
+		<s:HTTPService
+			id="GetSourceOptions"
+			resultFormat='text'
+			url='http://localhost:8080/saiku/json/saiku/admin/datasources'
+			result="fillHomeMenu(event)" />
 		<s:HTTPService
 			id="callDimensions"
 			resultFormat="text"
@@ -587,20 +673,14 @@
 		</components:Picker>
 		
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='595' y='450' >
-		<mx:FormItem label="Connection" id="Connection">
-			<s:TextInput id="connectionTextInput"/>
+	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='555' y='430' >
+		<mx:FormItem label="Query Name" id="QueryNameLabel" >
+			<s:TextInput id="QueryName" width='200' />
 		</mx:FormItem>
-		<mx:FormItem label="Cube">
-			<s:TextInput id="cubeTextInput"/>
-		</mx:FormItem>
-		<mx:FormItem label="Catalog">
-			<s:TextInput id="catalogTextInput"/>
-		</mx:FormItem>
-		<mx:FormItem label="Schema">
-			<s:TextInput id="schemaTextInput"/>
-		</mx:FormItem>
-		<s:Button label="CreateQuery" id="button" click="Home_Close()" />
+		
+		<s:Button label="Create Query" id="button" click="submit_form()" />
+		<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />			
+		
 	</mx:Form>
 	<s:Button includeIn="Page3" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
 	</s:Button>
