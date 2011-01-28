@@ -31,6 +31,7 @@
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="home" height.Home1="400" x.Home1="500" y.Home1="300" x="0" y="0"
 							   height="220" width.Home1="400" width="140" skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="QueryMenu" tabStops="S0 S50 S100" text="Create A New Query" x="615" y="325" includeIn="Home1"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeLabel" tabStops="S0 S50 S100" text="Home" x="43" y="100" includeIn="Home2,Home3"/>
 	</fx:DesignLayer>	
 	
@@ -46,6 +47,9 @@
 				<s:Parallel target="{HomeLabel}">
 					<s:Fade duration="600" startDelay="2000"/>
 				</s:Parallel>
+				<s:Parallel target="{QueryMenu}">
+					<s:Fade duration="800" startDelay="0"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Home2" toState="Home1">
@@ -57,6 +61,9 @@
 				<s:Parallel target="{HomeLabel}">
 					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
+				<s:Parallel target="{QueryMenu}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Home3" toState="Home1">
@@ -67,6 +74,9 @@
 				</s:Parallel>
 				<s:Parallel target="{HomeLabel}">
 					<s:Fade duration="1500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{QueryMenu}">
+					<s:Fade duration="500" startDelay="2600"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>
