@@ -11,7 +11,6 @@
 	
 	<fx:Script>
 		<![CDATA[
-			/*Library imports for datacus to utilize*/
 			import com.adobe.serialization.json.JSON;
 			
 			import flash.display.Stage;
@@ -30,6 +29,7 @@
 			
 			import spark.components.DropDownList;
 			import spark.components.List;
+			import spark.components.RichText;
 			import spark.layouts.supportClasses.DropLocation;
 			
 			import tuio.*;
@@ -201,11 +201,44 @@
 				cubeDropDown.width=300;
 				cubeDropDown.dataProvider = cubeArray;
 				cubeDropDown.selectedIndex=0;
-
+				
+				var connectionLabel:RichText = new RichText();
+				var catalogLabel:RichText = new RichText();
+				var schemaLabel:RichText = new RichText();
+				var cubeLabel:RichText = new RichText();
+				
+				//connectionLabel.color = "#2B4381";
+				//connectionLabel.fontFamily='Arial';
+				//connectionLabel.fontSize ='10';
+				//connectionLabel.tabStops="S0 S50 S100";
+				connectionLabel.text="Connection:";
+				
+				//catalogLabel.color = "#2B4381";
+				//catalogLabel.fontFamily='Arial';
+				//catalogLabel.fontSize ='10';
+				//catalogLabel.tabStops="S0 S50 S100";
+				catalogLabel.text="Catalog:";
+				
+				//schemaLabel.color = "#2B4381";
+				//schemaLabel.fontFamily='Arial';
+				//schemaLabel.fontSize ='10';
+				//schemaLabel.tabStops="S0 S50 S100";
+				schemaLabel.text="Schema:";
+				
+				//cubeLabel.color = "#2B4381";
+				//cubeLabel.fontFamily='Arial';
+				//cubeLabel.fontSize ='10';
+				//cubeLabel.tabStops="S0 S50 S100";
+				cubeLabel.text="Cube:";
+				
 				ConnectionForm.addChildAt(cubeDropDown,0);
+				ConnectionForm.addChildAt(cubeLabel,0);
 				ConnectionForm.addChildAt(schemaDropDown,0);
+				ConnectionForm.addChildAt(schemaLabel,0);
 				ConnectionForm.addChildAt(catalogDropDown,0);
+				ConnectionForm.addChildAt(catalogLabel,0);
 				ConnectionForm.addChildAt(connectionDropDown,0);
+				ConnectionForm.addChildAt(connectionLabel,0);
 			}
 			
 			//Creates a query in which the user manipulates through Datacus
@@ -702,7 +735,7 @@
 		</components:Picker>
 		
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='555' y='430' >
+	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='555' y='390' >
 		<mx:FormItem label="Query Name" id="QueryNameLabel" >
 			<s:TextInput id="QueryName" width='200' />
 		</mx:FormItem>
