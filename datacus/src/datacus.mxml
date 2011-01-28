@@ -481,15 +481,32 @@
 					results.send();
 				}
 			}
+			//[bindable]
+			//private var columnHeaderArray:ArrayCollection;
+			//[bindable]
+			//private var rowHeaderArray:ArrayCollection;
+			//[bindable]
+			//private var dataCellArray:ArrayCollection;
 			
 			//parses results array and stores in an ArrayCollection
 			public function updateGraphData(event:ResultEvent):void
 			{
+				var columnHeaderArray:ArrayCollection = new ArrayCollection;
+				var rowHeaderArray:ArrayCollection = new ArrayCollection;
+				var dataCellArray:ArrayCollection = new ArrayCollection;
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
-				for (var i:int; i<arr.length; i++){
-					for (var j:int; j<arr[0].length; j++){
-						var temp:String = arr[0][j].value;
+				for (var i:int = 0; i < arr.length; i++){
+					for (var j:int = 0; j<arr[i].length; j++){
+						if ((arr[i][j].type == "COLUMN_HEADER")&& (arr[i][j].value != 'null')){
+							columnHeaderArray.addItem(arr[i][j]);
+						}
+						if ((arr[i][j].type == "ROW_HEADER") && (arr[i][j].value != 'null')){
+							rowHeaderArray.addItem(arr[i][j]);
+						}
+						if ((arr[i][j].type == "DATA_CELL") && (arr[i][j].value != 'null')){
+							dataCellArray.addItem(arr[i][j]);
+						}
 					}
 				}
 				updateGraph();
