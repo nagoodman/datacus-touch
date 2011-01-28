@@ -6,18 +6,15 @@
 		 creationComplete="Home_creationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
+			//imports classes needed for component
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			
+			//sets current state to Home1 when component is loaded
 			protected function Home_creationCompleteHandler(event:FlexEvent):void{
 				currentState = 'Home1';
-				var x:int = 1;
 			}
 			
-			private function send_query(event:MouseEvent):void{
-				this.currentState='Home2';
-				FlexGlobals.topLevelApplication.submit_query(event);
-			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>

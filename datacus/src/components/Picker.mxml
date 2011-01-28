@@ -5,10 +5,12 @@
 		 creationComplete="Picker_creationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
+			//imports classes needed for component
 			import mx.events.FlexEvent;
+			
+			//initial function to set state to State1 upon load
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
 				currentState='State1';
-				var x:int=5;
 			}
 		]]>
 	</fx:Script>

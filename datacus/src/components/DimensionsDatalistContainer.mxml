@@ -4,17 +4,17 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script>
 		<![CDATA[
+			//imports classes needed for component
 			import mx.core.FlexGlobals;
 			import mx.rpc.events.ResultEvent;
-			
 			import spark.events.RendererExistenceEvent;
 			
+			//adds a click event handler to each item added to the Dimensions list
 			private function addClick(event:RendererExistenceEvent):void{
 				event.renderer.addEventListener(flash.events.MouseEvent.CLICK, SelectDimension);
 			}
 			
-			
-			
+			//handles a click event on a member of the dimensions list
 			private function SelectDimension(e:Event):void{
 				var currentDimension:String = FlexGlobals.topLevelApplication.currentDimension;
 				var newDimension:String = this.dimensionsList.selectedItems[0].label; 

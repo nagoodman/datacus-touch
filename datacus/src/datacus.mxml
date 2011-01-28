@@ -11,7 +11,94 @@
 	
 	<fx:Script>
 		<![CDATA[
-
+			/*Library imports for datacus to utilize*/
+			import com.adobe.serialization.json.JSON;
+			
+			import flash.display.Stage;
+			
+			import mx.charts.BarChart;
+			import mx.charts.CategoryAxis;
+			import mx.charts.Legend;
+			import mx.charts.series.BarSeries;
+			import mx.collections.ArrayCollection;
+			import mx.controls.*;
+			import mx.events.DragEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			
+			import services.create_query.*;
+			
+			import spark.components.DropDownList;
+			import spark.components.List;
+			import spark.layouts.supportClasses.DropLocation;
+			
+			import tuio.*;
+			import tuio.TouchEvent;
+			import tuio.TuioClient;
+			import tuio.connectors.UDPConnector;
+			import tuio.debug.TuioDebug;
+			import tuio.gestures.DragGesture;
+			import tuio.gestures.GestureManager;
+			import tuio.mouse.MouseToTouchDispatcher;
+			import tuio.windows7.*;
+			
+			protected var mainStage:Stage;
+			
+			/*Function first initiated when software starts*/
+			protected function init():void {
+				mainStage = this.systemManager.stage;
+				//makes full screen, but need to make sizinf relative first
+				//mainStage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+				tc = new TuioClient(new UDPConnector());
+				tm = TuioManager.init(mainStage, tc);
+				//gm = GestureManager.init(stage,tc);
+				//GestureManager.addGesture(new DragGesture());
+				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
+				//mTouch = new MouseToTouchDispatcher(mainStage);
+				tDbg = TuioDebug.init(mainStage);
+				tc.addListener(tDbg);
+				//these event listeners need to be added to each object
+				mainStage.addEventListener(tuio.TouchEvent.TOUCH_DOWN, handleDown);
+				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
+				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
+				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
+				CreateSession.send();				
+			}
+			
+			/*Variables used with touch gesture handling*/
+			public var tc:TuioClient;
+			public var tm:TuioManager;
+			//public var gm:GestureManager;
+			private var winTouch:Windows7TouchToTuioDispatcher;
+			private var mTouch:MouseToTouchDispatcher;
+			private var tDbg:TuioDebug;
+			
+			public function handleDrag(e:TransformGestureEvent):void {
+				//trace("dragged");
+			}
+			
+			public function handleDown(e:tuio.TouchEvent):void {
+				trace("TOUCHDOWN!");
+				trace(e.relatedObject.name);
+			}
+			
+			public function handleUp(e:tuio.TouchEvent):void {
+				//trace("TOUCHUP!");
+				//trace(e.relatedObject);
+			}
+			
+			public function handleMove(e:tuio.TouchEvent):void {
+				//trace("moving");
+			} 
+			
+			protected function checkResponse(event:ResultEvent):void{
+				if (event.statusCode == 200){
+					GetSourceOptions.send();
+				}
+				
+			}
+			
+			/*Functions to handle state changes*/
 			protected function Picker_Open():void
 			{
 				
@@ -20,7 +107,6 @@
 					currentState='Page3';
 					populatePicker();
 				}
-				
 				
 			}
 			
@@ -54,93 +140,8 @@
 				submit_query();
 			}
 				
-			import com.adobe.serialization.json.JSON;
 			
-			import flash.display.Stage;
-			
-			import mx.charts.BarChart;
-			import mx.charts.CategoryAxis;
-			import mx.charts.Legend;
-			import mx.charts.series.BarSeries;
-			import mx.collections.ArrayCollection;
-			import mx.controls.*;
-			import mx.events.DragEvent;
-			import mx.managers.DragManager;
-			import mx.rpc.events.ResultEvent;
-			
-			import services.create_query.*;
-			
-			import spark.components.DropDownList;
-			import spark.components.List;
-			import spark.layouts.supportClasses.DropLocation;
-			
-			import tuio.*;
-			import tuio.TouchEvent;
-			import tuio.TuioClient;
-			import tuio.connectors.UDPConnector;
-			import tuio.debug.TuioDebug;
-			import tuio.gestures.DragGesture;
-			import tuio.gestures.GestureManager;
-			import tuio.mouse.MouseToTouchDispatcher;
-			import tuio.windows7.*;
-			
-			public var tc:TuioClient;
-			public var tm:TuioManager;
-			//public var gm:GestureManager;
-			private var winTouch:Windows7TouchToTuioDispatcher;
-			private var mTouch:MouseToTouchDispatcher;
-			private var tDbg:TuioDebug;
-			protected var mainStage:Stage;
-			
-			protected function init():void {
-				mainStage = this.systemManager.stage;
-				//makes full screen, but need to make sizinf relative first
-				//mainStage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-				tc = new TuioClient(new UDPConnector());
-				tm = TuioManager.init(mainStage, tc);
-				//gm = GestureManager.init(stage,tc);
-				//GestureManager.addGesture(new DragGesture());
-				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
-				//mTouch = new MouseToTouchDispatcher(mainStage);
-				tDbg = TuioDebug.init(mainStage);
-				tc.addListener(tDbg);
-				//these event listeners need to be added to each object
-				mainStage.addEventListener(tuio.TouchEvent.TOUCH_DOWN, handleDown);
-				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
-				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
-				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
-				CreateSession.send();
-				
-
-				
-			}
-			
-			
-			public function handleDrag(e:TransformGestureEvent):void {
-				//trace("dragged");
-			}
-			
-			public function handleDown(e:tuio.TouchEvent):void {
-				trace("TOUCHDOWN!");
-				trace(e.relatedObject.name);
-			}
-			
-			public function handleUp(e:tuio.TouchEvent):void {
-				//trace("TOUCHUP!");
-				//trace(e.relatedObject);
-			}
-			
-			public function handleMove(e:tuio.TouchEvent):void {
-				//trace("moving");
-			} 
-			
-			protected function checkResponse(event:ResultEvent):void{
-				if (event.statusCode == 200){
-					GetSourceOptions.send();
-				}
-				
-			}
-			
+			/*Variables used to create drop down menus for creating a new query*/
 			private var connectionDropDown:DropDownList;
 			private var catalogDropDown:DropDownList;
 			private var schemaDropDown:DropDownList;
@@ -149,6 +150,9 @@
 			private var catalogArray:ArrayCollection = new ArrayCollection();
 			private var schemaArray:ArrayCollection = new ArrayCollection();
 			private var cubeArray:ArrayCollection = new ArrayCollection();
+			
+			[Bindable]
+			public var queryName:String;
 			
 			private function fillHomeMenu(event:ResultEvent):void{
 				var rawData:String=String(event.result);
@@ -204,11 +208,211 @@
 				ConnectionForm.addChildAt(connectionDropDown,0);
 			}
 			
+			//Creates a query in which the user manipulates through Datacus
 			public function submit_query():void
 			{
 				CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 			}
 			
+			/*Variables used to populate the Picker*/
+			[Bindable]
+			private var destDB:ArrayCollection=new ArrayCollection();
+			
+			[Bindable]
+			public var dimensionsAC:ArrayCollection;
+			
+			[Bindable]
+			public var levelsAC:ArrayCollection;
+			
+			[Bindable]
+			public var membersAC:ArrayCollection;
+			
+			[Bindable]
+			public var measuresAC:ArrayCollection;
+			
+			[Bindable]
+			public var currentDimension:String;
+			
+			[Bindable]
+			public var currentHierarchy:String;
+			
+			[Bindable]
+			public var currentLevel:int;
+			
+			[Bindable]
+			public var currentMeasure:String;
+			
+			/*Functions that populate the picker and handle changes within the picker*/
+			public function populatePicker():void{
+				queryName = new String();
+				queryName = "chartdata";
+				callDimensions.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/"
+				callDimensions.send()
+			}
+			//Populates the dimension list
+			public function getDimensions(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				dimensionsAC = new ArrayCollection();
+				measuresAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					if(arr[i].caption == 'Measures'){
+						obj.label = arr[i].caption;
+						obj.value = arr[i].uniqueName;
+						measuresAC.addItem(obj);
+					}
+					else{
+						obj.label = arr[i].caption;
+						obj.value = arr[i].uniqueName;
+						dimensionsAC.addItem(obj);
+					}
+				}
+				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
+				if (arr.length != 0){
+					var dimension:String = dimensionsAC[0].label;
+					var hierarchy:String = dimensionsAC[0].label;
+					callMeasures.send();
+					currentDimension = dimension;
+					currentHierarchy = hierarchy;
+					createLevels(currentDimension, currentHierarchy);
+				}
+			}
+			
+			//forms the url string to retrieve the levels of a query
+			public function createLevels(dimension:String, hierarchy:String):void{
+				currentDimension = dimension;
+				currentHierarchy = hierarchy;
+				picker.MembersDLContainer.membersLevel1.dataProvider = null;
+				picker.MembersDLContainer.membersLevel2.dataProvider = null;
+				picker.MembersDLContainer.membersLevel3.dataProvider = null;
+				
+				callLevels.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
+				callLevels.send();
+			}
+			
+			//retrieves the first list in the dimensions array and stores in the Measures panel (consistent across cubes)
+			public function getMeasures(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				measuresAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.value = arr[i].uniqueName;
+					measuresAC.addItem(obj);	
+				}
+				measures.measuresList.dataProvider = measuresAC;
+				
+			}
+			
+			//populates the levels list within the picker for selection
+			public function getLevels(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				levelsAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].hierarchy;
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					levelsAC.addItem(obj);	
+				}
+				picker.LevelsDLContainer.levelsList.dataProvider = levelsAC;
+				getMembersFromLevels(levelsAC);
+			}
+			
+			//forms three strings to retrieve the three levels of members initially visible within the picker
+			public function getMembersFromLevels(levels:ArrayCollection):void
+			{
+				var i:int = 0;
+				if(levels.length > 3){
+					for (i = 0; i < 3; i++){
+						if (i==0){
+							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers1.send();
+						}
+						if (i==1){
+							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers2.send();
+						}
+						if (i==2){
+							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers3.send();
+						}			
+					}
+				}else{
+					for (i = 0; i < levels.length; i ++){
+						if (i==0){
+							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers1.send();
+						}
+						if (i==1){
+							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers2.send();
+						}
+						if (i==2){
+							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers3.send();
+						}				
+					}			
+				}		
+			}
+			
+			//populates the first members list within the picker
+			public function getMembers1(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.value = arr[i].uniqueName;
+					membersAC.addItem(obj);	
+				}
+				picker.MembersDLContainer.membersLevel1.dataProvider = membersAC;
+			}
+			
+			//populates the second members list within the picker
+			public function getMembers2(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.value = arr[i].uniqueName;
+					membersAC.addItem(obj);	
+				}
+				picker.MembersDLContainer.membersLevel2.dataProvider = membersAC;
+			}
+			
+			//populates the third members list within the picker
+			public function getMembers3(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.value = arr[i].uniqueName;
+					membersAC.addItem(obj);	
+				}
+				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
+			}
+			
+			/*The variables used within the series and categories panels*/
 			[Bindable]
 			public var seriesList:ArrayCollection = new ArrayCollection;
 			
@@ -219,7 +423,7 @@
 				return unescape(escape(this).split(s).join(z));
 			}
 			
-			
+			/*The following are functions for posting to different axises on the server and create a resulting graph*/
 			//This is a public function that allows when array on series panel is changed to update the query
 			public function moveToColumns(members:Object):void
 			{
@@ -239,8 +443,8 @@
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
 					toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-				
-				toColumns.send();//sends service call to get new graph info 
+					
+					toColumns.send();//sends service call to get new graph info 
 				}
 			}
 			
@@ -262,13 +466,14 @@
 					item = item.replace(']','%5D');
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
-				
+					
 					toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-				
+					
 					toRows.send();//sends service call to get new graph info 
 				}
 			}
 			
+			//forms url string to retrieve results of a query
 			public function getResults():void
 			{
 				if((seriesList.length > 0) && (categoriesList.length > 0)){
@@ -277,6 +482,7 @@
 				}
 			}
 			
+			//parses results array and stores in an ArrayCollection
 			public function updateGraphData(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
@@ -288,6 +494,8 @@
 				}
 				updateGraph();
 			}
+			
+			/*Variables used within functions to create the graph*/
 			[Bindable]
 			public var chartData:ArrayCollection = new ArrayCollection([
 				{Store:'Deluxe Supermarket', Canada:23112, Mexico:61381, USA:61552},
@@ -304,6 +512,7 @@
 			public var series3:BarSeries;
 			public var legend1:Legend;
 			
+			//updates the graph component with an updated graph
 			public function updateGraph():void
 			{
 				/*Create Chart and set basic properties*/
@@ -348,204 +557,7 @@
 				graph.addElement(legend1);
 				graph.addElement(myChart);
 				
-			}
-			
-			[Bindable]
-			private var destDB:ArrayCollection=new ArrayCollection();
-			
-			[Bindable]
-			public var dimensionsAC:ArrayCollection;
-			
-			[Bindable]
-			public var levelsAC:ArrayCollection;
-			
-			[Bindable]
-			public var membersAC:ArrayCollection;
-			
-			[Bindable]
-			public var measuresAC:ArrayCollection;
-			
-			[Bindable]
-			public var queryName:String;
-			
-			[Bindable]
-			public var currentDimension:String;
-			
-			[Bindable]
-			public var currentHierarchy:String;
-			
-			[Bindable]
-			public var currentLevel:int;
-			
-			[Bindable]
-			public var currentMeasure:String;
-			
-			
-			public function populatePicker():void{
-				queryName = new String();
-				queryName = "chartdata";
-				callDimensions.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/"
-				callDimensions.send()
-			}
-			public function getDimensions(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				dimensionsAC = new ArrayCollection();
-				measuresAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					if(arr[i].caption == 'Measures'){
-						obj.label = arr[i].caption;
-						obj.value = arr[i].uniqueName;
-						measuresAC.addItem(obj);
-					}
-					else{
-						obj.label = arr[i].caption;
-						obj.value = arr[i].uniqueName;
-						dimensionsAC.addItem(obj);
-					}
-				}
-				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
-				if (arr.length != 0){
-					var dimension:String = dimensionsAC[0].label;
-					var hierarchy:String = dimensionsAC[0].label;
-					callMeasures.send();
-					currentDimension = dimension;
-					currentHierarchy = hierarchy;
-					createLevels(currentDimension, currentHierarchy);
-				}
-			}
-			
-			public function createLevels(dimension:String, hierarchy:String):void{
-				currentDimension = dimension;
-				currentHierarchy = hierarchy;
-				picker.MembersDLContainer.membersLevel1.dataProvider = null;
-				picker.MembersDLContainer.membersLevel2.dataProvider = null;
-				picker.MembersDLContainer.membersLevel3.dataProvider = null;
-				
-				callLevels.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
-				callLevels.send();
-			}
-			
-			public function getMeasures(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				measuresAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.value = arr[i].uniqueName;
-					measuresAC.addItem(obj);	
-				}
-				measures.measuresList.dataProvider = measuresAC;
-				
-			}
-			
-			public function getLevels(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				levelsAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].hierarchy;
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					levelsAC.addItem(obj);	
-				}
-				picker.LevelsDLContainer.levelsList.dataProvider = levelsAC;
-				getMembersFromLevels(levelsAC);
-			}
-			
-			public function getMembersFromLevels(levels:ArrayCollection):void
-			{
-				var i:int = 0;
-				if(levels.length > 3){
-					for (i = 0; i < 3; i++){
-						if (i==0){
-							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers1.send();
-						}
-						if (i==1){
-							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers2.send();
-						}
-						if (i==2){
-							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers3.send();
-						}			
-					}
-				}else{
-					for (i = 0; i < levels.length; i ++){
-						if (i==0){
-							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers1.send();
-						}
-						if (i==1){
-							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers2.send();
-						}
-						if (i==2){
-							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers3.send();
-						}				
-					}			
-				}		
-			}
-			
-			public function getMembers1(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
-				}
-				picker.MembersDLContainer.membersLevel1.dataProvider = membersAC;
-			}
-			
-			public function getMembers2(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
-				}
-				picker.MembersDLContainer.membersLevel2.dataProvider = membersAC;
-			}
-			
-			public function getMembers3(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
-				}
-				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
-			}
-			
-			
-			
-
-			
+			}			
 			
 		]]>
 	</fx:Script>

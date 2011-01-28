@@ -4,6 +4,7 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script>
 		<![CDATA[
+			//imports classes and libraries need for component
 			import com.adobe.serialization.json.JSON;
 			import mx.core.FlexGlobals;
 			
@@ -16,22 +17,22 @@
 			import spark.components.List;
 			import spark.layouts.supportClasses.DropLocation;
 			
-			
+			/*Variables need for functions within component*/
 			[Bindable]
 			private var catDB:ArrayCollection=new ArrayCollection();
 			
 			[Bindable]
 			public var dp:ArrayCollection;
 			
+			//event handler for entering a drag motion
 			protected function catList_dragEnterHandler(event:DragEvent):void
 			{
 				event.preventDefault();
 				var myDragTarget:List=event.currentTarget as List;
 				DragManager.acceptDragDrop(myDragTarget);
-				
 			}
 			
-			
+			//handles when a user drags an object over a list
 			protected function catList_dragOverHandler(event:DragEvent):void
 			{
 				var myDropTarget:List=List(event.currentTarget);
@@ -41,7 +42,7 @@
 				myDropTarget.layout.showDropIndicator(pos);
 			}
 			
-			
+			//handles a drop into a dropable list
 			protected function catList_dragDropHandler(event:DragEvent):void
 			{
 				var items:Object=event.dragSource.dataForFormat("itemsByIndex") as Object;
