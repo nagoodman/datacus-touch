@@ -101,7 +101,6 @@
 			/*Functions to handle state changes*/
 			protected function Picker_Open():void
 			{
-				
 				const state:String = currentState;
 				if ( state == 'Page2' ) {
 					currentState='Page3';
@@ -458,7 +457,7 @@
 			
 			/*The following are functions for posting to different axises on the server and create a resulting graph*/
 			//This is a public function that allows when array on series panel is changed to update the query
-			public function moveToColumns(members:Object):void
+			public function moveLevelToColumns(members:Object):void
 			{
 				seriesList = new ArrayCollection;
 				seriesList.addItem(members);
@@ -476,7 +475,28 @@
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
 					toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-					
+					toColumns.send();//sends service call to get new graph info 
+				}
+			}
+			
+			public function moveMemberToColumns(members:Object):void
+			{
+				seriesList = new ArrayCollection;
+				seriesList.addItem(members);
+				for (var i:int = 0; i < members.length; i ++){
+					var hierarchy:String = members[i].dimension;
+					var dimension:String = hierarchy.replace("[","");
+					dimension = dimension.replace("]","");
+					hierarchy = hierarchy.replace('[','%5B');
+					hierarchy = hierarchy.replace(']','%5D');
+					var item:String = members[i].value;
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+					item = item.replace('[','%5B');
+					item = item.replace(']','%5D');
+					toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
 					toColumns.send();//sends service call to get new graph info 
 				}
 			}
@@ -514,46 +534,76 @@
 					results.send();
 				}
 			}
-			//[bindable]
-			//private var columnHeaderArray:ArrayCollection;
-			//[bindable]
-			//private var rowHeaderArray:ArrayCollection;
-			//[bindable]
-			//private var dataCellArray:ArrayCollection;
+			[bindable]
+			private var columnHeaderArray:ArrayCollection;
+			[bindable]
+			private var rowHeaderArray:ArrayCollection;
+			[bindable]
+			private var dataCellArray:ArrayCollection;
 			
 			//parses results array and stores in an ArrayCollection
 			public function updateGraphData(event:ResultEvent):void
 			{
-				var columnHeaderArray:ArrayCollection = new ArrayCollection;
-				var rowHeaderArray:ArrayCollection = new ArrayCollection;
-				var dataCellArray:ArrayCollection = new ArrayCollection;
+				columnHeaderArray = new ArrayCollection;
+				rowHeaderArray = new ArrayCollection;
+				dataCellArray = new ArrayCollection;
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
 				for (var i:int = 0; i < arr.length; i++){
 					for (var j:int = 0; j<arr[i].length; j++){
 						if ((arr[i][j].type == "COLUMN_HEADER")&& (arr[i][j].value != 'null')){
-							columnHeaderArray.addItem(arr[i][j]);
+							if ((arr[i][j].value != arr[i][j-1].value) && (columnHeaderArray.length < (arr[i].length - 1))){
+								columnHeaderArray.addItem(arr[i][j]);
+							}
 						}
 						if ((arr[i][j].type == "ROW_HEADER") && (arr[i][j].value != 'null')){
 							rowHeaderArray.addItem(arr[i][j]);
 						}
 						if ((arr[i][j].type == "DATA_CELL") && (arr[i][j].value != 'null')){
-							dataCellArray.addItem(arr[i][j]);
+							var tempItem:String = arr[i][j].value;
+							var passItem:int = int(tempItem.replace(',',''))
+							dataCellArray.addItem(passItem);
 						}
 					}
 				}
+				var dataIterator:int = 0;
+				var tempObj:Object;
+				chartData = new ArrayCollection();
+				if (rowHeaderArray.length > columnHeaderArray.length){
+					for (var k:int = 0; k<rowHeaderArray.length; k++){
+						tempObj = new Object();
+						tempObj[rowHeaderArray[k].type] = rowHeaderArray[k].value;
+						for (var l:int = 0; l<columnHeaderArray.length; l++){
+							tempObj[columnHeaderArray[l].value] = dataCellArray[dataIterator];
+							dataIterator++;
+						}
+						chartData.addItem(tempObj);
+					}
+				}else{
+					for (var n:int = 0; n<columnHeaderArray.length; n++){
+						tempObj = new Object();
+						tempObj[columnHeaderArray[n].type] = columnHeaderArray[n].value;
+						for (var o:int = 0; o<rowHeaderArray.length; o++){
+							tempObj[rowHeaderArray[o].value] = dataCellArray[dataIterator];
+							dataIterator++;
+						}
+						chartData.addItem(tempObj);
+					}
+					
+				}
+				
 				updateGraph();
 			}
 			
 			/*Variables used within functions to create the graph*/
 			[Bindable]
-			public var chartData:ArrayCollection = new ArrayCollection([
+			public var chartData:ArrayCollection;/*= new ArrayCollection([
 				{Store:'Deluxe Supermarket', Canada:23112, Mexico:61381, USA:61552},
 				{Store:'Gourmet Supermarket', Canada:0, Mexico:23759, USA:23688},
 				{Store:'Mid-Size Grocery', Canada:34452, Mexico:74891, USA:0},
 				{Store:'Small Grocery', Canada:0, Mexico:24597, USA:50684},
 				{Store:'Supermarket', Canada:0, Mexico:58384, USA:135096}
-			]);
+			])*/
 			
 			
 			public var myChart:BarChart;
@@ -574,29 +624,39 @@
 				
 				/*Define the category axis */
 				var vAxis:CategoryAxis = new CategoryAxis();
-				vAxis.categoryField = "Store" ;
+				if (chartData[0].ROW_HEADER){
+					vAxis.categoryField = "ROW_HEADER";
+				}else{
+					vAxis.categoryField = "COLUMN_HEADER";
+				}
 				vAxis.dataProvider = chartData;
 				myChart.verticalAxis = vAxis;
 				
-				/*Add the series*/
+				var tempSeriesCol:BarSeries;
+				var tempSeriesRow:BarSeries;
 				var mySeries:Array=new Array();
-				series1 = new BarSeries();
-				series1.xField="Canada";
-				series1.yField="Store";
-				series1.displayName="Canada";
-				mySeries.push(series1);
 				
-				series2 = new BarSeries();
-				series2.xField="Mexico";
-				series2.yField="Store";
-				series2.displayName="Mexico";
-				mySeries.push(series2);
+				/*Add the series*/
+				if (chartData[0].ROW_HEADER){
+					for( var j:int=0; j< columnHeaderArray.length; j++){
+						tempSeriesCol = new BarSeries();
+						tempSeriesCol.dataProvider = chartData;
+						tempSeriesCol.xField=columnHeaderArray[j].value;
+						tempSeriesCol.yField = "ROW_HEADER";
+						tempSeriesCol.displayName=columnHeaderArray[j].value;
+						mySeries.push(tempSeriesCol);
+					}
+				}else{
+					for( var k:int=0; k< rowHeaderArray.length; k++){
+						tempSeriesRow = new BarSeries();
+						tempSeriesRow.dataProvider = chartData;
+						tempSeriesRow.xField=rowHeaderArray[k].value;
+						tempSeriesRow.yField = "COLUMN_HEADER";
+						tempSeriesRow.displayName=rowHeaderArray[k].value;
+						mySeries.push(tempSeriesRow);
+					}
+				}
 				
-				series3 = new BarSeries();
-				series3.xField="USA";
-				series3.yField="Store";
-				series3.displayName="USA";
-				mySeries.push(series3);
 				
 				myChart.series = mySeries;
 				
@@ -604,6 +664,7 @@
 				legend1 = new Legend();
 				legend1.dataProvider = myChart;
 				
+				graph.removeAllElements();
 				graph.addElement(legend1);
 				graph.addElement(myChart);
 				

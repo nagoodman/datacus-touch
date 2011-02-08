@@ -54,7 +54,7 @@
 						for (var j:int=0; j<myDropTarget.dataProvider.length; j++){
 							if (myDropTarget.dataProvider[j].value != items[k].value){
 								pos=this.serList.layout.calculateDropLocation(event);
-								FlexGlobals.topLevelApplication.moveToColumns(items);
+								FlexGlobals.topLevelApplication.moveLevelToColumns(items);
 								for (var i:int=items.length - 1; i >= 0; i--)
 								{
 									this.serDB.addItemAt(items[i], pos.dropIndex);
@@ -65,7 +65,7 @@
 					}
 				}else{
 					pos=this.serList.layout.calculateDropLocation(event);
-					FlexGlobals.topLevelApplication.moveToColumns(items);
+					FlexGlobals.topLevelApplication.moveLevelToColumns(items);
 					for (var p:int=items.length - 1; p >= 0; p--)
 					{
 						this.serDB.addItemAt(items[p], pos.dropIndex);

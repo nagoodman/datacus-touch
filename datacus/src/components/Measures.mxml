@@ -32,7 +32,7 @@
 				var newMeasure:String = this.measuresList.selectedItems[0].label;
 				currentMeasure = newMeasure;
 				var items:Object = this.measuresList.selectedItems as Object;
-				FlexGlobals.topLevelApplication.moveToColumns(items);
+				FlexGlobals.topLevelApplication.moveMemberToColumns(items);
 			}
 			
 		]]>
