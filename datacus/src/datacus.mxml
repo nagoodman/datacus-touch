@@ -243,6 +243,7 @@
 			//Creates a query in which the user manipulates through Datacus
 			public function submit_query():void
 			{
+				measures.measuresList.dataProvider = null;
 				CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 			}
 			
@@ -352,6 +353,7 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].hierarchy;
 					obj.selectionType = 'LEVEL';
+					obj.dropLocation = 'NONE';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					levelsAC.addItem(obj);	
@@ -408,6 +410,7 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
+					obj.dropLocation = 'NONE';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -425,6 +428,7 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
+					obj.dropLocation = 'NONE';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -442,6 +446,7 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
+					obj.dropLocation = 'NONE';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -466,6 +471,7 @@
 				seriesList = new ArrayCollection;
 				seriesList.addItem(members);
 				for (var i:int = 0; i < members.length; i ++){
+					members[i].dropLocation = 'COLUMNS';
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
@@ -492,9 +498,11 @@
 			//This is a public function that allows when array on categories panel is changed to update the query
 			public function moveToRows(members:Object):void
 			{
+				
 				categoriesList = new ArrayCollection;
 				categoriesList.addItem(item);
 				for (var i:int = 0; i < members.length; i ++){
+					members[i].dropLocation = 'ROWS';
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
