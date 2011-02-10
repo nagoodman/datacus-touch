@@ -351,6 +351,7 @@
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].hierarchy;
+					obj.selectionType = 'LEVEL';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					levelsAC.addItem(obj);	
@@ -406,6 +407,7 @@
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -422,6 +424,7 @@
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -438,6 +441,7 @@
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -457,7 +461,7 @@
 			
 			/*The following are functions for posting to different axises on the server and create a resulting graph*/
 			//This is a public function that allows when array on series panel is changed to update the query
-			public function moveLevelToColumns(members:Object):void
+			public function moveToColumns(members:Object):void
 			{
 				seriesList = new ArrayCollection;
 				seriesList.addItem(members);
@@ -474,29 +478,13 @@
 					item = item.replace(']','%5D');
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
-					toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-					toColumns.send();//sends service call to get new graph info 
-				}
-			}
-			
-			public function moveMemberToColumns(members:Object):void
-			{
-				seriesList = new ArrayCollection;
-				seriesList.addItem(members);
-				for (var i:int = 0; i < members.length; i ++){
-					var hierarchy:String = members[i].dimension;
-					var dimension:String = hierarchy.replace("[","");
-					dimension = dimension.replace("]","");
-					hierarchy = hierarchy.replace('[','%5B');
-					hierarchy = hierarchy.replace(']','%5D');
-					var item:String = members[i].value;
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
+					
+					if (members[i].selectionType == 'LEVEL'){
+						toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					}
+					if (members[i].selectionType == 'MEMBER'){
+						toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
+					}
 					toColumns.send();//sends service call to get new graph info 
 				}
 			}
@@ -520,7 +508,12 @@
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
 					
-					toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					if (members[i].selectionType == 'LEVEL'){
+						toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					}
+					if (members[i].selectionType == 'MEMBER'){
+						toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
+					}
 					
 					toRows.send();//sends service call to get new graph info 
 				}
