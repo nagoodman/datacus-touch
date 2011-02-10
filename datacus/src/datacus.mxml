@@ -20,6 +20,7 @@
 			import mx.charts.Legend;
 			import mx.charts.series.BarSeries;
 			import mx.collections.ArrayCollection;
+			import mx.collections.ArrayList;
 			import mx.controls.*;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
@@ -244,6 +245,8 @@
 			public function submit_query():void
 			{
 				measures.measuresList.dataProvider = null;
+				//categories.catList.dataProvider = new ArrayList;
+				//series.serList.dataProvider = new ArrayList;
 				CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 			}
 			
@@ -353,7 +356,7 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].hierarchy;
 					obj.selectionType = 'LEVEL';
-					obj.dropLocation = 'NONE';
+					obj.listLocation = 'LEVEL';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					levelsAC.addItem(obj);	
@@ -410,7 +413,7 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
-					obj.dropLocation = 'NONE';
+					obj.listLocation = 'MEMBER1';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -428,7 +431,7 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
-					obj.dropLocation = 'NONE';
+					obj.listLocation = 'MEMBER2';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -446,11 +449,43 @@
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
-					obj.dropLocation = 'NONE';
+					obj.listLocation = 'MEMBER3';
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
 				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
+			}
+			
+			public function removeFromList(member:Object, listIdentifier:String):void
+			{
+				var memberIndex:int = member.number;
+				if (listIdentifier == 'ROWS'){
+					categories.catList.dataProvider.removeItemAt(memberIndex);
+					moveToRows(member);
+					//find the correct url to remove items from query
+					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
+					//results.send();
+				}
+				if (listIdentifier == 'COLUMNS'){
+					series.serList.dataProvider.removeItemAt(memberIndex);
+					moveToColumns(member);
+					//find the correct url to remove items from query
+					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
+					//results.send();
+				}
+				if (listIdentifier == 'LEVEL'){
+					//should not remove the levels but the members within that level to keep the tree structure in picker
+					//picker.LevelsDLContainer.levelsList.dataProvider.removeItemAt(memberIndex);
+				}
+				if (listIdentifier == 'MEMBER1'){
+					picker.MembersDLContainer.membersLevel1.dataProvider.removeItemAt(memberIndex);
+				}
+				if (listIdentifier == 'MEMBER2'){
+					picker.MembersDLContainer.membersLevel2.dataProvider.removeItemAt(memberIndex);
+				}
+				if (listIdentifier == 'MEMBER3'){
+					picker.MembersDLContainer.membersLevel3.dataProvider.removeItemAt(memberIndex);
+				}
 			}
 			
 			/*The variables used within the series and categories panels*/
@@ -471,7 +506,7 @@
 				seriesList = new ArrayCollection;
 				seriesList.addItem(members);
 				for (var i:int = 0; i < members.length; i ++){
-					members[i].dropLocation = 'COLUMNS';
+					members[i].listLocation = 'COLUMNS';
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
@@ -502,7 +537,7 @@
 				categoriesList = new ArrayCollection;
 				categoriesList.addItem(item);
 				for (var i:int = 0; i < members.length; i ++){
-					members[i].dropLocation = 'ROWS';
+					members[i].listLocation = 'ROWS';
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");

@@ -6,10 +6,10 @@
 		<![CDATA[
 			//imports classes and libraries need for component
 			import com.adobe.serialization.json.JSON;
-			import mx.core.FlexGlobals;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
@@ -19,13 +19,13 @@
 			
 			/*Variables need for functions within component*/
 			[Bindable]
-			private var catDB:ArrayCollection=new ArrayCollection();
+			private var trashDB:ArrayCollection=new ArrayCollection();
 			
 			[Bindable]
 			public var dp:ArrayCollection;
 			
 			//event handler for entering a drag motion
-			protected function catList_dragEnterHandler(event:DragEvent):void
+			protected function trashList_dragEnterHandler(event:DragEvent):void
 			{
 				event.preventDefault();
 				var myDragTarget:List=event.currentTarget as List;
@@ -33,41 +33,46 @@
 			}
 			
 			//handles when a user drags an object over a list
-			protected function catList_dragOverHandler(event:DragEvent):void
+			protected function trashList_dragOverHandler(event:DragEvent):void
 			{
 				var myDropTarget:List=List(event.currentTarget);
-				//var pos:DropLocation=this.catList.layout.calculateDropLocation(event);
+				var pos:DropLocation=this.trashList.layout.calculateDropLocation(event);
 				DragManager.showFeedback(DragManager.COPY);
 				myDropTarget.createDropIndicator();
-				//myDropTarget.layout.showDropIndicator(pos);
+				myDropTarget.layout.showDropIndicator(pos);
 			}
 			
 			//handles a drop into a dropable list
-			protected function catList_dragDropHandler(event:DragEvent):void
+			protected function trashList_dragDropHandler(event:DragEvent):void
 			{
 				var items:Object=event.dragSource.dataForFormat("itemsByIndex") as Object;
 				var myDropTarget:List=List(event.currentTarget);
 				var pos:DropLocation;
+				var oldList:String = new String();
 				if (myDropTarget.dataProvider.length != 0){
 					for (var k:int = 0; k < items.length; k++){
+						oldList = items[k].listLocation;
+						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
 						for (var j:int=0; j<myDropTarget.dataProvider.length; j++){
 							if (myDropTarget.dataProvider[j].value != items[k].value){
-								//pos=this.catList.layout.calculateDropLocation(event);
+								pos=this.trashList.layout.calculateDropLocation(event);
 								//FlexGlobals.topLevelApplication.moveToRows(items);
 								for (var i:int=items.length - 1; i >= 0; i--)
 								{
-									this.catDB.addItemAt(items[i], pos.dropIndex);
+									this.trashDB.addItemAt(items[i], pos.dropIndex);
 								}
 								myDropTarget.destroyDropIndicator();
 							}
 						}
 					}
 				}else{
-					//pos=this.catList.layout.calculateDropLocation(event);
-					FlexGlobals.topLevelApplication.moveToRows(items);
+					pos=this.trashList.layout.calculateDropLocation(event);
+					//FlexGlobals.topLevelApplication.moveToRows(items);
 					for (var p:int=items.length - 1; p >= 0; p--)
 					{
-						this.catDB.addItemAt(items[p], pos.dropIndex);
+						oldList = items[p].listLocation;
+						FlexGlobals.topLevelApplication.removeFromList(items[p], oldList);
+						this.trashDB.addItemAt(items[p], pos.dropIndex);
 					}
 					myDropTarget.destroyDropIndicator();
 				}
@@ -82,5 +87,35 @@
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="100" width="140" skinClass="skins.Panel" />
-	</fx:DesignLayer>	
+	</fx:DesignLayer>
+	<s:List id="trashList"
+			width="130"
+			height="90"
+			x="5" y="5"
+			alpha="0.8"
+
+			dataProvider="{trashDB}"
+			dragEnter="trashList_dragEnterHandler(event)"
+			dragOver="trashList_dragOverHandler(event)"
+			dragDrop="trashList_dragDropHandler(event)"
+			skinClass="skins.MyDropSkin">
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="left"
+								paddingLeft="5"
+								paddingTop="5"/>
+		</s:layout>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"/>
+						</s:layout>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+		
+	</s:List>
 </s:Group>
