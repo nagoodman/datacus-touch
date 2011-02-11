@@ -460,15 +460,17 @@
 			{
 				var memberIndex:int = member.number;
 				if (listIdentifier == 'ROWS'){
+					categoriesList.removeItemAt(memberIndex);
+					removeFromGraph(member);
 					categories.catList.dataProvider.removeItemAt(memberIndex);
-					moveToRows(member);
 					//find the correct url to remove items from query
 					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
 					//results.send();
 				}
 				if (listIdentifier == 'COLUMNS'){
+					seriesList.removeItemAt(memberIndex);
+					removeFromGraph(member);
 					series.serList.dataProvider.removeItemAt(memberIndex);
-					moveToColumns(member);
 					//find the correct url to remove items from query
 					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
 					//results.send();
@@ -488,6 +490,33 @@
 				}
 			}
 			
+			public function removeFromGraph(members:Object):void
+			{
+				var originalLocation:String = members.listLocation;
+				var hierarchy:String = members.dimension;
+				var dimension:String = hierarchy.replace("[","");
+				dimension = dimension.replace("]","");
+				hierarchy = hierarchy.replace('[','%5B');
+				hierarchy = hierarchy.replace(']','%5D');
+				var item:String = members.value;
+				item = item.replace('[','%5B');
+				item = item.replace(']','%5D');
+				item = item.replace('[','%5B');
+				item = item.replace(']','%5D');
+				item = item.replace('[','%5B');
+				item = item.replace(']','%5D');
+					
+				if (members.selectionType == 'LEVEL'){
+					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+				}
+				if (members.selectionType == 'MEMBER'){
+					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
+				}
+					
+				remove.send();//sends service call to get new graph info 
+				
+			}
+			
 			/*The variables used within the series and categories panels*/
 			[Bindable]
 			public var seriesList:ArrayCollection = new ArrayCollection;
@@ -503,9 +532,10 @@
 			//This is a public function that allows when array on series panel is changed to update the query
 			public function moveToColumns(members:Object):void
 			{
-				seriesList = new ArrayCollection;
-				seriesList.addItem(members);
+				//seriesList = new ArrayCollection;
+				
 				for (var i:int = 0; i < members.length; i ++){
+					seriesList.addItem(members[i]);
 					members[i].listLocation = 'COLUMNS';
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
@@ -534,9 +564,10 @@
 			public function moveToRows(members:Object):void
 			{
 				
-				categoriesList = new ArrayCollection;
-				categoriesList.addItem(item);
+				//categoriesList = new ArrayCollection;
+				
 				for (var i:int = 0; i < members.length; i ++){
+					categoriesList.addItem(members[i]);
 					members[i].listLocation = 'ROWS';
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
@@ -568,6 +599,8 @@
 				if((seriesList.length > 0) && (categoriesList.length > 0)){
 					results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
 					results.send();
+				}else{
+					graph.removeAllElements();
 				}
 			}
 			[bindable]
@@ -749,6 +782,14 @@
 			id="callMembers3"
 			resultFormat="text"
 			result="getMembers3(event)" />
+		
+		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml"
+					   method="POST" result="getResults()">
+			<s:request>
+				<position>0</position>
+				<memberposition>-1</memberposition>
+			</s:request>
+		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
 		<s:HTTPService id="toRows" resultFormat="text" contentType="application/xml"
