@@ -7,7 +7,7 @@
 					   minWidth="1440"
 					   minHeight="920"
 					   creationComplete="init()" xmlns:create_query="services.create_query.*">  
-					<!--make it full screen, but for now...-->
+	<!--make it full screen, but for now...-->
 	
 	<fx:Script>
 		<![CDATA[
@@ -139,7 +139,7 @@
 				Home_Close();
 				submit_query();
 			}
-				
+			
 			
 			/*Variables used to create drop down menus for creating a new query*/
 			private var connectionDropDown:DropDownList;
@@ -505,14 +505,14 @@
 				item = item.replace(']','%5D');
 				item = item.replace('[','%5B');
 				item = item.replace(']','%5D');
-					
+				
 				if (members.selectionType == 'LEVEL'){
 					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 				}
 				if (members.selectionType == 'MEMBER'){
 					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
 				}
-					
+				
 				remove.send();//sends service call to get new graph info 
 				
 			}
@@ -667,11 +667,11 @@
 			/*Variables used within functions to create the graph*/
 			[Bindable]
 			public var chartData:ArrayCollection;/*= new ArrayCollection([
-				{Store:'Deluxe Supermarket', Canada:23112, Mexico:61381, USA:61552},
-				{Store:'Gourmet Supermarket', Canada:0, Mexico:23759, USA:23688},
-				{Store:'Mid-Size Grocery', Canada:34452, Mexico:74891, USA:0},
-				{Store:'Small Grocery', Canada:0, Mexico:24597, USA:50684},
-				{Store:'Supermarket', Canada:0, Mexico:58384, USA:135096}
+			{Store:'Deluxe Supermarket', Canada:23112, Mexico:61381, USA:61552},
+			{Store:'Gourmet Supermarket', Canada:0, Mexico:23759, USA:23688},
+			{Store:'Mid-Size Grocery', Canada:34452, Mexico:74891, USA:0},
+			{Store:'Small Grocery', Canada:0, Mexico:24597, USA:50684},
+			{Store:'Supermarket', Canada:0, Mexico:58384, USA:135096}
 			])*/
 			
 			
@@ -811,14 +811,14 @@
 		
 		<!-- request to server to get the new chart information back from the server for graphing values-->
 		<s:HTTPService id="results" resultFormat="text"
-			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
-			method="GET" result="updateGraphData(event)" />
+					   url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
+					   method="GET" result="updateGraphData(event)" />
 		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
 		<s:CallResponder id="CreateQueryResult"/>
 		
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
-<!--		I bet there's a better way to do the background		 -->
+		<!--		I bet there's a better way to do the background		 -->
 		<s:Rect id="bg" 
 				width="100%" height="100%" 
 				x="0" y="0">
@@ -829,33 +829,37 @@
 				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="0x5380d0" inner="true" knockout="false" quality="2" strength="1"/>
 			</s:filters>
 		</s:Rect>
+		<s:BitmapImage id="img"
+					   source="@Embed('assets/download.jpg')"
+					   fillMode="repeat"
+					   left="0" right="0"  top="0" bottom="0"/>
 	</fx:DesignLayer>
 	<fx:DesignLayer id="panels">
-<!--		organized left to right then top to bottom		 -->
+		<!--		organized left to right then top to bottom		 -->
 		<components:Graph id="graph" 
 						  x="180" y="260"
 						  />
 		<components:Measures id="measures"
- 			left="20" top="260"
-		/>
+							 left="20" top="260"
+							 />
 		<components:StateStep id="stateStep"
-			x="20" y="780"
-		/>
+							  x="20" y="780"
+							  />
 		<components:Pager id="pager"
-			x="180" y="20"
-		/>
+						  x="180" y="20"
+						  />
 		<components:Series id="series"
-			x="180" y="140"
-		/>
+						   x="180" y="140"
+						   />
 		<components:Categories id="categories"
-			x="180" y="780"
-		/>
+							   x="180" y="780"
+							   />
 		<components:ServerStatus id="serverStatus"
-			x="1280" y="20"
-		/>
+								 x="1280" y="20"
+								 />
 		<components:Sets id="sets"
-			x="1280" y="140"
-		/>
+						 x="1280" y="140"
+						 />
 		<components:Trash id="trash"
 						  x="1280" y="780"
 						  />	
@@ -866,10 +870,10 @@
 						 currentState.Page3="Home3">
 		</components:Home>
 		<components:Picker id="picker"
-			x="1280" y="260"
-			click="Picker_Open()" 
-			currentState.Page2="State2"
-			currentState.Page3="State3">
+						   x="1280" y="260"
+						   click="Picker_Open()" 
+						   currentState.Page2="State2"
+						   currentState.Page3="State3">
 		</components:Picker>
 		
 	</fx:DesignLayer>
