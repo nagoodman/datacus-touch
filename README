@@ -2,56 +2,25 @@
 *DATACUS*
 *********
 
-Sept. 7th, 2010
+Started: Sept. 7th, 2010
+Updated: Valentine's Day 2011
 
 The multi-touch data explorer
 *****************************
 
 Contributors
 ************
-Buck Heroux  - tmbuckheroux@gmail.com - asus g1 lnx & win7
+Buck Heroux  - tmbuckheroux@gmail.com
 Ryan Daubert - ryan.daubert@colorado.edu
 Ian Smith    - ianhenrysmith@gmail.com
 Adam Jackson - adam.jackson@colorado.edu
 Matt Smith   - elementalsk816@me.com
 
-API's
-*****
-TOUCH
-  TUIO - tuio as3 lib
-    -bubblebird.at/tuioflash/tuio-as3-library
-	after startup need to run TUIO tracker
+Open source data exploration app designed for win7 and 2-pt touchscreens
 
-	for 64-bit distro
-	Touch2Tuio is w7 tracker, might need to write our own
-		takes appplication window name as argument
-		(need to detect window)
-
-	udpTHing translates udp port 3333 to LocalConnection in flash
-
-	$> Touch2Tuio_x64.exe datacus
-
-	If we have Air 2.0 it supports UDP connections and don't need that bridge
-
-
-	
-
-
-GRAPHICS
-  UI
-    degrafa
-     -http://www.degrafa.org/
-  Charts
-    flex charts?
-     -http://www.flex-blog.com/samples/sample13/srcview/index.html
- 
-SERVER
-  Server Connector
-    BlazeDS
-      -http://en.wikipedia.org/wiki/BlazeDS
-    OLAP4J
-      -http://www.olap4j.org/
-
-FLASH
-  Flash Apps: http://www.adobe.com/support/flash/applications/app_design/app_design04.html
-  App Server: http://www.adobe.com/support/flash/applications/app_design/app_design06.html
+Stuff you need to be able to run Datacus:
+	windows 7
+	adobe Air
+	decent-sized touchscreen
+	connection to an OLAP database
+	Soul
