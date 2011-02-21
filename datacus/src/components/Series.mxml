@@ -42,7 +42,8 @@
 				myDropTarget.createDropIndicator();
 				myDropTarget.layout.showDropIndicator(pos);
 			}
-			
+			[bindable]
+			public var listLengthPriorAdd:int = 0;
 			//handles a drop into a dropable list
 			protected function serList_dragDropHandler(event:DragEvent):void
 			{
@@ -55,13 +56,15 @@
 						oldList = items[k].listLocation;
 						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
 						items[k].number = items.length - 1;
-						for (var j:int=0; j<myDropTarget.dataProvider.length; j++){
-							if (myDropTarget.dataProvider[j].value != items[k].value){
+						var listLen:int = myDropTarget.dataProvider.length;
+						while (listLengthPriorAdd<listLen){
+							if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
 								pos=this.serList.layout.calculateDropLocation(event);
 								FlexGlobals.topLevelApplication.moveToColumns(items);
 								for (var i:int=items.length - 1; i >= 0; i--)
 								{
 									this.serDB.addItemAt(items[i], pos.dropIndex);
+									listLengthPriorAdd++;
 								}
 								myDropTarget.destroyDropIndicator();
 							}
