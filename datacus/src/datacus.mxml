@@ -247,6 +247,20 @@
 				measures.measuresList.dataProvider = null;
 				//categories.catList.dataProvider = new ArrayList;
 				//series.serList.dataProvider = new ArrayList;
+				
+				//queryName = QueryName.text;
+				//if (QueryName.text == null){
+					//queryName = 'chartData';
+				//}
+				
+				//submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName;
+				
+				//var params:Object = {};
+				//params['connection'] = connectionDropDown.selectedItem.data;
+				//params['cube'] = cubeDropDown.selectedItem.data;
+				//params['catalog'] = catalogDropDown.selectedItem.data;
+				//params['schema'] = schemaDropDown.selectedItem.data;
+				//submit.send(params);//sends service call to get new graph info 
 				CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 			}
 			
@@ -512,7 +526,9 @@
 				if (members.selectionType == 'MEMBER'){
 					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
 				}
-					
+				//var params:Object = {};
+				//params['position'] = members.itemPosition;
+				//params['memeberposition'] = members.itemMemberPosition;
 				remove.send();//sends service call to get new graph info 
 				
 			}
@@ -528,8 +544,11 @@
 				return unescape(escape(this).split(s).join(z));
 			}
 			
+			
 			/*The following are functions for posting to different axises on the server and create a resulting graph*/
 			//This is a public function that allows when array on series panel is changed to update the query
+			public var nextColumnItemPosition:int = new int();
+			
 			public function moveToColumns(members:Object):void
 			{
 				//seriesList = new ArrayCollection;
@@ -537,6 +556,8 @@
 				for (var i:int = 0; i < members.length; i ++){
 					seriesList.addItem(members[i]);
 					members[i].listLocation = 'COLUMNS';
+					members[i].itemMemberPosition = seriesList.length -1;
+					members[i].itemPosition = nextColumnItemPosition;
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
@@ -556,10 +577,19 @@
 					if (members[i].selectionType == 'MEMBER'){
 						toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
 					}
-					toColumns.send();//sends service call to get new graph info 
+					
+					var params:Object = {};
+					params["position"] = nextColumnItemPosition;
+					params["memberposition"] = seriesList.length -1;
+					
+					toColumns.send(params);//sends service call to get new graph info 
+					
+					nextColumnItemPosition = nextColumnItemPosition + 1;
 				}
 			}
 			
+			[Bindable]
+			public var nextRowItemPosition:int = new int();
 			//This is a public function that allows when array on categories panel is changed to update the query
 			public function moveToRows(members:Object):void
 			{
@@ -569,6 +599,8 @@
 				for (var i:int = 0; i < members.length; i ++){
 					categoriesList.addItem(members[i]);
 					members[i].listLocation = 'ROWS';
+					members[i].itemMemberPosition = categoriesList.length -1;
+					members[i].itemPosition = nextRowItemPosition;
 					var hierarchy:String = members[i].dimension;
 					var dimension:String = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
@@ -588,8 +620,13 @@
 					if (members[i].selectionType == 'MEMBER'){
 						toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
 					}
+					var params:Object = {};
+					params["position"] = nextRowItemPosition;
+					params["memberposition"] = categoriesList.length -1;
+
+					toRows.send(params);//sends service call to get new graph info 
 					
-					toRows.send();//sends service call to get new graph info 
+					nextRowItemPosition = nextRowItemPosition + 1;
 				}
 			}
 			
@@ -597,6 +634,7 @@
 			public function getResults():void
 			{
 				if((seriesList.length > 0) && (categoriesList.length > 0)){
+					graph.removeAllElements();
 					results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
 					results.send();
 				}else{
@@ -783,36 +821,28 @@
 			resultFormat="text"
 			result="getMembers3(event)" />
 		
-		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml"
-					   method="POST" result="getResults()">
-			<s:request>
-				<position>0</position>
-				<memberposition>-1</memberposition>
-			</s:request>
+		<s:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
+					   method="POST" >
+		</s:HTTPService>
+		
+		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml" 
+					   method="DELETE" result="getResults()">
 		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
 		<s:HTTPService id="toRows" resultFormat="text" contentType="application/xml"
 					   method="POST" result="getResults()">
-			<s:request>
-				<position>0</position>
-				<memberposition>-1</memberposition>
-			</s:request>
 		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the Columns (Series) axis for graphing-->
 		<s:HTTPService id="toColumns" resultFormat="text" contentType="application/xml"
 					   method="POST" result="getResults()">
-			<s:request>
-				<position>0</position>
-				<memberposition>-1</memberposition>
-			</s:request>
 		</s:HTTPService>
 		
 		<!-- request to server to get the new chart information back from the server for graphing values-->
 		<s:HTTPService id="results" resultFormat="text"
-			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/result"
 			method="GET" result="updateGraphData(event)" />
+		
 		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
 		<s:CallResponder id="CreateQueryResult"/>
 		
