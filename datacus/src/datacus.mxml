@@ -526,10 +526,11 @@
 				if (members.selectionType == 'MEMBER'){
 					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
 				}
-				//var params:Object = {};
-				//params['position'] = members.itemPosition;
-				//params['memeberposition'] = members.itemMemberPosition;
-				remove.send();//sends service call to get new graph info 
+				remove.headers['X-HTTP-Method-Override'] = 'DELETE';
+				var params:Object = {};
+				params['position'] = members.itemPosition;
+				params['memeberposition'] = members.itemMemberPosition;
+				remove.send(params);//sends service call to get new graph info 
 				
 			}
 			
@@ -826,7 +827,7 @@
 		</s:HTTPService>
 		
 		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml" 
-					   method="DELETE" result="getResults()">
+					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
