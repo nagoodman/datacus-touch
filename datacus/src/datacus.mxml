@@ -21,9 +21,13 @@
 			import mx.charts.series.BarSeries;
 			import mx.collections.ArrayCollection;
 			import mx.collections.ArrayList;
+			import mx.containers.TitleWindow;
 			import mx.controls.*;
+			import mx.events.CloseEvent;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			
 			import services.create_query.*;
@@ -63,7 +67,11 @@
 				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
 				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
-				CreateSession.send();				
+				try {
+					CreateSession.send();
+				} catch (error:IOError) {
+					error_window("The Saiku Server is not running. Please close the application, start the Saiku server, and restart the application.");
+				}
 			}
 			
 			/*Variables used with touch gesture handling*/
@@ -241,6 +249,25 @@
 				ConnectionForm.addChildAt(connectionLabel,0);
 			}
 			
+			public function error_window(error_message:String):void {
+				var popup:TitleWindow = new TitleWindow();
+				popup.showCloseButton = true;
+				popup.addEventListener(Event.CLOSE, closeTitleWindow);
+				var label:Label = new Label();
+				label.text = error_message;
+				popup.addChild(label);
+				PopUpManager.addPopUp(popup, this, true);
+				PopUpManager.centerPopUp(popup);
+			}
+			
+			private function faultHandler(evt:FaultEvent):void {
+				var errors:String = "The Saiku Server is not running. " +
+					"Please close the application, start the Saiku server, " +
+					"and restart the application."
+				
+				error_window(errors);
+			}
+			
 			//Creates a query in which the user manipulates through Datacus
 			public function submit_query():void
 			{
@@ -261,9 +288,32 @@
 				//params['catalog'] = catalogDropDown.selectedItem.data;
 				//params['schema'] = schemaDropDown.selectedItem.data;
 				//submit.send(params);//sends service call to get new graph info 
-				CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
+				//CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
+				queryName = QueryName.text;
+//				var popup:TitleWindow = new TitleWindow();
+//				popup.showCloseButton = true;
+//				popup.addEventListener(Event.CLOSE, closeTitleWindow);
+//				var label:Label = new Label();
+//				label.text = "You must enter a valid name for the query. Query names must not be blank, cannot contain special characters, and cannot contain more than 20 characters.";
+//				popup.addChild(label);
+				//var pattern1:RegExp = new RegExp("[!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\\\=\\+\\/\\,\\.\\<\\>\\?\\~\\`\\\]");
+				var pattern1:RegExp = new RegExp("^[a-zA-Z0-9]+");
+				var pattern2:RegExp = new RegExp("[!@#$%^&*()+=,.<>\\]\\[;:'/\]");
+				if (queryName == "" || queryName.length > 20 
+					|| !(queryName.match(pattern1)) 
+					|| queryName.match(pattern2)){
+					error_window("You must enter a valid name for the query. " +
+						"Query names must not be blank and cannot contain spaces, " +
+						"special characters, or more than 20 characters.");
+				} else {
+					CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
+				}
 			}
 			
+			//function for closing the popup windows
+			public function closeTitleWindow(evt:CloseEvent):void {
+				PopUpManager.removePopUp(TitleWindow(evt.target));
+			}
 			/*Variables used to populate the Picker*/
 			[Bindable]
 			private var destDB:ArrayCollection=new ArrayCollection();
@@ -299,6 +349,7 @@
 				callDimensions.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/"
 				callDimensions.send()
 			}
+			
 			//Populates the dimension list
 			public function getDimensions(event:ResultEvent):void
 			{
@@ -790,7 +841,9 @@
 			id="CreateSession"
 			resultFormat='xml'
 			url='http://localhost:8080/saiku/rest/saiku/session'
-			result="checkResponse(event)" />
+			result="checkResponse(event)" 
+			fault="faultHandler(event)"
+			requestTimeout="20" />
 		<s:HTTPService
 			id="GetSourceOptions"
 			resultFormat='text'
