@@ -87,6 +87,7 @@
 		
 		
 	</fx:Script>
+	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 		
 	</fx:Declarations>
@@ -118,7 +119,7 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:Label text="{data.label}" styleName="label" />
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

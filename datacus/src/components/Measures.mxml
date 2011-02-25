@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="init()">	
+		 xmlns:mx="library://ns.adobe.com/flex/mx">	
 	<fx:Script>
 		<![CDATA[
 			//behavior: select measures type via tap or scroll if too many displayed
@@ -37,18 +36,19 @@
 			
 		]]>
 	</fx:Script>
+	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="MeasuresLabel" tabStops="S0 S50 S100" text="Measures" x="25" y="5"/>
+		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" styleName="main_panel" symbolColor="#591212" whiteSpaceCollapse="collapse"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="MeasuresLabel" tabStops="S0 S50 S100" text="Measures" x="25" y="5" />
 	</fx:DesignLayer>
 	<s:List id="measuresList"
 			width="130"
 			height="470"
 			x="5" y="25"
-			rendererAdd="addClick(event)">
+			>
 		
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="left"
@@ -64,7 +64,7 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:Label text="{data.label}" styleName="label" />
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

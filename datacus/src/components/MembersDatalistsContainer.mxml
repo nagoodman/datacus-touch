@@ -2,6 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1100" height="380" >
+	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -33,7 +34,7 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:Label text="{data.label}" styleName="label"/>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
@@ -56,7 +57,7 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:Label text="{data.label}" styleName="label"/>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
@@ -79,7 +80,7 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:Label text="{data.label}" styleName="label"/>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

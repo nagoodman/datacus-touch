@@ -89,12 +89,13 @@
 		
 		
 	</fx:Script>
+	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 		
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SeriesLabel" tabStops="S0 S50 S100" text="Series" x="500" y="5"/>
+		<s:RichText color="#2B4381" fontSize="20" id="SeriesLabel" tabStops="S0 S50 S100" text="Series" x="500" y="5"/>
 	</fx:DesignLayer>	
 	<s:List id="serList"
 			width="1070"
@@ -107,7 +108,7 @@
 			dragEnter="serList_dragEnterHandler(event)"
 			dragOver="serList_dragOverHandler(event)"
 			dragDrop="serList_dragDropHandler(event)"
-			skinClass="skins.MyDropSkin">
+			skinClass="skins.MyDropSkin" borderVisible="false">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="5"
@@ -120,7 +121,7 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:Label text="{data.label}" styleName="label" />
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

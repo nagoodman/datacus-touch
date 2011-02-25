@@ -912,7 +912,12 @@
 			<s:filters>
 				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="0x5380d0" inner="true" knockout="false" quality="2" strength="1"/>
 			</s:filters>
+			
 		</s:Rect>
+		<s:BitmapImage id="img"
+					   source="@Embed('assets/download.jpg')"
+					   fillMode="repeat"
+					   left="0" right="0"  top="0" bottom="0"/>
 	</fx:DesignLayer>
 	<fx:DesignLayer id="panels">
 <!--		organized left to right then top to bottom		 -->
