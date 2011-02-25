@@ -275,19 +275,6 @@
 				//categories.catList.dataProvider = new ArrayList;
 				//series.serList.dataProvider = new ArrayList;
 				
-				//queryName = QueryName.text;
-				//if (QueryName.text == null){
-					//queryName = 'chartData';
-				//}
-				
-				//submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName;
-				
-				//var params:Object = {};
-				//params['connection'] = connectionDropDown.selectedItem.data;
-				//params['cube'] = cubeDropDown.selectedItem.data;
-				//params['catalog'] = catalogDropDown.selectedItem.data;
-				//params['schema'] = schemaDropDown.selectedItem.data;
-				//submit.send(params);//sends service call to get new graph info 
 				//CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				queryName = QueryName.text;
 //				var popup:TitleWindow = new TitleWindow();
@@ -306,6 +293,13 @@
 						"Query names must not be blank and cannot contain spaces, " +
 						"special characters, or more than 20 characters.");
 				} else {
+					//submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/";
+					//var params:Object = {};
+					//params['connection'] = connectionDropDown.selectedItem.data;
+					//params['cube'] = cubeDropDown.selectedItem.data;
+					//params['catalog'] = catalogDropDown.selectedItem.data;
+					//params['schema'] = schemaDropDown.selectedItem.data;
+					//submit.send();//sends service call to get new graph info 
 					CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				}
 			}
@@ -829,6 +823,9 @@
 				
 			}			
 			
+			public function getData(dropDown:*):String{
+				return dropDown.data;
+			}
 		]]>
 	</fx:Script>
 	<s:states>
@@ -875,9 +872,15 @@
 			resultFormat="text"
 			result="getMembers3(event)" />
 		
-		<s:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
-					   method="POST" >
-		</s:HTTPService>
+		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
+					   method="POST">
+			<mx:request xmlns="">
+				<connection>{getData(connectionDropDown.selectedItem)}</connection>
+				<cube>{getData(cubeDropDown.selectedItem)}</cube>
+				<catalog>{getData(catalogDropDown.selectedItem)}</catalog>
+				<schema>{getData(schemaDropDown.selectedItem)}</schema>
+			</mx:request>
+		</mx:HTTPService>
 		
 		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml" 
 					   method="POST" result="getResults()">

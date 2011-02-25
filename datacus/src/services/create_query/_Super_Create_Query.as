@@ -10,6 +10,7 @@ import mx.rpc.AbstractOperation;
 import mx.rpc.AsyncToken;
 import mx.rpc.http.HTTPMultiService;
 import mx.rpc.http.Operation;
+import mx.core.FlexGlobals;
 
 
 [ExcludeClass]
@@ -24,7 +25,7 @@ internal class _Super_Create_Query extends com.adobe.fiber.services.wrapper.HTTP
          var operations:Array = new Array();
          var operation:mx.rpc.http.Operation;
          var argsArray:Array;
-
+		 
          operation = new mx.rpc.http.Operation(null, "CreateQuery");
          operation.url = "http://localhost:8080/saiku/json/saiku/admin/query/chartdata/";
          operation.method = "POST";
