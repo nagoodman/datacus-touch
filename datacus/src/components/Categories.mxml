@@ -54,11 +54,11 @@
 					for (var k:int = 0; k < items.length; k++){
 						oldList = items[k].listLocation;
 						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
-						items[k].number = items.length - 1;
 						var listLength:int = myDropTarget.dataProvider.length
 						while (listLengthPriorAdd<listLength){
 							if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
 								pos=this.catList.layout.calculateDropLocation(event);
+								items[k].number = pos.dropIndex;
 								FlexGlobals.topLevelApplication.moveToRows(items);
 								for (var i:int=items.length - 1; i >= 0; i--)
 								{

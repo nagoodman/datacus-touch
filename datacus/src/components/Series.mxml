@@ -55,7 +55,6 @@
 					for (var k:int = 0; k < items.length; k++){
 						oldList = items[k].listLocation;
 						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
-						items[k].number = items.length - 1;
 						var listLen:int = myDropTarget.dataProvider.length;
 						while (listLengthPriorAdd<listLen){
 							if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
