@@ -41,7 +41,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" styleName="main_panel" symbolColor="#591212" whiteSpaceCollapse="collapse"/>
+		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" styleName="main_panel"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="MeasuresLabel" tabStops="S0 S50 S100" text="Measures" x="25" y="5" />
 	</fx:DesignLayer>
 	<s:List id="measuresList"
