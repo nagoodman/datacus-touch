@@ -52,6 +52,11 @@
 			/*Function first initiated when software starts*/
 			protected function init():void {
 				mainStage = this.systemManager.stage;
+				var touchSupport:Boolean = Multitouch.supportsTouchEvents;
+				var gestureSupport:Boolean = Multitouch.supportsGestureEvents;
+				Multitouch.inputMode = MultitouchInputMode.GESTURE;
+				picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
+				/*
 				//makes full screen, but need to make sizinf relative first
 				//mainStage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 				tc = new TuioClient(new UDPConnector());
@@ -67,6 +72,7 @@
 				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
 				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
+*/
 				try {
 					CreateSession.send();
 				} catch (error:IOError) {
@@ -75,12 +81,16 @@
 			}
 			
 			/*Variables used with touch gesture handling*/
-			public var tc:TuioClient;
-			public var tm:TuioManager;
+			//public var tc:TuioClient;
+			//public var tm:TuioManager;
 			//public var gm:GestureManager;
-			private var winTouch:Windows7TouchToTuioDispatcher;
-			private var mTouch:MouseToTouchDispatcher;
-			private var tDbg:TuioDebug;
+			//private var winTouch:Windows7TouchToTuioDispatcher;
+			//private var mTouch:MouseToTouchDispatcher;
+			//private var tDbg:TuioDebug;
+			
+			public function pickerFlick(e:MouseEvent):void {
+				Picker_Open();
+			}
 			
 			public function handleDrag(e:TransformGestureEvent):void {
 				//trace("dragged");
