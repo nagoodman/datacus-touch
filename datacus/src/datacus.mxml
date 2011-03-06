@@ -160,10 +160,6 @@
 				
 			
 			/*Variables used to create drop down menus for creating a new query*/
-			private var connectionDropDown:DropDownList;
-			private var catalogDropDown:DropDownList;
-			private var schemaDropDown:DropDownList;
-			private var cubeDropDown:DropDownList;
 			private var connectionArray:ArrayCollection = new ArrayCollection();
 			private var catalogArray:ArrayCollection = new ArrayCollection();
 			private var schemaArray:ArrayCollection = new ArrayCollection();
@@ -200,63 +196,22 @@
 						}
 					}	
 				}
-				connectionDropDown = new DropDownList();
-				connectionDropDown.width=300;
+
 				connectionDropDown.dataProvider = connectionArray;
 				connectionDropDown.selectedIndex=0;
 				
-				catalogDropDown = new DropDownList();
-				catalogDropDown.width=300;
+
 				catalogDropDown.dataProvider = catalogArray;
 				catalogDropDown.selectedIndex=0;
 				
-				schemaDropDown = new DropDownList();
-				schemaDropDown.width=300;
+
 				schemaDropDown.dataProvider = schemaArray;
 				schemaDropDown.selectedIndex=0;
 				
-				cubeDropDown = new DropDownList();
-				cubeDropDown.width=300;
+
 				cubeDropDown.dataProvider = cubeArray;
 				cubeDropDown.selectedIndex=0;
 				
-				var connectionLabel:RichText = new RichText();
-				var catalogLabel:RichText = new RichText();
-				var schemaLabel:RichText = new RichText();
-				var cubeLabel:RichText = new RichText();
-				
-				//connectionLabel.color = "#2B4381";
-				//connectionLabel.fontFamily='Arial';
-				//connectionLabel.fontSize ='10';
-				//connectionLabel.tabStops="S0 S50 S100";
-				connectionLabel.text="Connection:";
-				
-				//catalogLabel.color = "#2B4381";
-				//catalogLabel.fontFamily='Arial';
-				//catalogLabel.fontSize ='10';
-				//catalogLabel.tabStops="S0 S50 S100";
-				catalogLabel.text="Catalog:";
-				
-				//schemaLabel.color = "#2B4381";
-				//schemaLabel.fontFamily='Arial';
-				//schemaLabel.fontSize ='10';
-				//schemaLabel.tabStops="S0 S50 S100";
-				schemaLabel.text="Schema:";
-				
-				//cubeLabel.color = "#2B4381";
-				//cubeLabel.fontFamily='Arial';
-				//cubeLabel.fontSize ='10';
-				//cubeLabel.tabStops="S0 S50 S100";
-				cubeLabel.text="Cube:";
-				
-				ConnectionForm.addChildAt(cubeDropDown,0);
-				ConnectionForm.addChildAt(cubeLabel,0);
-				ConnectionForm.addChildAt(schemaDropDown,0);
-				ConnectionForm.addChildAt(schemaLabel,0);
-				ConnectionForm.addChildAt(catalogDropDown,0);
-				ConnectionForm.addChildAt(catalogLabel,0);
-				ConnectionForm.addChildAt(connectionDropDown,0);
-				ConnectionForm.addChildAt(connectionLabel,0);
 			}
 			
 			public function error_window(error_message:String):void {
@@ -973,13 +928,37 @@
 		</components:Picker>
 		
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='555' y='390' >
-		<mx:FormItem label="Query Name" id="QueryNameLabel" >
+	<mx:Form includeIn="Page1" defaultButton="{submitQuery}" id="ConnectionForm" x='555' y='390' >
+		<mx:FormItem label='Connection:'>
+			<s:DropDownList id="connectionDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		<mx:FormItem label='Catalog:'>
+			<s:DropDownList id="catalogDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		<mx:FormItem label='Schema:'>
+			<s:DropDownList id="schemaDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		<mx:FormItem label="Cube:">
+			<s:DropDownList id="cubeDropDown" width='200'>
+			
+			</s:DropDownList>
+		</mx:FormItem>
+		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true">
 			<s:TextInput id="QueryName" width='200' />
 		</mx:FormItem>
-		
-		<s:Button label="Create Query" id="button" click="submit_form()" />
-		<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />			
+		<mx:FormItem>
+			<s:Button label="Create Query" id="submitQuery" click="submit_form()" />
+		</mx:FormItem>
+		<mx:FormItem>
+			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />
+		</mx:FormItem>
+					
 		
 	</mx:Form>
 	<s:Button includeIn="Page3" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
