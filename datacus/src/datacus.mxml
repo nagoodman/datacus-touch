@@ -6,7 +6,7 @@
 					   backgroundColor="#FFFFFF"
 					   minWidth="1440"
 					   minHeight="920"
-					   creationComplete="init()" xmlns:create_query="services.create_query.*">  
+					   creationComplete="init()" xmlns:create_query="services.create_query.*" xmlns:submit_query="services.submit_query.*">  
 					<!--make it full screen, but for now...-->
 	
 	<fx:Script>
@@ -112,17 +112,19 @@
 			
 			protected function checkResponse(event:ResultEvent):void{
 				if (event.statusCode == 200){
-					GetSourceOptions.send();
+					Home_Open();
 				}
 				
 			}
+			
+			
 			
 			/*Functions to handle state changes*/
 			protected function Picker_Open():void
 			{
 				const state:String = currentState;
-				if ( state == 'Page2' ) {
-					currentState='Page3';
+				if ( state == 'Page3' ) {
+					currentState='Page4';
 					populatePicker();
 				}
 				
@@ -130,25 +132,29 @@
 			
 			protected function Picker_Close():void{
 				const state:String = currentState;
-				if ( state == 'Page3' ) {
-					currentState='Page2';
+				if ( state == 'Page4' ) {
+					currentState='Page3';
 				}
 			}
 			
 			protected function Home_Open():void{
 				const state:String = currentState;
-				if ( state == 'Page3' ) {
-					currentState='Page1';
+				if ( state == 'Page4' ) {
+					currentState='Page2';
 				}
-				if ( state == 'Page2' ) {
-					currentState='Page1';
+				if ( state == 'Page3' ) {
+					currentState='Page2';
+				}
+				if (state == 'Page1' ) {
+					currentState='Page2';
+					GetSourceOptions.send();
 				}
 			}
 			
 			public function Home_Close():void{
 				const state:String = currentState;
-				if ( state == 'Page1' ) {
-					currentState='Page2';
+				if ( state == 'Page2' ) {
+					currentState='Page3';
 					var x:int = 5;
 				}
 			}
@@ -258,14 +264,15 @@
 						"Query names must not be blank and cannot contain spaces, " +
 						"special characters, or more than 20 characters.");
 				} else {
-					//submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/";
-					//var params:Object = {};
+					submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/";
+					var params:Object = {};
 					//params['connection'] = connectionDropDown.selectedItem.data;
 					//params['cube'] = cubeDropDown.selectedItem.data;
 					//params['catalog'] = catalogDropDown.selectedItem.data;
 					//params['schema'] = schemaDropDown.selectedItem.data;
-					//submit.send();//sends service call to get new graph info 
+					//submit.send(params);//sends service call to get new graph info 
 					CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
+					//Submit_QueryResult.token = submit_Query.Submit_Query(QueryName.text,connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				}
 			}
 			
@@ -794,12 +801,19 @@
 			public function getData(dropDown:*):String{
 				return dropDown.data;
 			}
+			
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<s:states>
 		<s:State name="Page1"/>
 		<s:State name="Page2"/>
 		<s:State name="Page3"/>
+		<s:State name="Page4"/>
 	</s:states>
 	<fx:Declarations>
 		<s:HTTPService
@@ -841,7 +855,7 @@
 			result="getMembers3(event)" />
 		
 		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
-					   method="POST">
+					   method="POST" >
 			<mx:request xmlns="">
 				<connection>{getData(connectionDropDown.selectedItem)}</connection>
 				<cube>{getData(cubeDropDown.selectedItem)}</cube>
@@ -870,6 +884,8 @@
 		
 		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
 		<s:CallResponder id="CreateQueryResult"/>
+		<submit_query:Submit_Query id="submit_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<s:CallResponder id="Submit_QueryResult"/>
 		
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
@@ -918,83 +934,108 @@
 						 x="20" y="20"
 						 click="Home_Open()"
 						 currentState.Page2="Home2"
-						 currentState.Page3="Home3">
+						 currentState.Page3="Home3"
+						 currentState.Page4="Home4">
 		</components:Home>
 		<components:Picker id="picker"
 			x="1280" y="260"
 			click="Picker_Open()" 
-			currentState.Page2="State2"
-			currentState.Page3="State3">
+			currentState.Page3="State2"
+			currentState.Page4="State3">
 		</components:Picker>
 		
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{submitQuery}" id="ConnectionForm" x='555' y='390' >
+	<mx:Form includeIn="Page2" defaultButton="{submitQuery}" id="ConnectionForm" x='555' y='390' >
 		<mx:FormItem label='Connection:'>
 			<s:DropDownList id="connectionDropDown" width='200'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
+		
 		<mx:FormItem label='Catalog:'>
 			<s:DropDownList id="catalogDropDown" width='200'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
+		
 		<mx:FormItem label='Schema:'>
 			<s:DropDownList id="schemaDropDown" width='200'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
-		<mx:FormItem label="Cube:">
+		
+		<mx:FormItem label='Cube:'>
 			<s:DropDownList id="cubeDropDown" width='200'>
-			
+				
 			</s:DropDownList>
 		</mx:FormItem>
+		
 		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true">
 			<s:TextInput id="QueryName" width='200' />
 		</mx:FormItem>
+		
 		<mx:FormItem>
 			<s:Button label="Create Query" id="submitQuery" click="submit_form()" />
 		</mx:FormItem>
+		
 		<mx:FormItem>
 			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />
 		</mx:FormItem>
 					
 		
 	</mx:Form>
-	<s:Button includeIn="Page3" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
+	<s:Button includeIn="Page4" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
 	</s:Button>
+	<mx:Form includeIn="Page1" defaultButton="{button}">
+		<mx:FormItem label="QueryName">
+			<s:TextInput id="queryNameTextInput"/>
+		</mx:FormItem>
+		<mx:FormItem label="Connection">
+			<s:TextInput id="connectionTextInput"/>
+		</mx:FormItem>
+		<mx:FormItem label="Cube">
+			<s:TextInput id="cubeTextInput"/>
+		</mx:FormItem>
+		<mx:FormItem label="Catalog">
+			<s:TextInput id="catalogTextInput"/>
+		</mx:FormItem>
+		<mx:FormItem label="Schema">
+			<s:TextInput id="schemaTextInput"/>
+		</mx:FormItem>
+		<s:Button label="Submit_Query" id="button" click="button_clickHandler(event)"/>
+	</mx:Form>
 	
 	
 	<s:transitions>
-		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
+		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="800" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page4">
 			<s:Parallel>
 				<s:Parallel target="{closePicker}">
 					<s:Fade duration="500" startDelay="3000"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page3">
 			<s:Parallel>
 				<s:Parallel target="{closePicker}">
 					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page1">
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="2600"/>
