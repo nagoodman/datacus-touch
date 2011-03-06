@@ -986,24 +986,6 @@
 	</mx:Form>
 	<s:Button includeIn="Page4" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
 	</s:Button>
-	<mx:Form includeIn="Page1" defaultButton="{button}">
-		<mx:FormItem label="QueryName">
-			<s:TextInput id="queryNameTextInput"/>
-		</mx:FormItem>
-		<mx:FormItem label="Connection">
-			<s:TextInput id="connectionTextInput"/>
-		</mx:FormItem>
-		<mx:FormItem label="Cube">
-			<s:TextInput id="cubeTextInput"/>
-		</mx:FormItem>
-		<mx:FormItem label="Catalog">
-			<s:TextInput id="catalogTextInput"/>
-		</mx:FormItem>
-		<mx:FormItem label="Schema">
-			<s:TextInput id="schemaTextInput"/>
-		</mx:FormItem>
-		<s:Button label="Submit_Query" id="button" click="button_clickHandler(event)"/>
-	</mx:Form>
 	
 	
 	<s:transitions>
