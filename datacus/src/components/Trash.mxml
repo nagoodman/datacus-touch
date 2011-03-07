@@ -143,15 +143,15 @@
 		<s:Transition autoReverse="true" fromState="Trash2" toState="Trash1">
 			<s:Parallel>	
 				<s:Parallel target="{trash}">
-					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
-					<s:Resize duration="1200" startDelay="800"/>
+					<s:Move autoCenterTransform="true" duration="800" startDelay="300"/>
+					<s:Resize duration="800" startDelay="300"/>
 				</s:Parallel>
 				<s:Parallel target="{TrashLabel}">
-					<s:Fade duration="600" startDelay="0"/>
+					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{trashList}">
-					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
-					<s:Resize duration="1200" startDelay="800"/>
+					<s:Move autoCenterTransform="true" duration="800" startDelay="300"/>
+					<s:Resize duration="800" startDelay="300"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>

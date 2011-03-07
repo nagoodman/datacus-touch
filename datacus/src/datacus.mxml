@@ -975,6 +975,14 @@
 		<components:ServerStatus id="serverStatus"
 			x="1280" y="20"
 		/>
+		<components:Picker id="picker"
+						   x="1280" y="260"
+						   click="Picker_Open()" 
+						   currentState.Page3="State1"
+						   currentState.Page4="State3"
+						   currentState.Page5="State2"
+						   currentState.Page6="State2">
+		</components:Picker>
 		<components:Sets id="sets"
 						 x="1280" y="140"
 						 click="Sets_Open()"
@@ -992,14 +1000,7 @@
 						 currentState.Page3="Home3"
 						 currentState.Page4="Home4">
 		</components:Home>
-		<components:Picker id="picker"
-			x="1280" y="260"
-			click="Picker_Open()" 
-			currentState.Page3="State2"
-			currentState.Page4="State3"
-			currentState.Page5="State2"
-			currentState.Page6="State2">
-		</components:Picker>
+		
 		
 	</fx:DesignLayer>
 	<mx:Form includeIn="Page2" defaultButton="{submitQuery}" id="ConnectionForm" x='555' y='390' >
@@ -1053,13 +1054,15 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		
 		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="800" startDelay="0"/>
+					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		
 		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
@@ -1070,41 +1073,29 @@
 		<s:Transition autoReverse="true" fromState="Page3" toState="Page4">
 			<s:Parallel>
 				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="3000"/>
+					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page4" toState="Page3">
-			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>			
-		</s:Transition>
+		
 		<s:Transition autoReverse="true" fromState="Page4" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="2600"/>
 				</s:Parallel>
 				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="0"/>
+					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page5" toState="Page4">
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page3">
 			<s:Parallel>
 				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="3000"/>
+					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
-			</s:Parallel>
+			</s:Parallel>			
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page6" toState="Page4">
-			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="3000"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
+		
 		<s:Transition autoReverse="true" fromState="Page5" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
@@ -1112,10 +1103,25 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page4">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="1300"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		
 		<s:Transition autoReverse="true" fromState="Page6" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page4">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
