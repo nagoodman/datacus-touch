@@ -95,6 +95,10 @@
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SeriesLabel" tabStops="S0 S50 S100" text="Series" x="500" y="5"/>
+		<s:BitmapImage id="img"
+					   source="@Embed('assets/series_bg.png')"
+					   fillMode="repeat"
+					   left="0" right="0"  top="0" bottom="0"/>
 	</fx:DesignLayer>	
 	<s:List id="serList"
 			width="1070"

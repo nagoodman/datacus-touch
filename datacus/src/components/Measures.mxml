@@ -37,18 +37,24 @@
 			
 		]]>
 	</fx:Script>
+	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" />
+		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" styleName="container" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="MeasuresLabel" tabStops="S0 S50 S100" text="Measures" x="25" y="5"/>
+		<s:BitmapImage id="img"
+					   source="@Embed('assets/measures_bg.png')"
+					   fillMode="repeat"
+					   left="0" right="0"  top="0" bottom="0"/>
 	</fx:DesignLayer>
 	<s:List id="measuresList"
 			width="130"
 			height="470"
 			x="5" y="25"
-			rendererAdd="addClick(event)">
+			rendererAdd="addClick(event)"
+			styleName="container">
 		
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="left"

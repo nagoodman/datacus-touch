@@ -7,5 +7,13 @@
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="100" width="140" skinClass="skins.Panel" />
+		<s:BitmapImage id="img"
+					   source="@Embed('assets/globe.1.png')"
+					   fillMode="clip"
+					   left="30" right="0"  top="10" bottom="0"
+					   height="60"
+					   width="60"
+					   alpha="0.5"
+					   />
 	</fx:DesignLayer>	
 </s:Group>

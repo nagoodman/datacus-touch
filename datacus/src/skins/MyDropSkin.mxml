@@ -4,7 +4,8 @@
 			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
 			 minWidth="112"
 			 alpha.disabled="0.5"
-			 blendMode="normal">
+			 blendMode="normal" 
+			 styleName="container">
 
 	<fx:Metadata>
 		<![CDATA[ 
@@ -20,7 +21,7 @@
 		<s:State name="normal"/>
 		<s:State name="disabled"/>
 	</s:states>
-
+	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 
 		<fx:Component id="dropIndicator">
@@ -36,20 +37,6 @@
 		</fx:Component>
 	</fx:Declarations>
 
-	<!-- border -->
-	<!--- @private -->
-	<s:Rect left="0"
-			right="0"
-			top="0"
-			bottom="0"
-			id="border">
-		<s:stroke>
-			<!--- @private -->
-			<s:SolidColorStroke id="borderStroke"
-								weight="1"/>
-		</s:stroke>
-	</s:Rect>
-
 	<!-- fill -->
 	<!--- Defines the background appearance of the list-based component. -->
 	<s:Rect id="background"
@@ -62,6 +49,10 @@
 			<s:SolidColor id="bgFill"
 						  color="0xFFFFFF"/>
 		</s:fill>
+		<s:filters>
+			<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
+			<s:DropShadowFilter alpha="0.55" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
+		</s:filters>
 	</s:Rect>
 
 	<!--- The Scroller component to add scroll bars to the list. -->

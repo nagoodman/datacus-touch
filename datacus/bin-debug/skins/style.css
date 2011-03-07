@@ -1,0 +1,15 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+.label{
+	color:#223355;
+	paddingBottom:4;
+	paddingLeft:4;
+	paddingRight:4;
+	paddingTop:4;
+}
+
+.container {
+	background-color: red;
+}

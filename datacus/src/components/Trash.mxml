@@ -92,6 +92,15 @@
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="trash" height="100" width="140" height.Trash2="400" width.Trash2="400" x.Trash2="-750" y.Trash2="-470"  skinClass="skins.Panel" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-598" y="-450" includeIn="Trash2"/>
+		<s:BitmapImage id="img"
+					   source="@Embed('assets/trash.png')"
+					   fillMode="clip"
+					   left="30" right="0"  top="10" bottom="0"
+					   height="60"
+					   width="60"
+					   includeIn="Trash1"
+					   alpha="0.3"
+					   />
 	</fx:DesignLayer>
 	<s:List id="trashList"
 			width="130" height="90" x="5" y="5"
