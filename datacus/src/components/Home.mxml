@@ -27,15 +27,29 @@
 		<s:State name="Home4"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="home" height.Home1="400" x.Home1="500" y.Home1="300" x="0" y="0" height.Home2="400" x.Home2="500" y.Home2="300" width.Home2="400"
-							   height="220" width.Home1="400" width="140" skinClass="skins.Panel" />
+		<s:SkinnableContainer id="home" x="0" y="0" height.Home2="300" x.Home2="500" y.Home2="300" width.Home2="400"
+							   height="220" width="140" skinClass="skins.Panel" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="QueryMenu" tabStops="S0 S50 S100" text="Create A New Query" x="615" y="325" includeIn="Home2"/>
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeLabel" tabStops="S0 S50 S100" text="Home" x="43" y="100" includeIn="Home3,Home4"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeLabel" tabStops="S0 S50 S100" text="Home" x="43" y="100" includeIn="Home1, Home3,Home4"/>
 	</fx:DesignLayer>	
 	
 	
 	
 	<s:transitions>
+		<s:Transition autoReverse="true" fromState="Home1" toState="Home2">
+			<s:Parallel>
+				<s:Parallel target="{home}">
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
+					<s:Resize duration="1000" startDelay="600"/>
+				</s:Parallel>
+				<s:Parallel target="{HomeLabel}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{QueryMenu}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Home2" toState="Home3">
 			<s:Parallel>	
 				<s:Parallel target="{home}">

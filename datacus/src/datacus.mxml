@@ -127,6 +127,14 @@
 					currentState='Page4';
 					populatePicker();
 				}
+				if (state == 'Page5'){
+					currentState='Page4';
+					populatePicker();
+				}
+				if (state =='Page6'){
+					currentState="Page4";
+					populatePicker();
+				}
 				
 			}
 			
@@ -139,15 +147,52 @@
 			
 			protected function Home_Open():void{
 				const state:String = currentState;
-				if ( state == 'Page4' ) {
-					currentState='Page2';
-				}
-				if ( state == 'Page3' ) {
-					currentState='Page2';
-				}
 				if (state == 'Page1' ) {
 					currentState='Page2';
 					GetSourceOptions.send();
+				}
+				else{
+					currentState='Page2'
+				}
+			}
+			
+			public function Trash_Open():void{
+				const state:String = currentState;
+				if (state =='Page3'){
+					currentState="Page5";
+				}
+				if (state =='Page4'){
+					currentState="Page5";
+				}
+				if (state =='Page6'){
+					currentState="Page5";
+				}
+			}
+			
+			public function Trash_Close():void{
+				const state:String = currentState;
+				if ( state =='Page5'){
+					currentState='Page3';
+				}
+			}
+			
+			public function Sets_Open():void{
+				const state:String = currentState;
+				if (state =='Page3'){
+					currentState="Page6";
+				}
+				if (state =='Page4'){
+					currentState="Page6";
+				}
+				if (state =='Page5'){
+					currentState="Page6";
+				}
+			}
+			
+			public function Sets_Close():void{
+				const state:String = currentState;
+				if ( state =='Page6'){
+					currentState='Page3';
 				}
 			}
 			
@@ -155,7 +200,6 @@
 				const state:String = currentState;
 				if ( state == 'Page2' ) {
 					currentState='Page3';
-					var x:int = 5;
 				}
 			}
 			
@@ -819,6 +863,8 @@
 		<s:State name="Page2"/>
 		<s:State name="Page3"/>
 		<s:State name="Page4"/>
+		<s:State name="Page5"/>
+		<s:State name="Page6"/>
 	</s:states>
 	<fx:Declarations>
 		<s:HTTPService
@@ -930,10 +976,14 @@
 			x="1280" y="20"
 		/>
 		<components:Sets id="sets"
-			x="1280" y="140"
+						 x="1280" y="140"
+						 click="Sets_Open()"
+						 currentState.Page6="Sets2"
 		/>
 		<components:Trash id="trash"
 						  x="1280" y="780"
+						  click="Trash_Open()"
+						  currentState.Page5="Trash2"
 						  />	
 		<components:Home id="home"
 						 x="20" y="20"
@@ -946,7 +996,9 @@
 			x="1280" y="260"
 			click="Picker_Open()" 
 			currentState.Page3="State2"
-			currentState.Page4="State3">
+			currentState.Page4="State3"
+			currentState.Page5="State2"
+			currentState.Page6="State2">
 		</components:Picker>
 		
 	</fx:DesignLayer>
@@ -994,6 +1046,13 @@
 	
 	
 	<s:transitions>
+		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
@@ -1031,6 +1090,34 @@
 					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page4">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="3000"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page4">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="3000"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
 		</s:Transition>
 	</s:transitions>
 </s:WindowedApplication>
