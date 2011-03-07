@@ -827,12 +827,12 @@
 			url='http://localhost:8080/saiku/rest/saiku/session'
 			result="checkResponse(event)" 
 			fault="faultHandler(event)"
-			requestTimeout="20" />
+			requestTimeout="-1" />
 		<s:HTTPService
 			id="GetSourceOptions"
 			resultFormat='text'
 			url='http://localhost:8080/saiku/json/saiku/admin/datasources'
-			result="fillHomeMenu(event)" />
+			result="fillHomeMenu(event)"/>
 		<s:HTTPService
 			id="callDimensions"
 			resultFormat="text"
