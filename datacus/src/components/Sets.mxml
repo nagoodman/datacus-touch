@@ -20,6 +20,7 @@
 			/*Variables need for functions within component*/
 			[Bindable]
 			private var setsDB:ArrayCollection=new ArrayCollection();
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -31,7 +32,7 @@
 	</s:states>
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="sets" height="100" width="140" height.Sets2="400" width.Sets2="400" x.Sets2="-750" y.Sets2="170"  skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Saved Sets" x="-598" y="190" includeIn="Sets2"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="-598" y="190" includeIn="Sets2"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsButtonLabel" tabStops="S0 S50 S100" text="Sets" x="50" y="40" includeIn="Sets1"/>
 	</fx:DesignLayer>
 	<s:List id="setsList" includeIn="Sets2"

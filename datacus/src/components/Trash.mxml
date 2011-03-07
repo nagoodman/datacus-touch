@@ -90,14 +90,14 @@
 		<s:State name="Trash2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="trash" height="100" width="140" height.Trash2="400" width.Trash2="400" x.Trash2="-750" y.Trash2="-500"  skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-598" y="-480" includeIn="Trash2"/>
+		<s:SkinnableContainer id="trash" height="100" width="140" height.Trash2="400" width.Trash2="400" x.Trash2="-750" y.Trash2="-470"  skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-598" y="-450" includeIn="Trash2"/>
 	</fx:DesignLayer>
 	<s:List id="trashList"
 			width="130" height="90" x="5" y="5"
 			width.Trash2="300"
 			height.Trash2="300"
-			x.Trash2="-700" y.Trash2="-450"
+			x.Trash2="-700" y.Trash2="-420"
 			alpha="0.8"
 
 			dataProvider="{trashDB}"

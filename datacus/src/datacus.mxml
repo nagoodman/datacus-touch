@@ -987,6 +987,9 @@
 						 x="1280" y="140"
 						 click="Sets_Open()"
 						 currentState.Page6="Sets2"
+						 currentState.Page3="Sets1"
+						 currentState.Page4="Sets1"
+						 currentState.Page5="Sets1"
 		/>
 		<components:Trash id="trash"
 						  x="1280" y="780"
@@ -1042,9 +1045,9 @@
 					
 		
 	</mx:Form>
-	<s:Button includeIn="Page4" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
-	</s:Button>
-	
+	<s:Button includeIn="Page4" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
+	<s:Button includeIn="Page6" x='850' y='320' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
+	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="Trash_Close()" ></s:Button>
 	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
@@ -1077,6 +1080,20 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page5">
+			<s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page6">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		
 		<s:Transition autoReverse="true" fromState="Page4" toState="Page2">
 			<s:Parallel>
@@ -1095,6 +1112,20 @@
 				</s:Parallel>
 			</s:Parallel>			
 		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page5">
+			<s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page6">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		
 		<s:Transition autoReverse="true" fromState="Page5" toState="Page2">
 			<s:Parallel>
@@ -1103,10 +1134,30 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page3">
+			<s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page5" toState="Page4">
 			<s:Parallel>
 				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="1300"/>
+					<s:Fade duration="500" startDelay="3000"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page6">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
@@ -1116,12 +1167,35 @@
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page3">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page6" toState="Page4">
 			<s:Parallel>
 				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="1300"/>
+					<s:Fade duration="500" startDelay="3000"/>
+				</s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page5">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="500" startDelay="1400"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
