@@ -243,6 +243,11 @@
 			public function submit_query():void
 			{
 				measures.measuresList.dataProvider = null;
+				graph.removeAllElements();
+				series.serDB = new ArrayCollection;
+				categories.catDB = new ArrayCollection;	
+				seriesList = new ArrayCollection;
+				categoriesList = new ArrayCollection;
 				//categories.catList.dataProvider = new ArrayList;
 				//series.serList.dataProvider = new ArrayList;
 				

@@ -19,7 +19,7 @@
 			
 			/*Variables need for functions within component*/
 			[Bindable]
-			private var serDB:ArrayCollection=new ArrayCollection();
+			public var serDB:ArrayCollection=new ArrayCollection();
 			
 			[Bindable]
 			public var dp:ArrayCollection;

@@ -19,7 +19,7 @@
 			
 			/*Variables need for functions within component*/
 			[Bindable]
-			private var catDB:ArrayCollection=new ArrayCollection();
+			public var catDB:ArrayCollection=new ArrayCollection();
 			
 			[Bindable]
 			public var dp:ArrayCollection;
