@@ -50,12 +50,12 @@
 			protected var mainStage:Stage;
 			
 			/*Variables used with touch gesture handling*/
-			public var tc:TuioClient;
-			public var tm:TuioManager;
-			public var gm:GestureManager;
+			//public var tc:TuioClient;
+			//public var tm:TuioManager;
+			//public var gm:GestureManager;
 			//private var winTouch:Windows7TouchToTuioDispatcher;
-			private var mTouch:MouseToTouchDispatcher;
-			private var tDbg:TuioDebug;
+			//private var mTouch:MouseToTouchDispatcher;
+			//private var tDbg:TuioDebug;
 			
 			/*Function first initiated when software starts*/
 			protected function init():void {
