@@ -49,30 +49,41 @@
 			
 			protected var mainStage:Stage;
 			
+			/*Variables used with touch gesture handling*/
+			public var tc:TuioClient;
+			public var tm:TuioManager;
+			public var gm:GestureManager;
+			//private var winTouch:Windows7TouchToTuioDispatcher;
+			private var mTouch:MouseToTouchDispatcher;
+			private var tDbg:TuioDebug;
+			
 			/*Function first initiated when software starts*/
 			protected function init():void {
-				mainStage = this.systemManager.stage;
+				//Init Touch
 				var touchSupport:Boolean = Multitouch.supportsTouchEvents;
 				var gestureSupport:Boolean = Multitouch.supportsGestureEvents;
 				Multitouch.inputMode = MultitouchInputMode.GESTURE;
+				
+				//Init Listeners
 				picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
-				/*
-				//makes full screen, but need to make sizinf relative first
-				//mainStage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+				
+/* 				//TUIO Init
+				mainStage = this.systemManager.stage;
 				tc = new TuioClient(new UDPConnector());
 				tm = TuioManager.init(mainStage, tc);
+				mTouch = new MouseToTouchDispatcher(mainStage);
 				//gm = GestureManager.init(stage,tc);
 				//GestureManager.addGesture(new DragGesture());
-				winTouch = new Windows7TouchToTuioDispatcher(mainStage);
-				//mTouch = new MouseToTouchDispatcher(mainStage);
-				tDbg = TuioDebug.init(mainStage);
-				tc.addListener(tDbg);
-				//these event listeners need to be added to each object
-				mainStage.addEventListener(tuio.TouchEvent.TOUCH_DOWN, handleDown);
+				//tDbg = TuioDebug.init(mainStage);
+				//tc.addListener(tDbg);
+				
+				//Event Listeners
+				picker.addEventListener(tuio.TouchEvent.ROLL_OUT, pickerFlick);
+				//mainStage.addEventListener(tuio.TouchEvent.TOUCH_DOWN, handleDown);
 				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
-				mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
+				//mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
-*/
+ */
 				try {
 					CreateSession.send();
 				} catch (error:IOError) {
@@ -80,17 +91,21 @@
 				}
 			}
 			
-			/*Variables used with touch gesture handling*/
-			//public var tc:TuioClient;
-			//public var tm:TuioManager;
-			//public var gm:GestureManager;
-			//private var winTouch:Windows7TouchToTuioDispatcher;
-			//private var mTouch:MouseToTouchDispatcher;
-			//private var tDbg:TuioDebug;
-			
+			//Touch Handlers
 			public function pickerFlick(e:MouseEvent):void {
 				Picker_Open();
+				picker.removeEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 			}
+			
+			public function homeFlick(e:MouseEvent):void {
+				Home_Open();
+				picker.removeEventListener(MouseEvent.ROLL_OUT, homeFlick);
+			}
+			
+			
+/* 			public function pickerFlick(e:MouseEvent):void {
+				Picker_Open();
+			} */
 			
 			public function handleDrag(e:TransformGestureEvent):void {
 				//trace("dragged");
@@ -133,6 +148,7 @@
 				if ( state == 'Page3' ) {
 					currentState='Page2';
 				}
+				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 			}
 			
 			protected function Home_Open():void{
@@ -151,6 +167,7 @@
 					currentState='Page2';
 					var x:int = 5;
 				}
+				//home.addEventListener(MouseEvent.ROLL_OUT, homeFlick);
 			}
 			
 			public function submit_form():void{
