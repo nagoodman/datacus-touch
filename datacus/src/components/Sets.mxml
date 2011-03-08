@@ -2,10 +2,114 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			//imports classes and libraries need for component
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.DragEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.components.List;
+			import spark.layouts.supportClasses.DropLocation;
+			
+			/*Variables need for functions within component*/
+			[Bindable]
+			private var setsDB:ArrayCollection=new ArrayCollection();
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
+	</fx:Declarations>	
+	<s:states>
+		<s:State name="Sets1"/>
+		<s:State name="Sets2"/>
+	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="100" width="140" skinClass="skins.Panel" />
-	</fx:DesignLayer>	
+		<s:SkinnableContainer id="sets" height="100" width="140" height.Sets2="400" width.Sets2="400" x.Sets2="-750" y.Sets2="170"  skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="-598" y="190" includeIn="Sets2"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsButtonLabel" tabStops="S0 S50 S100" text="Sets" x="50" y="40" includeIn="Sets1"/>
+		<s:BitmapImage id="img"
+					   source="@Embed('assets/save.png')"
+					   fillMode="clip"
+					   left="30" right="0"  top="10" bottom="0"
+					   height="60"
+					   width="60"
+					   includeIn="Sets1"
+					   alpha="0.2"
+					   />
+	</fx:DesignLayer>
+	<s:List id="setsList" includeIn="Sets2"
+			width="300"
+			height="300"
+			x="-700" y="220"
+			alpha="0.8"
+			
+			dataProvider="{setsDB}"
+			
+			skinClass="skins.MyDropSkin">
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="left"
+							  paddingLeft="5"
+							  paddingTop="5"/>
+		</s:layout>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"/>
+						</s:layout>
+						<s:Label text="{data.label}"/>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+		
+	</s:List>
+	<s:transitions>
+		<s:Transition autoReverse="true" fromState="Sets1" toState="Sets2">
+			<s:Parallel>
+				<s:Parallel target="{sets}">
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
+					<s:Resize duration="900" startDelay="600"/>
+				</s:Parallel>
+				<s:Parallel target="{SetsLabel}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{setsList}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{SetsButtonLabel}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Sets2" toState="Sets1">
+			<s:Parallel>	
+				<s:Parallel target="{sets}">
+					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
+					<s:Resize duration="900" startDelay="600"/>
+				</s:Parallel>
+				<s:Parallel target="{SetsLabel}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{setsList}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{SetsButtonLabel}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+
+
+
+
 </s:Group>

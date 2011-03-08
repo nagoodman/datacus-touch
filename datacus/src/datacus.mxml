@@ -6,7 +6,7 @@
 					   backgroundColor="#FFFFFF"
 					   minWidth="1440"
 					   minHeight="920"
-					   creationComplete="init()" xmlns:create_query="services.create_query.*">  
+					   creationComplete="init()" xmlns:create_query="services.create_query.*" xmlns:submit_query="services.submit_query.*">  
 					<!--make it full screen, but for now...-->
 	
 	<fx:Script>
@@ -127,17 +127,27 @@
 			
 			protected function checkResponse(event:ResultEvent):void{
 				if (event.statusCode == 200){
-					GetSourceOptions.send();
+					Home_Open();
 				}
 				
 			}
+			
+			
 			
 			/*Functions to handle state changes*/
 			protected function Picker_Open():void
 			{
 				const state:String = currentState;
-				if ( state == 'Page2' ) {
-					currentState='Page3';
+				if ( state == 'Page3' ) {
+					currentState='Page4';
+					populatePicker();
+				}
+				if (state == 'Page5'){
+					currentState='Page4';
+					populatePicker();
+				}
+				if (state =='Page6'){
+					currentState="Page4";
 					populatePicker();
 				}
 				
@@ -145,27 +155,67 @@
 			
 			protected function Picker_Close():void{
 				const state:String = currentState;
-				if ( state == 'Page3' ) {
-					currentState='Page2';
+				if ( state == 'Page4' ) {
+					currentState='Page3';
 				}
 				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 			}
 			
 			protected function Home_Open():void{
 				const state:String = currentState;
-				if ( state == 'Page3' ) {
-					currentState='Page1';
+				if (state == 'Page1' ) {
+					currentState='Page2';
+					GetSourceOptions.send();
 				}
-				if ( state == 'Page2' ) {
-					currentState='Page1';
+				else{
+					currentState='Page2'
+				}
+			}
+			
+			public function Trash_Open():void{
+				const state:String = currentState;
+				if (state =='Page3'){
+					currentState="Page5";
+				}
+				if (state =='Page4'){
+					currentState="Page5";
+				}
+				if (state =='Page6'){
+					currentState="Page5";
+				}
+			}
+			
+			public function Trash_Close():void{
+				const state:String = currentState;
+				if ( state =='Page5'){
+					currentState='Page3';
+				}
+			}
+			
+			public function Sets_Open():void{
+				const state:String = currentState;
+				if (state =='Page3'){
+					currentState="Page6";
+				}
+				if (state =='Page4'){
+					currentState="Page6";
+				}
+				if (state =='Page5'){
+					currentState="Page6";
+				}
+			}
+			
+			public function Sets_Close():void{
+				const state:String = currentState;
+				if ( state =='Page6'){
+					currentState='Page3';
 				}
 			}
 			
 			public function Home_Close():void{
 				const state:String = currentState;
-				if ( state == 'Page1' ) {
-					currentState='Page2';
-					var x:int = 5;
+				if ( state == 'Page2' ) {
+					currentState='Page3';
 				}
 				//home.addEventListener(MouseEvent.ROLL_OUT, homeFlick);
 			}
@@ -177,10 +227,6 @@
 				
 			
 			/*Variables used to create drop down menus for creating a new query*/
-			private var connectionDropDown:DropDownList;
-			private var catalogDropDown:DropDownList;
-			private var schemaDropDown:DropDownList;
-			private var cubeDropDown:DropDownList;
 			private var connectionArray:ArrayCollection = new ArrayCollection();
 			private var catalogArray:ArrayCollection = new ArrayCollection();
 			private var schemaArray:ArrayCollection = new ArrayCollection();
@@ -217,63 +263,22 @@
 						}
 					}	
 				}
-				connectionDropDown = new DropDownList();
-				connectionDropDown.width=300;
+
 				connectionDropDown.dataProvider = connectionArray;
 				connectionDropDown.selectedIndex=0;
 				
-				catalogDropDown = new DropDownList();
-				catalogDropDown.width=300;
+
 				catalogDropDown.dataProvider = catalogArray;
 				catalogDropDown.selectedIndex=0;
 				
-				schemaDropDown = new DropDownList();
-				schemaDropDown.width=300;
+
 				schemaDropDown.dataProvider = schemaArray;
 				schemaDropDown.selectedIndex=0;
 				
-				cubeDropDown = new DropDownList();
-				cubeDropDown.width=300;
+
 				cubeDropDown.dataProvider = cubeArray;
 				cubeDropDown.selectedIndex=0;
 				
-				var connectionLabel:RichText = new RichText();
-				var catalogLabel:RichText = new RichText();
-				var schemaLabel:RichText = new RichText();
-				var cubeLabel:RichText = new RichText();
-				
-				//connectionLabel.color = "#2B4381";
-				//connectionLabel.fontFamily='Arial';
-				//connectionLabel.fontSize ='10';
-				//connectionLabel.tabStops="S0 S50 S100";
-				connectionLabel.text="Connection:";
-				
-				//catalogLabel.color = "#2B4381";
-				//catalogLabel.fontFamily='Arial';
-				//catalogLabel.fontSize ='10';
-				//catalogLabel.tabStops="S0 S50 S100";
-				catalogLabel.text="Catalog:";
-				
-				//schemaLabel.color = "#2B4381";
-				//schemaLabel.fontFamily='Arial';
-				//schemaLabel.fontSize ='10';
-				//schemaLabel.tabStops="S0 S50 S100";
-				schemaLabel.text="Schema:";
-				
-				//cubeLabel.color = "#2B4381";
-				//cubeLabel.fontFamily='Arial';
-				//cubeLabel.fontSize ='10';
-				//cubeLabel.tabStops="S0 S50 S100";
-				cubeLabel.text="Cube:";
-				
-				ConnectionForm.addChildAt(cubeDropDown,0);
-				ConnectionForm.addChildAt(cubeLabel,0);
-				ConnectionForm.addChildAt(schemaDropDown,0);
-				ConnectionForm.addChildAt(schemaLabel,0);
-				ConnectionForm.addChildAt(catalogDropDown,0);
-				ConnectionForm.addChildAt(catalogLabel,0);
-				ConnectionForm.addChildAt(connectionDropDown,0);
-				ConnectionForm.addChildAt(connectionLabel,0);
 			}
 			
 			public function error_window(error_message:String):void {
@@ -299,22 +304,14 @@
 			public function submit_query():void
 			{
 				measures.measuresList.dataProvider = null;
+				graph.removeAllElements();
+				series.serDB = new ArrayCollection;
+				categories.catDB = new ArrayCollection;	
+				seriesList = new ArrayCollection;
+				categoriesList = new ArrayCollection;
 				//categories.catList.dataProvider = new ArrayList;
 				//series.serList.dataProvider = new ArrayList;
 				
-				//queryName = QueryName.text;
-				//if (QueryName.text == null){
-					//queryName = 'chartData';
-				//}
-				
-				//submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName;
-				
-				//var params:Object = {};
-				//params['connection'] = connectionDropDown.selectedItem.data;
-				//params['cube'] = cubeDropDown.selectedItem.data;
-				//params['catalog'] = catalogDropDown.selectedItem.data;
-				//params['schema'] = schemaDropDown.selectedItem.data;
-				//submit.send(params);//sends service call to get new graph info 
 				//CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				queryName = QueryName.text;
 //				var popup:TitleWindow = new TitleWindow();
@@ -333,7 +330,15 @@
 						"Query names must not be blank and cannot contain spaces, " +
 						"special characters, or more than 20 characters.");
 				} else {
+					submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/";
+					var params:Object = {};
+					//params['connection'] = connectionDropDown.selectedItem.data;
+					//params['cube'] = cubeDropDown.selectedItem.data;
+					//params['catalog'] = catalogDropDown.selectedItem.data;
+					//params['schema'] = schemaDropDown.selectedItem.data;
+					//submit.send(params);//sends service call to get new graph info 
 					CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
+					//Submit_QueryResult.token = submit_Query.Submit_Query(QueryName.text,connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				}
 			}
 			
@@ -506,6 +511,7 @@
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER1';
+					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -524,6 +530,7 @@
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER2';
+					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -542,6 +549,7 @@
 					obj.dimension = arr[i].dimension;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER3';
+					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
@@ -856,12 +864,24 @@
 				
 			}			
 			
+			public function getData(dropDown:*):String{
+				return dropDown.data;
+			}
+			
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<s:states>
 		<s:State name="Page1"/>
 		<s:State name="Page2"/>
 		<s:State name="Page3"/>
+		<s:State name="Page4"/>
+		<s:State name="Page5"/>
+		<s:State name="Page6"/>
 	</s:states>
 	<fx:Declarations>
 		<s:HTTPService
@@ -870,12 +890,12 @@
 			url='http://localhost:8080/saiku/rest/saiku/session'
 			result="checkResponse(event)" 
 			fault="faultHandler(event)"
-			requestTimeout="20" />
+			requestTimeout="-1" />
 		<s:HTTPService
 			id="GetSourceOptions"
 			resultFormat='text'
 			url='http://localhost:8080/saiku/json/saiku/admin/datasources'
-			result="fillHomeMenu(event)" />
+			result="fillHomeMenu(event)"/>
 		<s:HTTPService
 			id="callDimensions"
 			resultFormat="text"
@@ -902,9 +922,15 @@
 			resultFormat="text"
 			result="getMembers3(event)" />
 		
-		<s:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
+		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
 					   method="POST" >
-		</s:HTTPService>
+			<mx:request xmlns="">
+				<connection>{getData(connectionDropDown.selectedItem)}</connection>
+				<cube>{getData(cubeDropDown.selectedItem)}</cube>
+				<catalog>{getData(catalogDropDown.selectedItem)}</catalog>
+				<schema>{getData(schemaDropDown.selectedItem)}</schema>
+			</mx:request>
+		</mx:HTTPService>
 		
 		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml" 
 					   method="POST" result="getResults()">
@@ -926,6 +952,8 @@
 		
 		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
 		<s:CallResponder id="CreateQueryResult"/>
+		<submit_query:Submit_Query id="submit_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<s:CallResponder id="Submit_QueryResult"/>
 		
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
@@ -940,6 +968,10 @@
 				<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="0x5380d0" inner="true" knockout="false" quality="2" strength="1"/>
 			</s:filters>
 		</s:Rect>
+		<s:BitmapImage id="img"
+			source="@Embed('assets/download.jpg')"
+			fillMode="repeat"
+			left="0" right="0"  top="0" bottom="0"/>
 	</fx:DesignLayer>
 	<fx:DesignLayer id="panels">
 <!--		organized left to right then top to bottom		 -->
@@ -964,77 +996,229 @@
 		<components:ServerStatus id="serverStatus"
 			x="1280" y="20"
 		/>
+		<components:Picker id="picker"
+						   x="1280" y="260"
+						   click="Picker_Open()" 
+						   currentState.Page3="State1"
+						   currentState.Page4="State3"
+						   currentState.Page5="State2"
+						   currentState.Page6="State2">
+		</components:Picker>
 		<components:Sets id="sets"
-			x="1280" y="140"
+						 x="1280" y="140"
+						 click="Sets_Open()"
+						 currentState.Page6="Sets2"
+						 currentState.Page3="Sets1"
+						 currentState.Page4="Sets1"
+						 currentState.Page5="Sets1"
 		/>
 		<components:Trash id="trash"
 						  x="1280" y="780"
+						  click="Trash_Open()"
+						  currentState.Page5="Trash2"
 						  />	
 		<components:Home id="home"
 						 x="20" y="20"
 						 click="Home_Open()"
 						 currentState.Page2="Home2"
-						 currentState.Page3="Home3">
+						 currentState.Page3="Home3"
+						 currentState.Page4="Home4">
 		</components:Home>
-		<components:Picker id="picker"
-			x="1280" y="260"
-			click="Picker_Open()" 
-			currentState.Page2="State2"
-			currentState.Page3="State3">
-		</components:Picker>
+		
 		
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{button}" id="ConnectionForm" x='555' y='390' >
-		<mx:FormItem label="Query Name" id="QueryNameLabel" >
+	<mx:Form includeIn="Page2" defaultButton="{submitQuery}" id="ConnectionForm" x='555' y='390' >
+		<mx:FormItem label='Connection:'>
+			<s:DropDownList id="connectionDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label='Catalog:'>
+			<s:DropDownList id="catalogDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label='Schema:'>
+			<s:DropDownList id="schemaDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label='Cube:'>
+			<s:DropDownList id="cubeDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true">
 			<s:TextInput id="QueryName" width='200' />
 		</mx:FormItem>
 		
-		<s:Button label="Create Query" id="button" click="submit_form()" />
-		<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />			
+		<mx:FormItem>
+			<s:Button label="Create Query" id="submitQuery" click="submit_form()" />
+		</mx:FormItem>
+		
+		<mx:FormItem>
+			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />
+		</mx:FormItem>
+					
 		
 	</mx:Form>
-	<s:Button includeIn="Page3" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()">
-	</s:Button>
-	
+	<s:Button includeIn="Page4" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
+	<s:Button includeIn="Page6" x='850' y='320' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
+	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="Trash_Close()" ></s:Button>
 	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
-			<s:Parallel>
-				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="800" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		
 		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
 			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="3000"/>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		
 		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
 			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="0"/>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
-			</s:Parallel>			
+			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page1">
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page4">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="1300"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page5">
+			<s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page6">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="2600"/>
 				</s:Parallel>
 				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="0"/>
+					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>			
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page3">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>			
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page5">
+			<s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page6">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page3">
+			<s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page4">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="3000"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page6">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page2">
+			<s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page3">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page4">
+			<s:Parallel>
+				<s:Parallel target="{closePicker}">
+					<s:Fade duration="500" startDelay="3000"/>
+				</s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page5">
+			<s:Parallel>
+				<s:Parallel target="{closeSets}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
+					<s:Fade duration="500" startDelay="1400"/>
+				</s:Parallel>
+			</s:Parallel>
 		</s:Transition>
 	</s:transitions>
 </s:WindowedApplication>

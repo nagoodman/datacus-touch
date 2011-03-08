@@ -1,8 +1,8 @@
 /**
  * This is a generated class and is not intended for modification.  To customize behavior
- * of this service wrapper you may modify the generated sub-class of this class - CreateQuery.as.
+ * of this service wrapper you may modify the generated sub-class of this class - Submit_Query.as.
  */
-package services.createquery
+package services.submit_query
 {
 import com.adobe.fiber.core.model_internal;
 import com.adobe.fiber.services.wrapper.HTTPServiceWrapper;
@@ -13,11 +13,11 @@ import mx.rpc.http.Operation;
 
 
 [ExcludeClass]
-internal class _Super_CreateQuery extends com.adobe.fiber.services.wrapper.HTTPServiceWrapper
+internal class _Super_Submit_Query extends com.adobe.fiber.services.wrapper.HTTPServiceWrapper
 {
 
     // Constructor
-    public function _Super_CreateQuery()
+    public function _Super_Submit_Query()
     {
         // initialize service control
         _serviceControl = new mx.rpc.http.HTTPMultiService();
@@ -25,13 +25,13 @@ internal class _Super_CreateQuery extends com.adobe.fiber.services.wrapper.HTTPS
          var operation:mx.rpc.http.Operation;
          var argsArray:Array;
 
-         operation = new mx.rpc.http.Operation(null, "CreateQuery");
-         operation.url = "http://localhost:8080/saiku/json/saiku/{user}/query/{queryName}";
+         operation = new mx.rpc.http.Operation(null, "Submit_Query");
+         operation.url = "http://localhost:8080/saiku/json/saiku/admin/query/{queryName}";
          operation.method = "POST";
-         argsArray = new Array("user","queryName","connection","cube","catalog","schema");
+         argsArray = new Array("queryName","connection","cube","catalog","schema");
          operation.argumentNames = argsArray;         
          operation.properties = new Object();
-         operation.properties["urlParamNames"] = ["user", "queryName"];
+         operation.properties["urlParamNames"] = ["queryName"];
          operation.contentType = "application/x-www-form-urlencoded";
          operation.resultType = Object;
          operations.push(operation);
@@ -44,7 +44,7 @@ internal class _Super_CreateQuery extends com.adobe.fiber.services.wrapper.HTTPS
     }
 
     /**
-      * This method is a generated wrapper used to call the 'CreateQuery' operation. It returns an mx.rpc.AsyncToken whose 
+      * This method is a generated wrapper used to call the 'Submit_Query' operation. It returns an mx.rpc.AsyncToken whose 
       * result property will be populated with the result of the operation when the server response is received. 
       * To use this result from MXML code, define a CallResponder component and assign its token property to this method's return value. 
       * You can then bind to CallResponder.lastResult or listen for the CallResponder.result or fault events.
@@ -54,10 +54,10 @@ internal class _Super_CreateQuery extends com.adobe.fiber.services.wrapper.HTTPS
       *
       * @return an mx.rpc.AsyncToken whose result property will be populated with the result of the operation when the server response is received.
       */
-    public function CreateQuery(user:String, queryName:String, connection:String, cube:String, catalog:String, schema:String) : mx.rpc.AsyncToken
+    public function Submit_Query(queryName:String, connection:String, cube:String, catalog:String, schema:String) : mx.rpc.AsyncToken
     {
-        var _internal_operation:mx.rpc.AbstractOperation = _serviceControl.getOperation("CreateQuery");
-        var _internal_token:mx.rpc.AsyncToken = _internal_operation.send(user,queryName,connection,cube,catalog,schema) ;
+        var _internal_operation:mx.rpc.AbstractOperation = _serviceControl.getOperation("Submit_Query");
+        var _internal_token:mx.rpc.AsyncToken = _internal_operation.send(queryName,connection,cube,catalog,schema) ;
 
         return _internal_token;
     }
