@@ -87,6 +87,7 @@
 		
 		
 	</fx:Script>
+	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 		
 	</fx:Declarations>
@@ -112,8 +113,8 @@
 			skinClass="skins.MyDropSkin" borderAlpha="0.2">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="5"
-								paddingTop="28"/>
+								paddingLeft="12"
+								paddingTop="5"/>
 		</s:layout>
 		<s:itemRenderer>
 			<fx:Component>
@@ -122,7 +123,16 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:Label text="   " />
+						<s:BitmapImage id="img2"
+									   source="@Embed('assets/drag.png')"
+									   fillMode="scale"
+									   width="-14"
+									   height="43"
+									   />
+						<s:Label text="   " width="-5" />
+						<s:Label text="{data.label}" styleName="label" />
+						<s:Label text="   " />
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

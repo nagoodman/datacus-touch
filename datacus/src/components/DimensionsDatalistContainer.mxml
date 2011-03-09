@@ -30,12 +30,6 @@
 	</fx:Declarations>
 	<fx:DesignLayer id="DDLCBackground">
 		<s:Rect height="60" id="DimensionsDLContainer" width="900" x="0" y="0">
-			<s:stroke>
-				<s:SolidColorStroke caps="none" color="#5380D0" joints="miter" miterLimit="4" weight="1"/>
-			</s:stroke>
-			<s:fill>
-				<s:SolidColor color="#FFFFFF"/>
-			</s:fill>
 		</s:Rect>
 	</fx:DesignLayer>
 	<s:List id="dimensionsList"
@@ -45,7 +39,8 @@
 			
 			allowMultipleSelection="true"
 			x="5" y="5"
-			rendererAdd="addClick(event)">
+			rendererAdd="addClick(event)"
+			skinClass="skins.MyDropSkin" >
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="5"

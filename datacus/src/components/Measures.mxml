@@ -54,7 +54,8 @@
 			height="470"
 			x="5" y="25"
 			rendererAdd="addClick(event)"
-			styleName="container">
+			styleName="container"
+			skinClass="skins.MyDropSkin">
 		
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="left"

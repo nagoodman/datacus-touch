@@ -3,7 +3,9 @@
 @namespace mx "library://ns.adobe.com/flex/mx";
 
 .label{
+	background-color:#cccccc;
 	color:#223355;
+	font-size:36;
 	paddingBottom:4;
 	paddingLeft:4;
 	paddingRight:4;
