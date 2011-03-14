@@ -1103,10 +1103,14 @@
 	</fx:DesignLayer>
 	<mx:Form includeIn="Page1" defaultButton="{submitConnection}" id="ServerForm" x ='555' y='390'>
 		<mx:FormItem label='Server Address:'>
-			<s:TextInput id="ServerAddy" width='200' />
+			<s:TextInput id="ServerAddy" width='200'>
+				http://localhost:8080
+			</s:TextInput>
 		</mx:FormItem>
 		<mx:FormItem label='User Name:'>
-			<s:TextInput id="Uname" width='200' />
+			<s:TextInput id="Uname" width='200' >
+				admin
+			</s:TextInput>
 		</mx:FormItem>
 		<mx:FormItem label='Password:'>
 			<s:TextInput id="Passwd" width='200' />
@@ -1169,6 +1173,17 @@
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
+				<s:Parallel target="{ServerForm}">
+					<s:Fade duration="400" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		
+		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{ServerForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		
@@ -1180,6 +1195,13 @@
 			</s:Parallel>
 		</s:Transition>
 		
+		<s:Transition autoReverse="true" fromState="Page3" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{ServerForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
@@ -1209,6 +1231,13 @@
 			</s:Parallel>
 		</s:Transition>
 		
+		<s:Transition autoReverse="true" fromState="Page4" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{ServerForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page4" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
@@ -1241,6 +1270,13 @@
 			</s:Parallel>
 		</s:Transition>
 		
+		<s:Transition autoReverse="true" fromState="Page5" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{ServerForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page5" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
@@ -1276,6 +1312,13 @@
 			</s:Parallel>
 		</s:Transition>
 		
+		<s:Transition autoReverse="true" fromState="Page6" toState="Page1">
+			<s:Parallel>
+				<s:Parallel target="{ServerForm}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Page6" toState="Page2">
 			<s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
