@@ -19,6 +19,7 @@
 			import mx.charts.CategoryAxis;
 			import mx.charts.Legend;
 			import mx.charts.series.BarSeries;
+			import mx.charts.series.ColumnSeries;
 			import mx.collections.ArrayCollection;
 			import mx.collections.ArrayList;
 			import mx.containers.TitleWindow;
@@ -48,6 +49,14 @@
 			import tuio.windows7.*;
 			
 			protected var mainStage:Stage;
+			[bindable]
+			public var serverIDBase:String; //= "http://localhost:8080/saiku/";
+			[bindable]
+			public var userID:String; // = 'admin';
+			[bindable]
+			public var serverIDRest:String; //= "http://localhost:8080/saiku/rest/saiku/"+userID+"/query/";
+			[bindable]
+			public var serverIDJSON:String;// = "http://localhost:8080/saiku/json/saiku/"+userID+"/query/";
 			
 			/*Variables used with touch gesture handling*/
 			//public var tc:TuioClient;
@@ -84,11 +93,12 @@
 				//mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
 				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
  */
-				try {
-					CreateSession.send();
-				} catch (error:IOError) {
-					error_window("The Saiku Server is not running. Please close the application, start the Saiku server, and restart the application.");
-				}
+				//try {
+				//	CreateSession.url = serverIDBase+'rest/saiku/session';
+				//	CreateSession.send();
+				//} catch (error:IOError) {
+				//	error_window("The Saiku Server is not running. Please close the application, start the Saiku server, and restart the application.");
+				//}
 			}
 			
 			//Touch Handlers
@@ -127,12 +137,31 @@
 			
 			protected function checkResponse(event:ResultEvent):void{
 				if (event.statusCode == 200){
-					Home_Open();
+					Connection_Close();
 				}
-				
+			}
+					
+			private function submit_conn():void{
+				try {
+					userID = Uname.text;
+					serverIDBase = ServerAddy.text + '/saiku/';
+					serverIDRest = serverIDBase + 'rest/saiku/'+userID+'/query/';
+					serverIDJSON = serverIDBase + 'json/saiku/'+userID+'/query/';
+					CreateSession.url = serverIDBase+'rest/saiku/session';
+					CreateSession.send();
+				} catch (error:IOError) {
+					error_window("The Saiku Server is not running. Please close the application, start the Saiku server, and restart the application.");
+				}
 			}
 			
+			protected function Connection_Open():void{
+				const state:String = currentState;
+				currentState="Page1";
+			}
 			
+			protected function Connection_Close():void{
+				Home_Open();
+			}
 			
 			/*Functions to handle state changes*/
 			protected function Picker_Open():void
@@ -150,7 +179,6 @@
 					currentState="Page4";
 					populatePicker();
 				}
-				
 			}
 			
 			protected function Picker_Close():void{
@@ -165,6 +193,7 @@
 				const state:String = currentState;
 				if (state == 'Page1' ) {
 					currentState='Page2';
+					GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/datasources';
 					GetSourceOptions.send();
 				}
 				else{
@@ -194,6 +223,7 @@
 			
 			public function Sets_Open():void{
 				const state:String = currentState;
+				retrieveActiveSets();
 				if (state =='Page3'){
 					currentState="Page6";
 				}
@@ -330,7 +360,7 @@
 						"Query names must not be blank and cannot contain spaces, " +
 						"special characters, or more than 20 characters.");
 				} else {
-					submit.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/";
+					submit.url= serverIDRest + queryName+"/";
 					var params:Object = {};
 					//params['connection'] = connectionDropDown.selectedItem.data;
 					//params['cube'] = cubeDropDown.selectedItem.data;
@@ -378,7 +408,7 @@
 			public function populatePicker():void{
 				queryName = new String();
 				queryName = "chartdata";
-				callDimensions.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/"
+				callDimensions.url= serverIDJSON+queryName+"/axis/UNUSED/"
 				callDimensions.send()
 			}
 			
@@ -406,6 +436,7 @@
 				if (arr.length != 0){
 					var dimension:String = dimensionsAC[0].label;
 					var hierarchy:String = dimensionsAC[0].label;
+					callMeasures.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel";
 					callMeasures.send();
 					currentDimension = dimension;
 					currentHierarchy = hierarchy;
@@ -421,7 +452,7 @@
 				picker.MembersDLContainer.membersLevel2.dataProvider = null;
 				picker.MembersDLContainer.membersLevel3.dataProvider = null;
 				
-				callLevels.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
+				callLevels.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
 				callLevels.send();
 			}
 			
@@ -435,6 +466,7 @@
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
+					
 					obj.value = arr[i].uniqueName;
 					measuresAC.addItem(obj);	
 				}
@@ -469,30 +501,30 @@
 				if(levels.length > 3){
 					for (i = 0; i < 3; i++){
 						if (i==0){
-							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers1.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers1.send();
 						}
 						if (i==1){
-							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers2.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers2.send();
 						}
 						if (i==2){
-							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers3.send();
 						}			
 					}
 				}else{
 					for (i = 0; i < levels.length; i ++){
 						if (i==0){
-							callMembers1.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers1.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers1.send();
 						}
 						if (i==1){
-							callMembers2.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers2.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers2.send();
 						}
 						if (i==2){
-							callMembers3.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers3.send();
 						}				
 					}			
@@ -556,6 +588,29 @@
 				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
 			}
 			
+			
+			public function retrieveActiveSets():void{
+				retrieveSets.url= serverIDJSON;
+				retrieveSets.send()
+			}
+			[bindable]
+			public var setsAC:ArrayCollection;
+			public function getSets(event:ResultEvent):void{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				setsAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].name;
+					obj.axis = arr[i].axis;
+					obj.number = i;
+					obj.value = arr[i].name;
+					setsAC.addItem(obj);	
+				}
+				sets.setsList.dataProvider = setsAC;
+				
+			}
+			
 			public function removeFromList(member:Object, listIdentifier:String):void
 			{
 				var memberIndex:int = member.number;
@@ -607,10 +662,10 @@
 				item = item.replace(']','%5D');
 					
 				if (members.selectionType == 'LEVEL'){
-					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					remove.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 				}
 				if (members.selectionType == 'MEMBER'){
-					remove.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
+					remove.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
 				}
 				remove.headers['X-HTTP-Method-Override'] = 'DELETE';
 				var params:Object = {};
@@ -659,10 +714,10 @@
 					item = item.replace(']','%5D');
 					
 					if (members[i].selectionType == 'LEVEL'){
-						toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 					}
 					if (members[i].selectionType == 'MEMBER'){
-						toColumns.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
+						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
 					}
 					
 					var params:Object = {};
@@ -702,10 +757,10 @@
 					item = item.replace(']','%5D');
 					
 					if (members[i].selectionType == 'LEVEL'){
-						toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+						toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 					}
 					if (members[i].selectionType == 'MEMBER'){
-						toRows.url="http://localhost:8080/saiku/rest/saiku/admin/query/"+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
+						toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
 					}
 					var params:Object = {};
 					params["position"] = nextRowItemPosition;
@@ -722,7 +777,7 @@
 			{
 				if((seriesList.length > 0) && (categoriesList.length > 0)){
 					graph.removeAllElements();
-					results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
+					results.url=serverIDJSON+queryName+"/result"
 					results.send();
 				}else{
 					graph.removeAllElements();
@@ -817,35 +872,35 @@
 				myChart.width = 1070;
 				
 				/*Define the category axis */
-				var vAxis:CategoryAxis = new CategoryAxis();
+				var hAxis:CategoryAxis = new CategoryAxis();
 				if (chartData[0].ROW_HEADER){
-					vAxis.categoryField = "ROW_HEADER";
+					hAxis.categoryField = "ROW_HEADER";
 				}else{
-					vAxis.categoryField = "COLUMN_HEADER";
+					hAxis.categoryField = "COLUMN_HEADER";
 				}
-				vAxis.dataProvider = chartData;
-				myChart.verticalAxis = vAxis;
+				hAxis.dataProvider = chartData;
+				myChart.horizontalAxis = hAxis;
 				
-				var tempSeriesCol:BarSeries;
-				var tempSeriesRow:BarSeries;
+				var tempSeriesCol:ColumnSeries;
+				var tempSeriesRow:ColumnSeries;
 				var mySeries:Array=new Array();
 				
 				/*Add the series*/
 				if (chartData[0].ROW_HEADER){
 					for( var j:int=0; j< columnHeaderArray.length; j++){
-						tempSeriesCol = new BarSeries();
+						tempSeriesCol = new ColumnSeries();
 						tempSeriesCol.dataProvider = chartData;
-						tempSeriesCol.xField=columnHeaderArray[j].value;
-						tempSeriesCol.yField = "ROW_HEADER";
+						tempSeriesCol.yField=columnHeaderArray[j].value;
+						tempSeriesCol.xField = "ROW_HEADER";
 						tempSeriesCol.displayName=columnHeaderArray[j].value;
 						mySeries.push(tempSeriesCol);
 					}
 				}else{
 					for( var k:int=0; k< rowHeaderArray.length; k++){
-						tempSeriesRow = new BarSeries();
+						tempSeriesRow = new ColumnSeries();
 						tempSeriesRow.dataProvider = chartData;
-						tempSeriesRow.xField=rowHeaderArray[k].value;
-						tempSeriesRow.yField = "COLUMN_HEADER";
+						tempSeriesRow.yField=rowHeaderArray[k].value;
+						tempSeriesRow.xField = "COLUMN_HEADER";
 						tempSeriesRow.displayName=rowHeaderArray[k].value;
 						mySeries.push(tempSeriesRow);
 					}
@@ -887,15 +942,17 @@
 		<s:HTTPService
 			id="CreateSession"
 			resultFormat='xml'
-			url='http://localhost:8080/saiku/rest/saiku/session'
 			result="checkResponse(event)" 
 			fault="faultHandler(event)"
 			requestTimeout="-1" />
 		<s:HTTPService
 			id="GetSourceOptions"
 			resultFormat='text'
-			url='http://localhost:8080/saiku/json/saiku/admin/datasources'
 			result="fillHomeMenu(event)"/>
+		<s:HTTPService
+			id="retrieveSets"
+			resultFormat="text" method="GET"
+			result="getSets(event)"/>
 		<s:HTTPService
 			id="callDimensions"
 			resultFormat="text"
@@ -903,7 +960,6 @@
 		<s:HTTPService
 			id="callMeasures"
 			resultFormat="text"
-			url="http://localhost:8080/saiku/json/saiku/admin/query/chartdata/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel"
 			result="getMeasures(event)" />
 		<s:HTTPService
 			id="callLevels"
@@ -993,20 +1049,32 @@
 		<components:Categories id="categories"
 			x="180" y="780"
 		/>
-		<components:ServerStatus id="serverStatus"
-			x="1280" y="20"
-		/>
+		
 		<components:Picker id="picker"
 						   x="1280" y="260"
-						   click="Picker_Open()" 
+						   click.Page3="Picker_Open()"
+						   click.Page5="Picker_Open()"
+						   click.Page6="Picker_Open()"
 						   currentState.Page3="State1"
 						   currentState.Page4="State3"
 						   currentState.Page5="State2"
 						   currentState.Page6="State2">
 		</components:Picker>
+		<components:ServerStatus id="serverStatus"
+								 x="1280" y="20"
+								 click="Connection_Open()"
+								 currentState.Page1="Status1"
+								 currentState.Page2="Status2"
+								 currentState.Page3="Status2"
+								 currentState.Page4="Status2"
+								 currentState.Page5="Status2"
+								 currentState.Page6="Status2"
+								 />
 		<components:Sets id="sets"
 						 x="1280" y="140"
-						 click="Sets_Open()"
+						 click.Page3="Sets_Open()"
+						 click.Page4="Sets_Open()"
+						 click.Page5="Sets_Open()"
 						 currentState.Page6="Sets2"
 						 currentState.Page3="Sets1"
 						 currentState.Page4="Sets1"
@@ -1014,12 +1082,17 @@
 		/>
 		<components:Trash id="trash"
 						  x="1280" y="780"
-						  click="Trash_Open()"
+						  click.Page3="Trash_Open()"
+						  click.Page4="Trash_Open()"
+						  click.Page6="Trash_Open()"
 						  currentState.Page5="Trash2"
 						  />	
 		<components:Home id="home"
 						 x="20" y="20"
-						 click="Home_Open()"
+						 click.Page3="Home_Open()"
+						 click.Page4="Home_Open()"
+						 click.Page5="Home_Open()"
+						 click.Page6="Home_Open()"
 						 currentState.Page2="Home2"
 						 currentState.Page3="Home3"
 						 currentState.Page4="Home4">
@@ -1027,6 +1100,25 @@
 		
 		
 	</fx:DesignLayer>
+	<mx:Form includeIn="Page1" defaultButton="{submitConnection}" id="ServerForm" x ='555' y='390'>
+		<mx:FormItem label='Server Address:'>
+			<s:TextInput id="ServerAddy" width='200' />
+		</mx:FormItem>
+		<mx:FormItem label='User Name:'>
+			<s:TextInput id="Uname" width='200' />
+		</mx:FormItem>
+		<mx:FormItem label='Password:'>
+			<s:TextInput id="Passwd" width='200' />
+		</mx:FormItem>		
+		<mx:FormItem>
+			<s:Button label="Connect" id="submitConnection" click="submit_conn()" />
+		</mx:FormItem>
+		<mx:FormItem>
+			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" />
+		</mx:FormItem>
+	</mx:Form>
+	
+	
 	<mx:Form includeIn="Page2" defaultButton="{submitQuery}" id="ConnectionForm" x='555' y='390' >
 		<mx:FormItem label='Connection:'>
 			<s:DropDownList id="connectionDropDown" width='200'>

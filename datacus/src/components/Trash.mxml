@@ -92,7 +92,7 @@
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="trash" height="100" width="140" height.Trash2="400" width.Trash2="400" x.Trash2="-750" y.Trash2="-470"  skinClass="skins.Panel" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-598" y="-450" includeIn="Trash2"/>
-		<s:BitmapImage id="img"
+		<s:BitmapImage id="trashIcon"
 					   source="@Embed('assets/trash.png')"
 					   fillMode="clip"
 					   left="30" right="0"  top="10" bottom="0"
@@ -107,7 +107,7 @@
 			width.Trash2="300"
 			height.Trash2="300"
 			x.Trash2="-700" y.Trash2="-420"
-			alpha="0.8"
+			alpha="0.8" alpha.Trash1="0.3"
 
 			dataProvider="{trashDB}"
 			dragEnter="trashList_dragEnterHandler(event)"
@@ -147,6 +147,9 @@
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
 					<s:Resize duration="1000" startDelay="600"/>
 				</s:Parallel>
+				<s:Parallel target="{trashIcon}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Trash2" toState="Trash1">
@@ -161,6 +164,9 @@
 				<s:Parallel target="{trashList}">
 					<s:Move autoCenterTransform="true" duration="800" startDelay="300"/>
 					<s:Resize duration="800" startDelay="300"/>
+					<s:Parallel target="{trashIcon}">
+						<s:Fade duration="500" startDelay="1100"/>
+					</s:Parallel>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>

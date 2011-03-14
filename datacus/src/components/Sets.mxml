@@ -34,7 +34,7 @@
 		<s:SkinnableContainer id="sets" height="100" width="140" height.Sets2="400" width.Sets2="400" x.Sets2="-750" y.Sets2="170"  skinClass="skins.Panel" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="-598" y="190" includeIn="Sets2"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsButtonLabel" tabStops="S0 S50 S100" text="Sets" x="50" y="40" includeIn="Sets1"/>
-		<s:BitmapImage id="img"
+		<s:BitmapImage id="setsImg"
 					   source="@Embed('assets/save.png')"
 					   fillMode="clip"
 					   left="30" right="0"  top="10" bottom="0"
@@ -88,6 +88,9 @@
 				<s:Parallel target="{SetsButtonLabel}">
 					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
+				<s:Parallel target="{setsImg}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Sets2" toState="Sets1">
@@ -104,6 +107,9 @@
 				</s:Parallel>
 				<s:Parallel target="{SetsButtonLabel}">
 					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{setsImg}">
+					<s:Fade duration="500" startDelay="1700"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>

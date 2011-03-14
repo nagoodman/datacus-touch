@@ -50,6 +50,20 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
+		<s:Transition autoReverse="true" fromState="Home2" toState="Home1">
+			<s:Parallel>	
+				<s:Parallel target="{home}">
+					<s:Move autoCenterTransform="true" duration="800" startDelay="300"/>
+					<s:Resize duration="800" startDelay="300"/>
+				</s:Parallel>
+				<s:Parallel target="{HomeLabel}">
+					<s:Fade duration="500" startDelay="1100"/>
+				</s:Parallel>
+				<s:Parallel target="{QueryMenu}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Home2" toState="Home3">
 			<s:Parallel>	
 				<s:Parallel target="{home}">
