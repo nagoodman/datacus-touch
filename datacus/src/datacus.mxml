@@ -830,11 +830,11 @@
 						chartData.addItem(tempObj);
 					}
 				}else{
-					for (var n:int = 0; n<columnHeaderArray.length; n++){
+					for (var n:int = 0; n<rowHeaderArray.length; n++){
 						tempObj = new Object();
-						tempObj[columnHeaderArray[n].type] = columnHeaderArray[n].value;
-						for (var o:int = 0; o<rowHeaderArray.length; o++){
-							tempObj[rowHeaderArray[o].value] = dataCellArray[dataIterator];
+						tempObj[columnHeaderArray[n].type] = rowHeaderArray[n].value;
+						for (var o:int = 0; o<columnHeaderArray.length; o++){
+							tempObj[columnHeaderArray[o].value] = dataCellArray[dataIterator];
 							dataIterator++;
 						}
 						chartData.addItem(tempObj);
@@ -897,12 +897,12 @@
 						mySeries.push(tempSeriesCol);
 					}
 				}else{
-					for( var k:int=0; k< rowHeaderArray.length; k++){
+					for( var k:int=0; k< columnHeaderArray.length; k++){
 						tempSeriesRow = new ColumnSeries();
 						tempSeriesRow.dataProvider = chartData;
-						tempSeriesRow.yField=rowHeaderArray[k].value;
+						tempSeriesRow.yField=columnHeaderArray[k].value;
 						tempSeriesRow.xField = "COLUMN_HEADER";
-						tempSeriesRow.displayName=rowHeaderArray[k].value;
+						tempSeriesRow.displayName=columnHeaderArray[k].value;
 						mySeries.push(tempSeriesRow);
 					}
 				}
