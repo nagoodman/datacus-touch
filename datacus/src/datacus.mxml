@@ -1061,16 +1061,6 @@
 						   currentState.Page5="State2"
 						   currentState.Page6="State2">
 		</components:Picker>
-		<components:ServerStatus id="serverStatus"
-								 x="1280" y="20"
-								 click="Connection_Open()"
-								 currentState.Page1="Status1"
-								 currentState.Page2="Status2"
-								 currentState.Page3="Status2"
-								 currentState.Page4="Status2"
-								 currentState.Page5="Status2"
-								 currentState.Page6="Status2"
-								 />
 		<components:Sets id="sets"
 						 x="1280" y="140"
 						 click.Page3="Sets_Open()"
@@ -1081,6 +1071,16 @@
 						 currentState.Page4="Sets1"
 						 currentState.Page5="Sets1"
 		/>
+		<components:ServerStatus id="serverStatus"
+								 x="1280" y="20"
+								 click="Connection_Open()"
+								 currentState.Page1="Status1"
+								 currentState.Page2="Status2"
+								 currentState.Page3="Status2"
+								 currentState.Page4="Status2"
+								 currentState.Page5="Status2"
+								 currentState.Page6="Status2"
+								 />
 		<components:Trash id="trash"
 						  x="1280" y="780"
 						  click.Page3="Trash_Open()"
@@ -1102,12 +1102,12 @@
 		
 	</fx:DesignLayer>
 	<mx:Form includeIn="Page1" defaultButton="{submitConnection}" id="ServerForm" x ='555' y='390'>
-		<mx:FormItem label='Server Address:'>
-			<s:TextInput id="ServerAddy" width='200'>
+		<mx:FormItem label='Server Address:' required="true">
+			<s:TextInput id="ServerAddy" width='200' >
 				http://localhost:8080
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='User Name:'>
+		<mx:FormItem label='User Name:' required="true">
 			<s:TextInput id="Uname" width='200' >
 				admin
 			</s:TextInput>

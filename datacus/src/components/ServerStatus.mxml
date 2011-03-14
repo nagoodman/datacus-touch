@@ -19,6 +19,8 @@
 					   width="60"
 					   alpha="0.5"
 					   />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="ConnectionMenuLabel" tabStops="S0 S50 S100" text="Connection Menu" x="-632" y="320" includeIn="Status1"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="18" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" x="-650" y="345" includeIn="Status1"/>
 	</fx:DesignLayer>	
 	
 	<s:transitions>
@@ -31,6 +33,12 @@
 				<s:Parallel target="{statusImg}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
+				<s:Parallel target="{ConnectionMenu}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{ConnectionMenuLabel}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Status2" toState="Status1">
@@ -41,6 +49,12 @@
 				</s:Parallel>
 				<s:Parallel target="{statusImg}">
 					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{ConnectionMenu}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{ConnectionMenuLabel}">
+					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>

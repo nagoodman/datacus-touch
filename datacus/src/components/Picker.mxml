@@ -23,7 +23,7 @@
 		<s:State name="State3"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="picker" height="500" height.State3="500"  x="0" y="0" width="140" width.State3="1240"   x.State3="-1100" skinClass="skins.Panel" skinClass.State3="skins.Panel_picker_extended" />
+		<s:SkinnableContainer id="picker" height="500" height.State3="500"  x="0" y="0" width="140" width.State3="1240" x.State3="-1100" skinClass="skins.Panel" skinClass.State3="skins.Panel_picker_extended" />
 		
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x="40" y="225" includeIn="State1,State2" />
 	</fx:DesignLayer>
