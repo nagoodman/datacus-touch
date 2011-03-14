@@ -17,6 +17,7 @@
 			
 			import mx.charts.BarChart;
 			import mx.charts.CategoryAxis;
+			import mx.charts.ColumnChart;
 			import mx.charts.Legend;
 			import mx.charts.series.BarSeries;
 			import mx.charts.series.ColumnSeries;
@@ -855,7 +856,7 @@
 			])*/
 			
 			
-			public var myChart:BarChart;
+			public var myChart:ColumnChart;
 			public var series1:BarSeries;
 			public var series2:BarSeries;
 			public var series3:BarSeries;
@@ -865,7 +866,7 @@
 			public function updateGraph():void
 			{
 				/*Create Chart and set basic properties*/
-				myChart = new BarChart();
+				myChart = new ColumnChart(); 
 				myChart.showDataTips = true;
 				myChart.dataProvider = chartData;
 				myChart.height = 500;
