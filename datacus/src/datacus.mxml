@@ -340,6 +340,7 @@
 				graph.removeAllElements();
 				series.serDB = new ArrayCollection;
 				categories.catDB = new ArrayCollection;	
+				trash.trashDB = new ArrayCollection;
 				seriesList = new ArrayCollection;
 				categoriesList = new ArrayCollection;
 				//categories.catList.dataProvider = new ArrayList;
@@ -405,7 +406,10 @@
 			public var currentLevel:int;
 			
 			[Bindable]
-			public var currentMeasure:String;
+			public var currentMeasure:Object;
+			
+			[Bindable]
+			public var defaultMeasure:Object;
 			
 			/*Functions that populate the picker and handle changes within the picker*/
 			public function populatePicker():void{
@@ -464,15 +468,21 @@
 			{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
+				
 				measuresAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimension;
-					
+					obj.selectionType = 'MEASURE';
+					obj.listLocation = 'MEASURE';
+					obj.number = i;
 					obj.value = arr[i].uniqueName;
+					currentMeasure = arr[0].uniqueName;
 					measuresAC.addItem(obj);	
 				}
+				currentMeasure = measuresAC[0];
+				defaultMeasure = measuresAC[0];
 				measures.measuresList.dataProvider = measuresAC;
 				
 			}
@@ -648,6 +658,8 @@
 				}
 			}
 			
+			
+			
 			public function removeFromGraph(members:Object):void
 			{
 				var originalLocation:String = members.listLocation;
@@ -663,18 +675,26 @@
 				item = item.replace(']','%5D');
 				item = item.replace('[','%5B');
 				item = item.replace(']','%5D');
-					
-				if (members.selectionType == 'LEVEL'){
-					remove.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-				}
-				if (members.selectionType == 'MEMBER'){
-					remove.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
-				}
-				remove.headers['X-HTTP-Method-Override'] = 'DELETE';
 				var params:Object = {};
-				params['position'] = members.itemPosition;
-				params['memeberposition'] = members.itemMemberPosition;
-				remove.send(params);//sends service call to get new graph info 
+				if (members.selectionType =='LEVEL' || members.selectionType == 'MEMBER'){
+					if (members.selectionType == 'LEVEL'){
+						remove.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					}
+					if (members.selectionType == 'MEMBER'){
+						remove.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
+					}
+					remove.headers['X-HTTP-Method-Override'] = 'DELETE';
+					params['position'] = members.itemPosition;
+					params['memeberposition'] = members.itemMemberPosition;
+					remove.send(params);//sends service call to get new graph info 
+				}else{
+					removeMeasure.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
+					removeMeasure.headers['X-HTTP-Method-Override'] = 'DELETE';
+					params['position'] = members.itemPosition;
+					params['memeberposition'] = members.itemMemberPosition;
+					removeMeasure.send(params);
+				}
+				
 				
 			}
 			
@@ -688,6 +708,7 @@
 			String.prototype.replace = function(s:String, z:String):String{
 				return unescape(escape(this).split(s).join(z));
 			}
+			
 			
 			
 			/*The following are functions for posting to different axises on the server and create a resulting graph*/
@@ -718,6 +739,12 @@
 					
 					if (members[i].selectionType == 'LEVEL'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					}
+					if (members[i].selectionType == 'MEASURE'){
+						removeFromGraph(currentMeasure);
+						removeFromGraph(defaultMeasure);
+						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
+						currentMeasure = members[i];
 					}
 					if (members[i].selectionType == 'MEMBER'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
@@ -804,7 +831,7 @@
 				for (var i:int = 0; i < arr.length; i++){
 					for (var j:int = 0; j<arr[i].length; j++){
 						if ((arr[i][j].type == "COLUMN_HEADER")&& (arr[i][j].value != 'null')){
-							if ((arr[i][j].value != arr[i][j-1].value) && (columnHeaderArray.length < (arr[i].length - 1))){
+							if ((arr[i][j].value != arr[i][j-1].value) && (columnHeaderArray.length < (arr[i].length - 1))){ //arr[i].length-1 does not allow for multiple measures to be displayed at once
 								columnHeaderArray.addItem(arr[i][j]);
 							}
 						}
@@ -843,7 +870,6 @@
 					}
 					
 				}
-				
 				updateGraph();
 				//updateLineGraph();
 			}
@@ -1053,6 +1079,10 @@
 		
 		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml" 
 					   method="POST" result="getResults()">
+		</s:HTTPService>
+		
+		<s:HTTPService id="removeMeasure" resultFormat="text" contentType="application/xml" 
+					   method="POST">
 		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
