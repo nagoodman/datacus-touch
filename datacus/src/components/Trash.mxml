@@ -52,11 +52,12 @@
 				if (myDropTarget.dataProvider.length != 0){
 					for (var k:int = 0; k < items.length; k++){
 						oldList = items[k].listLocation;
+						items[k].newList = 'TRASH';
 						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
 						for (var j:int=0; j<myDropTarget.dataProvider.length; j++){
 							if (myDropTarget.dataProvider[j].value != items[k].value){
 								pos=this.trashList.layout.calculateDropLocation(event);
-								//FlexGlobals.topLevelApplication.moveToRows(items);
+								//FlexGlobals.topLevelApplication.removeFromGraph(items);
 								for (var i:int=items.length - 1; i >= 0; i--)
 								{
 									this.trashDB.addItemAt(items[i], pos.dropIndex);
@@ -71,7 +72,9 @@
 					for (var p:int=items.length - 1; p >= 0; p--)
 					{
 						oldList = items[p].listLocation;
+						items[k].newList = 'TRASH';
 						FlexGlobals.topLevelApplication.removeFromList(items[p], oldList);
+						
 						this.trashDB.addItemAt(items[p], pos.dropIndex);
 					}
 					myDropTarget.destroyDropIndicator();
