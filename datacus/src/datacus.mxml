@@ -933,7 +933,7 @@
 				myChart = new ColumnChart(); 
 				myChart.showDataTips = true;
 				myChart.dataProvider = chartData;
-				myChart.height = 500;
+				myChart.height = 550;
 				myChart.width = 1070;
 				
 				/*Define the category axis */
@@ -979,7 +979,7 @@
 				legend1.dataProvider = myChart;
 				
 				graph.removeAllElements();
-				graph.addElement(legend1);
+				graphLegend.addElement(legend1);
 				graph.addElement(myChart);
 				
 			}	
@@ -992,7 +992,7 @@
 				myLineChart = new LineChart(); 
 				myLineChart.showDataTips = true;
 				myLineChart.dataProvider = chartData;
-				myLineChart.height = 500;
+				myLineChart.height = 550;
 				myLineChart.width = 1070;
 				
 				/*Define the category axis */
@@ -1038,7 +1038,7 @@
 				legend1.dataProvider = myLineChart;
 				
 				graph.removeAllElements();
-				graph.addElement(legend1);
+				graphLegend.addElement(legend1);
 				graph.addElement(myLineChart);
 				
 			}
@@ -1164,26 +1164,28 @@
 	<fx:DesignLayer id="panels">
 <!--		organized left to right then top to bottom		 -->
 		<components:Graph id="graph" 
-						  x="180" y="260"
+						  x="180" y="210"
 						  />
+		<components:GraphLegend id="graphLegend"
+						   x="180" y="140">
+		</components:GraphLegend>
+		
 		<components:Measures id="measures"
- 			left="20" top="260"
+ 			left="20" top="140"
 		/>
 		<components:StateStep id="stateStep"
 			x="20" y="780"
 		/>
-		<components:Pager id="pager"
-			x="180" y="20"
-		/>
+		
 		<components:Series id="series"
-			x="180" y="140"
+			x="180" y="20"
 		/>
 		<components:Categories id="categories"
 			x="180" y="780"
 		/>
 		
 		<components:Picker id="picker"
-						   x="1280" y="260"
+						   x="1280" y="140"
 						   click.Page3="Picker_Open()"
 						   click.Page5="Picker_Open()"
 						   click.Page6="Picker_Open()"
@@ -1193,14 +1195,14 @@
 						   currentState.Page6="State2">
 		</components:Picker>
 		<components:Sets id="sets"
-						 x="1280" y="140"
+						 x="20" y="780"
 						 click.Page3="Sets_Open()"
 						 click.Page4="Sets_Open()"
 						 click.Page5="Sets_Open()"
-						 currentState.Page6="Sets2"
 						 currentState.Page3="Sets1"
 						 currentState.Page4="Sets1"
 						 currentState.Page5="Sets1"
+						 currentState.Page6="Sets2"
 		/>
 		<components:ServerStatus id="serverStatus"
 								 x="1280" y="20"
@@ -1294,8 +1296,8 @@
 					
 		
 	</mx:Form>
-	<s:Button includeIn="Page4" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
-	<s:Button includeIn="Page6" x='850' y='320' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
+	<s:Button includeIn="Page4" x='220' y='180' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
+	<s:Button includeIn="Page6" x='850' y='240' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
 	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="Trash_Close()" ></s:Button>
 	
 	<s:transitions>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 creationComplete="Sets_creationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
 			//imports classes and libraries need for component
@@ -10,6 +11,7 @@
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
@@ -21,6 +23,11 @@
 			[Bindable]
 			private var setsDB:ArrayCollection=new ArrayCollection();
 			
+			protected function Sets_creationCompleteHandler(event:FlexEvent):void{
+				currentState = 'Sets1';
+			}
+			
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -31,8 +38,8 @@
 		<s:State name="Sets2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="sets" height="100" width="140" height.Sets2="400" width.Sets2="400" x.Sets2="-750" y.Sets2="170"  skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="-598" y="190" includeIn="Sets2"/>
+		<s:SkinnableContainer id="setsContainer" height.Sets1="100" width.Sets1="140" x.Sets1="0" y.Sets1="0" height.Sets2="400" width.Sets2="400" x.Sets2="520" y.Sets2="-550"  skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="665" y="-530" includeIn="Sets2"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsButtonLabel" tabStops="S0 S50 S100" text="Sets" x="50" y="40" includeIn="Sets1"/>
 		<s:BitmapImage id="setsImg"
 					   source="@Embed('assets/save.png')"
@@ -47,7 +54,7 @@
 	<s:List id="setsList" includeIn="Sets2"
 			width="300"
 			height="300"
-			x="-700" y="220"
+			x="570" y="-500"
 			alpha="0.8"
 			
 			dataProvider="{setsDB}"
@@ -75,8 +82,8 @@
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Sets1" toState="Sets2">
 			<s:Parallel>
-				<s:Parallel target="{sets}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
+				<s:Parallel target="{setsContainer}">
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="600"/>
 					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsLabel}">
@@ -95,7 +102,7 @@
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Sets2" toState="Sets1">
 			<s:Parallel>	
-				<s:Parallel target="{sets}">
+				<s:Parallel target="{setsContainer}">
 					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
 					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>

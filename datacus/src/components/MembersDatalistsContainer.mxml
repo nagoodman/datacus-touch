@@ -80,4 +80,28 @@
 			</fx:Component>
 		</s:itemRenderer>
 	</s:List>
+	
+	<s:List x="10" y="380" width="1060" height="110" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="left"
+								paddingLeft="10"
+								paddingTop="10"/>
+		</s:layout>
+		<s:ArrayCollection>
+			
+		</s:ArrayCollection>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"
+												paddingLeft="0"/>
+						</s:layout>
+						<s:Label text="{data.label}" styleName="label" />
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
 </s:Group>

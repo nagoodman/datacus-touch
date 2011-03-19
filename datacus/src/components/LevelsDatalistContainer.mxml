@@ -12,7 +12,7 @@
 	
 	<s:List id="levelsList"
 			width="125"
-			height="370"
+			height="490"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			allowMultipleSelection="true"
