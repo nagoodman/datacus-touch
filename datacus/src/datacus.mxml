@@ -1008,6 +1008,7 @@
 				/*Create a legend*/
 				legend1 = new Legend();
 				legend1.dataProvider = myChart;
+				legend1.direction = "horizontal";
 				
 				graph.removeAllElements();
 				graphLegend.addElement(legend1);
@@ -1067,6 +1068,7 @@
 				/*Create a legend*/
 				legend1 = new Legend();
 				legend1.dataProvider = myLineChart;
+				legend1.direction = "horizontal";
 				
 				graph.removeAllElements();
 				graphLegend.addElement(legend1);
