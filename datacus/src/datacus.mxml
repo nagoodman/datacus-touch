@@ -458,6 +458,7 @@
 				picker.MembersDLContainer.membersLevel1.dataProvider = null;
 				picker.MembersDLContainer.membersLevel2.dataProvider = null;
 				picker.MembersDLContainer.membersLevel3.dataProvider = null;
+				picker.MembersDLContainer.membersLevel4.dataProvider = null;
 				
 				callLevels.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
 				callLevels.send();
@@ -511,8 +512,8 @@
 			public function getMembersFromLevels(levels:ArrayCollection):void
 			{
 				var i:int = 0;
-				if(levels.length > 3){
-					for (i = 0; i < 3; i++){
+				if(levels.length > 4){
+					for (i = 0; i < 4; i++){
 						if (i==0){
 							callMembers1.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers1.send();
@@ -524,7 +525,11 @@
 						if (i==2){
 							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers3.send();
-						}			
+						}
+						if (i==3){
+							callMembers4.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers4.send();
+						}
 					}
 				}else{
 					for (i = 0; i < levels.length; i ++){
@@ -539,7 +544,11 @@
 						if (i==2){
 							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
 							callMembers3.send();
-						}				
+						}
+						if (i==3){
+							callMembers4.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
+							callMembers4.send();
+						}
 					}			
 				}		
 			}
@@ -598,7 +607,26 @@
 					obj.value = arr[i].uniqueName;
 					membersAC.addItem(obj);	
 				}
+				
 				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
+			}
+			
+			public function getMembers4(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
+					obj.listLocation = 'MEMBER4';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					membersAC.addItem(obj);	
+				}
+				picker.MembersDLContainer.membersLevel4.dataProvider = membersAC;
 			}
 			
 			
@@ -659,6 +687,9 @@
 				}
 				else if (listIdentifier == 'MEMBER3'){
 					picker.MembersDLContainer.membersLevel3.dataProvider.removeItemAt(memberIndex);
+				}
+				else if (listIdentifier == 'MEMBER4'){
+					picker.MembersDLContainer.membersLevel4.dataProvider.removeItemAt(memberIndex);
 				}
 			}
 			
@@ -1101,6 +1132,10 @@
 			id="callMembers3"
 			resultFormat="text"
 			result="getMembers3(event)" />
+		<s:HTTPService
+			id="callMembers4"
+			resultFormat="text"
+			result="getMembers4(event)" />
 		
 		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
 					   method="POST" >
