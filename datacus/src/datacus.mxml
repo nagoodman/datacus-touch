@@ -14,6 +14,7 @@
 			import com.adobe.serialization.json.JSON;
 			
 			import flash.display.Stage;
+			import flash.utils.*;
 			
 			import mx.charts.BarChart;
 			import mx.charts.CategoryAxis;
@@ -140,7 +141,7 @@
 			
 			protected function checkResponse(event:ResultEvent):void{
 				if (event.statusCode == 200){
-					Connection_Close();
+					Home_Open();
 				}
 			}
 					
@@ -163,7 +164,7 @@
 			}
 			
 			protected function Connection_Close():void{
-				Home_Open();
+				currentState="Page3";
 			}
 			
 			/*Functions to handle state changes*/
@@ -744,6 +745,30 @@
 				return unescape(escape(this).split(s).join(z));
 			}
 			
+			private function clone(source:Object):*{
+				var buffer:ByteArray = new ByteArray();
+				buffer.writeObject(source);
+				buffer.position = 0;
+				return buffer.readObject();
+			}
+				
+			public function switchAxis():void{
+				var oldSeriesList:Object = clone(seriesList);
+				
+				var oldCategoriesList:Object = clone(categoriesList);
+				for (var i:int = 0; i< oldCategoriesList.length; i++){
+					moveToColumns(oldCategoriesList);
+					removeFromList(oldCategoriesList[i], 'ROWS');
+				}
+				for (var j:int = 0; j< oldSeriesList.length; j++){
+					moveToRows(oldSeriesList);
+					removeFromList(oldSeriesList[j], 'COLUMNS');
+				
+				}
+				getResults();
+				
+				//moveToRows(oldSeriesList);
+			}
 			
 			
 			/*The following are functions for posting to different axises on the server and create a resulting graph*/
@@ -752,19 +777,20 @@
 			
 			public function moveToColumns(members:Object):void
 			{
-				//seriesList = new ArrayCollection;
-				
-				for (var i:int = 0; i < members.length; i ++){
-					seriesList.addItem(members[i]);
-					members[i].listLocation = 'COLUMNS';
-					members[i].itemMemberPosition = seriesList.length -1;
-					members[i].itemPosition = nextColumnItemPosition;
-					var hierarchy:String = members[i].dimension;
-					var dimension:String = hierarchy.replace("[","");
+				var hierarchy:String;
+				var dimension:String;
+				var item:String;
+				/*if (members.listLocation == "ROWS"){
+					seriesList.addItem(members);
+					members.listLocation = 'COLUMNS';
+					members.itemMemberPosition = seriesList.length -1;
+					members.itemPosition = nextColumnItemPosition;
+					hierarchy = members.dimension;
+					dimension = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
 					hierarchy = hierarchy.replace('[','%5B');
 					hierarchy = hierarchy.replace(']','%5D');
-					var item:String = members[i].value;
+					item = members.value;
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
 					item = item.replace('[','%5B');
@@ -772,18 +798,52 @@
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
 					
-					if (members[i].selectionType == 'LEVEL'){
+					if (members.selectionType == 'LEVEL'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 					}
-					if (members[i].selectionType == 'MEASURE'){
+					if (members.selectionType == 'MEASURE'){
 						removeFromGraph(currentMeasure);
 						removeFromGraph(defaultMeasure);
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
-						currentMeasure = members[i];
+						currentMeasure = members;
 					}
-					if (members[i].selectionType == 'MEMBER'){
+					if (members.selectionType == 'MEMBER'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
 					}
+				}
+				else{*/
+					for (var i:int = 0; i < members.length; i ++){
+						seriesList.addItem(members[i]);
+						members[i].listLocation = 'COLUMNS';
+						members[i].itemMemberPosition = seriesList.length -1;
+						members[i].itemPosition = nextColumnItemPosition;
+						hierarchy = members[i].dimension;
+						dimension = hierarchy.replace("[","");
+						dimension = dimension.replace("]","");
+						hierarchy = hierarchy.replace('[','%5B');
+						hierarchy = hierarchy.replace(']','%5D');
+						item = members[i].value;
+						item = item.replace('[','%5B');
+						item = item.replace(']','%5D');
+						item = item.replace('[','%5B');
+						item = item.replace(']','%5D');
+						item = item.replace('[','%5B');
+						item = item.replace(']','%5D');
+						
+						if (members[i].selectionType == 'LEVEL'){
+							toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+						}
+						if (members[i].selectionType == 'MEASURE'){
+							removeFromGraph(currentMeasure);
+							removeFromGraph(defaultMeasure);
+							toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
+							currentMeasure = members[i];
+						}
+						if (members[i].selectionType == 'MEMBER'){
+							toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
+						}
+				//}
+				
 					
 					var params:Object = {};
 					params["position"] = nextColumnItemPosition;
@@ -800,33 +860,36 @@
 			//This is a public function that allows when array on categories panel is changed to update the query
 			public function moveToRows(members:Object):void
 			{
+				var hierarchy:String;
+				var dimension:String;
+				var item:String;
+					for (var i:int = 0; i < members.length; i ++){
+						categoriesList.addItem(members[i]);
+						members[i].listLocation = 'ROWS';
+						members[i].itemMemberPosition = members[i].number;//categoriesList.length -1;
+						members[i].itemPosition = members[i].number;//nextRowItemPosition;
+						hierarchy = members[i].dimension;
+						dimension = hierarchy.replace("[","");
+						dimension = dimension.replace("]","");
+						hierarchy = hierarchy.replace('[','%5B');
+						hierarchy = hierarchy.replace(']','%5D');
+						item = members[i].value;
+						item = item.replace('[','%5B');
+						item = item.replace(']','%5D');
+						item = item.replace('[','%5B');
+						item = item.replace(']','%5D');
+						item = item.replace('[','%5B');
+						item = item.replace(']','%5D');
+						
+						if (members[i].selectionType == 'LEVEL'){
+							toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+						}
+						if (members[i].selectionType == 'MEMBER'){
+							toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
+						}
+	
 				
-				//categoriesList = new ArrayCollection;
 				
-				for (var i:int = 0; i < members.length; i ++){
-					categoriesList.addItem(members[i]);
-					members[i].listLocation = 'ROWS';
-					members[i].itemMemberPosition = members[i].number//categoriesList.length -1;
-					members[i].itemPosition = members[i].number//nextRowItemPosition;
-					var hierarchy:String = members[i].dimension;
-					var dimension:String = hierarchy.replace("[","");
-					dimension = dimension.replace("]","");
-					hierarchy = hierarchy.replace('[','%5B');
-					hierarchy = hierarchy.replace(']','%5D');
-					var item:String = members[i].value;
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					
-					if (members[i].selectionType == 'LEVEL'){
-						toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-					}
-					if (members[i].selectionType == 'MEMBER'){
-						toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
-					}
 					var params:Object = {};
 					params["position"] = members[i].number;//nextRowItemPosition;
 					params["memberposition"] = members[i].number;//categoriesList.length -1;
@@ -1011,6 +1074,7 @@
 				legend1.direction = "horizontal";
 				
 				graph.removeAllElements();
+				graphLegend.removeAllElements();
 				graphLegend.addElement(legend1);
 				graph.addElement(myChart);
 				
@@ -1071,6 +1135,7 @@
 				legend1.direction = "horizontal";
 				
 				graph.removeAllElements();
+				graphLegend.removeAllElements();
 				graphLegend.addElement(legend1);
 				graph.addElement(myLineChart);
 				
