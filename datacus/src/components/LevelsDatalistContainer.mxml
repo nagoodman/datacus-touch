@@ -21,7 +21,7 @@
 		
 		<s:layout>
 			<s:VerticalLayout horizontalAlign='center'
-							  paddingTop="10"
+							  paddingTop="10" paddingBottom="10"
 								/>
 		</s:layout>
 		

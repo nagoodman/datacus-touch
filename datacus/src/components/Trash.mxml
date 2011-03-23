@@ -110,7 +110,7 @@
 			width.Trash2="300"
 			height.Trash2="300"
 			x.Trash2="-700" y.Trash2="-420"
-			alpha="0.8" alpha.Trash1="0.3"
+			alpha="0.8" alpha.Trash1="0"
 
 			dataProvider="{trashDB}"
 			dragEnter="trashList_dragEnterHandler(event)"
@@ -118,9 +118,9 @@
 			dragDrop="trashList_dragDropHandler(event)"
 			skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:VerticalLayout horizontalAlign="left"
-								paddingLeft="5"
-								paddingTop="5"/>
+			<s:VerticalLayout horizontalAlign="center"
+								paddingLeft="0"
+								paddingTop="10" paddingBottom="10"/>
 		</s:layout>
 		<s:itemRenderer>
 			<fx:Component>
@@ -129,7 +129,17 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:BorderContainer  height="40" width="100%" cornerRadius="4" borderWeight="2" >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color="#cacc82" alpha=".5" />
+									<s:GradientEntry color="#8c7415" alpha=".5" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="100%" height="100%" textAlign="center" fontSize="16" verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
@@ -149,6 +159,7 @@
 				<s:Parallel target="{trashList}">
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
 					<s:Resize duration="1000" startDelay="600"/>
+					<s:Fade duration='500' startDelay="1600" />
 				</s:Parallel>
 				<s:Parallel target="{trashIcon}">
 					<s:Fade duration="500" startDelay="0"/>
@@ -167,6 +178,7 @@
 				<s:Parallel target="{trashList}">
 					<s:Move autoCenterTransform="true" duration="800" startDelay="300"/>
 					<s:Resize duration="800" startDelay="300"/>
+					<s:Fade duration='300' startDelay="0" />
 					<s:Parallel target="{trashIcon}">
 						<s:Fade duration="500" startDelay="1100"/>
 					</s:Parallel>

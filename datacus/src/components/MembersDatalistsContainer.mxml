@@ -13,9 +13,9 @@
 	
 	<s:List x="10" y="10" width="900" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="10"
-								paddingTop="10"/>
+			<s:HorizontalLayout verticalAlign="middle"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
 		</s:layout>
 		<s:ArrayCollection>
 			
@@ -39,9 +39,9 @@
 	</s:List>
 	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="10"
-								paddingTop="10"/>
+			<s:HorizontalLayout verticalAlign="middle"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
 		</s:layout>
 		<s:ArrayCollection>
 			
@@ -64,9 +64,9 @@
 	</s:List>
 	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="10"
-								paddingTop="10"/>
+			<s:HorizontalLayout verticalAlign="middle"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
 		</s:layout>
 		<s:ArrayCollection>
 			
@@ -90,9 +90,9 @@
 	
 	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="10"
-								paddingTop="10"/>
+			<s:HorizontalLayout verticalAlign="middle"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
 		</s:layout>
 		<s:ArrayCollection>
 			
