@@ -754,20 +754,19 @@
 				
 			public function switchAxis():void{
 				var oldSeriesList:Object = clone(seriesList);
-				
 				var oldCategoriesList:Object = clone(categoriesList);
+				
+				moveToColumns(oldCategoriesList);
 				for (var i:int = 0; i< oldCategoriesList.length; i++){
-					moveToColumns(oldCategoriesList);
+					oldCategoriesList[i].number = 0;
 					removeFromList(oldCategoriesList[i], 'ROWS');
 				}
+				moveToRows(oldSeriesList);
 				for (var j:int = 0; j< oldSeriesList.length; j++){
-					moveToRows(oldSeriesList);
+					oldSeriesList[j].number = 0;
 					removeFromList(oldSeriesList[j], 'COLUMNS');
-				
 				}
 				getResults();
-				
-				//moveToRows(oldSeriesList);
 			}
 			
 			
@@ -1400,7 +1399,7 @@
 	</mx:Form>
 	<s:Button includeIn="Page4" x='220' y='180' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
 	<s:Button includeIn="Page6" x='850' y='240' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
-	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="Trash_Close()" ></s:Button>
+	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="switchAxis()" ></s:Button>
 	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
