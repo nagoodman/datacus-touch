@@ -29,7 +29,7 @@
 	</fx:DesignLayer>
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State3" 
-		x="-1090" y="100" alpha="0.79"/>
+		x="-990" y="100" alpha="0.79"/>
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
 											includeIn="State3"  
@@ -37,7 +37,7 @@
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
 										  includeIn="State3" 
-										  x="-955" y="100" alpha="0.79" />
+										  x="-795" y="100" alpha="0.79" />
 	
 	
 	

@@ -6,12 +6,12 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="LDLCBackground">
-		<s:Rect height="380" id="LevelsDLContainer" width="135" x="0" y="0">
+		<s:Rect height="380" id="LevelsDLContainer" width="195" x="0" y="0">
 		</s:Rect>
 	</fx:DesignLayer>
 	
 	<s:List id="levelsList"
-			width="125"
+			width="185"
 			height="490"
 			dragEnabled="true"
 			dragMoveEnabled="true"
