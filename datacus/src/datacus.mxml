@@ -655,8 +655,13 @@
 			
 			public function removeFromList(member:Object, listIdentifier:String):void
 			{
-				var memberIndex:int = member.number;
+				var memberIndex:int;
 				if (listIdentifier == 'ROWS'){
+					if (member.listLocation == 'COLUMNS'){
+						memberIndex = member.number;
+					}else{
+						memberIndex = categoriesList.getItemIndex(member);
+					}
 					categoriesList.removeItemAt(memberIndex);
 					if (member.newList == 'TRASH'){
 						removeFromGraph(member);
@@ -667,6 +672,11 @@
 					//results.send();
 				}
 				else if (listIdentifier == 'COLUMNS'){
+					if (member.listLocation == 'ROWS'){
+						memberIndex = member.number;
+					}else{
+						memberIndex = seriesList.getItemIndex(member);
+					}
 					seriesList.removeItemAt(memberIndex);
 					if (member.newList == 'TRASH'){
 						removeFromGraph(member);
@@ -681,15 +691,19 @@
 					//picker.LevelsDLContainer.levelsList.dataProvider.removeItemAt(memberIndex);
 				}
 				else if (listIdentifier == 'MEMBER1'){
+					memberIndex = picker.MembersDLContainer.membersLevel1.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel1.dataProvider.removeItemAt(memberIndex);
 				}
 				else if (listIdentifier == 'MEMBER2'){
+					memberIndex = picker.MembersDLContainer.membersLevel2.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel2.dataProvider.removeItemAt(memberIndex);
 				}
 				else if (listIdentifier == 'MEMBER3'){
+					memberIndex = picker.MembersDLContainer.membersLevel3.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel3.dataProvider.removeItemAt(memberIndex);
 				}
 				else if (listIdentifier == 'MEMBER4'){
+					memberIndex = picker.MembersDLContainer.membersLevel4.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel4.dataProvider.removeItemAt(memberIndex);
 				}
 			}
@@ -761,8 +775,10 @@
 					oldCategoriesList[i].number = 0;
 					removeFromList(oldCategoriesList[i], 'ROWS');
 				}
+				
 				moveToRows(oldSeriesList);
 				for (var j:int = 0; j< oldSeriesList.length; j++){
+					//var num2:int = seriesList.getItemIndex(seriesList[i]);
 					oldSeriesList[j].number = 0;
 					removeFromList(oldSeriesList[j], 'COLUMNS');
 				}
