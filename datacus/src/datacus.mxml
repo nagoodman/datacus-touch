@@ -681,7 +681,10 @@
 					if (member.newList == 'TRASH'){
 						removeFromGraph(member);
 					}
-					series.serList.dataProvider.removeItemAt(memberIndex);
+					if (member.dimension != "[Measures]"){
+						series.serList.dataProvider.removeItemAt(memberIndex);
+					}
+					
 					//find the correct url to remove items from query
 					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
 					//results.send();
