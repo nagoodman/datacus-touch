@@ -51,10 +51,10 @@
 					   alpha="0.2"
 					   />
 	</fx:DesignLayer>
-	<s:List id="setsList" 
-			width="300"
-			height="300"
-			x="570" y="-500"
+	<s:List id="setsList" width="130" height="90" x="5" y="5"
+			width.Sets2="300"
+			height.Sets2="300"
+			x.Sets2="570" y.Sets2="-500"
 			alpha="0.8" alpha.Sets1="0"
 			
 			dataProvider="{setsDB}"
@@ -100,6 +100,8 @@
 				</s:Parallel>
 				<s:Parallel target="{setsList}">
 					<s:Fade duration="500" startDelay="1600"/>
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="600"/>
+					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsButtonLabel}">
 					<s:Fade duration="500" startDelay="0"/>
@@ -120,6 +122,8 @@
 				</s:Parallel>
 				<s:Parallel target="{setsList}">
 					<s:Fade duration="500" startDelay="0"/>
+					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
+					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsButtonLabel}">
 					<s:Fade duration="500" startDelay="1600"/>
