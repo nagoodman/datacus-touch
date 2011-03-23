@@ -13,7 +13,7 @@
 	
 	<s:List x="10" y="10" width="900" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle"
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
@@ -39,7 +39,7 @@
 	</s:List>
 	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle"
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
@@ -64,7 +64,7 @@
 	</s:List>
 	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle"
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
@@ -90,7 +90,7 @@
 	
 	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle"
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
