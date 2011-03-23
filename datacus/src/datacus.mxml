@@ -666,7 +666,10 @@
 					if (member.newList == 'TRASH'){
 						removeFromGraph(member);
 					}
-					categories.catList.dataProvider.removeItemAt(memberIndex);
+					if (member.dimension != "[Measures]"){
+						categories.catList.dataProvider.removeItemAt(memberIndex);
+					}
+					
 					//find the correct url to remove items from query
 					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
 					//results.send();
@@ -777,14 +780,21 @@
 				for (var i:int = 0; i< oldCategoriesList.length; i++){
 					oldCategoriesList[i].number = 0;
 					removeFromList(oldCategoriesList[i], 'ROWS');
+					if (oldCategoriesList[i].dimension != '[Measures]'){
+						series.serDB.addItem(oldCategoriesList[i]);
+					}
 				}
 				
 				moveToRows(oldSeriesList);
 				for (var j:int = 0; j< oldSeriesList.length; j++){
-					//var num2:int = seriesList.getItemIndex(seriesList[i]);
 					oldSeriesList[j].number = 0;
 					removeFromList(oldSeriesList[j], 'COLUMNS');
+					if (oldSeriesList[j].dimension != '[Measures]'){
+						categories.catDB.addItem(oldSeriesList[j]);
+					}
 				}
+				
+				//categories.catDB = oldSeriesList;
 				getResults();
 			}
 			
@@ -798,71 +808,37 @@
 				var hierarchy:String;
 				var dimension:String;
 				var item:String;
-				/*if (members.listLocation == "ROWS"){
-					seriesList.addItem(members);
-					members.listLocation = 'COLUMNS';
-					members.itemMemberPosition = seriesList.length -1;
-					members.itemPosition = nextColumnItemPosition;
-					hierarchy = members.dimension;
+				for (var i:int = 0; i < members.length; i ++){
+					seriesList.addItem(members[i]);
+					members[i].listLocation = 'COLUMNS';
+					members[i].itemMemberPosition = seriesList.length -1;
+					members[i].itemPosition = nextColumnItemPosition;
+					hierarchy = members[i].dimension;
 					dimension = hierarchy.replace("[","");
 					dimension = dimension.replace("]","");
 					hierarchy = hierarchy.replace('[','%5B');
 					hierarchy = hierarchy.replace(']','%5D');
-					item = members.value;
+					item = members[i].value;
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
 					item = item.replace('[','%5B');
 					item = item.replace(']','%5D');
-					
-					if (members.selectionType == 'LEVEL'){
+						
+					if (members[i].selectionType == 'LEVEL'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 					}
-					if (members.selectionType == 'MEASURE'){
+					if (members[i].selectionType == 'MEASURE'){
 						removeFromGraph(currentMeasure);
 						removeFromGraph(defaultMeasure);
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
-						currentMeasure = members;
+						currentMeasure = members[i];
 					}
-					if (members.selectionType == 'MEMBER'){
+					if (members[i].selectionType == 'MEMBER'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
 					}
-				}
-				else{*/
-					for (var i:int = 0; i < members.length; i ++){
-						seriesList.addItem(members[i]);
-						members[i].listLocation = 'COLUMNS';
-						members[i].itemMemberPosition = seriesList.length -1;
-						members[i].itemPosition = nextColumnItemPosition;
-						hierarchy = members[i].dimension;
-						dimension = hierarchy.replace("[","");
-						dimension = dimension.replace("]","");
-						hierarchy = hierarchy.replace('[','%5B');
-						hierarchy = hierarchy.replace(']','%5D');
-						item = members[i].value;
-						item = item.replace('[','%5B');
-						item = item.replace(']','%5D');
-						item = item.replace('[','%5B');
-						item = item.replace(']','%5D');
-						item = item.replace('[','%5B');
-						item = item.replace(']','%5D');
-						
-						if (members[i].selectionType == 'LEVEL'){
-							toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-						}
-						if (members[i].selectionType == 'MEASURE'){
-							removeFromGraph(currentMeasure);
-							removeFromGraph(defaultMeasure);
-							toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
-							currentMeasure = members[i];
-						}
-						if (members[i].selectionType == 'MEMBER'){
-							toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
-						}
-				//}
 				
-					
 					var params:Object = {};
 					params["position"] = nextColumnItemPosition;
 					params["memberposition"] = seriesList.length -1;
@@ -1418,7 +1394,7 @@
 	</mx:Form>
 	<s:Button includeIn="Page4" x='220' y='180' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
 	<s:Button includeIn="Page6" x='850' y='240' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
-	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="switchAxis()" ></s:Button>
+	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="Trash_Close()" ></s:Button>
 	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
