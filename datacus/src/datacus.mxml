@@ -34,6 +34,7 @@
 			import mx.managers.PopUpManager;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
 			
 			import services.create_query.*;
 			
@@ -437,7 +438,8 @@
 					else{
 						obj.label = arr[i].caption;
 						obj.value = arr[i].uniqueName;
-						dimensionsAC.addItem(obj);
+						var objProx:ObjectProxy = new ObjectProxy(obj);
+						dimensionsAC.addItem(objProx);
 					}
 				}
 				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
@@ -481,7 +483,8 @@
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					currentMeasure = arr[0].uniqueName;
-					measuresAC.addItem(obj);	
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					measuresAC.addItem(objProx);	
 				}
 				currentMeasure = measuresAC[0];
 				defaultMeasure = measuresAC[0];
@@ -503,7 +506,8 @@
 					obj.listLocation = 'LEVEL';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
-					levelsAC.addItem(obj);	
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					levelsAC.addItem(objProx);	
 				}
 				picker.LevelsDLContainer.levelsList.dataProvider = levelsAC;
 				getMembersFromLevels(levelsAC);
@@ -568,7 +572,8 @@
 					obj.listLocation = 'MEMBER1';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
 				}
 				picker.MembersDLContainer.membersLevel1.dataProvider = membersAC;
 			}
@@ -587,7 +592,8 @@
 					obj.listLocation = 'MEMBER2';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
 				}
 				picker.MembersDLContainer.membersLevel2.dataProvider = membersAC;
 			}
@@ -606,7 +612,8 @@
 					obj.listLocation = 'MEMBER3';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
 				}
 				
 				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
@@ -625,7 +632,8 @@
 					obj.listLocation = 'MEMBER4';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
 				}
 				picker.MembersDLContainer.membersLevel4.dataProvider = membersAC;
 			}
