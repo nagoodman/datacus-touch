@@ -4,6 +4,7 @@
 
 .label{
 	background-color:#cccccc;
+	background: url(../assets/picker_panel.png);
 	color:#223355;
 	font-size:36;
 	paddingBottom:4;
@@ -11,6 +12,7 @@
 	paddingRight:4;
 	paddingTop:4;
 }
+
 
 .container {
 	background-color: red;

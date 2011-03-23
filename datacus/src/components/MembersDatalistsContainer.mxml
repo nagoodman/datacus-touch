@@ -28,7 +28,10 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}" styleName="label" />
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5' textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						</s:BorderContainer>
+						
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
@@ -51,7 +54,9 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}" styleName="label" />
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5' textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
@@ -74,7 +79,9 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}" styleName="label" />
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5'  textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
@@ -98,7 +105,9 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}" styleName="label" />
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

@@ -6,13 +6,13 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="LDLCBackground">
-		<s:Rect height="380" id="LevelsDLContainer" width="195" x="0" y="0">
+		<s:Rect height="500" id="LevelsDLContainer" width="195" x="0" y="0">
 		</s:Rect>
 	</fx:DesignLayer>
 	
 	<s:List id="levelsList"
 			width="185"
-			height="490"
+			height="480"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			allowMultipleSelection="true"
@@ -20,9 +20,9 @@
 			skinClass="skins.MyDropSkin" >
 		
 		<s:layout>
-			<s:VerticalLayout horizontalAlign="left"
-							  paddingLeft="5"
-							  paddingTop="20"/>
+			<s:VerticalLayout horizontalAlign='center'
+							  paddingTop="10"
+								/>
 		</s:layout>
 		
 		<s:itemRenderer>
@@ -31,9 +31,21 @@
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0"/>
-						</s:layout>
-						<s:Label text="{data.label}"/>
+												paddingLeft="0" paddingTop="0"/>
+						</s:layout>	
+						
+						<s:BorderContainer  height="90" width="155" cornerRadius="10" borderWeight="2"  >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#90bdd1" alpha=".8" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="145" height='90' x='5' textAlign="center" fontSize="25" verticalAlign="middle"/>
+						</s:BorderContainer>
+						
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
