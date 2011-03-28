@@ -27,6 +27,8 @@
 		
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x="40" y="300" includeIn="State1,State2" />
 	</fx:DesignLayer>
+	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100"/>
+	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State3" 
 		x="-990" y="105" alpha="0.79"/>
