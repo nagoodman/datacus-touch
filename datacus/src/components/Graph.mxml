@@ -2,6 +2,200 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.charts.BarChart;
+			import mx.charts.CategoryAxis;
+			import mx.charts.ColumnChart;
+			import mx.charts.Legend;
+			import mx.charts.LineChart;
+			import mx.charts.series.BarSeries;
+			import mx.charts.series.ColumnSeries;
+			import mx.charts.series.LineSeries;
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			
+			[Bindable]
+			private var tempChartData:ArrayCollection;
+			[Bindable]
+			public var myChart:ColumnChart;
+			[bindable]
+			public var myLineChart:LineChart;
+			[Bindable]
+			public var series1:BarSeries;
+			[Bindable]
+			public var series2:BarSeries;
+			[Bindable]
+			public var series3:BarSeries;
+			[Bindable]
+			public var legend1:Legend;
+			[Bindable]
+			private var tempColHeadArray:ArrayCollection;
+			[Bindable]
+			private var tempRowHeadArray:ArrayCollection;
+			[Bindable]
+			private var tempDataCellArray:ArrayCollection;
+			
+			public function switchAxis():void{
+				/*Retrieve data from variables in main file*/
+				var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
+				var oldCategoriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.categoriesList);
+				
+				FlexGlobals.topLevelApplication.moveToColumns(oldCategoriesList);
+				for (var i:int = 0; i< oldCategoriesList.length; i++){
+					oldCategoriesList[i].number = 0;
+					FlexGlobals.topLevelApplication.removeFromList(oldCategoriesList[i], 'ROWS');
+					if (oldCategoriesList[i].dimension != '[Measures]'){
+						FlexGlobals.topLevelApplication.series.serDB.addItem(oldCategoriesList[i]);
+					}
+				}
+				FlexGlobals.topLevelApplication.moveToRows(oldSeriesList);
+				for (var j:int = 0; j< oldSeriesList.length; j++){
+					oldSeriesList[j].number = 0;
+					FlexGlobals.topLevelApplication.removeFromList(oldSeriesList[j], 'COLUMNS');
+					if (oldSeriesList[j].dimension != '[Measures]'){
+						FlexGlobals.topLevelApplication.categories.catDB.addItem(oldSeriesList[j]);
+					}
+				}
+				
+				FlexGlobals.topLevelApplication.getResults();
+			}
+			
+			public function updateGraph():void
+			{
+				/*Retrieve data from variables in main file*/
+				tempChartData = FlexGlobals.topLevelApplication.chartData;
+				tempColHeadArray = FlexGlobals.topLevelApplication.columnHeaderArray;
+				tempRowHeadArray = FlexGlobals.topLevelApplication.rowHeaderArray;
+				tempDataCellArray = FlexGlobals.topLevelApplication.dataCellArray;
+				
+				/*Create Chart and set basic properties*/
+				myChart = new ColumnChart(); 
+				myChart.showDataTips = true;
+				myChart.dataProvider = tempChartData;
+				myChart.height = 550;
+				myChart.width = 1070;
+				
+				/*Define the category axis */
+				var hAxis:CategoryAxis = new CategoryAxis();
+				if (tempChartData[0].ROW_HEADER){
+					hAxis.categoryField = "ROW_HEADER";
+				}else{
+					hAxis.categoryField = "COLUMN_HEADER";
+				}
+				hAxis.dataProvider = tempChartData;
+				myChart.horizontalAxis = hAxis;
+				
+				var tempSeriesCol:ColumnSeries;
+				var tempSeriesRow:ColumnSeries;
+				var mySeries:Array=new Array();
+				
+				/*Add the series*/
+				if (tempChartData[0].ROW_HEADER){
+					for( var j:int=0; j< tempColHeadArray.length; j++){
+						tempSeriesCol = new ColumnSeries();
+						tempSeriesCol.dataProvider = tempChartData;
+						tempSeriesCol.yField=tempColHeadArray[j].value;
+						tempSeriesCol.xField = "ROW_HEADER";
+						tempSeriesCol.displayName=tempColHeadArray[j].value;
+						mySeries.push(tempSeriesCol);
+					}
+				}else{
+					for( var k:int=0; k< tempColHeadArray.length; k++){
+						tempSeriesRow = new ColumnSeries();
+						tempSeriesRow.dataProvider = tempChartData;
+						tempSeriesRow.yField=tempColHeadArray[k].value;
+						tempSeriesRow.xField = "COLUMN_HEADER";
+						tempSeriesRow.displayName=tempColHeadArray[k].value;
+						mySeries.push(tempSeriesRow);
+					}
+				}
+				
+				
+				myChart.series = mySeries;
+				
+				/*Create a legend*/
+				legend1 = new Legend();
+				legend1.dataProvider = myChart;
+				legend1.direction = "horizontal";
+				
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.addElement(legend1);
+				FlexGlobals.topLevelApplication.graph.addElement(myChart);
+				
+			}	
+			
+			
+			public function updateLineGraph():void
+			{
+				/*Retrieve data from variables in main file*/
+				tempChartData = FlexGlobals.topLevelApplication.chartData;
+				tempColHeadArray = FlexGlobals.topLevelApplication.columnHeaderArray;
+				tempRowHeadArray = FlexGlobals.topLevelApplication.rowHeaderArray;
+				tempDataCellArray = FlexGlobals.topLevelApplication.dataCellArray;
+				
+				/*Create Chart and set basic properties*/
+				myLineChart = new LineChart(); 
+				myLineChart.showDataTips = true;
+				myLineChart.dataProvider = tempChartData;
+				myLineChart.height = 550;
+				myLineChart.width = 1070;
+				
+				/*Define the category axis */
+				var hAxis:CategoryAxis = new CategoryAxis();
+				if (tempChartData[0].ROW_HEADER){
+					hAxis.categoryField = "ROW_HEADER";
+				}else{
+					hAxis.categoryField = "COLUMN_HEADER";
+				}
+				hAxis.dataProvider = tempChartData;
+				myLineChart.horizontalAxis = hAxis;
+				
+				var tempSeriesCol:LineSeries;
+				var tempSeriesRow:LineSeries;
+				var mySeries:Array=new Array();
+				
+				/*Add the series*/
+				if (tempChartData[0].ROW_HEADER){
+					for( var j:int=0; j< tempColHeadArray.length; j++){
+						tempSeriesCol = new LineSeries();
+						tempSeriesCol.dataProvider = tempChartData;
+						tempSeriesCol.yField=tempColHeadArray[j].value;
+						tempSeriesCol.xField = "ROW_HEADER";
+						tempSeriesCol.displayName=tempColHeadArray[j].value;
+						mySeries.push(tempSeriesCol);
+					}
+				}else{
+					for( var k:int=0; k< tempColHeadArray.length; k++){
+						tempSeriesRow = new LineSeries();
+						tempSeriesRow.dataProvider = tempChartData;
+						tempSeriesRow.yField=tempColHeadArray[k].value;
+						tempSeriesRow.xField = "COLUMN_HEADER";
+						tempSeriesRow.displayName=tempColHeadArray[k].value;
+						mySeries.push(tempSeriesRow);
+					}
+				}
+				
+				
+				myLineChart.series = mySeries;
+				
+				/*Create a legend*/
+				legend1 = new Legend();
+				legend1.dataProvider = myLineChart;
+				legend1.direction = "horizontal";
+				
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.addElement(legend1);
+				FlexGlobals.topLevelApplication.graph.addElement(myLineChart);
+				
+			}
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
