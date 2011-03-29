@@ -4,9 +4,13 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script>
 		<![CDATA[
-			//imports classes needed for component
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
 			import mx.core.FlexGlobals;
 			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
+			
 			import spark.events.RendererExistenceEvent;
 			
 			//adds a click event handler to each item added to the Dimensions list
@@ -19,7 +23,46 @@
 				var currentDimension:String = FlexGlobals.topLevelApplication.currentDimension;
 				var newDimension:String = this.dimensionsList.selectedItems[0].label; 
 				currentDimension = newDimension;
-				FlexGlobals.topLevelApplication.createLevels(currentDimension, currentDimension);
+				
+				FlexGlobals.topLevelApplication.picker.createLevels(currentDimension, currentDimension);
+				//FlexGlobals.topLevelApplication.createLevels(currentDimension, currentDimension);
+			}
+			
+			//Populates the dimension list
+			public function getDimensions(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				FlexGlobals.topLevelApplication.dimensionsAC = new ArrayCollection();
+				FlexGlobals.topLevelApplication.measuresAC = new ArrayCollection();
+				var tempDimensionsAC:ArrayCollection = FlexGlobals.topLevelApplication.dimensionsAC;
+				var tempMeasuresAC:ArrayCollection = FlexGlobals.topLevelApplication.measuresAC;
+				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					if(arr[i].caption == 'Measures'){
+						obj.label = arr[i].caption;
+						obj.value = arr[i].uniqueName;
+						tempMeasuresAC.addItem(obj);
+					}
+					else{
+						obj.label = arr[i].caption;
+						obj.value = arr[i].uniqueName;
+						var objProx:ObjectProxy = new ObjectProxy(obj);
+						tempDimensionsAC.addItem(objProx);
+					}
+				}
+				dimensionsList.dataProvider = tempDimensionsAC;
+				if (arr.length != 0){
+					var dimension:String = tempDimensionsAC[0].label;
+					var hierarchy:String = tempDimensionsAC[0].label;
+					FlexGlobals.topLevelApplication.callMeasures.url= tempServerID+tempQueryName+"/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel";
+					FlexGlobals.topLevelApplication.callMeasures.send();
+					FlexGlobals.topLevelApplication.currentDimension = dimension;
+					FlexGlobals.topLevelApplication.currentHierarchy = hierarchy;
+					FlexGlobals.topLevelApplication.createLevels(FlexGlobals.topLevelApplication.currentDimension, FlexGlobals.topLevelApplication.currentHierarchy);
+				}
 			}
 			
 		]]>

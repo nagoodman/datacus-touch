@@ -7,10 +7,17 @@
 		<![CDATA[
 			//behavior: select measures type via tap or scroll if too many displayed
 			//connections: listen to the categories and series for types of measures
+			import com.adobe.serialization.json.JSON;
 			import tuio.TouchEvent;
+			import mx.collections.ArrayCollection;
 			import flash.display.DisplayObject;
 			import mx.core.FlexGlobals;
 			import spark.events.RendererExistenceEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
+			
+			[bindable]
+			public var measuresAC:ArrayCollection = new ArrayCollection();
 			
 			//I am not defining these correctly or I can only use touch on the touch screen
 			protected function init():void {			
@@ -33,6 +40,31 @@
 				currentMeasure = newMeasure;
 				var items:Object = this.measuresList.selectedItems as Object;
 				FlexGlobals.topLevelApplication.moveToColumns(items);
+			}
+			
+			//retrieves the first list in the dimensions array and stores in the Measures panel (consistent across cubes)
+			public function getMeasures(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				
+				measuresAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEASURE';
+					obj.listLocation = 'MEASURE';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					FlexGlobals.topLevelApplication.currentMeasure = arr[0].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					measuresAC.addItem(objProx);	
+				}
+				FlexGlobals.topLevelApplication.currentMeasure = measuresAC[0];
+				FlexGlobals.topLevelApplication.defaultMeasure = measuresAC[0];
+				measuresList.dataProvider = measuresAC;
+				
 			}
 			
 		]]>

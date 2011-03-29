@@ -174,15 +174,15 @@
 				const state:String = currentState;
 				if ( state == 'Page3' ) {
 					currentState='Page4';
-					populatePicker();
+					picker.populatePicker();
 				}
 				if (state == 'Page5'){
 					currentState='Page4';
-					populatePicker();
+					picker.populatePicker();
 				}
 				if (state =='Page6'){
 					currentState="Page4";
-					populatePicker();
+					picker.populatePicker();
 				}
 			}
 			
@@ -276,7 +276,7 @@
 			private var cubeArray:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var queryName:String;
+			public var queryName:String = 'chartdata';
 			
 			[Bindable]
 			public var currentQueryName:String = new String();
@@ -359,8 +359,10 @@
 				//series.serList.dataProvider = new ArrayList;
 				
 				//CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
-				queryName = QueryName.text;
-				currentQueryName = QueryName.text;
+				//queryName = QueryName.text;
+				//currentQueryName = QueryName.text;
+				currentQueryName = new String();
+				currentQueryName = 'chartdata';
 //				var popup:TitleWindow = new TitleWindow();
 //				popup.showCloseButton = true;
 //				popup.addEventListener(Event.CLOSE, closeTitleWindow);
@@ -427,106 +429,6 @@
 			[Bindable]
 			public var defaultMeasure:Object = new Object();
 			
-			/*Functions that populate the picker and handle changes within the picker*/
-			public function populatePicker():void{
-				queryName = new String();
-				queryName = "chartdata";
-				currentQueryName = "chartdata";
-				callDimensions.url= serverIDJSON+queryName+"/axis/UNUSED/"
-				callDimensions.send()
-			}
-			
-			//Populates the dimension list
-			public function getDimensions(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				dimensionsAC = new ArrayCollection();
-				measuresAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					if(arr[i].caption == 'Measures'){
-						obj.label = arr[i].caption;
-						obj.value = arr[i].uniqueName;
-						measuresAC.addItem(obj);
-					}
-					else{
-						obj.label = arr[i].caption;
-						obj.value = arr[i].uniqueName;
-						var objProx:ObjectProxy = new ObjectProxy(obj);
-						dimensionsAC.addItem(objProx);
-					}
-				}
-				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
-				if (arr.length != 0){
-					var dimension:String = dimensionsAC[0].label;
-					var hierarchy:String = dimensionsAC[0].label;
-					callMeasures.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel";
-					callMeasures.send();
-					currentDimension = dimension;
-					currentHierarchy = hierarchy;
-					createLevels(currentDimension, currentHierarchy);
-				}
-			}
-			
-			//forms the url string to retrieve the levels of a query
-			public function createLevels(dimension:String, hierarchy:String):void{
-				currentDimension = dimension;
-				currentHierarchy = hierarchy;
-				picker.MembersDLContainer.membersLevel1.dataProvider = null;
-				picker.MembersDLContainer.membersLevel2.dataProvider = null;
-				picker.MembersDLContainer.membersLevel3.dataProvider = null;
-				picker.MembersDLContainer.membersLevel4.dataProvider = null;
-				
-				callLevels.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
-				callLevels.send();
-			}
-			
-			//retrieves the first list in the dimensions array and stores in the Measures panel (consistent across cubes)
-			public function getMeasures(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				
-				measuresAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEASURE';
-					obj.listLocation = 'MEASURE';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					currentMeasure = arr[0].uniqueName;
-					var objProx:ObjectProxy = new ObjectProxy(obj);
-					measuresAC.addItem(objProx);	
-				}
-				currentMeasure = measuresAC[0];
-				defaultMeasure = measuresAC[0];
-				measures.measuresList.dataProvider = measuresAC;
-				
-			}
-			
-			//populates the levels list within the picker for selection
-			public function getLevels(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				levelsAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].hierarchy;
-					obj.selectionType = 'LEVEL';
-					obj.listLocation = 'LEVEL';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					var objProx:ObjectProxy = new ObjectProxy(obj);
-					levelsAC.addItem(objProx);	
-				}
-				picker.LevelsDLContainer.levelsList.dataProvider = levelsAC;
-				picker.MembersDLContainer.getMembersFromLevels(levelsAC);
-			}
 			
 			//Removes the graphical representation of data from a given list and can remove an item from the graph
 			public function removeFromList(member:Object, listIdentifier:String):void
@@ -872,15 +774,15 @@
 		<s:HTTPService
 			id="callDimensions"
 			resultFormat="text"
-			result="getDimensions(event)" />
+			result="picker.DimensionsDLContainer.getDimensions(event)" />
 		<s:HTTPService
 			id="callMeasures"
 			resultFormat="text"
-			result="getMeasures(event)" />
+			result="measures.getMeasures(event)" />
 		<s:HTTPService
 			id="callLevels"
 			resultFormat="text"
-			result="getLevels(event)" />
+			result="picker.LevelsDLContainer.getLevels(event)" />
 		<s:HTTPService
 			id="callMembers1"
 			resultFormat="text"

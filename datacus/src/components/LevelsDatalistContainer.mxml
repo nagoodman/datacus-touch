@@ -2,6 +2,44 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
+			
+			//populates the levels list within the picker for selection
+			public function getLevels(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				FlexGlobals.topLevelApplication.levelsAC = new ArrayCollection();
+				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].hierarchy;
+					obj.selectionType = 'LEVEL';
+					obj.listLocation = 'LEVEL';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					tempLevelsAC.addItem(objProx);	
+				}
+				levelsList.dataProvider = tempLevelsAC;
+				FlexGlobals.topLevelApplication.picker.MembersDLContainer.getMembersFromLevels(tempLevelsAC);
+			}
+			
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>

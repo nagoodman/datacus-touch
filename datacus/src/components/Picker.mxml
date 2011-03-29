@@ -6,11 +6,40 @@
 	<fx:Script>
 		<![CDATA[
 			//imports classes needed for component
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
 			
 			//initial function to set state to State1 upon load
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
 				currentState='State1';
+			}
+			
+			
+			/*Functions that populate the picker and handle changes within the picker*/
+			public function populatePicker():void{
+				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				FlexGlobals.topLevelApplication.callDimensions.url= tempServerID+tempQueryName+"/axis/UNUSED/"
+				FlexGlobals.topLevelApplication.callDimensions.send()
+			}
+			
+			//forms the url string to retrieve the levels of a query
+			public function createLevels(dimension:String, hierarchy:String):void{
+				FlexGlobals.topLevelApplication.currentDimension = dimension;
+				FlexGlobals.topLevelApplication.currentHierarchy = hierarchy;
+				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				MembersDLContainer.membersLevel1.dataProvider = null;
+				MembersDLContainer.membersLevel2.dataProvider = null;
+				MembersDLContainer.membersLevel3.dataProvider = null;
+				MembersDLContainer.membersLevel4.dataProvider = null;
+				FlexGlobals.topLevelApplication.callLevels.url= tempServerID+tempQueryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
+				FlexGlobals.topLevelApplication.callLevels.send();
 			}
 		]]>
 	</fx:Script>

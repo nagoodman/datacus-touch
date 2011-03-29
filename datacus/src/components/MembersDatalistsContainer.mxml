@@ -73,7 +73,6 @@
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
-				//membersAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
