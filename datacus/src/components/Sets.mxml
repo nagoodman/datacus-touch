@@ -11,8 +11,8 @@
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
-			import mx.events.FlexEvent;
 			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
 			
@@ -25,6 +25,29 @@
 			
 			protected function Sets_creationCompleteHandler(event:FlexEvent):void{
 				currentState = 'Sets1';
+			}
+			
+			//Retrieves a list of active sets to be displayed in the Active Sets Menu
+			public function retrieveActiveSets():void{
+				FlexGlobals.topLevelApplication.retrieveSets.url = FlexGlobals.topLevelApplication.serverIDJSON;
+				FlexGlobals.topLevelApplication.retrieveSets.send()
+			}
+			
+			//Populates the sets list within the Active Sets Menu
+			public function getSets(event:ResultEvent):void{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				var tempSetsAC:ArrayCollection = FlexGlobals.topLevelApplication.setsAC;
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].name;
+					obj.axis = arr[i].axis;
+					obj.number = i;
+					obj.value = arr[i].name;
+					tempSetsAC.addItem(obj);	
+				}
+				setsList.dataProvider = tempSetsAC;
+				
 			}
 			
 			

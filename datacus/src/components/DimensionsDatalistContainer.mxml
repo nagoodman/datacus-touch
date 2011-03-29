@@ -42,7 +42,7 @@
 			rendererAdd="addClick(event)"
 			skinClass="skins.MyDropSkin" >
 		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle"
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="5" paddingRight="5"
 								paddingTop="0"/>
 		</s:layout>

@@ -24,6 +24,7 @@
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.managers.PopUpManager;
+			import mx.messaging.channels.StreamingAMFChannel;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
@@ -47,13 +48,13 @@
 			
 			protected var mainStage:Stage;
 			[bindable]
-			public var serverIDBase:String; //= "http://localhost:8080/saiku/";
+			public var serverIDBase:String = new String(); //= "http://localhost:8080/saiku/";
 			[bindable]
-			public var userID:String; // = 'admin';
+			public var userID:String = new String(); // = 'admin';
 			[bindable]
-			public var serverIDRest:String; //= "http://localhost:8080/saiku/rest/saiku/"+userID+"/query/";
+			public var serverIDRest:String = new String(); //= "http://localhost:8080/saiku/rest/saiku/"+userID+"/query/";
 			[bindable]
-			public var serverIDJSON:String;// = "http://localhost:8080/saiku/json/saiku/"+userID+"/query/";
+			public var serverIDJSON:String = new String();// = "http://localhost:8080/saiku/json/saiku/"+userID+"/query/";
 			
 			/*Variables used with touch gesture handling*/
 			//public var tc:TuioClient;
@@ -232,7 +233,7 @@
 			//Opens the sets menu by changing the state
 			public function Sets_Open():void{
 				const state:String = currentState;
-				retrieveActiveSets();
+				sets.retrieveActiveSets();
 				if (state =='Page3'){
 					currentState="Page6";
 				}
@@ -276,6 +277,9 @@
 			
 			[Bindable]
 			public var queryName:String;
+			
+			[Bindable]
+			public var currentQueryName:String = new String();
 			
 			//Fills the home menu based off information retrieved from the server
 			private function fillHomeMenu(event:ResultEvent):void{
@@ -356,6 +360,7 @@
 				
 				//CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				queryName = QueryName.text;
+				currentQueryName = QueryName.text;
 //				var popup:TitleWindow = new TitleWindow();
 //				popup.showCloseButton = true;
 //				popup.addEventListener(Event.CLOSE, closeTitleWindow);
@@ -393,36 +398,40 @@
 			private var destDB:ArrayCollection=new ArrayCollection();
 			
 			[Bindable]
-			public var dimensionsAC:ArrayCollection;
+			public var dimensionsAC:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var levelsAC:ArrayCollection;
+			public var levelsAC:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var membersAC:ArrayCollection;
+			public var membersAC:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var measuresAC:ArrayCollection;
+			public var measuresAC:ArrayCollection = new ArrayCollection();
+			
+			[bindable]
+			public var setsAC:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var currentDimension:String;
+			public var currentDimension:String = new String();
 			
 			[Bindable]
-			public var currentHierarchy:String;
+			public var currentHierarchy:String = new String();
 			
 			[Bindable]
-			public var currentLevel:int;
+			public var currentLevel:int = new int();
 			
 			[Bindable]
-			public var currentMeasure:Object;
+			public var currentMeasure:Object = new Object();
 			
 			[Bindable]
-			public var defaultMeasure:Object;
+			public var defaultMeasure:Object = new Object();
 			
 			/*Functions that populate the picker and handle changes within the picker*/
 			public function populatePicker():void{
 				queryName = new String();
 				queryName = "chartdata";
+				currentQueryName = "chartdata";
 				callDimensions.url= serverIDJSON+queryName+"/axis/UNUSED/"
 				callDimensions.send()
 			}
@@ -516,160 +525,7 @@
 					levelsAC.addItem(objProx);	
 				}
 				picker.LevelsDLContainer.levelsList.dataProvider = levelsAC;
-				getMembersFromLevels(levelsAC);
-			}
-			
-			//forms three strings to retrieve the three levels of members initially visible within the picker
-			public function getMembersFromLevels(levels:ArrayCollection):void
-			{
-				var i:int = 0;
-				if(levels.length > 4){
-					for (i = 0; i < 4; i++){
-						if (i==0){
-							callMembers1.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers1.send();
-						}
-						if (i==1){
-							callMembers2.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers2.send();
-						}
-						if (i==2){
-							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers3.send();
-						}
-						if (i==3){
-							callMembers4.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers4.send();
-						}
-					}
-				}else{
-					for (i = 0; i < levels.length; i ++){
-						if (i==0){
-							callMembers1.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers1.send();
-						}
-						if (i==1){
-							callMembers2.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers2.send();
-						}
-						if (i==2){
-							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers3.send();
-						}
-						if (i==3){
-							callMembers4.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers4.send();
-						}
-					}			
-				}		
-			}
-			
-			//populates the first members list within the picker
-			public function getMembers1(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEMBER';
-					obj.listLocation = 'MEMBER1';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					var objProx:ObjectProxy = new ObjectProxy(obj);
-					membersAC.addItem(objProx);	
-				}
-				picker.MembersDLContainer.membersLevel1.dataProvider = membersAC;
-			}
-			
-			//populates the second members list within the picker
-			public function getMembers2(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEMBER';
-					obj.listLocation = 'MEMBER2';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					var objProx:ObjectProxy = new ObjectProxy(obj);
-					membersAC.addItem(objProx);	
-				}
-				picker.MembersDLContainer.membersLevel2.dataProvider = membersAC;
-			}
-			
-			//populates the third members list within the picker
-			public function getMembers3(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEMBER';
-					obj.listLocation = 'MEMBER3';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					var objProx:ObjectProxy = new ObjectProxy(obj);
-					membersAC.addItem(objProx);	
-				}
-				
-				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
-			}
-			
-			//Populates the fourth level of members within the Picker
-			public function getMembers4(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEMBER';
-					obj.listLocation = 'MEMBER4';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					var objProx:ObjectProxy = new ObjectProxy(obj);
-					membersAC.addItem(objProx);	
-				}
-				picker.MembersDLContainer.membersLevel4.dataProvider = membersAC;
-			}
-			
-			//Retrieves a list of active sets to be displayed in the Active Sets Menu
-			public function retrieveActiveSets():void{
-				retrieveSets.url= serverIDJSON;
-				retrieveSets.send()
-			}
-			
-			//Array Collection variable that holds the list of active sets
-			[bindable]
-			public var setsAC:ArrayCollection;
-			
-			//Populates the sets list within the Active Sets Menu
-			public function getSets(event:ResultEvent):void{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				setsAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].name;
-					obj.axis = arr[i].axis;
-					obj.number = i;
-					obj.value = arr[i].name;
-					setsAC.addItem(obj);	
-				}
-				sets.setsList.dataProvider = setsAC;
-				
+				picker.MembersDLContainer.getMembersFromLevels(levelsAC);
 			}
 			
 			//Removes the graphical representation of data from a given list and can remove an item from the graph
@@ -1012,7 +868,7 @@
 		<s:HTTPService
 			id="retrieveSets"
 			resultFormat="text" method="GET"
-			result="getSets(event)"/>
+			result="sets.getSets(event)"/>
 		<s:HTTPService
 			id="callDimensions"
 			resultFormat="text"
@@ -1028,19 +884,19 @@
 		<s:HTTPService
 			id="callMembers1"
 			resultFormat="text"
-			result="getMembers1(event)" />
+			result="picker.MembersDLContainer.getMembers1(event)" />
 		<s:HTTPService
 			id="callMembers2"
 			resultFormat="text"
-			result="getMembers2(event)" />
+			result="picker.MembersDLContainer.getMembers2(event)" />
 		<s:HTTPService
 			id="callMembers3"
 			resultFormat="text"
-			result="getMembers3(event)" />
+			result="picker.MembersDLContainer.getMembers3(event)" />
 		<s:HTTPService
 			id="callMembers4"
 			resultFormat="text"
-			result="getMembers4(event)" />
+			result="picker.MembersDLContainer.getMembers4(event)" />
 		
 		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
 					   method="POST" >

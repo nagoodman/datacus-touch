@@ -27,7 +27,7 @@
 		
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x="40" y="300" includeIn="State1,State2" />
 	</fx:DesignLayer>
-	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100"/>
+	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100" />
 	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State3" 
@@ -35,7 +35,7 @@
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
 											includeIn="State3"  
-											x="-880" y="20" alpha="0.79"/>
+											x="-795" y="20" alpha="0.79"/>
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
 										  includeIn="State3" 
@@ -57,6 +57,9 @@
 					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
 				<s:Parallel target="{LevelsDLContainer}">
+					<s:Fade duration="500" startDelay="1300"/>
+				</s:Parallel>
+				<s:Parallel target="{PickerClose}">
 					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
 				<s:Parallel target="{PickerLabel}">
@@ -99,6 +102,9 @@
 				<s:Parallel target="{LevelsDLContainer}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
+				<s:Parallel target="{PickerClose}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
 				<s:Parallel target="{PickerLabel}">
 					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
@@ -117,6 +123,9 @@
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{LevelsDLContainer}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{PickerClose}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{PickerLabel}">
