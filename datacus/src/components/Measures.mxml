@@ -7,10 +7,17 @@
 		<![CDATA[
 			//behavior: select measures type via tap or scroll if too many displayed
 			//connections: listen to the categories and series for types of measures
+			import com.adobe.serialization.json.JSON;
 			import tuio.TouchEvent;
+			import mx.collections.ArrayCollection;
 			import flash.display.DisplayObject;
 			import mx.core.FlexGlobals;
 			import spark.events.RendererExistenceEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
+			
+			[bindable]
+			public var measuresAC:ArrayCollection = new ArrayCollection();
 			
 			//I am not defining these correctly or I can only use touch on the touch screen
 			protected function init():void {			
@@ -35,6 +42,31 @@
 				FlexGlobals.topLevelApplication.moveToColumns(items);
 			}
 			
+			//retrieves the first list in the dimensions array and stores in the Measures panel (consistent across cubes)
+			public function getMeasures(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				
+				measuresAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEASURE';
+					obj.listLocation = 'MEASURE';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					FlexGlobals.topLevelApplication.currentMeasure = arr[0].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					measuresAC.addItem(objProx);	
+				}
+				FlexGlobals.topLevelApplication.currentMeasure = measuresAC[0];
+				FlexGlobals.topLevelApplication.defaultMeasure = measuresAC[0];
+				measuresList.dataProvider = measuresAC;
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Style source="../skins/style.css" />
@@ -42,7 +74,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="500" width="140" skinClass="skins.Panel" styleName="container" />
+		<s:SkinnableContainer height="620" width="140" skinClass="skins.Panel" styleName="container" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="MeasuresLabel" tabStops="S0 S50 S100" text="Measures" x="25" y="5"/>
 		<s:BitmapImage id="img"
 					   source="@Embed('assets/measures_bg.png')"
@@ -51,16 +83,16 @@
 	</fx:DesignLayer>
 	<s:List id="measuresList"
 			width="130"
-			height="470"
+			height="590"
 			x="5" y="25"
 			rendererAdd="addClick(event)"
 			styleName="container"
 			skinClass="skins.MyDropSkin">
 		
 		<s:layout>
-			<s:VerticalLayout horizontalAlign="left"
-							  paddingLeft="5"
-							  paddingTop="5"/>
+			<s:VerticalLayout horizontalAlign="center"
+							  paddingLeft="0"
+							  paddingTop="10" paddingBottom="10"/>
 		</s:layout>
 		
 		<s:itemRenderer>
@@ -71,7 +103,17 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:BorderContainer  height="50" width="105" cornerRadius="4" borderWeight="2"  >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color="#e66a6a" alpha=".5" />
+									<s:GradientEntry color="#d61111" alpha=".5" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

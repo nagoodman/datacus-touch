@@ -14,15 +14,8 @@
 			import com.adobe.serialization.json.JSON;
 			
 			import flash.display.Stage;
+			import flash.utils.*;
 			
-			import mx.charts.BarChart;
-			import mx.charts.CategoryAxis;
-			import mx.charts.ColumnChart;
-			import mx.charts.Legend;
-			import mx.charts.LineChart;
-			import mx.charts.series.BarSeries;
-			import mx.charts.series.ColumnSeries;
-			import mx.charts.series.LineSeries;
 			import mx.collections.ArrayCollection;
 			import mx.collections.ArrayList;
 			import mx.containers.TitleWindow;
@@ -31,8 +24,10 @@
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.managers.PopUpManager;
+			import mx.messaging.channels.StreamingAMFChannel;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
 			
 			import services.create_query.*;
 			
@@ -53,13 +48,13 @@
 			
 			protected var mainStage:Stage;
 			[bindable]
-			public var serverIDBase:String; //= "http://localhost:8080/saiku/";
+			public var serverIDBase:String = new String(); //= "http://localhost:8080/saiku/";
 			[bindable]
-			public var userID:String; // = 'admin';
+			public var userID:String = new String(); // = 'admin';
 			[bindable]
-			public var serverIDRest:String; //= "http://localhost:8080/saiku/rest/saiku/"+userID+"/query/";
+			public var serverIDRest:String = new String(); //= "http://localhost:8080/saiku/rest/saiku/"+userID+"/query/";
 			[bindable]
-			public var serverIDJSON:String;// = "http://localhost:8080/saiku/json/saiku/"+userID+"/query/";
+			public var serverIDJSON:String = new String();// = "http://localhost:8080/saiku/json/saiku/"+userID+"/query/";
 			
 			/*Variables used with touch gesture handling*/
 			public var touchX:int;
@@ -129,7 +124,7 @@
 				trace(offsetX);
 				picker.x += offsetX;
 				trace(picker.width);
-				picker. -= offsetX;
+				picker.width -= offsetX;
 				trace(picker.width);
 				touchX = e.stageX;
 			}
@@ -179,12 +174,14 @@
 				//trace("moving");
 			} 
 			
+			//Verify a connection
 			protected function checkResponse(event:ResultEvent):void{
 				if (event.statusCode == 200){
-					Connection_Close();
+					Home_Open();
 				}
 			}
-					
+			
+			//Attempts to create a session the specified server with login credentials
 			private function submit_conn():void{
 				try {
 					userID = Uname.text;
@@ -198,33 +195,39 @@
 				}
 			}
 			
+			/*Functions to handle state changes*/
+			
+			//Opens the connection menu by changing the state
 			protected function Connection_Open():void{
 				const state:String = currentState;
 				currentState="Page1";
 			}
 			
+			//Closes the connection menu by changing the state
 			protected function Connection_Close():void{
-				Home_Open();
+				currentState="Page3";
 			}
 			
-			/*Functions to handle state changes*/
+			//Automatically Opens Picker by changing the current state
+			//Attached to a Flick and a One-Finger-Touch
 			protected function Picker_Open():void
 			{
 				const state:String = currentState;
 				if ( state == 'Page3' ) {
 					currentState='Page4';
-					populatePicker();
+					picker.populatePicker();
 				}
 				if (state == 'Page5'){
 					currentState='Page4';
-					populatePicker();
+					picker.populatePicker();
 				}
 				if (state =='Page6'){
 					currentState="Page4";
-					populatePicker();
+					picker.populatePicker();
 				}
 			}
 			
+			//Closes the Picker automatically by changing the state
 			protected function Picker_Close():void{
 				const state:String = currentState;
 				if ( state == 'Page4' ) {
@@ -233,6 +236,7 @@
 				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 			}
 			
+			//Opens the home menu by changing the state
 			protected function Home_Open():void{
 				const state:String = currentState;
 				if (state == 'Page1' ) {
@@ -245,6 +249,7 @@
 				}
 			}
 			
+			//Opens the trash can by changing the state
 			public function Trash_Open():void{
 				const state:String = currentState;
 				if (state =='Page3'){
@@ -258,6 +263,7 @@
 				}
 			}
 			
+			//Closes the trash can by changin the state
 			public function Trash_Close():void{
 				const state:String = currentState;
 				if ( state =='Page5'){
@@ -265,9 +271,10 @@
 				}
 			}
 			
+			//Opens the sets menu by changing the state
 			public function Sets_Open():void{
 				const state:String = currentState;
-				retrieveActiveSets();
+				sets.retrieveActiveSets();
 				if (state =='Page3'){
 					currentState="Page6";
 				}
@@ -279,6 +286,7 @@
 				}
 			}
 			
+			//Closes sets menu and changes the current state
 			public function Sets_Close():void{
 				const state:String = currentState;
 				if ( state =='Page6'){
@@ -286,6 +294,7 @@
 				}
 			}
 			
+			//Closes home menu and changes state
 			public function Home_Close():void{
 				const state:String = currentState;
 				if ( state == 'Page2' ) {
@@ -294,6 +303,7 @@
 				//home.addEventListener(MouseEvent.ROLL_OUT, homeFlick);
 			}
 			
+			//Submits the user generated query and takes application to next State
 			public function submit_form():void{
 				Home_Close();
 				submit_query();
@@ -307,8 +317,12 @@
 			private var cubeArray:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var queryName:String;
+			public var queryName:String = 'chartdata';
 			
+			[Bindable]
+			public var currentQueryName:String = new String();
+			
+			//Fills the home menu based off information retrieved from the server
 			private function fillHomeMenu(event:ResultEvent):void{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
@@ -337,24 +351,22 @@
 						}
 					}	
 				}
-
+				//Fills available connection options
 				connectionDropDown.dataProvider = connectionArray;
 				connectionDropDown.selectedIndex=0;
-				
-
+				//Fills available catalog options
 				catalogDropDown.dataProvider = catalogArray;
 				catalogDropDown.selectedIndex=0;
-				
-
+				//Fills available schema options
 				schemaDropDown.dataProvider = schemaArray;
 				schemaDropDown.selectedIndex=0;
-				
-
+				//Fills available cube options
 				cubeDropDown.dataProvider = cubeArray;
 				cubeDropDown.selectedIndex=0;
-				
 			}
 			
+			//Produces an error window native to the application to overwrite
+			//the default Adobe Air window
 			public function error_window(error_message:String):void {
 				var popup:TitleWindow = new TitleWindow();
 				popup.showCloseButton = true;
@@ -366,11 +378,11 @@
 				PopUpManager.centerPopUp(popup);
 			}
 			
+			//Error handling when application cannot connect to the server
 			private function faultHandler(evt:FaultEvent):void {
 				var errors:String = "The Saiku Server is not running. " +
 					"Please close the application, start the Saiku server, " +
-					"and restart the application."
-				
+					"and restart the application."	
 				error_window(errors);
 			}
 			
@@ -388,7 +400,10 @@
 				//series.serList.dataProvider = new ArrayList;
 				
 				//CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
-				queryName = QueryName.text;
+				//queryName = QueryName.text;
+				//currentQueryName = QueryName.text;
+				currentQueryName = new String();
+				currentQueryName = 'chartdata';
 //				var popup:TitleWindow = new TitleWindow();
 //				popup.showCloseButton = true;
 //				popup.addEventListener(Event.CLOSE, closeTitleWindow);
@@ -426,296 +441,99 @@
 			private var destDB:ArrayCollection=new ArrayCollection();
 			
 			[Bindable]
-			public var dimensionsAC:ArrayCollection;
+			public var dimensionsAC:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var levelsAC:ArrayCollection;
+			public var levelsAC:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var membersAC:ArrayCollection;
+			public var membersAC:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var measuresAC:ArrayCollection;
+			public var measuresAC:ArrayCollection = new ArrayCollection();
 			
-			[Bindable]
-			public var currentDimension:String;
-			
-			[Bindable]
-			public var currentHierarchy:String;
-			
-			[Bindable]
-			public var currentLevel:int;
-			
-			[Bindable]
-			public var currentMeasure:Object;
-			
-			[Bindable]
-			public var defaultMeasure:Object;
-			
-			/*Functions that populate the picker and handle changes within the picker*/
-			public function populatePicker():void{
-				queryName = new String();
-				queryName = "chartdata";
-				callDimensions.url= serverIDJSON+queryName+"/axis/UNUSED/"
-				callDimensions.send()
-			}
-			
-			//Populates the dimension list
-			public function getDimensions(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				dimensionsAC = new ArrayCollection();
-				measuresAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					if(arr[i].caption == 'Measures'){
-						obj.label = arr[i].caption;
-						obj.value = arr[i].uniqueName;
-						measuresAC.addItem(obj);
-					}
-					else{
-						obj.label = arr[i].caption;
-						obj.value = arr[i].uniqueName;
-						dimensionsAC.addItem(obj);
-					}
-				}
-				picker.DimensionsDLContainer.dimensionsList.dataProvider = dimensionsAC;
-				if (arr.length != 0){
-					var dimension:String = dimensionsAC[0].label;
-					var hierarchy:String = dimensionsAC[0].label;
-					callMeasures.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel";
-					callMeasures.send();
-					currentDimension = dimension;
-					currentHierarchy = hierarchy;
-					createLevels(currentDimension, currentHierarchy);
-				}
-			}
-			
-			//forms the url string to retrieve the levels of a query
-			public function createLevels(dimension:String, hierarchy:String):void{
-				currentDimension = dimension;
-				currentHierarchy = hierarchy;
-				picker.MembersDLContainer.membersLevel1.dataProvider = null;
-				picker.MembersDLContainer.membersLevel2.dataProvider = null;
-				picker.MembersDLContainer.membersLevel3.dataProvider = null;
-				
-				callLevels.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
-				callLevels.send();
-			}
-			
-			//retrieves the first list in the dimensions array and stores in the Measures panel (consistent across cubes)
-			public function getMeasures(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				
-				measuresAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEASURE';
-					obj.listLocation = 'MEASURE';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					currentMeasure = arr[0].uniqueName;
-					measuresAC.addItem(obj);	
-				}
-				currentMeasure = measuresAC[0];
-				defaultMeasure = measuresAC[0];
-				measures.measuresList.dataProvider = measuresAC;
-				
-			}
-			
-			//populates the levels list within the picker for selection
-			public function getLevels(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				levelsAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].hierarchy;
-					obj.selectionType = 'LEVEL';
-					obj.listLocation = 'LEVEL';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					levelsAC.addItem(obj);	
-				}
-				picker.LevelsDLContainer.levelsList.dataProvider = levelsAC;
-				getMembersFromLevels(levelsAC);
-			}
-			
-			//forms three strings to retrieve the three levels of members initially visible within the picker
-			public function getMembersFromLevels(levels:ArrayCollection):void
-			{
-				var i:int = 0;
-				if(levels.length > 3){
-					for (i = 0; i < 3; i++){
-						if (i==0){
-							callMembers1.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers1.send();
-						}
-						if (i==1){
-							callMembers2.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers2.send();
-						}
-						if (i==2){
-							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers3.send();
-						}			
-					}
-				}else{
-					for (i = 0; i < levels.length; i ++){
-						if (i==0){
-							callMembers1.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers1.send();
-						}
-						if (i==1){
-							callMembers2.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers2.send();
-						}
-						if (i==2){
-							callMembers3.url= serverIDJSON+queryName+"/axis/UNUSED/dimension/"+currentDimension+"/hierarchy/"+currentHierarchy+"/"+levels[i].label;
-							callMembers3.send();
-						}				
-					}			
-				}		
-			}
-			
-			//populates the first members list within the picker
-			public function getMembers1(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEMBER';
-					obj.listLocation = 'MEMBER1';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
-				}
-				picker.MembersDLContainer.membersLevel1.dataProvider = membersAC;
-			}
-			
-			//populates the second members list within the picker
-			public function getMembers2(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEMBER';
-					obj.listLocation = 'MEMBER2';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
-				}
-				picker.MembersDLContainer.membersLevel2.dataProvider = membersAC;
-			}
-			
-			//populates the third members list within the picker
-			public function getMembers3(event:ResultEvent):void
-			{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				membersAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
-					obj.selectionType = 'MEMBER';
-					obj.listLocation = 'MEMBER3';
-					obj.number = i;
-					obj.value = arr[i].uniqueName;
-					membersAC.addItem(obj);	
-				}
-				picker.MembersDLContainer.membersLevel3.dataProvider = membersAC;
-			}
-			
-			
-			public function retrieveActiveSets():void{
-				retrieveSets.url= serverIDJSON;
-				retrieveSets.send()
-			}
 			[bindable]
-			public var setsAC:ArrayCollection;
-			public function getSets(event:ResultEvent):void{
-				var rawData:String=String(event.result);
-				var arr:Array = (JSON.decode(rawData)as Array);
-				setsAC = new ArrayCollection();
-				for (var i:int =0; i < arr.length; i++){
-					var obj:Object = new Object;
-					obj.label = arr[i].name;
-					obj.axis = arr[i].axis;
-					obj.number = i;
-					obj.value = arr[i].name;
-					setsAC.addItem(obj);	
-				}
-				sets.setsList.dataProvider = setsAC;
-				
-			}
+			public var setsAC:ArrayCollection = new ArrayCollection();
 			
+			[Bindable]
+			public var currentDimension:String = new String();
+			
+			[Bindable]
+			public var currentHierarchy:String = new String();
+			
+			[Bindable]
+			public var currentLevel:int = new int();
+			
+			[Bindable]
+			public var currentMeasure:Object = new Object();
+			
+			[Bindable]
+			public var defaultMeasure:Object = new Object();
+			
+			
+			//Removes the graphical representation of data from a given list and can remove an item from the graph
 			public function removeFromList(member:Object, listIdentifier:String):void
 			{
-				var memberIndex:int = member.number;
+				var memberIndex:int;
 				if (listIdentifier == 'ROWS'){
+					if (member.listLocation == 'COLUMNS'){
+						memberIndex = member.number;
+					}else{
+						memberIndex = categoriesList.getItemIndex(member);
+					}
 					categoriesList.removeItemAt(memberIndex);
-					removeFromGraph(member);
-					categories.catList.dataProvider.removeItemAt(memberIndex);
-					//find the correct url to remove items from query
-					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
-					//results.send();
+					if (member.newList == 'TRASH'){
+						removeFromGraph(member);
+					}
+					if (member.dimension != "[Measures]"){
+						categories.catList.dataProvider.removeItemAt(memberIndex);
+					}
 				}
-				if (listIdentifier == 'COLUMNS'){
+				else if (listIdentifier == 'COLUMNS'){
+					if (member.listLocation == 'ROWS'){
+						memberIndex = member.number;
+					}else{
+						memberIndex = seriesList.getItemIndex(member);
+					}
 					seriesList.removeItemAt(memberIndex);
-					removeFromGraph(member);
-					series.serList.dataProvider.removeItemAt(memberIndex);
-					//find the correct url to remove items from query
-					//results.url="http://localhost:8080/saiku/json/saiku/admin/query/"+queryName+"/result"
-					//results.send();
+					if (member.newList == 'TRASH'){
+						removeFromGraph(member);
+					}
+					if (member.dimension != "[Measures]"){
+						series.serList.dataProvider.removeItemAt(memberIndex);
+					}
 				}
-				if (listIdentifier == 'LEVEL'){
+				else if (listIdentifier == 'LEVEL'){
 					//should not remove the levels but the members within that level to keep the tree structure in picker
 					//picker.LevelsDLContainer.levelsList.dataProvider.removeItemAt(memberIndex);
 				}
-				if (listIdentifier == 'MEMBER1'){
+				else if (listIdentifier == 'MEMBER1'){
+					memberIndex = picker.MembersDLContainer.membersLevel1.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel1.dataProvider.removeItemAt(memberIndex);
 				}
-				if (listIdentifier == 'MEMBER2'){
+				else if (listIdentifier == 'MEMBER2'){
+					memberIndex = picker.MembersDLContainer.membersLevel2.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel2.dataProvider.removeItemAt(memberIndex);
 				}
-				if (listIdentifier == 'MEMBER3'){
+				else if (listIdentifier == 'MEMBER3'){
+					memberIndex = picker.MembersDLContainer.membersLevel3.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel3.dataProvider.removeItemAt(memberIndex);
+				}
+				else if (listIdentifier == 'MEMBER4'){
+					memberIndex = picker.MembersDLContainer.membersLevel4.dataProvider.getItemIndex(member);
+					picker.MembersDLContainer.membersLevel4.dataProvider.removeItemAt(memberIndex);
 				}
 			}
 			
 			
-			
+			//removes a specified item from the current graph
 			public function removeFromGraph(members:Object):void
 			{
 				var originalLocation:String = members.listLocation;
-				var hierarchy:String = members.dimension;
-				var dimension:String = hierarchy.replace("[","");
-				dimension = dimension.replace("]","");
-				hierarchy = hierarchy.replace('[','%5B');
-				hierarchy = hierarchy.replace(']','%5D');
-				var item:String = members.value;
-				item = item.replace('[','%5B');
-				item = item.replace(']','%5D');
-				item = item.replace('[','%5B');
-				item = item.replace(']','%5D');
-				item = item.replace('[','%5B');
-				item = item.replace(']','%5D');
+				var dimension:String = cleanDimension(members.dimension);
+				var hierarchy:String = cleanHierarchy(members.dimension);
+				var item:String = cleanItem(members.value);
+				
 				var params:Object = {};
 				if (members.selectionType =='LEVEL' || members.selectionType == 'MEMBER'){
 					if (members.selectionType == 'LEVEL'){
@@ -735,49 +553,76 @@
 					params['memeberposition'] = members.itemMemberPosition;
 					removeMeasure.send(params);
 				}
-				
-				
 			}
 			
-			/*The variables used within the series and categories panels*/
+			/*The global variables used within the series and categories panels*/
 			[Bindable]
 			public var seriesList:ArrayCollection = new ArrayCollection;
 			
 			[Bindable]
 			public var categoriesList:ArrayCollection = new ArrayCollection;
 			
+			[Bindable]
+			public var nextRowItemPosition:int = new int();
+			
+			[Bindable]
+			public var nextColumnItemPosition:int = new int();
+			
+			//Replaces a given string with a new string; used for URLEncoding
 			String.prototype.replace = function(s:String, z:String):String{
 				return unescape(escape(this).split(s).join(z));
 			}
 			
+			//Deep copies an item, so you can manipulate a temporary list without changing the original
+			public function clone(source:Object):*{
+				var buffer:ByteArray = new ByteArray();
+				buffer.writeObject(source);
+				buffer.position = 0;
+				return buffer.readObject();
+			}
 			
+			//Converts dimension into urlencode for server calls
+			public function cleanDimension(dimension:String):String{
+				dimension = dimension.replace("[","");
+				dimension = dimension.replace("]","");
+				return dimension;
+			}
+			
+			//Converts hierarchy into urlencode for server calls
+			public function cleanHierarchy(hierarchy:String):String{
+				hierarchy = hierarchy.replace('[','%5B');
+				hierarchy = hierarchy.replace(']','%5D');
+				return hierarchy;
+			}
+			
+			//Converts item into urlencode for server calls
+			public function cleanItem(item:String):String{
+				item = item.replace('[','%5B');
+				item = item.replace(']','%5D');
+				item = item.replace('[','%5B');
+				item = item.replace(']','%5D');
+				item = item.replace('[','%5B');
+				item = item.replace(']','%5D');
+				return item;
+			}
 			
 			/*The following are functions for posting to different axises on the server and create a resulting graph*/
-			//This is a public function that allows when array on series panel is changed to update the query
-			public var nextColumnItemPosition:int = new int();
 			
+			//This is a public function that allows when array on series panel is changed to update the query
 			public function moveToColumns(members:Object):void
 			{
-				//seriesList = new ArrayCollection;
-				
+				var hierarchy:String;
+				var dimension:String;
+				var item:String;
 				for (var i:int = 0; i < members.length; i ++){
 					seriesList.addItem(members[i]);
 					members[i].listLocation = 'COLUMNS';
 					members[i].itemMemberPosition = seriesList.length -1;
 					members[i].itemPosition = nextColumnItemPosition;
-					var hierarchy:String = members[i].dimension;
-					var dimension:String = hierarchy.replace("[","");
-					dimension = dimension.replace("]","");
-					hierarchy = hierarchy.replace('[','%5B');
-					hierarchy = hierarchy.replace(']','%5D');
-					var item:String = members[i].value;
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					
+					dimension = cleanDimension(members[i].dimension);
+					hierarchy = cleanHierarchy(members[i].dimension);
+					item = cleanItem(members[i].value);
+						
 					if (members[i].selectionType == 'LEVEL'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 					}
@@ -790,7 +635,7 @@
 					if (members[i].selectionType == 'MEMBER'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
 					}
-					
+				
 					var params:Object = {};
 					params["position"] = nextColumnItemPosition;
 					params["memberposition"] = seriesList.length -1;
@@ -801,45 +646,60 @@
 				}
 			}
 			
-			[Bindable]
-			public var nextRowItemPosition:int = new int();
+			
 			//This is a public function that allows when array on categories panel is changed to update the query
 			public function moveToRows(members:Object):void
 			{
+				var hierarchy:String;
+				var dimension:String;
+				var item:String;
+					for (var i:int = 0; i < members.length; i ++){
+						categoriesList.addItem(members[i]);
+						members[i].listLocation = 'ROWS';
+						members[i].itemMemberPosition = members[i].number;//categoriesList.length -1;
+						members[i].itemPosition = members[i].number;//nextRowItemPosition;
+						dimension = cleanDimension(members[i].dimension);
+						hierarchy = cleanHierarchy(members[i].dimension);
+						item = cleanItem(members[i].value);
+						
+						if (members[i].selectionType == 'LEVEL'){
+							toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+						}
+						if (members[i].selectionType == 'MEMBER'){
+							toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
+						}
+	
 				
-				//categoriesList = new ArrayCollection;
-				
-				for (var i:int = 0; i < members.length; i ++){
-					categoriesList.addItem(members[i]);
-					members[i].listLocation = 'ROWS';
-					members[i].itemMemberPosition = categoriesList.length -1;
-					members[i].itemPosition = nextRowItemPosition;
-					var hierarchy:String = members[i].dimension;
-					var dimension:String = hierarchy.replace("[","");
-					dimension = dimension.replace("]","");
-					hierarchy = hierarchy.replace('[','%5B');
-					hierarchy = hierarchy.replace(']','%5D');
-					var item:String = members[i].value;
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					item = item.replace('[','%5B');
-					item = item.replace(']','%5D');
-					
-					if (members[i].selectionType == 'LEVEL'){
-						toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
-					}
-					if (members[i].selectionType == 'MEMBER'){
-						toRows.url=serverIDRest+queryName+"/axis/ROWS/dimension/"+dimension+"/member/"+item;
-					}
 					var params:Object = {};
-					params["position"] = nextRowItemPosition;
-					params["memberposition"] = categoriesList.length -1;
+					params["position"] = members[i].number;//nextRowItemPosition;
+					params["memberposition"] = members[i].number;//categoriesList.length -1;
 
 					toRows.send(params);//sends service call to get new graph info 
 					
 					nextRowItemPosition = nextRowItemPosition + 1;
+				}
+			}
+			
+			//This is the public function that moves items back to the picker, but not to the trash can
+			//Associated with flicking items off panels instead of dragging and dropping in trash
+			public function moveToUnused(members:Object):void{
+				var hierarchy:String;
+				var dimension:String;
+				var item:String;
+				for (var i:int = 0; i < members.length; i ++){
+					categoriesList.addItem(members[i]);
+					members[i].listLocation = 'UNUSED';
+					dimension = cleanDimension(members[i].dimension);
+					hierarchy = cleanHierarchy(members[i].dimension);
+					item = cleanItem(members[i].value);
+					
+					if (members[i].selectionType == 'LEVEL'){
+						toUnused.url=serverIDRest+queryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
+					}
+					if (members[i].selectionType == 'MEMBER'){
+						toUnused.url=serverIDRest+queryName+"/axis/UNUSED/dimension/"+dimension+"/member/"+item;
+					}	
+					toUnused.send();//sends service call to get new graph info 
 				}
 			}
 			
@@ -854,12 +714,17 @@
 					graph.removeAllElements();
 				}
 			}
+			
+			//Globals variables associated with the data retrieved from database about
+			//items that were selected to be graphed
 			[bindable]
-			private var columnHeaderArray:ArrayCollection;
+			public var chartData:ArrayCollection;
 			[bindable]
-			private var rowHeaderArray:ArrayCollection;
+			public var columnHeaderArray:ArrayCollection;
 			[bindable]
-			private var dataCellArray:ArrayCollection;
+			public var rowHeaderArray:ArrayCollection;
+			[bindable]
+			public var dataCellArray:ArrayCollection;
 			
 			//parses results array and stores in an ArrayCollection
 			public function updateGraphData(event:ResultEvent):void
@@ -911,152 +776,16 @@
 					}
 					
 				}
-				updateGraph();
+				graph.updateGraph();//returns default column chart
 				//updateLineGraph();
 			}
 			
-			/*Variables used within functions to create the graph*/
-			[Bindable]
-			public var chartData:ArrayCollection;/*= new ArrayCollection([
-				{Store:'Deluxe Supermarket', Canada:23112, Mexico:61381, USA:61552},
-				{Store:'Gourmet Supermarket', Canada:0, Mexico:23759, USA:23688},
-				{Store:'Mid-Size Grocery', Canada:34452, Mexico:74891, USA:0},
-				{Store:'Small Grocery', Canada:0, Mexico:24597, USA:50684},
-				{Store:'Supermarket', Canada:0, Mexico:58384, USA:135096}
-			])*/
 			
-			
-			public var myChart:ColumnChart;
-			public var series1:BarSeries;
-			public var series2:BarSeries;
-			public var series3:BarSeries;
-			public var legend1:Legend;
-			
-			//updates the graph component with an updated graph
-			public function updateGraph():void
-			{
-				/*Create Chart and set basic properties*/
-				myChart = new ColumnChart(); 
-				myChart.showDataTips = true;
-				myChart.dataProvider = chartData;
-				myChart.height = 500;
-				myChart.width = 1070;
-				
-				/*Define the category axis */
-				var hAxis:CategoryAxis = new CategoryAxis();
-				if (chartData[0].ROW_HEADER){
-					hAxis.categoryField = "ROW_HEADER";
-				}else{
-					hAxis.categoryField = "COLUMN_HEADER";
-				}
-				hAxis.dataProvider = chartData;
-				myChart.horizontalAxis = hAxis;
-				
-				var tempSeriesCol:ColumnSeries;
-				var tempSeriesRow:ColumnSeries;
-				var mySeries:Array=new Array();
-				
-				/*Add the series*/
-				if (chartData[0].ROW_HEADER){
-					for( var j:int=0; j< columnHeaderArray.length; j++){
-						tempSeriesCol = new ColumnSeries();
-						tempSeriesCol.dataProvider = chartData;
-						tempSeriesCol.yField=columnHeaderArray[j].value;
-						tempSeriesCol.xField = "ROW_HEADER";
-						tempSeriesCol.displayName=columnHeaderArray[j].value;
-						mySeries.push(tempSeriesCol);
-					}
-				}else{
-					for( var k:int=0; k< columnHeaderArray.length; k++){
-						tempSeriesRow = new ColumnSeries();
-						tempSeriesRow.dataProvider = chartData;
-						tempSeriesRow.yField=columnHeaderArray[k].value;
-						tempSeriesRow.xField = "COLUMN_HEADER";
-						tempSeriesRow.displayName=columnHeaderArray[k].value;
-						mySeries.push(tempSeriesRow);
-					}
-				}
-				
-				
-				myChart.series = mySeries;
-				
-				/*Create a legend*/
-				legend1 = new Legend();
-				legend1.dataProvider = myChart;
-				
-				graph.removeAllElements();
-				graph.addElement(legend1);
-				graph.addElement(myChart);
-				
-			}	
-			[bindable]
-			public var myLineChart:LineChart;
-			
-			public function updateLineGraph():void
-			{
-				/*Create Chart and set basic properties*/
-				myLineChart = new LineChart(); 
-				myLineChart.showDataTips = true;
-				myLineChart.dataProvider = chartData;
-				myLineChart.height = 500;
-				myLineChart.width = 1070;
-				
-				/*Define the category axis */
-				var hAxis:CategoryAxis = new CategoryAxis();
-				if (chartData[0].ROW_HEADER){
-					hAxis.categoryField = "ROW_HEADER";
-				}else{
-					hAxis.categoryField = "COLUMN_HEADER";
-				}
-				hAxis.dataProvider = chartData;
-				myLineChart.horizontalAxis = hAxis;
-				
-				var tempSeriesCol:LineSeries;
-				var tempSeriesRow:LineSeries;
-				var mySeries:Array=new Array();
-				
-				/*Add the series*/
-				if (chartData[0].ROW_HEADER){
-					for( var j:int=0; j< columnHeaderArray.length; j++){
-						tempSeriesCol = new LineSeries();
-						tempSeriesCol.dataProvider = chartData;
-						tempSeriesCol.yField=columnHeaderArray[j].value;
-						tempSeriesCol.xField = "ROW_HEADER";
-						tempSeriesCol.displayName=columnHeaderArray[j].value;
-						mySeries.push(tempSeriesCol);
-					}
-				}else{
-					for( var k:int=0; k< columnHeaderArray.length; k++){
-						tempSeriesRow = new LineSeries();
-						tempSeriesRow.dataProvider = chartData;
-						tempSeriesRow.yField=columnHeaderArray[k].value;
-						tempSeriesRow.xField = "COLUMN_HEADER";
-						tempSeriesRow.displayName=columnHeaderArray[k].value;
-						mySeries.push(tempSeriesRow);
-					}
-				}
-				
-				
-				myLineChart.series = mySeries;
-				
-				/*Create a legend*/
-				legend1 = new Legend();
-				legend1.dataProvider = myLineChart;
-				
-				graph.removeAllElements();
-				graph.addElement(legend1);
-				graph.addElement(myLineChart);
-				
-			}
 			
 			public function getData(dropDown:*):String{
 				return dropDown.data;
 			}
 			
-			protected function button_clickHandler(event:MouseEvent):void
-			{
-				
-			}
 			
 		]]>
 	</fx:Script>
@@ -1082,31 +811,35 @@
 		<s:HTTPService
 			id="retrieveSets"
 			resultFormat="text" method="GET"
-			result="getSets(event)"/>
+			result="sets.getSets(event)"/>
 		<s:HTTPService
 			id="callDimensions"
 			resultFormat="text"
-			result="getDimensions(event)" />
+			result="picker.DimensionsDLContainer.getDimensions(event)" />
 		<s:HTTPService
 			id="callMeasures"
 			resultFormat="text"
-			result="getMeasures(event)" />
+			result="measures.getMeasures(event)" />
 		<s:HTTPService
 			id="callLevels"
 			resultFormat="text"
-			result="getLevels(event)" />
+			result="picker.LevelsDLContainer.getLevels(event)" />
 		<s:HTTPService
 			id="callMembers1"
 			resultFormat="text"
-			result="getMembers1(event)" />
+			result="picker.MembersDLContainer.getMembers1(event)" />
 		<s:HTTPService
 			id="callMembers2"
 			resultFormat="text"
-			result="getMembers2(event)" />
+			result="picker.MembersDLContainer.getMembers2(event)" />
 		<s:HTTPService
 			id="callMembers3"
 			resultFormat="text"
-			result="getMembers3(event)" />
+			result="picker.MembersDLContainer.getMembers3(event)" />
+		<s:HTTPService
+			id="callMembers4"
+			resultFormat="text"
+			result="picker.MembersDLContainer.getMembers4(event)" />
 		
 		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
 					   method="POST" >
@@ -1133,6 +866,10 @@
 		
 		<!-- request to server to move a new item to the Columns (Series) axis for graphing-->
 		<s:HTTPService id="toColumns" resultFormat="text" contentType="application/xml"
+					   method="POST" result="getResults()">
+		</s:HTTPService>
+		
+		<s:HTTPService id="toUnused" resultFormat="text" contentType="application/xml"
 					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
@@ -1166,26 +903,28 @@
 	<fx:DesignLayer id="panels">
 <!--		organized left to right then top to bottom		 -->
 		<components:Graph id="graph" 
-						  x="180" y="260"
+						  x="180" y="210"
 						  />
+		<components:GraphLegend id="graphLegend"
+						   x="180" y="140">
+		</components:GraphLegend>
+		
 		<components:Measures id="measures"
- 			left="20" top="260"
+ 			left="20" top="140"
 		/>
 		<components:StateStep id="stateStep"
 			x="20" y="780"
 		/>
-		<components:Pager id="pager"
-			x="180" y="20"
-		/>
+		
 		<components:Series id="series"
-			x="180" y="140"
+			x="180" y="20"
 		/>
 		<components:Categories id="categories"
 			x="180" y="780"
 		/>
 		
 		<components:Picker id="picker"
-						   x="1280" y="260"
+						   x="1280" y="140"
 						   click.Page3="Picker_Open()"
 						   click.Page5="Picker_Open()"
 						   click.Page6="Picker_Open()"
@@ -1195,14 +934,14 @@
 						   currentState.Page6="State2">
 		</components:Picker>
 		<components:Sets id="sets"
-						 x="1280" y="140"
+						 x="20" y="780"
 						 click.Page3="Sets_Open()"
 						 click.Page4="Sets_Open()"
 						 click.Page5="Sets_Open()"
-						 currentState.Page6="Sets2"
 						 currentState.Page3="Sets1"
 						 currentState.Page4="Sets1"
 						 currentState.Page5="Sets1"
+						 currentState.Page6="Sets2"
 		/>
 		<components:ServerStatus id="serverStatus"
 								 x="1280" y="20"
@@ -1296,8 +1035,8 @@
 					
 		
 	</mx:Form>
-	<s:Button includeIn="Page4" x='220' y='300' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
-	<s:Button includeIn="Page6" x='850' y='320' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
+	<s:Button includeIn="Page4" x='220' y='180' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
+	<s:Button includeIn="Page6" x='850' y='240' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
 	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="Trash_Close()" ></s:Button>
 	
 	<s:transitions>

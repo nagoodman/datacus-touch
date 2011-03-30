@@ -1,21 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1100" height="380" >
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="940" height="500" >
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
+			
+			private var membersAC:ArrayCollection = new ArrayCollection();
+			
+			//forms three strings to retrieve the three levels of members initially visible within the picker
+			public function getMembersFromLevels(levels:ArrayCollection):void
+			{
+				var i:int = 0;
+				var tempServerIDJSON:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
+				var tempCurrentDimension:String = FlexGlobals.topLevelApplication.currentDimension;
+				var tempCurrentHierarchy:String = FlexGlobals.topLevelApplication.currentHierarchy;
+				
+				if(levels.length > 4){
+					for (i = 0; i < 4; i++){
+						if (i==0){
+							FlexGlobals.topLevelApplication.callMembers1.url = tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers1.send();
+						}
+						if (i==1){
+							FlexGlobals.topLevelApplication.callMembers2.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers2.send();
+						}
+						if (i==2){
+							FlexGlobals.topLevelApplication.callMembers3.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers3.send();
+						}
+						if (i==3){
+							FlexGlobals.topLevelApplication.callMembers4.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers4.send();
+						}
+					}
+				}else{
+					for (i = 0; i < levels.length; i ++){
+						if (i==0){
+							FlexGlobals.topLevelApplication.callMembers1.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers1.send();
+						}
+						if (i==1){
+							FlexGlobals.topLevelApplication.callMembers2.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers2.send();
+						}
+						if (i==2){
+							FlexGlobals.topLevelApplication.callMembers3.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers3.send();
+						}
+						if (i==3){
+							FlexGlobals.topLevelApplication.callMembers4.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers4.send();
+						}
+					}			
+				}		
+			}
+			
+			//populates the first members list within the picker
+			public function getMembers1(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
+					obj.listLocation = 'MEMBER1';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
+				}
+				membersLevel1.dataProvider = membersAC;
+			}
+			
+			//populates the second members list within the picker
+			public function getMembers2(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
+					obj.listLocation = 'MEMBER2';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
+				}
+				membersLevel2.dataProvider = membersAC;
+			}
+			
+			//populates the third members list within the picker
+			public function getMembers3(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
+					obj.listLocation = 'MEMBER3';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
+				}
+				
+				membersLevel3.dataProvider = membersAC;
+			}
+			
+			//Populates the fourth level of members within the Picker
+			public function getMembers4(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				membersAC = new ArrayCollection();
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].dimension;
+					obj.selectionType = 'MEMBER';
+					obj.listLocation = 'MEMBER4';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					membersAC.addItem(objProx);	
+				}
+				membersLevel4.dataProvider = membersAC;
+			}
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="LDLCBackground">
-		<s:Rect height="380" id="MembersDLContainerrec" width="1080" x="0" y="0" alpha="0.79">
+		<s:Rect height="500" id="MembersDLContainerrec" width="940" x="0" y="0" alpha="0.79">
 			
 		</s:Rect>
 	</fx:DesignLayer>
 	
-	<s:List x="10" y="10" width="1060" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+	<s:List x="10" y="10" width="900" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="10"
-								paddingTop="10"/>
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
 		</s:layout>
 		<s:ArrayCollection>
 			
@@ -28,17 +175,20 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}" styleName="label" />
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5' textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						</s:BorderContainer>
+						
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
 		</s:itemRenderer>
 	</s:List>
-	<s:List x="10" y="135" width="1060" height="110" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="10"
-								paddingTop="10"/>
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
 		</s:layout>
 		<s:ArrayCollection>
 			
@@ -51,17 +201,19 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}" styleName="label" />
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5' textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
 		</s:itemRenderer>
 	</s:List>
-	<s:List x="10" y="260" width="1060" height="110" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:HorizontalLayout horizontalAlign="left"
-								paddingLeft="10"
-								paddingTop="10"/>
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
 		</s:layout>
 		<s:ArrayCollection>
 			
@@ -74,7 +226,35 @@
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:Label text="{data.label}" styleName="label" />
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5'  textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						</s:BorderContainer>
+					</s:Group>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+	
+	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
+								paddingLeft="10" paddingRight="10"
+								paddingTop="0"/>
+		</s:layout>
+		<s:ArrayCollection>
+			
+		</s:ArrayCollection>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Group>
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle"
+												paddingLeft="0"/>
+						</s:layout>
+						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

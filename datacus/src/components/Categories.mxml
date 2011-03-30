@@ -55,19 +55,33 @@
 						oldList = items[k].listLocation;
 						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
 						var listLength:int = myDropTarget.dataProvider.length
-						while (listLengthPriorAdd<listLength){
-							if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
-								pos=this.catList.layout.calculateDropLocation(event);
-								items[k].number = pos.dropIndex;
-								FlexGlobals.topLevelApplication.moveToRows(items);
-								for (var i:int=items.length - 1; i >= 0; i--)
-								{
-									this.catDB.addItemAt(items[i], pos.dropIndex);
-									listLengthPriorAdd++;
+						if (items[k].listLocation == 'ROWS'){
+							pos=this.catList.layout.calculateDropLocation(event);
+							items[k].number = pos.dropIndex;
+							FlexGlobals.topLevelApplication.moveToRows(items);
+							for (var x:int=items.length - 1; x >= 0; x--)
+							{
+								this.catDB.addItemAt(items[x], pos.dropIndex);
+								listLengthPriorAdd++;
+							}
+							myDropTarget.destroyDropIndicator();
+						}
+						else{
+							while (listLengthPriorAdd<listLength){
+								if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
+									pos=this.catList.layout.calculateDropLocation(event);
+									items[k].number = pos.dropIndex;
+									FlexGlobals.topLevelApplication.moveToRows(items);
+									for (var i:int=items.length - 1; i >= 0; i--)
+									{
+										this.catDB.addItemAt(items[i], pos.dropIndex);
+										listLengthPriorAdd++;
+									}
+									myDropTarget.destroyDropIndicator();
 								}
-								myDropTarget.destroyDropIndicator();
 							}
 						}
+						
 					}
 				}else{
 					pos=this.catList.layout.calculateDropLocation(event);

@@ -8,14 +8,46 @@
 	<fx:Script>
 		<![CDATA[
 			//imports classes needed for component
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+<<<<<<< HEAD
 	
+=======
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
+>>>>>>> 81e1b22c53de10abac454d7c5cf4427c578c7494
 			
 			//init
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
 				//Init state
 				currentState='State1';
 				this.maxWidth="1240";
+			}
+			
+			
+			/*Functions that populate the picker and handle changes within the picker*/
+			public function populatePicker():void{
+				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				FlexGlobals.topLevelApplication.callDimensions.url= tempServerID+tempQueryName+"/axis/UNUSED/"
+				FlexGlobals.topLevelApplication.callDimensions.send()
+			}
+			
+			//forms the url string to retrieve the levels of a query
+			public function createLevels(dimension:String, hierarchy:String):void{
+				FlexGlobals.topLevelApplication.currentDimension = dimension;
+				FlexGlobals.topLevelApplication.currentHierarchy = hierarchy;
+				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				MembersDLContainer.membersLevel1.dataProvider = null;
+				MembersDLContainer.membersLevel2.dataProvider = null;
+				MembersDLContainer.membersLevel3.dataProvider = null;
+				MembersDLContainer.membersLevel4.dataProvider = null;
+				FlexGlobals.topLevelApplication.callLevels.url= tempServerID+tempQueryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
+				FlexGlobals.topLevelApplication.callLevels.send();
 			}
 		]]>
 	</fx:Script>
@@ -28,21 +60,23 @@
 		<s:State name="State3"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="picker" height="500" height.State3="500"  x="0" y="0" width="140" width.State3="1240" x.State3="-1100" skinClass="skins.Panel" skinClass.State3="skins.Panel_picker_extended" />
+		<s:SkinnableContainer id="picker" height="620" height.State3="620"  x="0" y="0" width="140" width.State3="1240" x.State3="-1100" skinClass="skins.Panel" skinClass.State3="skins.Panel_picker_extended" />
 		
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x="40" y="225" includeIn="State1,State2" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x="40" y="300" includeIn="State1,State2" />
 	</fx:DesignLayer>
+	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100" />
+	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State3" 
-		x="-1090" y="100" alpha="0.79"/>
+		x="-990" y="105" alpha="0.79"/>
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
 											includeIn="State3"  
-											x="-880" y="20" alpha="0.79"/>
+											x="-795" y="20" alpha="0.79"/>
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
 										  includeIn="State3" 
-										  x="-955" y="100" alpha="0.79" />
+										  x="-795" y="100" alpha="0.79" />
 	
 	
 	
@@ -60,6 +94,9 @@
 					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
 				<s:Parallel target="{LevelsDLContainer}">
+					<s:Fade duration="500" startDelay="1300"/>
+				</s:Parallel>
+				<s:Parallel target="{PickerClose}">
 					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
 				<s:Parallel target="{PickerLabel}">
@@ -102,6 +139,9 @@
 				<s:Parallel target="{LevelsDLContainer}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
+				<s:Parallel target="{PickerClose}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
 				<s:Parallel target="{PickerLabel}">
 					<s:Fade duration="500" startDelay="1300"/>
 				</s:Parallel>
@@ -120,6 +160,9 @@
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{LevelsDLContainer}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{PickerClose}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{PickerLabel}">

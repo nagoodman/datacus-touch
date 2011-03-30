@@ -2,17 +2,55 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
+			
+			//populates the levels list within the picker for selection
+			public function getLevels(event:ResultEvent):void
+			{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				FlexGlobals.topLevelApplication.levelsAC = new ArrayCollection();
+				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].caption;
+					obj.dimension = arr[i].hierarchy;
+					obj.selectionType = 'LEVEL';
+					obj.listLocation = 'LEVEL';
+					obj.number = i;
+					obj.value = arr[i].uniqueName;
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					tempLevelsAC.addItem(objProx);	
+				}
+				levelsList.dataProvider = tempLevelsAC;
+				FlexGlobals.topLevelApplication.picker.MembersDLContainer.getMembersFromLevels(tempLevelsAC);
+			}
+			
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="LDLCBackground">
-		<s:Rect height="380" id="LevelsDLContainer" width="135" x="0" y="0">
+		<s:Rect height="500" id="LevelsDLContainer" width="195" x="0" y="0">
 		</s:Rect>
 	</fx:DesignLayer>
 	
 	<s:List id="levelsList"
-			width="125"
-			height="370"
+			width="185"
+			height="480"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			allowMultipleSelection="true"
@@ -20,9 +58,9 @@
 			skinClass="skins.MyDropSkin" >
 		
 		<s:layout>
-			<s:VerticalLayout horizontalAlign="left"
-							  paddingLeft="5"
-							  paddingTop="20"/>
+			<s:VerticalLayout horizontalAlign='center'
+							  paddingTop="10" paddingBottom="10"
+								/>
 		</s:layout>
 		
 		<s:itemRenderer>
@@ -31,9 +69,21 @@
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0"/>
-						</s:layout>
-						<s:Label text="{data.label}"/>
+												paddingLeft="0" paddingTop="0"/>
+						</s:layout>	
+						
+						<s:BorderContainer  height="90" width="155" cornerRadius="10" borderWeight="2"  >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#90bdd1" alpha=".8" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="145" height='90' x='5' textAlign="center" fontSize="25" verticalAlign="middle"/>
+						</s:BorderContainer>
+						
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

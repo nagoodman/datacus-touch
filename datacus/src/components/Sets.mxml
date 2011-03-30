@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 creationComplete="Sets_creationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
 			//imports classes and libraries need for component
@@ -11,6 +12,7 @@
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
 			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
 			
@@ -20,6 +22,34 @@
 			/*Variables need for functions within component*/
 			[Bindable]
 			private var setsDB:ArrayCollection=new ArrayCollection();
+			
+			protected function Sets_creationCompleteHandler(event:FlexEvent):void{
+				currentState = 'Sets1';
+			}
+			
+			//Retrieves a list of active sets to be displayed in the Active Sets Menu
+			public function retrieveActiveSets():void{
+				FlexGlobals.topLevelApplication.retrieveSets.url = FlexGlobals.topLevelApplication.serverIDJSON;
+				FlexGlobals.topLevelApplication.retrieveSets.send()
+			}
+			
+			//Populates the sets list within the Active Sets Menu
+			public function getSets(event:ResultEvent):void{
+				var rawData:String=String(event.result);
+				var arr:Array = (JSON.decode(rawData)as Array);
+				var tempSetsAC:ArrayCollection = FlexGlobals.topLevelApplication.setsAC;
+				for (var i:int =0; i < arr.length; i++){
+					var obj:Object = new Object;
+					obj.label = arr[i].name;
+					obj.axis = arr[i].axis;
+					obj.number = i;
+					obj.value = arr[i].name;
+					tempSetsAC.addItem(obj);	
+				}
+				setsList.dataProvider = tempSetsAC;
+				
+			}
+			
 			
 		]]>
 	</fx:Script>
@@ -31,8 +61,8 @@
 		<s:State name="Sets2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="sets" height="100" width="140" height.Sets2="400" width.Sets2="400" x.Sets2="-750" y.Sets2="170"  skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="-598" y="190" includeIn="Sets2"/>
+		<s:SkinnableContainer id="setsContainer" height.Sets1="100" width.Sets1="140" x.Sets1="0" y.Sets1="0" height.Sets2="400" width.Sets2="400" x.Sets2="520" y.Sets2="-550"  skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="665" y="-530" includeIn="Sets2"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="SetsButtonLabel" tabStops="S0 S50 S100" text="Sets" x="50" y="40" includeIn="Sets1"/>
 		<s:BitmapImage id="setsImg"
 					   source="@Embed('assets/save.png')"
@@ -44,19 +74,18 @@
 					   alpha="0.2"
 					   />
 	</fx:DesignLayer>
-	<s:List id="setsList" includeIn="Sets2"
-			width="300"
-			height="300"
-			x="-700" y="220"
-			alpha="0.8"
+	<s:List id="setsList" width="130" height="90" x="5" y="5"
+			width.Sets2="300"
+			height.Sets2="300"
+			x.Sets2="570" y.Sets2="-500"
+			alpha="0.8" alpha.Sets1="0"
 			
 			dataProvider="{setsDB}"
 			
 			skinClass="skins.MyDropSkin">
 		<s:layout>
-			<s:VerticalLayout horizontalAlign="left"
-							  paddingLeft="5"
-							  paddingTop="5"/>
+			<s:VerticalLayout horizontalAlign="center"
+							  paddingTop="10" paddingBottom="10"/>
 		</s:layout>
 		<s:itemRenderer>
 			<fx:Component>
@@ -65,7 +94,17 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:Label text="{data.label}"/>
+						<s:BorderContainer  height="40" width="100%" cornerRadius="4" borderWeight="2" >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color="#72ada9" alpha=".5" />
+									<s:GradientEntry color="#135a78" alpha=".5" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="100%" height="100%" textAlign="center" fontSize="16" verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
@@ -75,8 +114,8 @@
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Sets1" toState="Sets2">
 			<s:Parallel>
-				<s:Parallel target="{sets}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
+				<s:Parallel target="{setsContainer}">
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="600"/>
 					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsLabel}">
@@ -84,6 +123,8 @@
 				</s:Parallel>
 				<s:Parallel target="{setsList}">
 					<s:Fade duration="500" startDelay="1600"/>
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="600"/>
+					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsButtonLabel}">
 					<s:Fade duration="500" startDelay="0"/>
@@ -95,7 +136,7 @@
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="Sets2" toState="Sets1">
 			<s:Parallel>	
-				<s:Parallel target="{sets}">
+				<s:Parallel target="{setsContainer}">
 					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
 					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
@@ -104,6 +145,8 @@
 				</s:Parallel>
 				<s:Parallel target="{setsList}">
 					<s:Fade duration="500" startDelay="0"/>
+					<s:Move autoCenterTransform="true" duration="1100" startDelay="800"/>
+					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsButtonLabel}">
 					<s:Fade duration="500" startDelay="1600"/>
