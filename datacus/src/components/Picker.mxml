@@ -3,14 +3,19 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*"
 		 creationComplete="Picker_creationCompleteHandler(event)">
+
+	
 	<fx:Script>
 		<![CDATA[
 			//imports classes needed for component
 			import mx.events.FlexEvent;
+	
 			
-			//initial function to set state to State1 upon load
+			//init
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
+				//Init state
 				currentState='State1';
+				this.maxWidth="1240";
 			}
 		]]>
 	</fx:Script>
