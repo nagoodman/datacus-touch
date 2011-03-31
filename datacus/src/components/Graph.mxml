@@ -47,7 +47,7 @@
 			
 			public function attachGestures(){
 				if(Multitouch.supportsGestureEvents){
-					this.addEventListener(TransformGestureEvent.GESTURE_ROTATE, graphTypePie);
+					this.addEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
 					this.addEventListener(TouchEvent.TOUCH_ROLL_OUT, graphTypeLine);
 				}
 			}
@@ -76,7 +76,7 @@
 				updateAreaGraph();
 			}
 			
-			public function switchAxis():void{
+			public function switchAxis(e:TransformGestureEvent):void{
 				/*Retrieve data from variables in main file*/
 				var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
 				var oldCategoriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.categoriesList);
