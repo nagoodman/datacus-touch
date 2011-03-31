@@ -391,6 +391,7 @@
 			{
 				measures.measuresList.dataProvider = null;
 				graph.removeAllElements();
+				graphLegend.removeAllElements();
 				series.serDB = new ArrayCollection;
 				categories.catDB = new ArrayCollection;	
 				trash.trashDB = new ArrayCollection;
@@ -707,11 +708,11 @@
 			public function getResults():void
 			{
 				if((seriesList.length > 0) && (categoriesList.length > 0)){
-					graph.removeAllElements();
 					results.url=serverIDJSON+queryName+"/result"
 					results.send();
 				}else{
 					graph.removeAllElements();
+					graphLegend.removeAllElements();
 				}
 			}
 			
@@ -725,6 +726,8 @@
 			public var rowHeaderArray:ArrayCollection;
 			[bindable]
 			public var dataCellArray:ArrayCollection;
+			[bindable]
+			public var graphType:String = new String;
 			
 			//parses results array and stores in an ArrayCollection
 			public function updateGraphData(event:ResultEvent):void
@@ -776,8 +779,9 @@
 					}
 					
 				}
-				graph.updateGraph();//returns default column chart
-				//graph.updateLineGraph();
+				graphType = new String();
+				graphType='DEFAULT';
+				graph.graphType(graphType);
 			}
 			
 			
