@@ -22,6 +22,7 @@
 			import mx.controls.*;
 			import mx.events.CloseEvent;
 			import mx.events.DragEvent;
+			import flash.events.TouchEvent;
 			import mx.managers.DragManager;
 			import mx.managers.PopUpManager;
 			import mx.messaging.channels.StreamingAMFChannel;
@@ -36,8 +37,8 @@
 			import spark.components.RichText;
 			import spark.layouts.supportClasses.DropLocation;
 			
-			import tuio.*;
-			import tuio.TouchEvent;
+			//import tuio.*;
+			//import tuio.TouchEvent;
 			import tuio.TuioClient;
 			import tuio.connectors.UDPConnector;
 			import tuio.debug.TuioDebug;
@@ -141,9 +142,8 @@
 			
 			
 			
-			public function pickerFlick(e:MouseEvent):void {
+			public function pickerFlick(e:TouchEvent):void {
 				Picker_Open();
-				picker.removeEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 			}
 			
 			public function homeFlick(e:MouseEvent):void {
@@ -726,8 +726,7 @@
 			public var rowHeaderArray:ArrayCollection;
 			[bindable]
 			public var dataCellArray:ArrayCollection;
-			[bindable]
-			public var graphType:String = new String;
+
 			
 			//parses results array and stores in an ArrayCollection
 			public function updateGraphData(event:ResultEvent):void
@@ -778,10 +777,9 @@
 						chartData.addItem(tempObj);
 					}
 					
-				}
-				graphType = new String();
-				graphType='DEFAULT';
-				graph.graphType(graphType);
+				};
+				graph.graphTypeDefault();
+
 			}
 			
 			

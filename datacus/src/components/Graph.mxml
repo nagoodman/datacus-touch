@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 creationComplete="attachGestures()">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
 			
+			import flash.events.MouseEvent;
+			import flash.events.TouchEvent;
+			import flash.events.TransformGestureEvent;
+			import flash.ui.Multitouch;
+			
 			import mx.charts.*;
 			import mx.charts.series.*;
-
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
@@ -40,22 +45,35 @@
 			[Bindable]
 			private var tempDataCellArray:ArrayCollection;
 			
-			public function graphType(type:String):void{
+			public function attachGestures(){
+				if(Multitouch.supportsGestureEvents){
+					this.addEventListener(TransformGestureEvent.GESTURE_ROTATE, graphTypePie);
+					this.addEventListener(TouchEvent.TOUCH_ROLL_OUT, graphTypeLine);
+				}
+			}
+			
+			public function graphTypeDefault():void{
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
-				if (type == 'DEFAULT'){
-					updateGraph();
-				}
-				else if (type == 'LINE'){
-					updateLineGraph();
-				}
-				else if (type =='AREA'){
-					updateAreaGraph();
-				}
-				else if (type =='PIE'){
-					updatePieGraph();
-				}
-				
+				updateGraph();
+			}
+			
+			public function graphTypeLine(type:TouchEvent):void{
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				updateLineGraph();
+			}
+			
+			public function graphTypePie(type:TransformGestureEvent):void{
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				updatePieGraph();
+			}
+			
+			public function graphTypeArea():void{
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				updateAreaGraph();
 			}
 			
 			public function switchAxis():void{
