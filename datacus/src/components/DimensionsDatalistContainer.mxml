@@ -61,7 +61,7 @@
 					FlexGlobals.topLevelApplication.callMeasures.send();
 					FlexGlobals.topLevelApplication.currentDimension = dimension;
 					FlexGlobals.topLevelApplication.currentHierarchy = hierarchy;
-					FlexGlobals.topLevelApplication.createLevels(FlexGlobals.topLevelApplication.currentDimension, FlexGlobals.topLevelApplication.currentHierarchy);
+					FlexGlobals.topLevelApplication.picker.createLevels(FlexGlobals.topLevelApplication.currentDimension, FlexGlobals.topLevelApplication.currentHierarchy);
 				}
 			}
 			

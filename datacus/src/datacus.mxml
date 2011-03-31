@@ -736,7 +736,7 @@
 					
 				}
 				graph.updateGraph();//returns default column chart
-				//updateLineGraph();
+				//graph.updateLineGraph();
 			}
 			
 			
