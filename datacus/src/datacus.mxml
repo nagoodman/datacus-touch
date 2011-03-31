@@ -57,6 +57,7 @@
 			public var serverIDJSON:String = new String();// = "http://localhost:8080/saiku/json/saiku/"+userID+"/query/";
 			
 			/*Variables used with touch gesture handling*/
+			public var touchX:int;
 			//public var tc:TuioClient;
 			//public var tm:TuioManager;
 			//public var gm:GestureManager;
@@ -72,7 +73,8 @@
 				Multitouch.inputMode = MultitouchInputMode.GESTURE;
 				
 				//Init Listeners
-				picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
+				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 				
 /* 				//TUIO Init
 				mainStage = this.systemManager.stage;
@@ -100,6 +102,45 @@
 			}
 			
 			//Touch Handlers
+			public function pickerDown(e:MouseEvent):void {
+				trace("in mouseDown");
+//				if (currentState == 'State1') {
+//					trace("in state1");
+					touchX = e.stageX;
+					this.addEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
+					this.addEventListener(MouseEvent.MOUSE_UP, pickerUp);
+//				}
+/* 				else if (currentState == 'State2') {
+					
+				}
+				else if (currentState == 'State3') {
+					
+				} */
+			}
+			
+			public function pickerMove(e:MouseEvent):void {
+				trace("in mouse move");
+				var offsetX:int = e.stageX - touchX;
+				trace(offsetX);
+				picker.x += offsetX;
+				trace(picker.width);
+				picker.width -= offsetX;
+				trace(picker.width);
+				touchX = e.stageX;
+			}
+			
+			public function pickerUp(e:MouseEvent):void {
+				this.removeEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
+				this.removeEventListener(MouseEvent.MOUSE_UP, pickerUp);
+			}
+			
+			
+			
+			
+			
+			
+			
+			
 			public function pickerFlick(e:MouseEvent):void {
 				Picker_Open();
 				picker.removeEventListener(MouseEvent.ROLL_OUT, pickerFlick);

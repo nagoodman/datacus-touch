@@ -3,6 +3,8 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="components.*"
 		 creationComplete="Picker_creationCompleteHandler(event)">
+
+	
 	<fx:Script>
 		<![CDATA[
 			//imports classes needed for component
@@ -11,12 +13,18 @@
 			import mx.collections.ArrayCollection;
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+<<<<<<< HEAD
+	
+=======
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
+>>>>>>> 81e1b22c53de10abac454d7c5cf4427c578c7494
 			
-			//initial function to set state to State1 upon load
+			//init
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
+				//Init state
 				currentState='State1';
+				this.maxWidth="1240";
 			}
 			
 			
