@@ -14,6 +14,7 @@
 			import com.adobe.serialization.json.JSON;
 			
 			import flash.display.Stage;
+			import flash.events.TouchEvent;
 			import flash.utils.*;
 			
 			import mx.collections.ArrayCollection;
@@ -22,7 +23,6 @@
 			import mx.controls.*;
 			import mx.events.CloseEvent;
 			import mx.events.DragEvent;
-			import flash.events.TouchEvent;
 			import mx.managers.DragManager;
 			import mx.managers.PopUpManager;
 			import mx.messaging.channels.StreamingAMFChannel;
@@ -37,8 +37,6 @@
 			import spark.components.RichText;
 			import spark.layouts.supportClasses.DropLocation;
 			
-			//import tuio.*;
-			//import tuio.TouchEvent;
 			import tuio.TuioClient;
 			import tuio.connectors.UDPConnector;
 			import tuio.debug.TuioDebug;
@@ -133,16 +131,10 @@
 			public function pickerUp(e:MouseEvent):void {
 				this.removeEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
 				this.removeEventListener(MouseEvent.MOUSE_UP, pickerUp);
-			}
+			}	
 			
-			
-			
-			
-			
-			
-			
-			
-			public function pickerFlick(e:TouchEvent):void {
+			//Handles a flick gesture on the picker
+			public function pickerFlick(e:TransformGestureEvent):void {
 				Picker_Open();
 			}
 			

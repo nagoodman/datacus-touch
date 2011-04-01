@@ -97,7 +97,7 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:BorderContainer  height="25" width="100%" cornerRadius="4" borderWeight="2"  >
+						<s:BorderContainer  height="25" width="100%" cornerRadius="1" borderWeight="2"  >
 							<s:backgroundFill>
 								<s:LinearGradient rotation="90">
 									<s:GradientEntry color="#81cca1" alpha=".5" />

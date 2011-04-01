@@ -14,19 +14,18 @@
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			import flash.events.TouchEvent;
-//<<<<<<< HEAD
-	
-//=======
+			import flash.events.TransformGestureEvent;
+
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
-//>>>>>>> 81e1b22c53de10abac454d7c5cf4427c578c7494
+
 			
 			//init
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
 				//Init state
 				currentState='State1';
 				if(Multitouch.supportsGestureEvents){
-					this.addEventListener(TouchEvent.TOUCH_ROLL_OUT, FlexGlobals.topLevelApplication.pickerFlick());
+					this.addEventListener(TransformGestureEvent.GESTURE_PAN, FlexGlobals.topLevelApplication.pickerFlick);
 				}
 				//this.maxWidth="1240";
 			}

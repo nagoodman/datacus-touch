@@ -45,7 +45,7 @@
 			[Bindable]
 			private var tempDataCellArray:ArrayCollection;
 			
-			public function attachGestures(){
+			public function attachGestures():void{
 				if(Multitouch.supportsGestureEvents){
 					this.addEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
 					this.addEventListener(TouchEvent.TOUCH_ROLL_OUT, graphTypeLine);

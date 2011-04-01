@@ -13,6 +13,8 @@
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
+			import spark.events.RendererExistenceEvent;
+			import flash.events.TouchEvent;
 			
 			import spark.components.List;
 			import spark.layouts.supportClasses.DropLocation;
@@ -23,6 +25,13 @@
 			
 			[Bindable]
 			public var dp:ArrayCollection;
+			
+			//Adds flick event to items in list
+			private function addClick(event:RendererExistenceEvent):void{
+				if(Multitouch.supportsGestureEvents){
+					event.renderer.addEventListener(TouchEvent.TOUCH_ROLL_OUT, FlexGlobals.topLevelApplication.moveToUnused);
+				}
+			}
 			
 			//event handler for entering a drag motion
 			protected function serList_dragEnterHandler(event:DragEvent):void
@@ -138,7 +147,7 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:BorderContainer  height="50" width="105" cornerRadius="4" borderWeight="2"  >
+						<s:BorderContainer  height="50" width="105" cornerRadius="1" borderWeight="2"  >
 							<s:backgroundFill>
 								<s:LinearGradient rotation="90">
 									<s:GradientEntry color="#A4E3C6" alpha=".5" />
