@@ -128,7 +128,7 @@
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="12"
-								paddingTop="5"/>
+								paddingTop="8"/>
 		</s:layout>
 		<s:itemRenderer>
 			<fx:Component>
@@ -137,16 +137,17 @@
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"/>
 						</s:layout>
-						<s:Label text="   " />
-						<s:BitmapImage id="img2"
-									   source="@Embed('assets/drag.png')"
-									   fillMode="scale"
-									   width="-14"
-									   height="43"
-									   />
-						<s:Label text="   " width="-5" />
-						<s:Label text="{data.label}" styleName="label" />
-						<s:Label text="   " />
+						<s:BorderContainer  height="50" width="105" cornerRadius="4" borderWeight="2"  >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color="#E7F1B5" alpha=".5" />
+									<s:GradientEntry color="#F1E91B" alpha=".5" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
+						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>

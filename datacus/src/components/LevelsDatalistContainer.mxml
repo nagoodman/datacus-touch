@@ -69,10 +69,10 @@
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0" paddingTop="0"/>
+												paddingLeft="0" paddingTop="14"/>
 						</s:layout>	
 						
-						<s:BorderContainer  height="90" width="155" cornerRadius="10" borderWeight="2"  >
+						<s:BorderContainer  height="90" width="155" cornerRadius="10" borderWeight="2" >
 							<s:backgroundFill>
 								<s:LinearGradient rotation="90">
 									<s:GradientEntry color="#ffffff" alpha=".8" />
@@ -81,7 +81,7 @@
 								
 							</s:backgroundFill>
 							
-							<s:Label text="{data.label}" width="145" height='90' x='5' textAlign="center" fontSize="25" verticalAlign="middle"/>
+							<s:Label text="{data.label}" width="145" height='90' x='5' textAlign="center" fontSize="25" verticalAlign="middle" />
 						</s:BorderContainer>
 						
 					</s:Group>
