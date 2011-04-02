@@ -52,6 +52,15 @@
 				}
 			}
 			
+			public function removeGestures():void {
+				if(Multitouch.supportsGestureEvents){
+					this.removeEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
+					this.removeEventListener(TouchEvent.TOUCH_ROLL_OUT, graphTypeLine);
+				}
+			}
+			
+			
+			
 			public function graphTypeDefault():void{
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
@@ -77,6 +86,7 @@
 			}
 			
 			public function switchAxis(e:TransformGestureEvent):void{
+				removeGestures();
 				/*Retrieve data from variables in main file*/
 				var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
 				var oldCategoriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.categoriesList);
@@ -99,6 +109,7 @@
 				}
 				
 				FlexGlobals.topLevelApplication.getResults();
+				attachGestures();
 			}
 			
 			public function updateGraph():void
