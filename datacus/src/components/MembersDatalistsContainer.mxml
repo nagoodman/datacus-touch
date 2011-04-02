@@ -169,14 +169,30 @@
 		</s:ArrayCollection>
 		<s:itemRenderer>
 			<fx:Component>
-				<s:ItemRenderer>
+				<s:ItemRenderer autoDrawBackground="false">
+					<s:states>
+						<s:State name="normal" />
+						<s:State name="down" />
+						<s:State name="selected"/>
+					</s:states>
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
-							<s:Label text="{data.label}" width="165" x='5' textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
 						</s:BorderContainer>
 						
 					</s:Group>
@@ -195,14 +211,30 @@
 		</s:ArrayCollection>
 		<s:itemRenderer>
 			<fx:Component>
-				<s:ItemRenderer>
+				<s:ItemRenderer autoDrawBackground="false">
+					<s:states>
+						<s:State name="normal" />
+						<s:State name="down" />
+						<s:State name="selected"/>
+					</s:states>
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
-							<s:Label text="{data.label}" width="165" x='5' textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
 						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
@@ -220,14 +252,30 @@
 		</s:ArrayCollection>
 		<s:itemRenderer>
 			<fx:Component>
-				<s:ItemRenderer>
+				<s:ItemRenderer autoDrawBackground="false">
+					<s:states>
+						<s:State name="normal" />
+						<s:State name="down" />
+						<s:State name="selected"/>
+					</s:states>
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
-							<s:Label text="{data.label}" width="165" x='5'  textAlign="center" fontSize="25" height='78' verticalAlign="middle"/>
+						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
+							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
 						</s:BorderContainer>
 					</s:Group>
 				</s:ItemRenderer>
@@ -246,15 +294,32 @@
 		</s:ArrayCollection>
 		<s:itemRenderer>
 			<fx:Component>
-				<s:ItemRenderer>
+				<s:ItemRenderer autoDrawBackground="false">
+					<s:states>
+						<s:State name="normal" />
+						<s:State name="down" />
+						<s:State name="selected"/>
+					</s:states>
 					<s:Group>
 						<s:layout>
 							<s:HorizontalLayout verticalAlign="middle"
 												paddingLeft="0"/>
 						</s:layout>
-						<s:BorderContainer backgroundImage="@Embed('assets/picker_panel.png')" height="78" width="175" borderVisible="false" >
+						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
+							<s:backgroundFill>
+								<s:LinearGradient rotation="90">
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color="#ffffff" alpha=".8" />
+									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+								</s:LinearGradient>
+								
+							</s:backgroundFill>
+							
 							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
 						</s:BorderContainer>
+						
 					</s:Group>
 				</s:ItemRenderer>
 			</fx:Component>
