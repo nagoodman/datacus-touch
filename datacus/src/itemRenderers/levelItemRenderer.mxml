@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false">
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="down" />
+		<s:State name="selected"/>
+	</s:states>
+	<s:Group>
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle"
+								paddingLeft="0"/>
+		</s:layout>
+		<s:BorderContainer  height="90" width="155" cornerRadius="10" borderWeight="2" >
+			<s:backgroundFill>
+				<s:LinearGradient rotation="90">
+					<s:GradientEntry color.normal="#c7cceb" color.selected="#9ba3d8" color.down="#9ba3d8" alpha=".8" />
+					<s:GradientEntry color="#ffffff" alpha=".8" />
+					<s:GradientEntry color="#ffffff" alpha=".8" />
+					<s:GradientEntry color="#ffffff" alpha=".8" />
+					<s:GradientEntry color.normal="#c7cceb" color.selected="#9ba3d8" color.down="#9ba3d8" alpha=".8" />
+				</s:LinearGradient>	
+			</s:backgroundFill>
+			
+			<s:Label text="{data.label}" width="145" x='5' height='90' textAlign="center" fontSize="25" verticalAlign="middle"/>
+		</s:BorderContainer>
+	</s:Group>
+</s:ItemRenderer>

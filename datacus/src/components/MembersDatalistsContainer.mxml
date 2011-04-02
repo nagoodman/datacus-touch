@@ -6,6 +6,8 @@
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
 			
+			import itemRenderers.memberItemRenderer;
+			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
@@ -158,171 +160,37 @@
 		</s:Rect>
 	</fx:DesignLayer>
 	
-	<s:List x="10" y="10" width="900" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+	<s:List x="10" y="10" width="900" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true"
+			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
-		<s:ArrayCollection>
-			
-		</s:ArrayCollection>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer autoDrawBackground="false">
-					<s:states>
-						<s:State name="normal" />
-						<s:State name="down" />
-						<s:State name="selected"/>
-					</s:states>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0"/>
-						</s:layout>
-						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
-						</s:BorderContainer>
-						
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
 	</s:List>
-	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" 
+			dragMoveEnabled="true" skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
-		<s:ArrayCollection>
-			
-		</s:ArrayCollection>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer autoDrawBackground="false">
-					<s:states>
-						<s:State name="normal" />
-						<s:State name="down" />
-						<s:State name="selected"/>
-					</s:states>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0"/>
-						</s:layout>
-						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
-						</s:BorderContainer>
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
 	</s:List>
-	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" 
+			dragMoveEnabled="true" skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
-		<s:ArrayCollection>
-			
-		</s:ArrayCollection>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer autoDrawBackground="false">
-					<s:states>
-						<s:State name="normal" />
-						<s:State name="down" />
-						<s:State name="selected"/>
-					</s:states>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0"/>
-						</s:layout>
-						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
-						</s:BorderContainer>
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
 	</s:List>
 	
-	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" skinClass="skins.MyDropSkin">
+	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" 
+			dragMoveEnabled="true" skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
-		<s:ArrayCollection>
-			
-		</s:ArrayCollection>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer autoDrawBackground="false">
-					<s:states>
-						<s:State name="normal" />
-						<s:State name="down" />
-						<s:State name="selected"/>
-					</s:states>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0"/>
-						</s:layout>
-						<s:BorderContainer  height="78" width="175" cornerRadius="20" borderWeight="2" >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color="#ffffff" alpha=".8" />
-									<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="165" x='5' height='78' textAlign="center" fontSize="25" verticalAlign="middle"/>
-						</s:BorderContainer>
-						
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
 	</s:List>
 </s:Group>

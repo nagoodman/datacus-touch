@@ -82,7 +82,7 @@
 			x="5" y="25"
 			rendererAdd="addClick(event)"
 			styleName="container"
-			skinClass="skins.MyDropSkin">
+			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.measureItemRenderer">
 		
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"
@@ -90,33 +90,5 @@
 							  paddingTop="10" paddingBottom="10"/>
 		</s:layout>
 		
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer autoDrawBackground="false">
-					<s:states>
-						<s:State name="normal" />
-						<s:State name="down" />
-						<s:State name="selected"/>
-					</s:states>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"
-												paddingLeft="0"/>
-						</s:layout>
-						<s:BorderContainer borderStyle="inset" height="50" width="105" cornerRadius="1" borderWeight="3"  >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color.normal="#d61111" color.down="#ebaa74" color.selected="#ebaa74" alpha=".5" />
-									<s:GradientEntry color.normal="#8B0606" color.down="#d66a11" color.selected="#d66a11" alpha=".5" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
-						</s:BorderContainer>
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
 	</s:List>
 </s:Group>

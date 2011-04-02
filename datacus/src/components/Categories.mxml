@@ -4,19 +4,20 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script>
 		<![CDATA[
-			//imports classes and libraries need for component
 			import com.adobe.serialization.json.JSON;
-			import mx.core.FlexGlobals;
+			
+			import flash.events.TouchEvent;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.controls.listClasses.IListItemRenderer;
+			import mx.core.FlexGlobals;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
-			import spark.events.RendererExistenceEvent;
-			import flash.events.TouchEvent;
 			
 			import spark.components.List;
+			import spark.events.RendererExistenceEvent;
 			import spark.layouts.supportClasses.DropLocation;
 			
 			/*Variables need for functions within component*/
@@ -62,6 +63,7 @@
 				if (myDropTarget.dataProvider.length != 0){
 					for (var k:int = 0; k < items.length; k++){
 						oldList = items[k].listLocation;
+						chooseRenderer(items[p]);
 						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
 						var listLength:int = myDropTarget.dataProvider.length
 						if (items[k].listLocation == 'ROWS'){
@@ -97,6 +99,8 @@
 					for (var p:int=items.length - 1; p >= 0; p--)
 					{
 						oldList = items[p].listLocation;
+						chooseRenderer(items[p]);
+
 						FlexGlobals.topLevelApplication.removeFromList(items[p], oldList);
 						items[p].number = 0;
 						this.catDB.addItemAt(items[p], pos.dropIndex);
@@ -106,13 +110,107 @@
 				}
 			}
 			
+			public function chooseRenderer(item:Object):void{
+				var renderSel:String = item.selectionType;
+				if (renderSel == "MEMBER"){
+					catList.itemRenderer = new ClassFactory(memberItemRenderer);
+				}
+				else if (renderSel == "LEVEL"){
+					catList.itemRenderer = new ClassFactory(levelItemRenderer);
+				}
+				else{
+					catList.itemRenderer = new ClassFactory(noLabel);
+				}
+			}
+			
+			
+			
 		]]>
 		
 		
 	</fx:Script>
 	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
-		
+		<fx:Component className="noLabel">
+			<s:ItemRenderer>
+				<s:Group>
+					<s:layout>
+						<s:HorizontalLayout verticalAlign="middle"/>
+					</s:layout>
+					<s:BorderContainer  height="50" width="105" cornerRadius="1" borderWeight="2"  >
+						<s:backgroundFill>
+							<s:LinearGradient rotation="90">
+								<s:GradientEntry color="#E7F1B5" alpha=".5" />
+								<s:GradientEntry color="#F1E91B" alpha=".5" />
+							</s:LinearGradient>
+							
+						</s:backgroundFill>
+						
+						<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
+					</s:BorderContainer>
+				</s:Group>
+			</s:ItemRenderer>
+		</fx:Component>
+		<fx:Component className="memberItemRenderer">
+			<s:ItemRenderer autoDrawBackground="false">
+				<s:states>
+					<s:State name="normal" />
+					<s:State name="down" />
+					<s:State name="selected"/>
+				</s:states>
+				<s:Group>
+					<s:layout>
+						<s:HorizontalLayout verticalAlign="middle"
+											paddingLeft="0"/>
+					</s:layout>
+					<s:BorderContainer  height="50" width="105" cornerRadius="15" borderWeight="2" >
+						<s:backgroundFill>
+							<s:LinearGradient rotation="90">
+								<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+								<s:GradientEntry color="#ffffff" alpha=".8" />
+								<s:GradientEntry color="#ffffff" alpha=".8" />
+								<s:GradientEntry color="#ffffff" alpha=".8" />
+								<s:GradientEntry color.normal="#cdcdcd" color.selected="#999999" color.down="#999999" alpha=".8" />
+							</s:LinearGradient>
+							
+						</s:backgroundFill>
+						
+						<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
+					</s:BorderContainer>
+					
+				</s:Group>
+			</s:ItemRenderer>
+		</fx:Component>
+		<fx:Component className="levelItemRenderer">
+			<s:ItemRenderer autoDrawBackground="false">
+				<s:states>
+					<s:State name="normal" />
+					<s:State name="down" />
+					<s:State name="selected"/>
+				</s:states>
+				<s:Group>
+					<s:layout>
+						<s:HorizontalLayout verticalAlign="middle"
+											paddingLeft="0"/>
+					</s:layout>
+					<s:BorderContainer  height="50" width="105" cornerRadius="10" borderWeight="2" >
+						<s:backgroundFill>
+							<s:LinearGradient rotation="90">
+								<s:GradientEntry color.normal="#c7cceb" color.selected="#9ba3d8" color.down="#9ba3d8" alpha=".8" />
+								<s:GradientEntry color="#ffffff" alpha=".8" />
+								<s:GradientEntry color="#ffffff" alpha=".8" />
+								<s:GradientEntry color="#ffffff" alpha=".8" />
+								<s:GradientEntry color.normal="#c7cceb" color.selected="#9ba3d8" color.down="#9ba3d8" alpha=".8" />
+							</s:LinearGradient>
+							
+						</s:backgroundFill>
+						
+						<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
+					</s:BorderContainer>
+					
+				</s:Group>
+			</s:ItemRenderer>
+		</fx:Component>
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
@@ -140,28 +238,7 @@
 								paddingLeft="12"
 								paddingTop="8"/>
 		</s:layout>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"/>
-						</s:layout>
-						<s:BorderContainer  height="50" width="105" cornerRadius="1" borderWeight="2"  >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color="#E7F1B5" alpha=".5" />
-									<s:GradientEntry color="#F1E91B" alpha=".5" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
-						</s:BorderContainer>
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
+	
 		
 	</s:List>
 </s:Group>
