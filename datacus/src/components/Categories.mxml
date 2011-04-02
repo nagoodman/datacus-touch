@@ -27,7 +27,7 @@
 			public var dp:ArrayCollection;
 			
 			//Adds flick event to items in list
-			private function addClick(event:RendererExistenceEvent):void{
+			private function addFlick(event:RendererExistenceEvent):void{
 				if(Multitouch.supportsGestureEvents){
 					event.renderer.addEventListener(TouchEvent.TOUCH_ROLL_OUT, FlexGlobals.topLevelApplication.moveToUnused);
 				}
@@ -127,6 +127,7 @@
 			height="70"
 			x="5" y="5"
 			alpha="0.8"
+			rendererAdd="addFlick(event)"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			dataProvider="{catDB}"
