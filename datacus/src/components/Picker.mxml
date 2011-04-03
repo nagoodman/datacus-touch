@@ -27,7 +27,7 @@
 				if(Multitouch.supportsGestureEvents){
 					this.addEventListener(TransformGestureEvent.GESTURE_PAN, FlexGlobals.topLevelApplication.pickerFlick);
 				}
-				//this.maxWidth="1240";
+				
 			}
 			
 			
@@ -51,6 +51,13 @@
 				MembersDLContainer.membersLevel4.dataProvider = null;
 				FlexGlobals.topLevelApplication.callLevels.url= tempServerID+tempQueryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
 				FlexGlobals.topLevelApplication.callLevels.send();
+			}
+			
+			protected function close_picker():void{
+				var state:String = this.currentState; 
+				if( state == "State3"){
+					this.currentState = "State2";
+				}
 			}
 		]]>
 	</fx:Script>

@@ -37,13 +37,13 @@
 			import spark.components.RichText;
 			import spark.layouts.supportClasses.DropLocation;
 			
-			import tuio.TuioClient;
+			/*import tuio.TuioClient;
 			import tuio.connectors.UDPConnector;
 			import tuio.debug.TuioDebug;
 			import tuio.gestures.DragGesture;
 			import tuio.gestures.GestureManager;
 			import tuio.mouse.MouseToTouchDispatcher;
-			import tuio.windows7.*;
+			import tuio.windows7.*;*/
 			
 			protected var mainStage:Stage;
 			[bindable]
@@ -57,12 +57,11 @@
 			
 			/*Variables used with touch gesture handling*/
 			public var touchX:int;
-			//public var tc:TuioClient;
-			//public var tm:TuioManager;
+
 			//public var gm:GestureManager;
-			//private var winTouch:Windows7TouchToTuioDispatcher;
+
 			//private var mTouch:MouseToTouchDispatcher;
-			//private var tDbg:TuioDebug;
+
 			
 			/*Function first initiated when software starts*/
 			protected function init():void {
@@ -73,6 +72,7 @@
 				
 				//Init Listeners
 				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				
 				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 				
 /* 				//TUIO Init
@@ -138,6 +138,11 @@
 				Picker_Open();
 			}
 			
+			public function pickerFlickClose(e:TransformGestureEvent):void{
+				Picker_Close();
+			}
+
+			
 			public function homeFlick(e:MouseEvent):void {
 				Home_Open();
 				picker.removeEventListener(MouseEvent.ROLL_OUT, homeFlick);
@@ -152,19 +157,6 @@
 				//trace("dragged");
 			}
 			
-			public function handleDown(e:tuio.TouchEvent):void {
-				trace("TOUCHDOWN!");
-				trace(e.relatedObject.name);
-			}
-			
-			public function handleUp(e:tuio.TouchEvent):void {
-				//trace("TOUCHUP!");
-				//trace(e.relatedObject);
-			}
-			
-			public function handleMove(e:tuio.TouchEvent):void {
-				//trace("moving");
-			} 
 			
 			//Verify a connection
 			protected function checkResponse(event:ResultEvent):void{
@@ -204,28 +196,32 @@
 			//Attached to a Flick and a One-Finger-Touch
 			protected function Picker_Open():void
 			{
+				picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+
+				//picker.currentState = "State3";
+				//picker.populatePicker();
 				const state:String = currentState;
 				if ( state == 'Page3' ) {
 					currentState='Page4';
 					picker.populatePicker();
 				}
-				if (state == 'Page5'){
+				else if (state == 'Page5'){
 					currentState='Page4';
 					picker.populatePicker();
 				}
-				if (state =='Page6'){
+				else if (state =='Page6'){
 					currentState="Page4";
 					picker.populatePicker();
 				}
 			}
 			
 			//Closes the Picker automatically by changing the state
-			protected function Picker_Close():void{
+			public function Picker_Close():void{
 				const state:String = currentState;
 				if ( state == 'Page4' ) {
 					currentState='Page3';
 				}
-				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
+				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
 			}
 			
 			//Opens the home menu by changing the state
