@@ -53,10 +53,6 @@
 				FlexGlobals.topLevelApplication.callLevels.send();
 			}
 			
-			protected function close_picker():void{
-				currentState = "State2";
-				this.addEventListener(MouseEvent.CLICK, FlexGlobals.topLevelApplication.Picker_Open);
-			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -72,7 +68,7 @@
 		
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x="40" y="300" includeIn="State1,State2" />
 	</fx:DesignLayer>
-	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100" click="close_picker()"/>
+	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100"/>
 	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State3" 

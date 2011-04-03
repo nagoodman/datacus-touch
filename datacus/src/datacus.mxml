@@ -144,7 +144,8 @@
 			}
 			
 			public function pickerFlickClose(e:TransformGestureEvent):void{
-				Picker_Close();
+				var event:MouseEvent;
+				Picker_Close(event);
 			}
 
 			
@@ -203,26 +204,16 @@
 			{
 				picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
 				picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
-
+	
 				picker.currentState = "State3";
 				picker.populatePicker();
-				/*const state:String = currentState;
-				if ( state == 'Page3' ) {
-					currentState='Page4';
-					picker.populatePicker();
-				}
-				else if (state == 'Page5'){
-					currentState='Page4';
-					picker.populatePicker();
-				}
-				else if (state =='Page6'){
-					currentState="Page4";
-					picker.populatePicker();
-				}*/
+				picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+
 			}
 			
 			//Closes the Picker automatically by changing the state
-			public function Picker_Close():void{
+			public function Picker_Close(e:MouseEvent):void{
+				picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
 				picker.currentState= "State2";
 				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
 				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
