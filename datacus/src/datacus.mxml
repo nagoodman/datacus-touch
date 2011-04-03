@@ -72,7 +72,11 @@
 				
 				//Init Listeners
 				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-				
+				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
+				home.addEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
+				trash.addEventListener(MouseEvent.MOUSE_DOWN, Trash_Open);
+				sets.addEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
+				serverStatus.addEventListener(MouseEvent.MOUSE_DOWN, Connection_Open);
 				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
 				
 /* 				//TUIO Init
@@ -135,7 +139,8 @@
 			
 			//Handles a flick gesture on the picker
 			public function pickerFlick(e:TransformGestureEvent):void {
-				Picker_Open();
+				var event:MouseEvent;
+				Picker_Open(event);
 			}
 			
 			public function pickerFlickClose(e:TransformGestureEvent):void{
@@ -144,7 +149,7 @@
 
 			
 			public function homeFlick(e:MouseEvent):void {
-				Home_Open();
+				//Home_Open();
 				picker.removeEventListener(MouseEvent.ROLL_OUT, homeFlick);
 			}
 			
@@ -161,15 +166,17 @@
 			//Verify a connection
 			protected function checkResponse(event:ResultEvent):void{
 				if (event.statusCode == 200){
-					Home_Open();
+					serverStatus.Connection_Close();
+					var e:MouseEvent;
+					Home_Open(e);
 				}
 			}
 			
 			//Attempts to create a session the specified server with login credentials
-			private function submit_conn():void{
+			public function submit_conn():void{
 				try {
-					userID = Uname.text;
-					serverIDBase = ServerAddy.text + '/saiku/';
+					userID = serverStatus.Uname.text;
+					serverIDBase = serverStatus.ServerAddy.text + '/saiku/';
 					serverIDRest = serverIDBase + 'rest/saiku/'+userID+'/query/';
 					serverIDJSON = serverIDBase + 'json/saiku/'+userID+'/query/';
 					CreateSession.url = serverIDBase+'rest/saiku/session';
@@ -182,25 +189,24 @@
 			/*Functions to handle state changes*/
 			
 			//Opens the connection menu by changing the state
-			protected function Connection_Open():void{
-				const state:String = currentState;
-				currentState="Page1";
+			public function Connection_Open(e:MouseEvent):void{
+				serverStatus.removeEventListener(MouseEvent.MOUSE_DOWN, Connection_Open);
+				home.currentState="Home1";
+				serverStatus.currentState = "State1";
+				//currentState="Page1";
 			}
 			
-			//Closes the connection menu by changing the state
-			protected function Connection_Close():void{
-				currentState="Page3";
-			}
 			
 			//Automatically Opens Picker by changing the current state
 			//Attached to a Flick and a One-Finger-Touch
-			protected function Picker_Open():void
+			public function Picker_Open(e:MouseEvent):void
 			{
 				picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
 
-				//picker.currentState = "State3";
-				//picker.populatePicker();
-				const state:String = currentState;
+				picker.currentState = "State3";
+				picker.populatePicker();
+				/*const state:String = currentState;
 				if ( state == 'Page3' ) {
 					currentState='Page4';
 					picker.populatePicker();
@@ -212,88 +218,49 @@
 				else if (state =='Page6'){
 					currentState="Page4";
 					picker.populatePicker();
-				}
+				}*/
 			}
 			
 			//Closes the Picker automatically by changing the state
 			public function Picker_Close():void{
-				const state:String = currentState;
-				if ( state == 'Page4' ) {
-					currentState='Page3';
-				}
+				picker.currentState= "State2";
 				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
 			}
 			
 			//Opens the home menu by changing the state
-			protected function Home_Open():void{
-				const state:String = currentState;
-				if (state == 'Page1' ) {
-					currentState='Page2';
-					GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/datasources';
-					GetSourceOptions.send();
-				}
-				else{
-					currentState='Page2'
-				}
+			public function Home_Open(e:MouseEvent):void{
+				home.removeEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
+				home.currentState = "Home2";
+				GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/datasources';
+				GetSourceOptions.send();
+
 			}
 			
 			//Opens the trash can by changing the state
-			public function Trash_Open():void{
-				const state:String = currentState;
-				if (state =='Page3'){
-					currentState="Page5";
-				}
-				if (state =='Page4'){
-					currentState="Page5";
-				}
-				if (state =='Page6'){
-					currentState="Page5";
-				}
+			public function Trash_Open(e:MouseEvent):void{
+				trash.trashList.dataProvider = null;
+				trash.removeEventListener(MouseEvent.MOUSE_DOWN, Trash_Open);
+				trash.currentState = "State2";
 			}
 			
 			//Closes the trash can by changin the state
 			public function Trash_Close():void{
-				const state:String = currentState;
-				if ( state =='Page5'){
-					currentState='Page3';
-				}
+				trash.currentState = "State1";
+				trash.addEventListener(MouseEvent.MOUSE_DOWN, Trash_Close);
 			}
 			
 			//Opens the sets menu by changing the state
-			public function Sets_Open():void{
-				const state:String = currentState;
+			public function Sets_Open(e:MouseEvent):void{
+				sets.removeEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
 				sets.retrieveActiveSets();
-				if (state =='Page3'){
-					currentState="Page6";
-				}
-				if (state =='Page4'){
-					currentState="Page6";
-				}
-				if (state =='Page5'){
-					currentState="Page6";
-				}
+				sets.currentState = "Sets2";
 			}
 			
-			//Closes sets menu and changes the current state
-			public function Sets_Close():void{
-				const state:String = currentState;
-				if ( state =='Page6'){
-					currentState='Page3';
-				}
-			}
-			
-			//Closes home menu and changes state
-			public function Home_Close():void{
-				const state:String = currentState;
-				if ( state == 'Page2' ) {
-					currentState='Page3';
-				}
-				//home.addEventListener(MouseEvent.ROLL_OUT, homeFlick);
-			}
-			
+
 			//Submits the user generated query and takes application to next State
 			public function submit_form():void{
-				Home_Close();
+				home.Home_Close();
 				submit_query();
 			}
 				
@@ -340,17 +307,17 @@
 					}	
 				}
 				//Fills available connection options
-				connectionDropDown.dataProvider = connectionArray;
-				connectionDropDown.selectedIndex=0;
+				home.connectionDropDown.dataProvider = connectionArray;
+				home.connectionDropDown.selectedIndex=0;
 				//Fills available catalog options
-				catalogDropDown.dataProvider = catalogArray;
-				catalogDropDown.selectedIndex=0;
+				home.catalogDropDown.dataProvider = catalogArray;
+				home.catalogDropDown.selectedIndex=0;
 				//Fills available schema options
-				schemaDropDown.dataProvider = schemaArray;
-				schemaDropDown.selectedIndex=0;
+				home.schemaDropDown.dataProvider = schemaArray;
+				home.schemaDropDown.selectedIndex=0;
 				//Fills available cube options
-				cubeDropDown.dataProvider = cubeArray;
-				cubeDropDown.selectedIndex=0;
+				home.cubeDropDown.dataProvider = cubeArray;
+				home.cubeDropDown.selectedIndex=0;
 			}
 			
 			//Produces an error window native to the application to overwrite
@@ -377,6 +344,7 @@
 			//Creates a query in which the user manipulates through Datacus
 			public function submit_query():void
 			{
+
 				measures.measuresList.dataProvider = null;
 				graph.removeAllElements();
 				graphLegend.removeAllElements();
@@ -416,7 +384,7 @@
 					//params['catalog'] = catalogDropDown.selectedItem.data;
 					//params['schema'] = schemaDropDown.selectedItem.data;
 					//submit.send(params);//sends service call to get new graph info 
-					CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
+					CreateQueryResult.token = create_Query.CreateQuery(home.connectionDropDown.selectedItem.data,home.cubeDropDown.selectedItem.data,home.catalogDropDown.selectedItem.data,home.schemaDropDown.selectedItem.data);
 					//Submit_QueryResult.token = submit_Query.Submit_Query(QueryName.text,connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				}
 			}
@@ -779,14 +747,7 @@
 			
 		]]>
 	</fx:Script>
-	<s:states>
-		<s:State name="Page1"/>
-		<s:State name="Page2"/>
-		<s:State name="Page3"/>
-		<s:State name="Page4"/>
-		<s:State name="Page5"/>
-		<s:State name="Page6"/>
-	</s:states>
+
 	<fx:Declarations>
 		<s:HTTPService
 			id="CreateSession"
@@ -834,10 +795,10 @@
 		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
 					   method="POST" >
 			<mx:request xmlns="">
-				<connection>{getData(connectionDropDown.selectedItem)}</connection>
-				<cube>{getData(cubeDropDown.selectedItem)}</cube>
-				<catalog>{getData(catalogDropDown.selectedItem)}</catalog>
-				<schema>{getData(schemaDropDown.selectedItem)}</schema>
+				<connection>{getData(home.connectionDropDown.selectedItem)}</connection>
+				<cube>{getData(home.cubeDropDown.selectedItem)}</cube>
+				<catalog>{getData(home.catalogDropDown.selectedItem)}</catalog>
+				<schema>{getData(home.schemaDropDown.selectedItem)}</schema>
 			</mx:request>
 		</mx:HTTPService>
 		
@@ -915,308 +876,27 @@
 		
 		<components:Picker id="picker"
 						   x="1280" y="140"
-						   click.Page3="Picker_Open()"
-						   click.Page5="Picker_Open()"
-						   click.Page6="Picker_Open()"
-						   currentState.Page3="State1"
-						   currentState.Page4="State3"
-						   currentState.Page5="State2"
-						   currentState.Page6="State2">
+							>
 		</components:Picker>
 		<components:Sets id="sets"
 						 x="20" y="780"
-						 click.Page3="Sets_Open()"
-						 click.Page4="Sets_Open()"
-						 click.Page5="Sets_Open()"
-						 currentState.Page3="Sets1"
-						 currentState.Page4="Sets1"
-						 currentState.Page5="Sets1"
-						 currentState.Page6="Sets2"
 		/>
 		<components:ServerStatus id="serverStatus"
 								 x="1280" y="20"
-								 click="Connection_Open()"
-								 currentState.Page1="Status1"
-								 currentState.Page2="Status2"
-								 currentState.Page3="Status2"
-								 currentState.Page4="Status2"
-								 currentState.Page5="Status2"
-								 currentState.Page6="Status2"
 								 />
 		<components:Trash id="trash"
-						  x="1280" y="780"
-						  click.Page3="Trash_Open()"
-						  click.Page4="Trash_Open()"
-						  click.Page6="Trash_Open()"
-						  currentState.Page5="Trash2"
-						  />	
+						  x="1280" y="780" />	
 		<components:Home id="home"
-						 x="20" y="20"
-						 click.Page3="Home_Open()"
-						 click.Page4="Home_Open()"
-						 click.Page5="Home_Open()"
-						 click.Page6="Home_Open()"
-						 currentState.Page2="Home2"
-						 currentState.Page3="Home3"
-						 currentState.Page4="Home4">
+						 x="20" y="20">
+
+
 		</components:Home>
 		
 		
 	</fx:DesignLayer>
-	<mx:Form includeIn="Page1" defaultButton="{submitConnection}" id="ServerForm" x ='555' y='390'>
-		<mx:FormItem label='Server Address:' required="true">
-			<s:TextInput id="ServerAddy" width='200' >
-				http://localhost:8080
-			</s:TextInput>
-		</mx:FormItem>
-		<mx:FormItem label='User Name:' required="true">
-			<s:TextInput id="Uname" width='200' >
-				admin
-			</s:TextInput>
-		</mx:FormItem>
-		<mx:FormItem label='Password:'>
-			<s:TextInput id="Passwd" width='200' />
-		</mx:FormItem>		
-		<mx:FormItem>
-			<s:Button label="Connect" id="submitConnection" click="submit_conn()" />
-		</mx:FormItem>
-		<mx:FormItem>
-			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" />
-		</mx:FormItem>
-	</mx:Form>
 	
 	
-	<mx:Form includeIn="Page2" defaultButton="{submitQuery}" id="ConnectionForm" x='555' y='390' >
-		<mx:FormItem label='Connection:'>
-			<s:DropDownList id="connectionDropDown" width='200'>
-				
-			</s:DropDownList>
-		</mx:FormItem>
-		
-		<mx:FormItem label='Catalog:'>
-			<s:DropDownList id="catalogDropDown" width='200'>
-				
-			</s:DropDownList>
-		</mx:FormItem>
-		
-		<mx:FormItem label='Schema:'>
-			<s:DropDownList id="schemaDropDown" width='200'>
-				
-			</s:DropDownList>
-		</mx:FormItem>
-		
-		<mx:FormItem label='Cube:'>
-			<s:DropDownList id="cubeDropDown" width='200'>
-				
-			</s:DropDownList>
-		</mx:FormItem>
-		
-		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true">
-			<s:TextInput id="QueryName" width='200' />
-		</mx:FormItem>
-		
-		<mx:FormItem>
-			<s:Button label="Create Query" id="submitQuery" click="submit_form()" />
-		</mx:FormItem>
-		
-		<mx:FormItem>
-			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />
-		</mx:FormItem>
-					
-		
-	</mx:Form>
-	<s:Button includeIn="Page4" x='220' y='180' id="closePicker" label="Close X" click="Picker_Close()"></s:Button>
-	<s:Button includeIn="Page6" x='850' y='240' id="closeSets" label="Close X" click="Sets_Close()" ></s:Button>
-	<s:Button includeIn="Page5" x='850' y='320' id="closeTrash" label="Close X" click="Trash_Close()" ></s:Button>
+
 	
-	<s:transitions>
-		<s:Transition autoReverse="true" fromState="Page1" toState="Page2">
-			<s:Parallel>
-				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-				<s:Parallel target="{ServerForm}">
-					<s:Fade duration="400" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		
-		<s:Transition autoReverse="true" fromState="Page2" toState="Page1">
-			<s:Parallel>
-				<s:Parallel target="{ServerForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		
-		<s:Transition autoReverse="true" fromState="Page2" toState="Page3">
-			<s:Parallel>
-				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page1">
-			<s:Parallel>
-				<s:Parallel target="{ServerForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page2">
-			<s:Parallel>
-				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page4">
-			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="1300"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page5">
-			<s:Parallel>
-				<s:Parallel target="{closeTrash}">
-					<s:Fade duration="500" startDelay="1400"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page3" toState="Page6">
-			<s:Parallel>
-				<s:Parallel target="{closeSets}">
-					<s:Fade duration="500" startDelay="1400"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		
-		<s:Transition autoReverse="true" fromState="Page4" toState="Page1">
-			<s:Parallel>
-				<s:Parallel target="{ServerForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page4" toState="Page2">
-			<s:Parallel>
-				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="500" startDelay="2600"/>
-				</s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>			
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page4" toState="Page3">
-			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>			
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page4" toState="Page5">
-			<s:Parallel>
-				<s:Parallel target="{closeTrash}">
-					<s:Fade duration="500" startDelay="1400"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page4" toState="Page6">
-			<s:Parallel>
-				<s:Parallel target="{closeSets}">
-					<s:Fade duration="500" startDelay="1400"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		
-		<s:Transition autoReverse="true" fromState="Page5" toState="Page1">
-			<s:Parallel>
-				<s:Parallel target="{ServerForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page5" toState="Page2">
-			<s:Parallel>
-				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page5" toState="Page3">
-			<s:Parallel>
-				<s:Parallel target="{closeTrash}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page5" toState="Page4">
-			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="3000"/>
-				</s:Parallel>
-				<s:Parallel target="{closeTrash}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page5" toState="Page6">
-			<s:Parallel>
-				<s:Parallel target="{closeSets}">
-					<s:Fade duration="500" startDelay="1400"/>
-				</s:Parallel>
-				<s:Parallel target="{closeTrash}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		
-		<s:Transition autoReverse="true" fromState="Page6" toState="Page1">
-			<s:Parallel>
-				<s:Parallel target="{ServerForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page6" toState="Page2">
-			<s:Parallel>
-				<s:Parallel target="{ConnectionForm}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-				<s:Parallel target="{closeSets}">
-					<s:Fade duration="500" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page6" toState="Page3">
-			<s:Parallel>
-				<s:Parallel target="{closeSets}">
-					<s:Fade duration="500" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page6" toState="Page4">
-			<s:Parallel>
-				<s:Parallel target="{closePicker}">
-					<s:Fade duration="500" startDelay="3000"/>
-				</s:Parallel>
-				<s:Parallel target="{closeSets}">
-					<s:Fade duration="500" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Page6" toState="Page5">
-			<s:Parallel>
-				<s:Parallel target="{closeSets}">
-					<s:Fade duration="500" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{closeTrash}">
-					<s:Fade duration="500" startDelay="1400"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-	</s:transitions>
+	
 </s:WindowedApplication>

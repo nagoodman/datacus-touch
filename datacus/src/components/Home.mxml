@@ -15,6 +15,13 @@
 				currentState = 'Home1';
 			}
 			
+			//Closes home menu and changes state
+			public function Home_Close():void{
+				currentState = "Home1";
+				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Home_Open);
+				//home.addEventListener(MouseEvent.ROLL_OUT, homeFlick);
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -23,17 +30,53 @@
 	<s:states>
 		<s:State name="Home1"/>
 		<s:State name="Home2"/>
-		<s:State name="Home3"/>
-		<s:State name="Home4"/>
 	</s:states>
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="home" x="0" y="0" height.Home2="300" x.Home2="500" y.Home2="300" width.Home2="400"
 							   height="100" width="140" skinClass="skins.Panel" />
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeMenuLabel" tabStops="S0 S50 S100" text="Home Menu" x="645" y="320" includeIn="Home2"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="18" id="QueryMenu" tabStops="S0 S50 S100" text="Create A New Query" x="615" y="350" includeIn="Home2"/>
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeLabel" tabStops="S0 S50 S100" text="Home" x="43" y="40" includeIn="Home1, Home3,Home4"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeLabel" tabStops="S0 S50 S100" text="Home" x="43" y="40" includeIn="Home1"/>
 	</fx:DesignLayer>	
-	
+	<mx:Form includeIn="Home2" defaultButton="{submitQuery}" id="ConnectionForm" x='535' y='370' >
+		<mx:FormItem label='Connection:'>
+			<s:DropDownList id="connectionDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label='Catalog:'>
+			<s:DropDownList id="catalogDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label='Schema:'>
+			<s:DropDownList id="schemaDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label='Cube:'>
+			<s:DropDownList id="cubeDropDown" width='200'>
+				
+			</s:DropDownList>
+		</mx:FormItem>
+		
+		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true">
+			<s:TextInput id="QueryName" width='200' />
+		</mx:FormItem>
+		
+		<mx:FormItem>
+			<s:Button label="Create Query" id="submitQuery" click="FlexGlobals.topLevelApplication.submit_form()" />
+		</mx:FormItem>
+		
+		<mx:FormItem>
+			<s:Button label="Cancel" id="cancelNewQuery" click="currentState='Home4'" />
+		</mx:FormItem>
+		
+		
+	</mx:Form>
 	
 	
 	<s:transitions>
@@ -50,6 +93,9 @@
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 				<s:Parallel target="{HomeMenuLabel}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
@@ -69,58 +115,10 @@
 				<s:Parallel target="{HomeMenuLabel}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Home2" toState="Home3">
-			<s:Parallel>	
-				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="800" startDelay="300"/>
-					<s:Resize duration="800" startDelay="300"/>
-				</s:Parallel>
-				<s:Parallel target="{HomeLabel}">
-					<s:Fade duration="500" startDelay="1100"/>
-				</s:Parallel>
-				<s:Parallel target="{QueryMenu}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{HomeMenuLabel}">
+				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Home3" toState="Home2">
-			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
-					<s:Resize duration="1000" startDelay="600"/>
-				</s:Parallel>
-				<s:Parallel target="{HomeLabel}">
-					<s:Fade duration="500" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{QueryMenu}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-				<s:Parallel target="{HomeMenuLabel}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Home4" toState="Home2">
-			<s:Parallel>
-				<s:Parallel target="{home}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="1500"/>
-					<s:Resize duration="1000" startDelay="1600"/>
-				</s:Parallel>
-				<s:Parallel target="{HomeLabel}">
-					<s:Fade duration="1500" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{QueryMenu}">
-					<s:Fade duration="500" startDelay="2600"/>
-				</s:Parallel>
-				<s:Parallel target="{HomeMenuLabel}">
-					<s:Fade duration="500" startDelay="2600"/>
-				</s:Parallel>
-			</s:Parallel>			
 		</s:Transition>
 	</s:transitions>
 </s:Group>

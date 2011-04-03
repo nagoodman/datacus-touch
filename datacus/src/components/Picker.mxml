@@ -10,12 +10,12 @@
 			//imports classes needed for component
 			import com.adobe.serialization.json.JSON;
 			
+			import flash.events.TouchEvent;
+			import flash.events.TransformGestureEvent;
+			
 			import mx.collections.ArrayCollection;
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
-			import flash.events.TouchEvent;
-			import flash.events.TransformGestureEvent;
-
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
 
@@ -54,10 +54,8 @@
 			}
 			
 			protected function close_picker():void{
-				var state:String = this.currentState; 
-				if( state == "State3"){
-					this.currentState = "State2";
-				}
+				currentState = "State2";
+				this.addEventListener(MouseEvent.CLICK, FlexGlobals.topLevelApplication.Picker_Open);
 			}
 		]]>
 	</fx:Script>
@@ -74,7 +72,7 @@
 		
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x="40" y="300" includeIn="State1,State2" />
 	</fx:DesignLayer>
-	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100" />
+	<components:PickerCloseArea id="PickerClose" includeIn="State3" x="-1100" click="close_picker()"/>
 	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State3" 

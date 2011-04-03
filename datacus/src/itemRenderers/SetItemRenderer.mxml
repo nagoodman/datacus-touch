@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false">
+	
+	<s:Group>
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle"/>
+		</s:layout>
+		<s:BorderContainer  height="40" width="100%" cornerRadius="4" borderWeight="2" >
+			<s:backgroundFill>
+				<s:LinearGradient rotation="90">
+					<s:GradientEntry color="#135a78" alpha=".5" />
+					<s:GradientEntry color="#72ada9" alpha=".5" />
+					<s:GradientEntry color="#72ada9" alpha=".5" />
+					<s:GradientEntry color="#135a78" alpha=".5" />
+				</s:LinearGradient>
+				
+			</s:backgroundFill>
+			
+			<s:Label text="{data.label}" width="100%" height="100%" textAlign="center" fontSize="16" verticalAlign="middle"/>
+		</s:BorderContainer>
+	</s:Group>
+	
+</s:ItemRenderer>

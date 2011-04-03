@@ -15,6 +15,7 @@
 			import mx.events.FlexEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
 			
 			import spark.components.List;
 			import spark.layouts.supportClasses.DropLocation;
@@ -37,17 +38,24 @@
 			public function getSets(event:ResultEvent):void{
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
-				var tempSetsAC:ArrayCollection = FlexGlobals.topLevelApplication.setsAC;
+				var tempSetsAC:ArrayCollection = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].name;
 					obj.axis = arr[i].axis;
 					obj.number = i;
 					obj.value = arr[i].name;
-					tempSetsAC.addItem(obj);	
+					var objProx:ObjectProxy = new ObjectProxy(obj);
+					tempSetsAC.addItem(objProx);	
+					
 				}
 				setsList.dataProvider = tempSetsAC;
 				
+			}
+			
+			public function Sets_Close():void{
+				currentState='Sets1';
+				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Sets_Open);
 			}
 			
 			
@@ -73,43 +81,20 @@
 					   includeIn="Sets1"
 					   alpha="0.2"
 					   />
+		<s:Button includeIn="Sets2" x="830" y="-540" id="closeSets" label="Close X" click="Sets_Close()"></s:Button>
 	</fx:DesignLayer>
 	<s:List id="setsList" width="130" height="90" x="5" y="5"
 			width.Sets2="300"
 			height.Sets2="300"
 			x.Sets2="570" y.Sets2="-500"
 			alpha="0.8" alpha.Sets1="0"
-			
 			dataProvider="{setsDB}"
-			
-			skinClass="skins.MyDropSkin">
+			skinClass="skins.MyDropSkin"
+			itemRenderer="itemRenderers.SetItemRenderer">
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"
 							  paddingTop="10" paddingBottom="10"/>
 		</s:layout>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"/>
-						</s:layout>
-						<s:BorderContainer  height="40" width="100%" cornerRadius="4" borderWeight="2" >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color="#72ada9" alpha=".5" />
-									<s:GradientEntry color="#135a78" alpha=".5" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="100%" height="100%" textAlign="center" fontSize="16" verticalAlign="middle"/>
-						</s:BorderContainer>
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
-		
 	</s:List>
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Sets1" toState="Sets2">
@@ -119,6 +104,9 @@
 					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsLabel}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{closeSets}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 				<s:Parallel target="{setsList}">
@@ -141,6 +129,9 @@
 					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{SetsLabel}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{closeSets}">
 					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{setsList}">

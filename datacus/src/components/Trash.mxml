@@ -81,6 +81,11 @@
 				}
 			}
 			
+			public function Trash_Close():void{
+				currentState = "State1";
+				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Trash_Open);
+			}
+			
 		]]>
 		
 		
@@ -89,71 +94,54 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<s:states>
-		<s:State name="Trash1"/>
-		<s:State name="Trash2"/>
+		<s:State name="State1"/>
+		<s:State name="State2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="trash" height="100" width="140" height.Trash2="400" width.Trash2="400" x.Trash2="-750" y.Trash2="-470"  skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-598" y="-450" includeIn="Trash2"/>
+		<s:SkinnableContainer id="trash" height.State1="100" width.State1="140" height.State2="400" width.State2="400" x.State2="-750" y.State2="-470"  skinClass="skins.Panel" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-598" y="-450" includeIn="State2"/>
 		<s:BitmapImage id="trashIcon"
 					   source="@Embed('assets/trash.png')"
 					   fillMode="clip"
 					   left="30" right="0"  top="10" bottom="0"
 					   height="60"
 					   width="60"
-					   includeIn="Trash1"
+					   includeIn="State1"
 					   alpha="0.3"
 					   />
+		<s:Button includeIn="State2" x='-440' y='-460' id="closeTrash" label="Close X" click.State2="Trash_Close()" ></s:Button>
 	</fx:DesignLayer>
 	<s:List id="trashList"
 			width="130" height="90" x="5" y="5"
-			width.Trash2="300"
-			height.Trash2="300"
-			x.Trash2="-700" y.Trash2="-420"
-			alpha="0.8" alpha.Trash1="0"
+			width.State2="300"
+			height.State2="300"
+			x.State2="-700" y.State2="-420"
+			alpha="0.8" alpha.State1="0"
 
 			dataProvider="{trashDB}"
 			dragEnter="trashList_dragEnterHandler(event)"
 			dragOver="trashList_dragOverHandler(event)"
 			dragDrop="trashList_dragDropHandler(event)"
-			skinClass="skins.MyDropSkin">
+			skinClass="skins.MyDropSkin"
+			itemRenderer="itemRenderers.trashItemRenderer">
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"
 								paddingLeft="0"
 								paddingTop="10" paddingBottom="10"/>
 		</s:layout>
-		<s:itemRenderer>
-			<fx:Component>
-				<s:ItemRenderer>
-					<s:Group>
-						<s:layout>
-							<s:HorizontalLayout verticalAlign="middle"/>
-						</s:layout>
-						<s:BorderContainer  height="40" width="100%" cornerRadius="4" borderWeight="2" >
-							<s:backgroundFill>
-								<s:LinearGradient rotation="90">
-									<s:GradientEntry color="#cacc82" alpha=".5" />
-									<s:GradientEntry color="#8c7415" alpha=".5" />
-								</s:LinearGradient>
-								
-							</s:backgroundFill>
-							
-							<s:Label text="{data.label}" width="100%" height="100%" textAlign="center" fontSize="16" verticalAlign="middle"/>
-						</s:BorderContainer>
-					</s:Group>
-				</s:ItemRenderer>
-			</fx:Component>
-		</s:itemRenderer>
 		
 	</s:List>
 	<s:transitions>
-		<s:Transition autoReverse="true" fromState="Trash1" toState="Trash2">
+		<s:Transition autoReverse="true" fromState="State1" toState="State2">
 			<s:Parallel>
 				<s:Parallel target="{trash}">
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
 					<s:Resize duration="1000" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{TrashLabel}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 				<s:Parallel target="{trashList}">
@@ -166,13 +154,16 @@
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Trash2" toState="Trash1">
+		<s:Transition autoReverse="true" fromState="State2" toState="State1">
 			<s:Parallel>	
 				<s:Parallel target="{trash}">
 					<s:Move autoCenterTransform="true" duration="800" startDelay="300"/>
 					<s:Resize duration="800" startDelay="300"/>
 				</s:Parallel>
 				<s:Parallel target="{TrashLabel}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{closeTrash}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{trashList}">

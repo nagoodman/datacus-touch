@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="Connection_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			protected function Connection_creationCompleteHandler(event:FlexEvent):void{
+				//Init state
+				this.currentState='State1';
+
+			}
+			//Closes the connection menu by changing the state
+			public function Connection_Close():void{
+				currentState = "State2";
+				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Connection_Open);
+			}
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<s:states>
-		<s:State name="Status1"/>
-		<s:State name="Status2"/>
+		<s:State name="State1"/>
+		<s:State name="State2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="status" height="100" width="140" skinClass="skins.Panel" width.Status1="400" height.Status1="250" x.Status1="-750" y.Status1="300"/>
-		<s:BitmapImage id="statusImg" includeIn="Status2"
+		<s:SkinnableContainer id="status" height.State2="100" width.State2="140" skinClass="skins.Panel" width.State1="400" height.State1="250" x.State1="-750" y.State1="300"/>
+		<s:BitmapImage id="statusImg" includeIn="State2"
 					   source="@Embed('assets/globe.1.png')"
 					   fillMode="clip"
 					   left="30" right="0"  top="10" bottom="0"
@@ -19,12 +36,33 @@
 					   width="60"
 					   alpha="0.5"
 					   />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="ConnectionMenuLabel" tabStops="S0 S50 S100" text="Connection Menu" x="-632" y="320" includeIn="Status1"/>
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="18" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" x="-650" y="345" includeIn="Status1"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="ConnectionMenuLabel" tabStops="S0 S50 S100" text="Connection Menu" x="-632" y="320" includeIn="State1"/>
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="18" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" x="-650" y="345" includeIn="State1"/>
 	</fx:DesignLayer>	
+	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" x ='-725' y='370'>
+		<mx:FormItem label='Server Address:' required="true">
+			<s:TextInput id="ServerAddy" width='200' >
+				http://localhost:8080
+			</s:TextInput>
+		</mx:FormItem>
+		<mx:FormItem label='User Name:' required="true">
+			<s:TextInput id="Uname" width='200' >
+				admin
+			</s:TextInput>
+		</mx:FormItem>
+		<mx:FormItem label='Password:'>
+			<s:TextInput id="Passwd" width='200' />
+		</mx:FormItem>		
+		<mx:FormItem>
+			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" />
+		</mx:FormItem>
+		<mx:FormItem>
+			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" />
+		</mx:FormItem>
+	</mx:Form>
 	
 	<s:transitions>
-		<s:Transition autoReverse="true" fromState="Status1" toState="Status2">
+		<s:Transition autoReverse="true" fromState="State1" toState="State2">
 			<s:Parallel>
 				<s:Parallel target="{status}">
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="500"/>
@@ -39,9 +77,12 @@
 				<s:Parallel target="{ConnectionMenuLabel}">
 					<s:Fade duration="500" startDelay="0"/>
 				</s:Parallel>
+				<s:Parallel target="{ServerForm}">
+					<s:Fade duration="500" startDelay="0"/>
+				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
-		<s:Transition autoReverse="true" fromState="Status2" toState="Status1">
+		<s:Transition autoReverse="true" fromState="State2" toState="State1">
 			<s:Parallel>	
 				<s:Parallel target="{status}">
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="600"/>
@@ -54,6 +95,9 @@
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 				<s:Parallel target="{ConnectionMenuLabel}">
+					<s:Fade duration="500" startDelay="1600"/>
+				</s:Parallel>
+				<s:Parallel target="{ServerForm}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
