@@ -191,6 +191,10 @@
 			
 			//Opens the connection menu by changing the state
 			public function Connection_Open(e:MouseEvent):void{
+				trash.Trash_Close();
+				sets.Sets_Close();
+				home.Home_Close();
+				Picker_Close(e);
 				serverStatus.removeEventListener(MouseEvent.MOUSE_DOWN, Connection_Open);
 				home.currentState="Home1";
 				serverStatus.currentState = "State1";
@@ -202,6 +206,10 @@
 			//Attached to a Flick and a One-Finger-Touch
 			public function Picker_Open(e:MouseEvent):void
 			{
+				trash.Trash_Close();
+				sets.Sets_Close();
+				home.Home_Close();
+				serverStatus.Connection_Close();
 				picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
 				picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
 	
@@ -213,7 +221,9 @@
 			
 			//Closes the Picker automatically by changing the state
 			public function Picker_Close(e:MouseEvent):void{
-				picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+				if (picker.currentState == "State3"){
+					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+				}
 				picker.currentState= "State2";
 				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
 				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
@@ -221,6 +231,10 @@
 			
 			//Opens the home menu by changing the state
 			public function Home_Open(e:MouseEvent):void{
+				trash.Trash_Close();
+				sets.Sets_Close();
+				Picker_Close(e);
+				serverStatus.Connection_Close();
 				home.removeEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
 				home.currentState = "Home2";
 				GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/datasources';
@@ -230,19 +244,23 @@
 			
 			//Opens the trash can by changing the state
 			public function Trash_Open(e:MouseEvent):void{
+				serverStatus.Connection_Close();
+				sets.Sets_Close();
+				home.Home_Close();
+				Picker_Close(e);
 				trash.trashList.dataProvider = null;
 				trash.removeEventListener(MouseEvent.MOUSE_DOWN, Trash_Open);
 				trash.currentState = "State2";
 			}
 			
-			//Closes the trash can by changin the state
-			public function Trash_Close():void{
-				trash.currentState = "State1";
-				trash.addEventListener(MouseEvent.MOUSE_DOWN, Trash_Close);
-			}
+
 			
 			//Opens the sets menu by changing the state
 			public function Sets_Open(e:MouseEvent):void{
+				trash.Trash_Close();
+				serverStatus.Connection_Close();
+				home.Home_Close();
+				Picker_Close(e);
 				sets.removeEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
 				sets.retrieveActiveSets();
 				sets.currentState = "Sets2";
