@@ -21,11 +21,12 @@
 			}
 		]]>
 	</fx:Script>
+
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="touchArea">
-		<s:Rect height="620" id="closeArea" width="100" x="0" y="0" />
+		<s:SkinnableContainer height="620" id="closeArea" width="100" x="0" y="0" />
 		<s:BitmapImage id="closeImg"
 					   source="@Embed('assets/close_arrow.png')"
 					   fillMode="clip"

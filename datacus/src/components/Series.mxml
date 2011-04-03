@@ -62,35 +62,38 @@
 				var oldList:String = new String();
 				if (myDropTarget.dataProvider.length != 0){
 					for (var k:int = 0; k < items.length; k++){
-						oldList = items[k].listLocation;
-						FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
-						var listLen:int = myDropTarget.dataProvider.length;
-						if (items[k].listLocation == 'COLUMNS'){
-							pos=this.serList.layout.calculateDropLocation(event);
-							items[k].number = pos.dropIndex;
-							FlexGlobals.topLevelApplication.moveToColumns(items);
-							for (var x:int=items.length - 1; x >= 0; x--)
-							{
-								this.serDB.addItemAt(items[x], pos.dropIndex);
-								listLengthPriorAdd++;
-							}
-							myDropTarget.destroyDropIndicator();
+						if(myDropTarget.dataProvider[0].dimension != items[k].dimension){
+							
 						}else{
-							while (listLengthPriorAdd<listLen){
-								if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
-									pos=this.serList.layout.calculateDropLocation(event);
-									items[k].number = pos.dropIndex;
-									FlexGlobals.topLevelApplication.moveToColumns(items);
-									for (var i:int=items.length - 1; i >= 0; i--)
-									{
-										this.serDB.addItemAt(items[i], pos.dropIndex);
-										listLengthPriorAdd++;
+							oldList = items[k].listLocation;
+							FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
+							var listLen:int = myDropTarget.dataProvider.length;
+							if (items[k].listLocation == 'COLUMNS'){
+								pos=this.serList.layout.calculateDropLocation(event);
+								items[k].number = pos.dropIndex;
+								FlexGlobals.topLevelApplication.moveToColumns(items);
+								for (var x:int=items.length - 1; x >= 0; x--)
+								{
+									this.serDB.addItemAt(items[x], pos.dropIndex);
+									listLengthPriorAdd++;
+								}
+								myDropTarget.destroyDropIndicator();
+							}else{
+								while (listLengthPriorAdd<listLen){
+									if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
+										pos=this.serList.layout.calculateDropLocation(event);
+										items[k].number = pos.dropIndex;
+										FlexGlobals.topLevelApplication.moveToColumns(items);
+										for (var i:int=items.length - 1; i >= 0; i--)
+										{
+											this.serDB.addItemAt(items[i], pos.dropIndex);
+											listLengthPriorAdd++;
+										}
+										myDropTarget.destroyDropIndicator();
 									}
-									myDropTarget.destroyDropIndicator();
 								}
 							}
 						}
-						
 					}
 				}else{
 					pos=this.serList.layout.calculateDropLocation(event);

@@ -701,49 +701,56 @@
 				dataCellArray = new ArrayCollection;
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
-				for (var i:int = 0; i < arr.length; i++){
-					for (var j:int = 0; j<arr[i].length; j++){
-						if ((arr[i][j].type == "COLUMN_HEADER")&& (arr[i][j].value != 'null')){
-							if ((arr[i][j].value != arr[i][j-1].value) && (columnHeaderArray.length < (arr[i].length - 1))){ //arr[i].length-1 does not allow for multiple measures to be displayed at once
-								columnHeaderArray.addItem(arr[i][j]);
+				if (arr.length == 0){
+					graph.removeAllElements();
+					graphLegend.removeAllElements();
+				}
+				else{
+					for (var i:int = 0; i < arr.length; i++){
+						for (var j:int = 0; j<arr[i].length; j++){
+							if ((arr[i][j].type == "COLUMN_HEADER")&& (arr[i][j].value != 'null')){
+								if ((arr[i][j].value != arr[i][j-1].value) && (columnHeaderArray.length < (arr[i].length - 1))){ //arr[i].length-1 does not allow for multiple measures to be displayed at once
+									columnHeaderArray.addItem(arr[i][j]);
+								}
+							}
+							if ((arr[i][j].type == "ROW_HEADER") && (arr[i][j].value != 'null')){
+								rowHeaderArray.addItem(arr[i][j]);
+							}
+							if ((arr[i][j].type == "DATA_CELL") && (arr[i][j].value != 'null')){
+								var tempItem:String = arr[i][j].value;
+								var passItem:int = int(tempItem.replace(',',''))
+								dataCellArray.addItem(passItem);
 							}
 						}
-						if ((arr[i][j].type == "ROW_HEADER") && (arr[i][j].value != 'null')){
-							rowHeaderArray.addItem(arr[i][j]);
-						}
-						if ((arr[i][j].type == "DATA_CELL") && (arr[i][j].value != 'null')){
-							var tempItem:String = arr[i][j].value;
-							var passItem:int = int(tempItem.replace(',',''))
-							dataCellArray.addItem(passItem);
-						}
 					}
+					var dataIterator:int = 0;
+					var tempObj:Object;
+					chartData = new ArrayCollection();
+					if (rowHeaderArray.length > columnHeaderArray.length){
+						for (var k:int = 0; k<rowHeaderArray.length; k++){
+							tempObj = new Object();
+							tempObj[rowHeaderArray[k].type] = rowHeaderArray[k].value;
+							for (var l:int = 0; l<columnHeaderArray.length; l++){
+								tempObj[columnHeaderArray[l].value] = dataCellArray[dataIterator];
+								dataIterator++;
+							}
+							chartData.addItem(tempObj);
+						}
+					}else{
+						for (var n:int = 0; n<rowHeaderArray.length; n++){
+							tempObj = new Object();
+							tempObj[columnHeaderArray[n].type] = rowHeaderArray[n].value;
+							for (var o:int = 0; o<columnHeaderArray.length; o++){
+								tempObj[columnHeaderArray[o].value] = dataCellArray[dataIterator];
+								dataIterator++;
+							}
+							chartData.addItem(tempObj);
+						}
+						
+					};
+					graph.graphTypeDefault();
 				}
-				var dataIterator:int = 0;
-				var tempObj:Object;
-				chartData = new ArrayCollection();
-				if (rowHeaderArray.length > columnHeaderArray.length){
-					for (var k:int = 0; k<rowHeaderArray.length; k++){
-						tempObj = new Object();
-						tempObj[rowHeaderArray[k].type] = rowHeaderArray[k].value;
-						for (var l:int = 0; l<columnHeaderArray.length; l++){
-							tempObj[columnHeaderArray[l].value] = dataCellArray[dataIterator];
-							dataIterator++;
-						}
-						chartData.addItem(tempObj);
-					}
-				}else{
-					for (var n:int = 0; n<rowHeaderArray.length; n++){
-						tempObj = new Object();
-						tempObj[columnHeaderArray[n].type] = rowHeaderArray[n].value;
-						for (var o:int = 0; o<columnHeaderArray.length; o++){
-							tempObj[columnHeaderArray[o].value] = dataCellArray[dataIterator];
-							dataIterator++;
-						}
-						chartData.addItem(tempObj);
-					}
-					
-				};
-				graph.graphTypeDefault();
+				
 
 			}
 			
