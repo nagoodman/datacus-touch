@@ -31,11 +31,11 @@
 			//Adds flick event to items in list
 			private function addFlick(event:RendererExistenceEvent):void{
 				if(Multitouch.supportsGestureEvents){
-					event.renderer.addEventListener(TouchEvent.TOUCH_ROLL_OUT, removeItem);
+					event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
 				}
 			}
 			
-			private function removeItem(e:TouchEvent):void{//TouchEvent):void{
+			private function removeItem(e:MouseEvent):void{//TouchEvent):void{
 				var obj:ObjectProxy = e.currentTarget.data;
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
 			}
