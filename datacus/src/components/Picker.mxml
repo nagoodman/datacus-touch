@@ -53,6 +53,9 @@
 				FlexGlobals.topLevelApplication.callLevels.send();
 			}
 			
+
+
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -132,6 +135,29 @@
 			</s:Parallel>
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="State3" toState="State2">
+			<s:Parallel>
+				<s:Parallel target="{picker}">
+					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>
+					<s:Resize duration="1000" startDelay="300"/>
+				</s:Parallel>
+				<s:Parallel target="{MembersDLContainer}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{DimensionsDLContainer}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{LevelsDLContainer}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{PickerClose}">
+					<s:Fade duration="300" startDelay="0"/>
+				</s:Parallel>
+				<s:Parallel target="{PickerLabel}">
+					<s:Fade duration="500" startDelay="1300"/>
+				</s:Parallel>
+			</s:Parallel>			
+		</s:Transition>
+		<s:Transition autoReverse="true" fromState="State2" toState="State1">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>

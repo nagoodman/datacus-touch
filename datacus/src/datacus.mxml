@@ -213,21 +213,27 @@
 				serverStatus.Connection_Close();
 				picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
 				picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
-	
-				picker.currentState = "State3";
-				picker.populatePicker();
-				picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+				
+				if (picker.currentState == "State2"){
+					picker.currentState = "State1";					
+				}else{
+					picker.currentState = "State3";
+					picker.populatePicker();
+					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+				}
+				
 
 			}
 			
 			//Closes the Picker automatically by changing the state
 			public function Picker_Close(e:MouseEvent):void{
 				if (picker.currentState == "State3"){
+					picker.currentState= "State2";
 					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
 				}
-				picker.currentState= "State2";
 				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
 				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
+				
 			}
 			
 			//Opens the home menu by changing the state

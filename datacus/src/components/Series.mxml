@@ -16,6 +16,7 @@
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
+			import flash.events.TransformGestureEvent;
 			
 			import spark.components.List;
 			import spark.events.RendererExistenceEvent;
@@ -32,11 +33,11 @@
 			private function addFlick(event:RendererExistenceEvent):void{
 				//event.renderer.addEventListener(MouseEvent.MOUSE_DOWN, removeItem);
 				if(Multitouch.supportsGestureEvents){
-					event.renderer.addEventListener(TouchEvent.TOUCH_ROLL_OUT, removeItem);
+					event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
 				}
 			}
 			
-			private function removeItem(e:TouchEvent):void{//MouseEvent):void{
+			private function removeItem(e:MouseEvent):void{//MouseEvent):void{
 				var obj:ObjectProxy = e.currentTarget.data;
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
 			}
