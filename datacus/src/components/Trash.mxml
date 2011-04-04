@@ -7,14 +7,21 @@
 			//imports classes and libraries need for component
 			import com.adobe.serialization.json.JSON;
 			
+			import flash.events.GestureEvent;
+			import flash.events.PressAndTapGestureEvent;
+			import flash.events.TouchEvent;
+			import flash.events.TransformGestureEvent;
+			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectProxy;
 			
 			import spark.components.List;
+			import spark.events.RendererExistenceEvent;
 			import spark.layouts.supportClasses.DropLocation;
 			
 			/*Variables need for functions within component*/
@@ -23,6 +30,39 @@
 			
 			[Bindable]
 			public var dp:ArrayCollection;
+			
+			private function addTouchTap(event:RendererExistenceEvent):void{
+				//event.renderer.addEventListener(MouseEvent.MOUSE_DOWN, readdItem);
+				if(Multitouch.supportsGestureEvents){
+					event.renderer.addEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, readdItem); 
+				}
+			}
+			
+			private function readdItem(e:PressAndTapGestureEvent):void{//:MouseEvent):void{
+				var obj:ObjectProxy = e.currentTarget.data;
+				var objects:Object = new Object();
+				var oldList:String = new String();
+				var dropIndex:int = new int();
+				if (obj.listLocation == "COLUMNS"){
+					oldList = obj.newList;
+					objects[0] = obj;
+					objects.length = 1;
+					FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
+					obj.number = 0;
+					dropIndex = FlexGlobals.topLevelApplication.series.serDB.length;
+					FlexGlobals.topLevelApplication.series.serDB.addItemAt(obj, dropIndex);
+					FlexGlobals.topLevelApplication.moveToColumns(objects);
+				}else if (obj.listLocation =="ROWS"){
+					oldList = obj.newList;
+					objects[0] = obj;
+					objects.length = 1;
+					FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
+					obj.number = 0;
+					dropIndex = FlexGlobals.topLevelApplication.categories.catDB.length;
+					FlexGlobals.topLevelApplication.categories.catDB.addItemAt(obj, dropIndex);
+					FlexGlobals.topLevelApplication.moveToRows(objects);
+				}
+			}
 			
 			//event handler for entering a drag motion
 			protected function trashList_dragEnterHandler(event:DragEvent):void
@@ -117,7 +157,7 @@
 			height.State2="300"
 			x.State2="-700" y.State2="-420"
 			alpha="0.8" alpha.State1="0"
-
+			rendererAdd="addTouchTap(event)"
 			dataProvider = "{trashDB}"
 			dragEnter="trashList_dragEnterHandler(event)"
 			dragOver="trashList_dragOverHandler(event)"

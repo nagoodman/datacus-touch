@@ -489,6 +489,10 @@
 					memberIndex = picker.MembersDLContainer.membersLevel4.dataProvider.getItemIndex(member);
 					picker.MembersDLContainer.membersLevel4.dataProvider.removeItemAt(memberIndex);
 				}
+				else if (listIdentifier == 'TRASH'){
+					memberIndex = trash.trashList.dataProvider.getItemIndex(member);
+					trash.trashList.dataProvider.removeItemAt(memberIndex);
+				}
 			}
 			
 			
