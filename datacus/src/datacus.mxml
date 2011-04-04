@@ -762,7 +762,7 @@
 			resultFormat='xml'
 			result="checkResponse(event)" 
 			fault="faultHandler(event)"
-			requestTimeout="-1" />
+			requestTimeout="-1" showBusyCursor="true" />
 		<s:HTTPService
 			id="GetSourceOptions"
 			resultFormat='text'
