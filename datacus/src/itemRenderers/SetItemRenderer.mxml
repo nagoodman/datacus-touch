@@ -3,7 +3,11 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				autoDrawBackground="false">
-	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="down" />
+		<s:State name="selected"/>
+	</s:states>
 	<s:Group>
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle"/>
@@ -11,10 +15,10 @@
 		<s:BorderContainer  height="40" width="100%" cornerRadius="4" borderWeight="2" >
 			<s:backgroundFill>
 				<s:LinearGradient rotation="90">
-					<s:GradientEntry color="#135a78" alpha=".5" />
-					<s:GradientEntry color="#72ada9" alpha=".5" />
-					<s:GradientEntry color="#72ada9" alpha=".5" />
-					<s:GradientEntry color="#135a78" alpha=".5" />
+					<s:GradientEntry color.normal="#135a78" color.down="#4598bc" color.selected="#4598bc" alpha=".5" />
+					<s:GradientEntry color.normal="#72ada9" color.down="#aed6d3" color.selected="#aed6d3" alpha=".5" />
+					<s:GradientEntry color.normal="#72ada9" color.down="#aed6d3" color.selected="#aed6d3" alpha=".5" />
+					<s:GradientEntry color.normal="#135a78" color.down="#4598bc" color.selected="#4598bc" alpha=".5" />
 				</s:LinearGradient>
 				
 			</s:backgroundFill>

@@ -5,8 +5,12 @@
 		 creationComplete="Sets_creationCompleteHandler(event)">
 	<fx:Script>
 		<![CDATA[
-			//imports classes and libraries need for component
 			import com.adobe.serialization.json.JSON;
+			
+			import flash.events.GestureEvent;
+			import flash.events.PressAndTapGestureEvent;
+			import flash.events.TouchEvent;
+			import flash.events.TransformGestureEvent;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
@@ -18,7 +22,10 @@
 			import mx.utils.ObjectProxy;
 			
 			import spark.components.List;
+			import spark.events.RendererExistenceEvent;
 			import spark.layouts.supportClasses.DropLocation;
+			
+			import tuio.gestures.Gesture;
 			
 			/*Variables need for functions within component*/
 			[Bindable]
@@ -26,6 +33,12 @@
 			
 			protected function Sets_creationCompleteHandler(event:FlexEvent):void{
 				currentState = 'Sets1';
+			}
+			
+			private function addTouchTap(event:RendererExistenceEvent):void{
+				if(Multitouch.supportsGestureEvents){
+					event.renderer.addEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, LoadOldSet); 
+				}
 			}
 			
 			//Retrieves a list of active sets to be displayed in the Active Sets Menu
@@ -56,6 +69,12 @@
 			public function Sets_Close():void{
 				currentState='Sets1';
 				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Sets_Open);
+			}
+			
+			public function LoadOldSet(e:PressAndTapGestureEvent):void{
+				var obj:ObjectProxy = e.currentTarget.data;
+				FlexGlobals.topLevelApplication.currentQueryName = obj.value;
+				FlexGlobals.topLevelApplication.getResults();
 			}
 			
 			
@@ -89,6 +108,7 @@
 			x.Sets2="570" y.Sets2="-500"
 			alpha="0.8" alpha.Sets1="0"
 			dataProvider="{setsDB}"
+			rendererAdd="addTouchTap(event)"
 			skinClass="skins.MyDropSkin"
 			itemRenderer="itemRenderers.SetItemRenderer">
 		<s:layout>

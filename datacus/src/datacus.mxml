@@ -673,7 +673,7 @@
 			public function getResults():void
 			{
 				if((seriesList.length > 0) && (categoriesList.length > 0)){
-					results.url=serverIDJSON+queryName+"/result"
+					results.url=serverIDJSON+currentQueryName+"/result"
 					results.send();
 				}else{
 					graph.removeAllElements();
