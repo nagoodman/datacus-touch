@@ -49,6 +49,7 @@
 					objects.length = 1;
 					FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
 					obj.number = 0;
+					//FlexGlobals.topLevelApplication.seriesList.addItem(obj);
 					dropIndex = FlexGlobals.topLevelApplication.series.serDB.length;
 					FlexGlobals.topLevelApplication.series.serDB.addItemAt(obj, dropIndex);
 					FlexGlobals.topLevelApplication.moveToColumns(objects);
@@ -58,6 +59,7 @@
 					objects.length = 1;
 					FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
 					obj.number = 0;
+					//FlexGlobals.topLevelApplication.categoriesList.addItem(obj);
 					dropIndex = FlexGlobals.topLevelApplication.categories.catDB.length;
 					FlexGlobals.topLevelApplication.categories.catDB.addItemAt(obj, dropIndex);
 					FlexGlobals.topLevelApplication.moveToRows(objects);
