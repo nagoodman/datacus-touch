@@ -215,7 +215,8 @@
 				picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
 				
 				if (picker.currentState == "State2"){
-					picker.currentState = "State1";					
+					picker.currentState = "State1";	
+					picker.addEventListener(MouseEvent.CLICK, Picker_Open);
 				}else{
 					picker.currentState = "State3";
 					picker.populatePicker();

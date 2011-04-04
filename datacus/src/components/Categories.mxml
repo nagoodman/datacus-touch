@@ -31,12 +31,12 @@
 			//Adds flick event to items in list
 			private function addFlick(event:RendererExistenceEvent):void{
 				if(Multitouch.supportsGestureEvents){
-					event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
+					//event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
 				}
 			}
 			
-			private function removeItem(e:MouseEvent):void{//TouchEvent):void{
-				var obj:ObjectProxy = e.currentTarget.data;
+			private function removeItem(e:DragEvent):void{//TouchEvent):void{
+				var obj:ObjectProxy = e.currentTarget.selectedItems[0];
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
 			}
 			
@@ -46,6 +46,7 @@
 				event.preventDefault();
 				var myDragTarget:List=event.currentTarget as List;
 				DragManager.acceptDragDrop(myDragTarget);
+				
 			}
 			
 			//handles when a user drags an object over a list
@@ -114,21 +115,15 @@
 					FlexGlobals.topLevelApplication.moveToRows(items);
 					myDropTarget.destroyDropIndicator();
 				}
+			}		
+
+			protected function catList_dragExitHandler(event:DragEvent):void
+			{
+				if (event.currentTarget.selectedItems.length != 0){
+					removeItem(event);
+				}
 			}
-			
-			/*public function chooseRenderer(item:Object):void{
-				var renderSel:String = item.selectionType;
-				if (renderSel == "MEMBER"){
-					catList.itemRenderer = new ClassFactory(memberItemRenderer);
-				}
-				else if (renderSel == "LEVEL"){
-					catList.itemRenderer = new ClassFactory(levelItemRenderer);
-				}
-				else{
-					catList.itemRenderer = new ClassFactory(noLabel);
-				}
-			}*/
-			
+
 		]]>
 		
 		
@@ -153,7 +148,7 @@
 			rendererAdd="addFlick(event)"
 			dragEnabled="true"
 			dragMoveEnabled="true"
-			dataProvider="{catDB}"
+			dataProvider="{catDB}" dragExit="catList_dragExitHandler(event)"
 			dragEnter="catList_dragEnterHandler(event)"
 			dragOver="catList_dragOverHandler(event)"
 			dragDrop="catList_dragDropHandler(event)"

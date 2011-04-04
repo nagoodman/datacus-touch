@@ -8,6 +8,7 @@
 			import com.adobe.serialization.json.JSON;
 			
 			import flash.events.TouchEvent;
+			import flash.events.TransformGestureEvent;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
@@ -16,7 +17,6 @@
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
-			import flash.events.TransformGestureEvent;
 			
 			import spark.components.List;
 			import spark.events.RendererExistenceEvent;
@@ -33,12 +33,12 @@
 			private function addFlick(event:RendererExistenceEvent):void{
 				//event.renderer.addEventListener(MouseEvent.MOUSE_DOWN, removeItem);
 				if(Multitouch.supportsGestureEvents){
-					event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
+					//event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
 				}
 			}
 			
-			private function removeItem(e:MouseEvent):void{//MouseEvent):void{
-				var obj:ObjectProxy = e.currentTarget.data;
+			private function removeItem(e:DragEvent):void{//MouseEvent):void{
+				var obj:ObjectProxy = e.currentTarget.selectedItems[0];
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
 			}
 			
@@ -119,6 +119,14 @@
 			}
 			
 			
+
+			protected function serList_dragExitHandler(event:DragEvent):void
+			{
+				if (event.currentTarget.selectedItems.length != 0){
+					removeItem(event);
+				}
+			}
+
 		]]>
 		
 		
@@ -144,6 +152,7 @@
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			dataProvider="{serDB}"
+			dragExit="serList_dragExitHandler(event)"
 			dragEnter="serList_dragEnterHandler(event)"
 			dragOver="serList_dragOverHandler(event)"
 			dragDrop="serList_dragDropHandler(event)"
