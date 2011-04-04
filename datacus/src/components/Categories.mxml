@@ -117,10 +117,13 @@
 				}
 			}		
 
-			protected function catList_dragExitHandler(event:DragEvent):void
+			protected function catList_dragCompleteHandler(event:DragEvent):void
 			{
-				if (event.currentTarget.selectedItems.length != 0){
+				if (event.action == "none"){
 					removeItem(event);
+				}
+				else{
+					
 				}
 			}
 
@@ -148,7 +151,8 @@
 			rendererAdd="addFlick(event)"
 			dragEnabled="true"
 			dragMoveEnabled="true"
-			dataProvider="{catDB}" dragExit="catList_dragExitHandler(event)"
+			dragComplete="catList_dragCompleteHandler(event)"
+			dataProvider="{catDB}" 
 			dragEnter="catList_dragEnterHandler(event)"
 			dragOver="catList_dragOverHandler(event)"
 			dragDrop="catList_dragDropHandler(event)"

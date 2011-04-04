@@ -120,10 +120,14 @@
 			
 			
 
-			protected function serList_dragExitHandler(event:DragEvent):void
+			
+			protected function serList_dragCompleteHandler(event:DragEvent):void
 			{
-				if (event.currentTarget.selectedItems.length != 0){
+				if (event.action == "none"){
 					removeItem(event);
+				}
+				else{
+					
 				}
 			}
 
@@ -151,8 +155,8 @@
 			rendererAdd="addFlick(event)"
 			dragEnabled="true"
 			dragMoveEnabled="true"
-			dataProvider="{serDB}"
-			dragExit="serList_dragExitHandler(event)"
+			dataProvider="{serDB}" 
+			dragComplete="serList_dragCompleteHandler(event)"
 			dragEnter="serList_dragEnterHandler(event)"
 			dragOver="serList_dragOverHandler(event)"
 			dragDrop="serList_dragDropHandler(event)"
