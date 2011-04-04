@@ -6,17 +6,19 @@
 		<![CDATA[
 			//imports classes and libraries need for component
 			import com.adobe.serialization.json.JSON;
-			import mx.core.FlexGlobals;
+			
+			import flash.events.TouchEvent;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
 			import mx.events.DragEvent;
 			import mx.managers.DragManager;
 			import mx.rpc.events.ResultEvent;
-			import spark.events.RendererExistenceEvent;
-			import flash.events.TouchEvent;
+			import mx.utils.ObjectProxy;
 			
 			import spark.components.List;
+			import spark.events.RendererExistenceEvent;
 			import spark.layouts.supportClasses.DropLocation;
 			
 			/*Variables need for functions within component*/
@@ -28,9 +30,15 @@
 			
 			//Adds flick event to items in list
 			private function addFlick(event:RendererExistenceEvent):void{
+				//event.renderer.addEventListener(MouseEvent.MOUSE_DOWN, removeItem);
 				if(Multitouch.supportsGestureEvents){
-					event.renderer.addEventListener(TouchEvent.TOUCH_ROLL_OUT, FlexGlobals.topLevelApplication.moveToUnused);
+					event.renderer.addEventListener(TouchEvent.TOUCH_ROLL_OUT, removeItem);
 				}
+			}
+			
+			private function removeItem(e:TouchEvent):void{//MouseEvent):void{
+				var obj:ObjectProxy = e.currentTarget.data;
+				FlexGlobals.topLevelApplication.moveToUnused(obj);
 			}
 			
 			//event handler for entering a drag motion
