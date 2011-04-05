@@ -10,6 +10,7 @@
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.core.DragSource;
 			import mx.core.FlexGlobals;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
@@ -18,6 +19,20 @@
 			import mx.utils.ObjectProxy;
 			
 			private var membersAC:ArrayCollection = new ArrayCollection();
+			
+			public function memberFlick(e:MouseEvent):void {
+				var dSource:DragSource = new DragSource();
+				dSource.addData(e.relatedObject, "itemsByIndex" );
+				var dEvent:DragEvent = new DragEvent(DragEvent.DRAG_DROP,false,true,null,dSource);
+				if (e.stageY < e.relatedObject.scaleY) {
+					//down flick
+					FlexGlobals.topLevelApplication.categories.dispatchEvent(dEvent);
+				} else {
+					//up flick
+					FlexGlobals.topLevelApplication.series.dispatchEvent(dEvent);
+				}
+				
+			}
 			
 			//forms three strings to retrieve the three levels of members initially visible within the picker
 			public function getMembersFromLevels(levels:ArrayCollection):void
@@ -84,9 +99,9 @@
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					var objProx:ObjectProxy = new ObjectProxy(obj);
-					membersAC.addItem(objProx);	
 				}
 				membersLevel1.dataProvider = membersAC;
+				membersLevel1.addEventListener(MouseEvent.ROLL_OUT,memberFlick);
 			}
 			
 			//populates the second members list within the picker
@@ -104,6 +119,7 @@
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					var objProx:ObjectProxy = new ObjectProxy(obj);
+					objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
 					membersAC.addItem(objProx);	
 				}
 				membersLevel2.dataProvider = membersAC;
@@ -124,6 +140,7 @@
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					var objProx:ObjectProxy = new ObjectProxy(obj);
+					objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
 					membersAC.addItem(objProx);	
 				}
 				
@@ -145,6 +162,7 @@
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					var objProx:ObjectProxy = new ObjectProxy(obj);
+					objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
 					membersAC.addItem(objProx);	
 				}
 				membersLevel4.dataProvider = membersAC;

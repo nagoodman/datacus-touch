@@ -86,7 +86,6 @@
 										  x="-795" y="100" alpha="0.79" />
 	
 	
-	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="State1" toState="State3">
 			<s:Parallel>
