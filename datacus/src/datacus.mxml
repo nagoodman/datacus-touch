@@ -186,21 +186,26 @@
 			//Attached to a Flick and a One-Finger-Touch
 			public function Picker_Open(e:MouseEvent):void
 			{
-				trash.Trash_Close();
-				sets.Sets_Close();
-				home.Home_Close();
-				serverStatus.Connection_Close();
-				picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-				picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
-				
-				if (picker.currentState == "State2"){
-					picker.currentState = "State1";	
-					picker.addEventListener(MouseEvent.CLICK, Picker_Open);
+				if (queryName == ''){
+					return;
 				}else{
-					picker.currentState = "State3";
-					picker.populatePicker();
-					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+					trash.Trash_Close();
+					sets.Sets_Close();
+					home.Home_Close();
+					serverStatus.Connection_Close();
+					picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+					picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
+					
+					if (picker.currentState == "State2"){
+						picker.currentState = "State1";	
+						picker.addEventListener(MouseEvent.CLICK, Picker_Open);
+					}else{
+						picker.currentState = "State3";
+						picker.populatePicker();
+						picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+					}
 				}
+				
 				
 
 			}
@@ -218,15 +223,18 @@
 			
 			//Opens the home menu by changing the state
 			public function Home_Open(e:MouseEvent):void{
-				trash.Trash_Close();
-				sets.Sets_Close();
-				Picker_Close(e);
-				serverStatus.Connection_Close();
-				home.removeEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
-				home.currentState = "Home2";
-				GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/discover';
-				GetSourceOptions.send();
-
+				if (userID == ""){
+					return;
+				}else{
+					trash.Trash_Close();
+					sets.Sets_Close();
+					Picker_Close(e);
+					serverStatus.Connection_Close();
+					home.removeEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
+					home.currentState = "Home2";
+					GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/discover';
+					GetSourceOptions.send();
+				}
 			}
 			
 			//Opens the trash can by changing the state
@@ -244,13 +252,17 @@
 			
 			//Opens the sets menu by changing the state
 			public function Sets_Open(e:MouseEvent):void{
-				trash.Trash_Close();
-				serverStatus.Connection_Close();
-				home.Home_Close();
-				Picker_Close(e);
-				sets.removeEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
-				sets.retrieveActiveSets();
-				sets.currentState = "Sets2";
+				if (userID == ""){
+					return;
+				}else{
+					trash.Trash_Close();
+					serverStatus.Connection_Close();
+					home.Home_Close();
+					Picker_Close(e);
+					sets.removeEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
+					sets.retrieveActiveSets();
+					sets.currentState = "Sets2";
+				}
 			}
 			
 
