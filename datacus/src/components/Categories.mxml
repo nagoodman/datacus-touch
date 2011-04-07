@@ -39,6 +39,7 @@
 			//Removes an item from the categories panel
 			private function removeItem(e:DragEvent):void{//TouchEvent):void{
 				var obj:ObjectProxy = e.currentTarget.selectedItems[0];
+				listLengthPriorAdd--;
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
 			}
 			
