@@ -40,7 +40,6 @@
 			//removes the selected item from the series panel and from the graph
 			private function removeItem(e:DragEvent):void{//MouseEvent):void{
 				var obj:ObjectProxy = e.currentTarget.selectedItems[0];
-				listLengthPriorAdd--;
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
 			}
 			

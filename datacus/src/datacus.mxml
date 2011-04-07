@@ -423,6 +423,7 @@
 					}else{
 						memberIndex = categoriesList.getItemIndex(member);
 					}
+					categories.listLengthPriorAdd --;
 					categoriesList.removeItemAt(memberIndex);
 					if (member.newList == 'TRASH'){
 						removeFromGraph(member);
@@ -437,6 +438,7 @@
 					}else{
 						memberIndex = seriesList.getItemIndex(member);
 					}
+					series.listLengthPriorAdd --;
 					seriesList.removeItemAt(memberIndex);
 					if (member.newList == 'TRASH'){
 						removeFromGraph(member);
