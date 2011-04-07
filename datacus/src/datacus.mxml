@@ -31,7 +31,6 @@
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
 			
-			import services.create_query.*;
 			
 			import spark.components.DropDownList;
 			import spark.components.List;

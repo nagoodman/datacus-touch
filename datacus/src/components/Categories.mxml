@@ -57,8 +57,6 @@
 				var myDropTarget:List=List(event.currentTarget);
 				var pos:DropLocation=this.catList.layout.calculateDropLocation(event);
 				DragManager.showFeedback(DragManager.COPY);
-				myDropTarget.createDropIndicator();
-				myDropTarget.layout.showDropIndicator(pos);
 			}
 			[bindable]
 			public var listLengthPriorAdd:int = 0;
@@ -86,7 +84,7 @@
 									this.catDB.addItemAt(items[x], pos.dropIndex);
 									listLengthPriorAdd++;
 								}
-								myDropTarget.destroyDropIndicator();
+								
 							}
 							else{
 								while (listLengthPriorAdd<listLength){
@@ -99,7 +97,7 @@
 											this.catDB.addItemAt(items[i], pos.dropIndex);
 											listLengthPriorAdd++;
 										}
-										myDropTarget.destroyDropIndicator();
+										
 									}
 								}
 							}
@@ -115,7 +113,7 @@
 						this.catDB.addItemAt(items[p], pos.dropIndex);
 					}
 					FlexGlobals.topLevelApplication.moveToRows(items);
-					myDropTarget.destroyDropIndicator();
+					
 				}
 			}		
 

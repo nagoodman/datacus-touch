@@ -58,8 +58,7 @@
 				var myDropTarget:List=List(event.currentTarget);
 				var pos:DropLocation=this.serList.layout.calculateDropLocation(event);
 				DragManager.showFeedback(DragManager.COPY);
-				myDropTarget.createDropIndicator();
-				myDropTarget.layout.showDropIndicator(pos);
+
 			}
 			[bindable]
 			public var listLengthPriorAdd:int = 0;
@@ -87,7 +86,7 @@
 									this.serDB.addItemAt(items[x], pos.dropIndex);
 									listLengthPriorAdd++;
 								}
-								myDropTarget.destroyDropIndicator();
+							
 							}else{
 								while (listLengthPriorAdd<listLen){
 									if (myDropTarget.dataProvider[listLengthPriorAdd].value != items[k].value){
@@ -99,7 +98,7 @@
 											this.serDB.addItemAt(items[i], pos.dropIndex);
 											listLengthPriorAdd++;
 										}
-										myDropTarget.destroyDropIndicator();
+									
 									}
 								}
 							}
@@ -115,7 +114,7 @@
 						this.serDB.addItemAt(items[p], pos.dropIndex);
 					}
 					FlexGlobals.topLevelApplication.moveToColumns(items);
-					myDropTarget.destroyDropIndicator();
+					//myDropTarget.destroyDropIndicator();
 				}
 			}
 			
