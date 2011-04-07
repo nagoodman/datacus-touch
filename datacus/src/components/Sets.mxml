@@ -31,10 +31,12 @@
 			[Bindable]
 			private var setsDB:ArrayCollection=new ArrayCollection();
 			
+			//Sets currentStateS
 			protected function Sets_creationCompleteHandler(event:FlexEvent):void{
 				currentState = 'Sets1';
 			}
 			
+			//Adds the PressAndTapGesture to each rendered item in the list and makes this event trigger a load set
 			private function addTouchTap(event:RendererExistenceEvent):void{
 				if(Multitouch.supportsGestureEvents){
 					event.renderer.addEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, LoadOldSet); 
@@ -65,11 +67,13 @@
 				
 			}
 			
+			//Closes the sets menu with transition and adds a listener for it to be clicked again to be reopened
 			public function Sets_Close():void{
 				currentState='Sets1';
 				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Sets_Open);
 			}
 			
+			//Clears categories and series panels as well as loads a previous graph
 			public function LoadOldSet(e:PressAndTapGestureEvent):void{
 				var obj:ObjectProxy = e.currentTarget.data;
 				if (obj != null){
@@ -174,8 +178,5 @@
 			</s:Parallel>
 		</s:Transition>
 	</s:transitions>
-
-
-
 
 </s:Group>

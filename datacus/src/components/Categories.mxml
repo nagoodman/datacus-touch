@@ -28,13 +28,15 @@
 			[Bindable]
 			public var dp:ArrayCollection;
 			
-			//Adds flick event to items in list
-			private function addFlick(event:RendererExistenceEvent):void{
-				if(Multitouch.supportsGestureEvents){
-					//event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
+			//Simulates a flick by following where the item is dragged... if not onto new list or same list then removes
+			protected function catList_dragCompleteHandler(event:DragEvent):void
+			{
+				if (event.action == "none"){
+					removeItem(event);
 				}
 			}
 			
+			//Removes an item from the categories panel
 			private function removeItem(e:DragEvent):void{//TouchEvent):void{
 				var obj:ObjectProxy = e.currentTarget.selectedItems[0];
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
@@ -117,15 +119,7 @@
 				}
 			}		
 
-			protected function catList_dragCompleteHandler(event:DragEvent):void
-			{
-				if (event.action == "none"){
-					removeItem(event);
-				}
-				else{
-					
-				}
-			}
+			
 
 		]]>
 		
@@ -148,7 +142,6 @@
 			height="70"
 			x="5" y="5"
 			alpha="0.8"
-			rendererAdd="addFlick(event)"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			dragComplete="catList_dragCompleteHandler(event)"

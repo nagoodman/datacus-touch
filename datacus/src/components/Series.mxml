@@ -29,14 +29,15 @@
 			[Bindable]
 			public var dp:ArrayCollection;
 			
-			//Adds flick event to items in list
-			private function addFlick(event:RendererExistenceEvent):void{
-				//event.renderer.addEventListener(MouseEvent.MOUSE_DOWN, removeItem);
-				if(Multitouch.supportsGestureEvents){
-					//event.renderer.addEventListener(MouseEvent.ROLL_OUT, removeItem);
+			//Adds flick event to items in list by simulating a drag not onto a new list
+			protected function serList_dragCompleteHandler(event:DragEvent):void
+			{
+				if (event.action == "none"){
+					removeItem(event);
 				}
 			}
 			
+			//removes the selected item from the series panel and from the graph
 			private function removeItem(e:DragEvent):void{//MouseEvent):void{
 				var obj:ObjectProxy = e.currentTarget.selectedItems[0];
 				FlexGlobals.topLevelApplication.moveToUnused(obj);
@@ -118,18 +119,6 @@
 				}
 			}
 			
-			
-
-			
-			protected function serList_dragCompleteHandler(event:DragEvent):void
-			{
-				if (event.action == "none"){
-					removeItem(event);
-				}
-				else{
-					
-				}
-			}
 
 		]]>
 		
@@ -152,7 +141,6 @@
 			height="70"
 			x="5" y="25"
 			alpha="0.8"
-			rendererAdd="addFlick(event)"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			dataProvider="{serDB}" 

@@ -7,8 +7,9 @@
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			
+			//Sets Init state
 			protected function Connection_creationCompleteHandler(event:FlexEvent):void{
-				//Init state
+				
 				this.currentState='State1';
 
 			}

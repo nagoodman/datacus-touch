@@ -46,7 +46,17 @@
 			private var tempRowHeadArray:ArrayCollection;
 			[Bindable]
 			private var tempDataCellArray:ArrayCollection;
+			[bindable]
+			public var timer:Timer;
 			
+			//Slows the time for adding gestures so that Touch Screens will not register multiple events
+			private function timeGestures():void{
+				timer = new Timer(1000,0);
+				timer.addEventListener(TimerEvent.TIMER, attachGestures);
+				timer.start();
+			}
+			
+			//Attaches gestures to the graphing area
 			public function attachGestures(event:TimerEvent):void{
 				if(Multitouch.supportsGestureEvents){
 					this.addEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
@@ -55,14 +65,7 @@
 				timer.stop()
 			}
 			
-			[bindable]
-			public var timer:Timer;
-			private function timeGestures():void{
-				timer = new Timer(1000,0);
-				timer.addEventListener(TimerEvent.TIMER, attachGestures);
-				timer.start();
-			}
-			
+			//Removes gestures associted with the graph component
 			public function removeGestures():void {
 				if(Multitouch.supportsGestureEvents){
 					this.removeEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
@@ -70,32 +73,35 @@
 				}
 			}
 			
-			
-			
+			//Forms a default column bar graph
 			public function graphTypeDefault():void{
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateGraph();
 			}
 			
+			//Forms a line graph
 			public function graphTypeLine(type:TouchEvent):void{
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateLineGraph();
 			}
 			
+			//Forms a pie graph **does not work currently because data input needs to be different than other chart forms**
 			public function graphTypePie(type:TransformGestureEvent):void{
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updatePieGraph();
 			}
 			
+			//Forms an area graph 
 			public function graphTypeArea():void{
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateAreaGraph();
 			}
 			
+			//Function that controls the categories vs series view of the graph (flips them)
 			public function switchAxis(e:TransformGestureEvent):void{
 				removeGestures();
 				var tempServer:String = FlexGlobals.topLevelApplication.serverIDRest;
@@ -133,6 +139,7 @@
 				timeGestures();
 			}
 			
+			//produces the data for the column bar graph
 			public function updateGraph():void
 			{
 				/*Retrieve data from variables in main file*/
@@ -201,7 +208,7 @@
 				
 			}	
 			
-			
+			//produces the line graph
 			public function updateLineGraph():void
 			{
 				/*Retrieve data from variables in main file*/
@@ -270,6 +277,7 @@
 				
 			}
 			
+			//produces the area graph
 			public function updateAreaGraph():void
 			{
 				/*Retrieve data from variables in main file*/

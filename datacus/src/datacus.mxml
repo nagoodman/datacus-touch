@@ -38,14 +38,6 @@
 			import spark.components.RichText;
 			import spark.layouts.supportClasses.DropLocation;
 			
-			/*import tuio.TuioClient;
-			import tuio.connectors.UDPConnector;
-			import tuio.debug.TuioDebug;
-			import tuio.gestures.DragGesture;
-			import tuio.gestures.GestureManager;
-			import tuio.mouse.MouseToTouchDispatcher;
-			import tuio.windows7.*;*/
-			
 			protected var mainStage:Stage;
 			[bindable]
 			public var serverIDBase:String = new String(); //= "http://localhost:8080/saiku/";
@@ -59,9 +51,6 @@
 			/*Variables used with touch gesture handling*/
 			public var touchX:int;
 
-			//public var gm:GestureManager;
-
-			//private var mTouch:MouseToTouchDispatcher;
 
 			
 			/*Function first initiated when software starts*/
@@ -78,48 +67,16 @@
 				trash.addEventListener(MouseEvent.MOUSE_DOWN, Trash_Open);
 				sets.addEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
 				serverStatus.addEventListener(MouseEvent.MOUSE_DOWN, Connection_Open);
-				//picker.addEventListener(MouseEvent.ROLL_OUT, pickerFlick);
-				
-/* 				//TUIO Init
-				mainStage = this.systemManager.stage;
-				tc = new TuioClient(new UDPConnector());
-				tm = TuioManager.init(mainStage, tc);
-				mTouch = new MouseToTouchDispatcher(mainStage);
-				//gm = GestureManager.init(stage,tc);
-				//GestureManager.addGesture(new DragGesture());
-				//tDbg = TuioDebug.init(mainStage);
-				//tc.addListener(tDbg);
-				
-				//Event Listeners
-				picker.addEventListener(tuio.TouchEvent.ROLL_OUT, pickerFlick);
-				//mainStage.addEventListener(tuio.TouchEvent.TOUCH_DOWN, handleDown);
-				//stage.addEventListener(org.tuio.TouchEvent.TOUCH_MOVE, handleMove);
-				//mainStage.addEventListener(tuio.TouchEvent.TOUCH_UP, handleUp);	
-				//stage.addEventListener(flash.events.TransformGestureEvent.GESTURE_PAN, handleDrag);
- */
-				//try {
-				//	CreateSession.url = serverIDBase+'rest/saiku/session';
-				//	CreateSession.send();
-				//} catch (error:IOError) {
-				//	error_window("The Saiku Server is not running. Please close the application, start the Saiku server, and restart the application.");
-				//}
 			}
 			
 			//Touch Handlers
 			public function pickerDown(e:MouseEvent):void {
 				trace("in mouseDown");
-//				if (currentState == 'State1') {
-//					trace("in state1");
-					touchX = e.stageX;
-					this.addEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
-					this.addEventListener(MouseEvent.MOUSE_UP, pickerUp);
-//				}
-/* 				else if (currentState == 'State2') {
-					
-				}
-				else if (currentState == 'State3') {
-					
-				} */
+
+				touchX = e.stageX;
+				this.addEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
+				this.addEventListener(MouseEvent.MOUSE_UP, pickerUp);
+
 			}
 			
 			public function pickerMove(e:MouseEvent):void {
@@ -393,23 +350,12 @@
 				trash.trashDB = new ArrayCollection;
 				seriesList = new ArrayCollection;
 				categoriesList = new ArrayCollection;
-				//categories.catList.dataProvider = new ArrayList;
-				//series.serList.dataProvider = new ArrayList;
-				
-				//CreateQueryResult.token = create_Query.CreateQuery(connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
-				//queryName = QueryName.text;
-				//currentQueryName = QueryName.text;
+
 				currentQueryName = new String();
 				currentQueryName = home.QueryName.text;
 				queryName = new String();
 				queryName = home.QueryName.text;
-//				var popup:TitleWindow = new TitleWindow();
-//				popup.showCloseButton = true;
-//				popup.addEventListener(Event.CLOSE, closeTitleWindow);
-//				var label:Label = new Label();
-//				label.text = "You must enter a valid name for the query. Query names must not be blank, cannot contain special characters, and cannot contain more than 20 characters.";
-//				popup.addChild(label);
-				//var pattern1:RegExp = new RegExp("[!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\\\=\\+\\/\\,\\.\\<\\>\\?\\~\\`\\\]");
+
 				var pattern1:RegExp = new RegExp("^[a-zA-Z0-9]+");
 				var pattern2:RegExp = new RegExp("[!@#$%^&*()+=,.<>\\]\\[;:'/\]");
 				if (queryName == "" || queryName.length > 20 
@@ -426,8 +372,6 @@
 					currentSchema = home.schemaDropDown.selectedItem.data;
 					serverIDPicker = serverIDBase + 'json/saiku/' + userID + '/discover/'+currentConnection+'/'+currentCatalog+'/'+currentSchema+'/'+currentCube+'/';
 					submit.send();//sends service call to get new graph info 
-					//CreateQueryResult.token = create_Query.CreateQuery(home.connectionDropDown.selectedItem.data,home.cubeDropDown.selectedItem.data,home.catalogDropDown.selectedItem.data,home.schemaDropDown.selectedItem.data);
-					//Submit_QueryResult.token = submit_Query.Submit_Query(QueryName.text,connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				}
 			}
 			
@@ -503,8 +447,7 @@
 					}
 				}
 				else if (listIdentifier == 'LEVEL'){
-					//should not remove the levels but the members within that level to keep the tree structure in picker
-					//picker.LevelsDLContainer.levelsList.dataProvider.removeItemAt(memberIndex);
+					
 				}
 				else if (listIdentifier == 'MEMBER1'){
 					memberIndex = picker.MembersDLContainer.membersLevel1.dataProvider.getItemIndex(member);
@@ -560,6 +503,9 @@
 			
 			[Bindable]
 			public var categoriesList:ArrayCollection = new ArrayCollection;
+			
+			[Bindable]
+			public var filterList:ArrayCollection = new ArrayCollection;
 			
 			[Bindable]
 			public var nextRowItemPosition:int = new int();
@@ -625,12 +571,6 @@
 					if (members[i].selectionType == 'LEVEL'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/hierarchy/"+hierarchy+"/"+item;
 					}
-					if (members[i].selectionType == 'MEASURE'){
-						removeFromGraph(currentMeasure);
-						removeFromGraph(defaultMeasure);
-						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
-						currentMeasure = members[i];
-					}
 					if (members[i].selectionType == 'MEMBER'){
 						toColumns.url=serverIDRest+queryName+"/axis/COLUMNS/dimension/"+dimension+"/member/"+item;
 					}
@@ -679,7 +619,7 @@
 				}
 			}
 			
-			public var filterList:ArrayCollection = new ArrayCollection;
+			
 			public function moveToFilter(members:Object):void
 			{
 				var hierarchy:String;
@@ -797,8 +737,7 @@
 
 			}
 			
-			
-			
+			//Retrieves selected options for creating a new query to pass to server used in HTTPSERVICE
 			public function getData(dropDown:*):String{
 				return dropDown.data;
 			}

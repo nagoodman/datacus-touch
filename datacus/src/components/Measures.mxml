@@ -17,15 +17,9 @@
 			
 			import spark.events.RendererExistenceEvent;
 			
-			import tuio.TouchEvent;
 			
 			[bindable]
 			public var measuresAC:ArrayCollection = new ArrayCollection();
-			
-			//I am not defining these correctly or I can only use touch on the touch screen
-			
-			
-			
 			
 			//adds click event handler on each member of the list as it's created
 			private function addClick(event:RendererExistenceEvent):void{

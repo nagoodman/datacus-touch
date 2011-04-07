@@ -20,6 +20,8 @@
 			
 			private var membersAC:ArrayCollection = new ArrayCollection();
 			
+			
+			//controls whether a member goes to the series or categories panels with a directional flick
 			public function memberFlick(e:MouseEvent):void {
 				var dSource:DragSource = new DragSource();
 				dSource.addData(e.relatedObject, "itemsByIndex" );
@@ -43,6 +45,7 @@
 				var tempCurrentDimension:String = FlexGlobals.topLevelApplication.currentDimension;
 				var tempCurrentHierarchy:String = FlexGlobals.topLevelApplication.currentHierarchy;
 				
+				//only populates first four levels 
 				if(levels.length > 4){
 					for (i = 0; i < 4; i++){
 						if (i==0){
