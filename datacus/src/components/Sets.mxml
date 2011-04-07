@@ -112,7 +112,7 @@
 					   />
 		<s:Button includeIn="Sets2" x="830" y="-540" id="closeSets" label="Close X" click="Sets_Close()"></s:Button>
 	</fx:DesignLayer>
-	<s:List id="setsList" width="130" height="90" x="5" y="5"
+	<s:List id="setsList" width="130" height="90" x="5" y="5" 
 			width.Sets2="300"
 			height.Sets2="300"
 			x.Sets2="570" y.Sets2="-500"
