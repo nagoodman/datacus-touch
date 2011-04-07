@@ -73,6 +73,16 @@
 							if(myDropTarget.dataProvider[r].value == items[k].value){
 								return;
 							}
+							if(items[k].selectionType == 'MEMBER' && myDropTarget.dataProvider[r].selectionType == 'LEVEL'){
+								if(myDropTarget.dataProvider[r].value == items[k].level){
+									return;
+								}
+							}
+							if(items[k].selectionType == 'LEVEL' && myDropTarget.dataProvider[r].selectionType == 'MEMBER'){
+								if(myDropTarget.dataProvider[r].level == items[k].value){
+									return;
+								}
+							}
 						}
 						if(myDropTarget.dataProvider[0].dimension != items[k].dimension){
 							return;

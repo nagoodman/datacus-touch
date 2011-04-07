@@ -91,12 +91,14 @@
 			public function getMembers1(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
+				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimensionUniqueName;
+					obj.level = tempLevelsAC[0].value;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER1';
 					obj.number = i;
@@ -112,12 +114,14 @@
 			public function getMembers2(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
+				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimensionUniqueName;
+					obj.level = tempLevelsAC[1].value;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER2';
 					obj.number = i;
@@ -133,12 +137,14 @@
 			public function getMembers3(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
+				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimensionUniqueName;
+					obj.level = tempLevelsAC[2].value;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER3';
 					obj.number = i;
@@ -155,12 +161,14 @@
 			public function getMembers4(event:ResultEvent):void
 			{
 				var rawData:String=String(event.result);
+				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
 					obj.dimension = arr[i].dimensionUniqueName;
+					obj.level = tempLevelsAC[3].value;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER4';
 					obj.number = i;
