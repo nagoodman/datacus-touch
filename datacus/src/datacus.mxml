@@ -6,7 +6,7 @@
 					   backgroundColor="#FFFFFF"
 					   minWidth="1440"
 					   minHeight="920"
-					   creationComplete="init()" xmlns:create_query="services.create_query.*" xmlns:submit_query="services.submit_query.*">  
+					   creationComplete="init()">  
 					<!--make it full screen, but for now...-->
 	
 	<fx:Script>
@@ -833,10 +833,7 @@
 		<s:HTTPService id="results" resultFormat="text"
 			method="GET" result="updateGraphData(event)" />
 		
-		<create_query:Create_Query id="create_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
-		<s:CallResponder id="CreateQueryResult"/>
-		<submit_query:Submit_Query id="submit_Query" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
-		<s:CallResponder id="Submit_QueryResult"/>
+
 		
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
@@ -867,9 +864,6 @@
 		
 		<components:Measures id="measures"
  			left="20" top="140"
-		/>
-		<components:StateStep id="stateStep"
-			x="20" y="780"
 		/>
 		
 		<components:Series id="series"
