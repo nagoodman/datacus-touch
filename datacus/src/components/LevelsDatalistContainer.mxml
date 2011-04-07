@@ -25,7 +25,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
-					obj.dimension = arr[i].hierarchy;
+					obj.dimension = arr[i].hierarchyUniqueName;
 					obj.selectionType = 'LEVEL';
 					obj.listLocation = 'LEVEL';
 					obj.number = i;

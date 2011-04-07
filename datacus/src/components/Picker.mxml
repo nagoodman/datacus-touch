@@ -34,8 +34,8 @@
 			/*Functions that populate the picker and handle changes within the picker*/
 			public function populatePicker():void{
 				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
-				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
-				FlexGlobals.topLevelApplication.callDimensions.url= tempServerID+tempQueryName+"/axis/UNUSED/"
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDPicker;
+				FlexGlobals.topLevelApplication.callDimensions.url= tempServerID + 'dimensions';
 				FlexGlobals.topLevelApplication.callDimensions.send()
 			}
 			
@@ -44,12 +44,12 @@
 				FlexGlobals.topLevelApplication.currentDimension = dimension;
 				FlexGlobals.topLevelApplication.currentHierarchy = hierarchy;
 				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
-				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDPicker;
 				MembersDLContainer.membersLevel1.dataProvider = null;
 				MembersDLContainer.membersLevel2.dataProvider = null;
 				MembersDLContainer.membersLevel3.dataProvider = null;
 				MembersDLContainer.membersLevel4.dataProvider = null;
-				FlexGlobals.topLevelApplication.callLevels.url= tempServerID+tempQueryName+"/axis/UNUSED/dimension/"+dimension+"/hierarchy/"+hierarchy+"/";
+				FlexGlobals.topLevelApplication.callLevels.url= tempServerID+"dimensions/"+dimension+"/hierarchies/"+hierarchy+"/levels";
 				FlexGlobals.topLevelApplication.callLevels.send();
 			}
 			

@@ -54,10 +54,9 @@
 				var tempSetsAC:ArrayCollection = new ArrayCollection();
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
-					obj.label = arr[i].name;
-					obj.axis = arr[i].axis;
+					obj.label = arr[i];
 					obj.number = i;
-					obj.value = arr[i].name;
+					obj.value = arr[i];
 					var objProx:ObjectProxy = new ObjectProxy(obj);
 					tempSetsAC.addItem(objProx);	
 					

@@ -50,8 +50,10 @@
 				admin
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='Password:'>
-			<s:TextInput id="Passwd" width='200' />
+		<mx:FormItem label='Password:' required="true">
+			<s:TextInput id="Passwd" width='200'>
+				admin
+			</s:TextInput>
 		</mx:FormItem>		
 		<mx:FormItem>
 			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" />

@@ -38,7 +38,7 @@
 				var tempDimensionsAC:ArrayCollection = FlexGlobals.topLevelApplication.dimensionsAC;
 				var tempMeasuresAC:ArrayCollection = FlexGlobals.topLevelApplication.measuresAC;
 				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
-				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDPicker;
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					if(arr[i].caption == 'Measures'){
@@ -57,7 +57,7 @@
 				if (arr.length != 0){
 					var dimension:String = tempDimensionsAC[0].label;
 					var hierarchy:String = tempDimensionsAC[0].label;
-					FlexGlobals.topLevelApplication.callMeasures.url= tempServerID+tempQueryName+"/axis/UNUSED/dimension/Measures/hierarchy/Measures/MeasuresLevel";
+					FlexGlobals.topLevelApplication.callMeasures.url= tempServerID + 'measures';
 					FlexGlobals.topLevelApplication.callMeasures.send();
 					FlexGlobals.topLevelApplication.currentDimension = dimension;
 					FlexGlobals.topLevelApplication.currentHierarchy = hierarchy;

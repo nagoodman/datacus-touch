@@ -47,7 +47,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
+					obj.dimension = arr[i].dimensionUniqueName;
 					obj.selectionType = 'MEASURE';
 					obj.listLocation = 'MEASURE';
 					obj.number = i;

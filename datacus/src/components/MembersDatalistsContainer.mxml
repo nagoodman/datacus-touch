@@ -38,7 +38,7 @@
 			public function getMembersFromLevels(levels:ArrayCollection):void
 			{
 				var i:int = 0;
-				var tempServerIDJSON:String = FlexGlobals.topLevelApplication.serverIDJSON;
+				var tempServerIDJSON:String = FlexGlobals.topLevelApplication.serverIDPicker;
 				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
 				var tempCurrentDimension:String = FlexGlobals.topLevelApplication.currentDimension;
 				var tempCurrentHierarchy:String = FlexGlobals.topLevelApplication.currentHierarchy;
@@ -46,38 +46,38 @@
 				if(levels.length > 4){
 					for (i = 0; i < 4; i++){
 						if (i==0){
-							FlexGlobals.topLevelApplication.callMembers1.url = tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers1.url = tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers1.send();
 						}
 						if (i==1){
-							FlexGlobals.topLevelApplication.callMembers2.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers2.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers2.send();
 						}
 						if (i==2){
-							FlexGlobals.topLevelApplication.callMembers3.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers3.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers3.send();
 						}
 						if (i==3){
-							FlexGlobals.topLevelApplication.callMembers4.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers4.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers4.send();
 						}
 					}
 				}else{
 					for (i = 0; i < levels.length; i ++){
 						if (i==0){
-							FlexGlobals.topLevelApplication.callMembers1.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers1.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers1.send();
 						}
 						if (i==1){
-							FlexGlobals.topLevelApplication.callMembers2.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers2.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers2.send();
 						}
 						if (i==2){
-							FlexGlobals.topLevelApplication.callMembers3.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers3.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers3.send();
 						}
 						if (i==3){
-							FlexGlobals.topLevelApplication.callMembers4.url= tempServerIDJSON+tempQueryName+"/axis/UNUSED/dimension/"+tempCurrentDimension+"/hierarchy/"+tempCurrentHierarchy+"/"+levels[i].label;
+							FlexGlobals.topLevelApplication.callMembers4.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
 							FlexGlobals.topLevelApplication.callMembers4.send();
 						}
 					}			
@@ -93,15 +93,16 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
+					obj.dimension = arr[i].dimensionUniqueName;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER1';
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					var objProx:ObjectProxy = new ObjectProxy(obj);
+					objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
+					membersAC.addItem(objProx);
 				}
 				membersLevel1.dataProvider = membersAC;
-				membersLevel1.addEventListener(MouseEvent.ROLL_OUT,memberFlick);
 			}
 			
 			//populates the second members list within the picker
@@ -113,7 +114,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
+					obj.dimension = arr[i].dimensionUniqueName;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER2';
 					obj.number = i;
@@ -134,7 +135,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
+					obj.dimension = arr[i].dimensionUniqueName;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER3';
 					obj.number = i;
@@ -156,7 +157,7 @@
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
-					obj.dimension = arr[i].dimension;
+					obj.dimension = arr[i].dimensionUniqueName;
 					obj.selectionType = 'MEMBER';
 					obj.listLocation = 'MEMBER4';
 					obj.number = i;

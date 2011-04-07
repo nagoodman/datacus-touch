@@ -164,6 +164,16 @@
 				//trace("dragged");
 			}
 			
+			import mx.utils.Base64Encoder;
+			[bindable]
+			public var password:String = new String(); // = 'admin'
+			
+			private function addAuthHeader(service:HTTPService, username:String, password:String):void{
+				//add the header to request
+				var enc:Base64Encoder = new Base64Encoder();
+				enc.encode(username + ':' + password);
+				service.headers['Authorization'] = 'Basic' + enc.toString();
+			}
 			
 			//Verify a connection
 			protected function checkResponse(event:ResultEvent):void{
@@ -173,15 +183,28 @@
 					Home_Open(e);
 				}
 			}
+			[bindable]
+			public var serverIDPicker:String = new String();
+			[bindable]
+			public var currentConnection:String = new String();
+			[bindable]
+			public var currentCatalog:String = new String();
+			[bindable]
+			public var currentSchema:String = new String();
+			[bindable]
+			public var currentCube:String = new String();
 			
 			//Attempts to create a session the specified server with login credentials
 			public function submit_conn():void{
 				try {
 					userID = serverStatus.Uname.text;
+					password = serverStatus.Passwd.text;
 					serverIDBase = serverStatus.ServerAddy.text + '/saiku/';
 					serverIDRest = serverIDBase + 'rest/saiku/'+userID+'/query/';
 					serverIDJSON = serverIDBase + 'json/saiku/'+userID+'/query/';
 					CreateSession.url = serverIDBase+'rest/saiku/session';
+					CreateSession.url = serverIDBase+'rest/saiku/'+userID+'/discover';
+					addAuthHeader(CreateSession, userID, password);
 					CreateSession.send();
 				} catch (error:IOError) {
 					error_window("The Saiku Server is not running. Please close the application, start the Saiku server, and restart the application.");
@@ -245,7 +268,7 @@
 				serverStatus.Connection_Close();
 				home.removeEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
 				home.currentState = "Home2";
-				GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/datasources';
+				GetSourceOptions.url = serverIDBase+'json/saiku/'+userID+'/discover';
 				GetSourceOptions.send();
 
 			}
@@ -289,7 +312,7 @@
 			private var cubeArray:ArrayCollection = new ArrayCollection();
 			
 			[Bindable]
-			public var queryName:String = 'chartdata';
+			public var queryName:String = new String();
 			
 			[Bindable]
 			public var currentQueryName:String = new String();
@@ -301,8 +324,8 @@
 				
 				for (var i:int =0; i < arr.length; i++){
 					var con:Object = new Object;
-					con.label = arr[i].connectionName;
-					con.data = arr[i].connectionName;
+					con.label = arr[i].name;
+					con.data = arr[i].name;
 					connectionArray.addItemAt(con, i);
 					for (var j:int = 0; j< arr[i].catalogs.length; j++){
 						var cat:Object = new Object;
@@ -316,8 +339,8 @@
 							schemaArray.addItemAt(schem, k);
 							for (var l:int = 0; l < arr[i].catalogs[j].schemas[k].cubes.length; l++){
 								var cube:Object = new Object;
-								cube.label = arr[i].catalogs[j].schemas[k].cubes[l].cubeName;
-								cube.data = arr[i].catalogs[j].schemas[k].cubes[l].cubeName;
+								cube.label = arr[i].catalogs[j].schemas[k].cubes[l].name;
+								cube.data = arr[i].catalogs[j].schemas[k].cubes[l].name;
 								cubeArray.addItemAt(cube, k);
 							}
 						}
@@ -377,7 +400,9 @@
 				//queryName = QueryName.text;
 				//currentQueryName = QueryName.text;
 				currentQueryName = new String();
-				currentQueryName = 'chartdata';
+				currentQueryName = home.QueryName.text;
+				queryName = new String();
+				queryName = home.QueryName.text;
 //				var popup:TitleWindow = new TitleWindow();
 //				popup.showCloseButton = true;
 //				popup.addEventListener(Event.CLOSE, closeTitleWindow);
@@ -395,13 +420,13 @@
 						"special characters, or more than 20 characters.");
 				} else {
 					submit.url= serverIDRest + queryName+"/";
-					var params:Object = {};
-					//params['connection'] = connectionDropDown.selectedItem.data;
-					//params['cube'] = cubeDropDown.selectedItem.data;
-					//params['catalog'] = catalogDropDown.selectedItem.data;
-					//params['schema'] = schemaDropDown.selectedItem.data;
-					//submit.send(params);//sends service call to get new graph info 
-					CreateQueryResult.token = create_Query.CreateQuery(home.connectionDropDown.selectedItem.data,home.cubeDropDown.selectedItem.data,home.catalogDropDown.selectedItem.data,home.schemaDropDown.selectedItem.data);
+					currentConnection = home.connectionDropDown.selectedItem.data;
+					currentCube = home.cubeDropDown.selectedItem.data;
+					currentCatalog = home.catalogDropDown.selectedItem.data;
+					currentSchema = home.schemaDropDown.selectedItem.data;
+					serverIDPicker = serverIDBase + 'json/saiku/' + userID + '/discover/'+currentConnection+'/'+currentCatalog+'/'+currentSchema+'/'+currentCube+'/';
+					submit.send();//sends service call to get new graph info 
+					//CreateQueryResult.token = create_Query.CreateQuery(home.connectionDropDown.selectedItem.data,home.cubeDropDown.selectedItem.data,home.catalogDropDown.selectedItem.data,home.schemaDropDown.selectedItem.data);
 					//Submit_QueryResult.token = submit_Query.Submit_Query(QueryName.text,connectionDropDown.selectedItem.data,cubeDropDown.selectedItem.data,catalogDropDown.selectedItem.data,schemaDropDown.selectedItem.data);
 				}
 			}
@@ -807,8 +832,7 @@
 			resultFormat="text"
 			result="picker.MembersDLContainer.getMembers4(event)" />
 		
-		<mx:HTTPService id="submit" resultFormat="text" contentType="application/xml" 
-					   method="POST" >
+		<mx:HTTPService id="submit" resultFormat="text" method="POST" >
 			<mx:request xmlns="">
 				<connection>{getData(home.connectionDropDown.selectedItem)}</connection>
 				<cube>{getData(home.cubeDropDown.selectedItem)}</cube>
@@ -817,25 +841,25 @@
 			</mx:request>
 		</mx:HTTPService>
 		
-		<s:HTTPService id="remove" resultFormat="text" contentType="application/xml" 
+		<s:HTTPService id="remove" resultFormat="text"  
 					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
-		<s:HTTPService id="removeMeasure" resultFormat="text" contentType="application/xml" 
+		<s:HTTPService id="removeMeasure" resultFormat="text"  
 					   method="POST">
 		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the ROWS (categories) axis for graphing-->
-		<s:HTTPService id="toRows" resultFormat="text" contentType="application/xml"
+		<s:HTTPService id="toRows" resultFormat="text" 
 					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
 		<!-- request to server to move a new item to the Columns (Series) axis for graphing-->
-		<s:HTTPService id="toColumns" resultFormat="text" contentType="application/xml"
+		<s:HTTPService id="toColumns" resultFormat="text" 
 					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
-		<s:HTTPService id="toUnused" resultFormat="text" contentType="application/xml"
+		<s:HTTPService id="toUnused" resultFormat="text" 
 					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
