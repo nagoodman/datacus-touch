@@ -61,7 +61,7 @@
 
 			}
 			[bindable]
-			public var listLengthPriorAdd:int = 0;
+			public var listLengthPriorAdd:int = new int();
 			//handles a drop into a dropable list
 			protected function serList_dragDropHandler(event:DragEvent):void
 			{
@@ -106,6 +106,7 @@
 					}
 				}else{
 					pos=this.serList.layout.calculateDropLocation(event);
+					listLengthPriorAdd = 0;
 					for (var p:int=items.length - 1; p >= 0; p--)
 					{
 						oldList = items[p].listLocation;
