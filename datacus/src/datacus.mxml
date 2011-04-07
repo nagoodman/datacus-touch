@@ -850,6 +850,10 @@
 					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
+		<s:HTTPService id="switchAxis" resultFormat="text"  
+					   method="POST" result="getResults()">
+		</s:HTTPService>
+		
 		<s:HTTPService id="removeMeasure" resultFormat="text"  
 					   method="POST">
 		</s:HTTPService>

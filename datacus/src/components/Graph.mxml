@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="attachGestures()">
+		 creationComplete="timeGestures()">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
@@ -19,6 +19,8 @@
 			import mx.core.FlexGlobals;
 			import mx.graphics.SolidColorStroke;
 			import mx.graphics.Stroke;
+			
+			import org.osmf.events.TimeEvent;
 			
 			[Bindable]
 			private var tempChartData:ArrayCollection;
@@ -45,11 +47,20 @@
 			[Bindable]
 			private var tempDataCellArray:ArrayCollection;
 			
-			public function attachGestures():void{
+			public function attachGestures(event:TimerEvent):void{
 				if(Multitouch.supportsGestureEvents){
 					this.addEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
 					this.addEventListener(TouchEvent.TOUCH_ROLL_OUT, graphTypeLine);
 				}
+				timer.stop()
+			}
+			
+			[bindable]
+			public var timer:Timer;
+			private function timeGestures():void{
+				timer = new Timer(1000,0);
+				timer.addEventListener(TimerEvent.TIMER, attachGestures);
+				timer.start();
 			}
 			
 			public function removeGestures():void {
@@ -87,8 +98,14 @@
 			
 			public function switchAxis(e:TransformGestureEvent):void{
 				removeGestures();
+				var tempServer:String = FlexGlobals.topLevelApplication.serverIDRest;
+				var tempQuery:String = FlexGlobals.topLevelApplication.currentQueryName;
+				FlexGlobals.topLevelApplication.switchAxis.url=tempServer+tempQuery+"/swapaxes";
+				FlexGlobals.topLevelApplication.switchAxis.headers['X-HTTP-Method-Override'] = 'PUT';
+				FlexGlobals.topLevelApplication.switchAxis.send();
+				
 				/*Retrieve data from variables in main file*/
-				var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
+				/*var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
 				var oldCategoriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.categoriesList);
 				
 				FlexGlobals.topLevelApplication.moveToColumns(oldCategoriesList);
@@ -108,8 +125,8 @@
 					}
 				}
 				
-				FlexGlobals.topLevelApplication.getResults();
-				attachGestures();
+				FlexGlobals.topLevelApplication.getResults(); */
+				timeGestures();
 			}
 			
 			public function updateGraph():void
