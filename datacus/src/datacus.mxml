@@ -705,6 +705,11 @@
 				}
 			}
 			
+			public function viewResults():void{
+				results.url=serverIDJSON+currentQueryName+"/result"
+				results.send();
+			}
+			
 			//Globals variables associated with the data retrieved from database about
 			//items that were selected to be graphed
 			[bindable]

@@ -72,8 +72,15 @@
 			
 			public function LoadOldSet(e:PressAndTapGestureEvent):void{
 				var obj:ObjectProxy = e.currentTarget.data;
-				FlexGlobals.topLevelApplication.currentQueryName = obj.value;
-				FlexGlobals.topLevelApplication.getResults();
+				if (obj != null){
+					FlexGlobals.topLevelApplication.series.serDB = new ArrayCollection;
+					FlexGlobals.topLevelApplication.categories.catDB = new ArrayCollection;	
+					FlexGlobals.topLevelApplication.trash.trashDB = new ArrayCollection;
+					FlexGlobals.topLevelApplication.seriesList = new ArrayCollection;
+					FlexGlobals.topLevelApplication.categoriesList = new ArrayCollection;
+					FlexGlobals.topLevelApplication.currentQueryName = obj.value;
+					FlexGlobals.topLevelApplication.viewResults();
+				}
 			}
 			
 			

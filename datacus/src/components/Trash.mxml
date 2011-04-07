@@ -39,30 +39,33 @@
 			}
 			
 			private function readdItem(e:PressAndTapGestureEvent):void{//:MouseEvent):void{
+				//this.trashList.removeEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, readdItem);
 				var obj:ObjectProxy = e.currentTarget.data;
-				var objects:Object = new Object();
-				var oldList:String = new String();
-				var dropIndex:int = new int();
-				if (obj.listLocation == "COLUMNS"){
-					oldList = obj.newList;
-					objects[0] = obj;
-					objects.length = 1;
-					FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
-					obj.number = 0;
-					//FlexGlobals.topLevelApplication.seriesList.addItem(obj);
-					dropIndex = FlexGlobals.topLevelApplication.series.serDB.length;
-					FlexGlobals.topLevelApplication.series.serDB.addItemAt(obj, dropIndex);
-					FlexGlobals.topLevelApplication.moveToColumns(objects);
-				}else if (obj.listLocation =="ROWS"){
-					oldList = obj.newList;
-					objects[0] = obj;
-					objects.length = 1;
-					FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
-					obj.number = 0;
-					//FlexGlobals.topLevelApplication.categoriesList.addItem(obj);
-					dropIndex = FlexGlobals.topLevelApplication.categories.catDB.length;
-					FlexGlobals.topLevelApplication.categories.catDB.addItemAt(obj, dropIndex);
-					FlexGlobals.topLevelApplication.moveToRows(objects);
+				if (obj != null){
+					var objects:Object = new Object();
+					var oldList:String = new String();
+					var dropIndex:int = new int();
+					if (obj.listLocation == "COLUMNS"){
+						oldList = obj.newList;
+						objects[0] = obj;
+						objects.length = 1;
+						FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
+						obj.number = 0;
+						//FlexGlobals.topLevelApplication.seriesList.addItem(obj);
+						dropIndex = FlexGlobals.topLevelApplication.series.serDB.length;
+						FlexGlobals.topLevelApplication.series.serDB.addItemAt(obj, dropIndex);
+						FlexGlobals.topLevelApplication.moveToColumns(objects);
+					}else if (obj.listLocation =="ROWS"){
+						oldList = obj.newList;
+						objects[0] = obj;
+						objects.length = 1;
+						FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
+						obj.number = 0;
+						//FlexGlobals.topLevelApplication.categoriesList.addItem(obj);
+						dropIndex = FlexGlobals.topLevelApplication.categories.catDB.length;
+						FlexGlobals.topLevelApplication.categories.catDB.addItemAt(obj, dropIndex);
+						FlexGlobals.topLevelApplication.moveToRows(objects);
+					}
 				}
 			}
 			
