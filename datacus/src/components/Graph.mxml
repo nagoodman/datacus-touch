@@ -100,32 +100,36 @@
 				removeGestures();
 				var tempServer:String = FlexGlobals.topLevelApplication.serverIDRest;
 				var tempQuery:String = FlexGlobals.topLevelApplication.currentQueryName;
-				FlexGlobals.topLevelApplication.switchAxis.url=tempServer+tempQuery+"/swapaxes";
-				FlexGlobals.topLevelApplication.switchAxis.headers['X-HTTP-Method-Override'] = 'PUT';
-				FlexGlobals.topLevelApplication.switchAxis.send();
 				
 				/*Retrieve data from variables in main file*/
-				/*var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
+				var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
 				var oldCategoriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.categoriesList);
 				
-				FlexGlobals.topLevelApplication.moveToColumns(oldCategoriesList);
+				
 				for (var i:int = 0; i< oldCategoriesList.length; i++){
-					oldCategoriesList[i].number = 0;
+					oldCategoriesList[i].number = i;
+					oldCategoriesList[i].listLocation = "COLUMNS";
 					FlexGlobals.topLevelApplication.removeFromList(oldCategoriesList[i], 'ROWS');
 					if (oldCategoriesList[i].dimension != '[Measures]'){
+						FlexGlobals.topLevelApplication.seriesList.addItem(oldCategoriesList[i]);
 						FlexGlobals.topLevelApplication.series.serDB.addItem(oldCategoriesList[i]);
 					}
 				}
-				FlexGlobals.topLevelApplication.moveToRows(oldSeriesList);
+				
 				for (var j:int = 0; j< oldSeriesList.length; j++){
-					oldSeriesList[j].number = 0;
+					oldSeriesList[j].number = j;
+					oldSeriesList[j].listLocation = "ROWS";
 					FlexGlobals.topLevelApplication.removeFromList(oldSeriesList[j], 'COLUMNS');
 					if (oldSeriesList[j].dimension != '[Measures]'){
+						FlexGlobals.topLevelApplication.categoriesList.addItem(oldSeriesList[j]);
 						FlexGlobals.topLevelApplication.categories.catDB.addItem(oldSeriesList[j]);
 					}
 				}
 				
-				FlexGlobals.topLevelApplication.getResults(); */
+				FlexGlobals.topLevelApplication.switchAxis.url=tempServer+tempQuery+"/swapaxes";
+				FlexGlobals.topLevelApplication.switchAxis.headers['X-HTTP-Method-Override'] = 'PUT';
+				FlexGlobals.topLevelApplication.switchAxis.send();
+				
 				timeGestures();
 			}
 			

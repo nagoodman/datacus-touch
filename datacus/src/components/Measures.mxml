@@ -7,13 +7,17 @@
 			//behavior: select measures type via tap or scroll if too many displayed
 			//connections: listen to the categories and series for types of measures
 			import com.adobe.serialization.json.JSON;
-			import tuio.TouchEvent;
-			import mx.collections.ArrayCollection;
+			
 			import flash.display.DisplayObject;
+			
+			import mx.collections.ArrayCollection;
 			import mx.core.FlexGlobals;
-			import spark.events.RendererExistenceEvent;
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
+			
+			import spark.events.RendererExistenceEvent;
+			
+			import tuio.TouchEvent;
 			
 			[bindable]
 			public var measuresAC:ArrayCollection = new ArrayCollection();
@@ -34,7 +38,12 @@
 				var newMeasure:String = this.measuresList.selectedItems[0].label;
 				currentMeasure = newMeasure;
 				var items:Object = this.measuresList.selectedItems as Object;
-				FlexGlobals.topLevelApplication.moveToColumns(items);
+				var tempList:ArrayCollection = FlexGlobals.topLevelApplication.filterList;
+				for (var i:int = 0; i < tempList.length; i++){
+					FlexGlobals.topLevelApplication.removeFromGraph(tempList[i]);
+				}
+				FlexGlobals.topLevelApplication.filterList = new ArrayCollection();
+				FlexGlobals.topLevelApplication.moveToFilter(items);
 			}
 			
 			//retrieves the first list in the dimensions array and stores in the Measures panel (consistent across cubes)

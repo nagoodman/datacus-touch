@@ -546,15 +546,11 @@
 						remove.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
 					}
 					remove.headers['X-HTTP-Method-Override'] = 'DELETE';
-					params['position'] = members.itemPosition;
-					params['memeberposition'] = members.itemMemberPosition;
-					remove.send(params);//sends service call to get new graph info 
+					remove.send();//sends service call to get new graph info 
 				}else{
 					removeMeasure.url=serverIDRest+queryName+"/axis/"+originalLocation+"/dimension/"+dimension+"/member/"+item;
 					removeMeasure.headers['X-HTTP-Method-Override'] = 'DELETE';
-					params['position'] = members.itemPosition;
-					params['memeberposition'] = members.itemMemberPosition;
-					removeMeasure.send(params);
+					removeMeasure.send();
 				}
 			}
 			
@@ -680,6 +676,24 @@
 					toRows.send(params);//sends service call to get new graph info 
 					
 					nextRowItemPosition = nextRowItemPosition + 1;
+				}
+			}
+			
+			public var filterList:ArrayCollection = new ArrayCollection;
+			public function moveToFilter(members:Object):void
+			{
+				var hierarchy:String;
+				var dimension:String;
+				var item:String;
+				for (var i:int = 0; i < members.length; i ++){
+					filterList.addItem(members[i]);
+					members[i].listLocation = 'FILTER';
+					dimension = cleanDimension(members[i].dimension);
+					item = cleanItem(members[i].value);
+
+					toFilter.url=serverIDRest+queryName+"/axis/FILTER/dimension/"+dimension+"/member/"+item;
+					toFilter.send();//sends service call to get new graph info 
+
 				}
 			}
 			
@@ -865,6 +879,10 @@
 		
 		<!-- request to server to move a new item to the Columns (Series) axis for graphing-->
 		<s:HTTPService id="toColumns" resultFormat="text" 
+					   method="POST" result="getResults()">
+		</s:HTTPService>
+		
+		<s:HTTPService id="toFilter" resultFormat="text" 
 					   method="POST" result="getResults()">
 		</s:HTTPService>
 		
