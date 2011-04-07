@@ -71,8 +71,13 @@
 				var oldList:String = new String();
 				if (myDropTarget.dataProvider.length != 0){
 					for (var k:int = 0; k < items.length; k++){
+						for (var r:int = 0; r < myDropTarget.dataProvider.length; r++){
+							if(myDropTarget.dataProvider[r].value == items[k].value){
+								return;
+							}
+						}
 						if(myDropTarget.dataProvider[0].dimension != items[k].dimension){
-							
+							return;
 						}else{
 							oldList = items[k].listLocation;
 							FlexGlobals.topLevelApplication.removeFromList(items[k], oldList);
