@@ -268,7 +268,7 @@
 
 			//Submits the user generated query and takes application to next State
 			public function submit_form():void{
-				home.Home_Close();
+
 				submit_query();
 			}
 				
@@ -383,6 +383,7 @@
 					currentSchema = home.schemaDropDown.selectedItem.data;
 					serverIDPicker = serverIDBase + 'json/saiku/' + userID + '/discover/'+currentConnection+'/'+currentCatalog+'/'+currentSchema+'/'+currentCube+'/';
 					submit.send();//sends service call to get new graph info 
+					home.Home_Close();
 				}
 			}
 			

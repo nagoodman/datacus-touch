@@ -121,6 +121,14 @@
 				}else{
 					pos=this.catList.layout.calculateDropLocation(event);
 					listLengthPriorAdd = 0;
+					var tempSerList:ArrayCollection = FlexGlobals.topLevelApplication.seriesList;
+					if (tempSerList.length > 0){
+						if(tempSerList[0].dimension == items[p].dimension){
+							FlexGlobals.topLevelApplication.error_window("You cannot graph two items of the same dimension on different axes."
+								+" Please make your selection again.");
+							return;
+						}
+					}
 					for (var p:int=items.length - 1; p >= 0; p--)
 					{
 						oldList = items[p].listLocation;

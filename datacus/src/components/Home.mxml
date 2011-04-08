@@ -72,7 +72,7 @@
 		</mx:FormItem>
 		
 		<mx:FormItem>
-			<s:Button label="Cancel" id="cancelNewQuery" click="currentState='Home1'" />
+			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />
 		</mx:FormItem>
 		
 		
