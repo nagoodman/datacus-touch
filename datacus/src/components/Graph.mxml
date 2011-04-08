@@ -2,12 +2,13 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="timeGestures()">
+		 creationComplete="init()">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
 			
 			import flash.events.MouseEvent;
+			import flash.events.PressAndTapGestureEvent;
 			import flash.events.TouchEvent;
 			import flash.events.TransformGestureEvent;
 			import flash.ui.Multitouch;
@@ -58,7 +59,20 @@
 			[bindable]
 			private var AreaGraphType:ContextMenuItem;
 			
-			public function addItemsToContextMenu():void{
+			//initial function on load
+			protected function init():void{
+				timeGestures();
+				addItemsToContextMenu();
+			}
+			
+			//opens the context menu with the loaded graphs
+			private function openContextMenu(e:PressAndTapGestureEvent):void{
+				graphMenu.display(this.stage,e.stageX,e.stageY);
+				removeGestures();
+			}
+			
+			//Adds three different chart types to the context menu
+			private function addItemsToContextMenu():void{
 				DefaultGraphType = new ContextMenuItem('Dafault Graph',false,true,true);
 				LineGraphType = new ContextMenuItem('Line Graph',false,true,true);
 				AreaGraphType = new ContextMenuItem('Area Graph',false,true,true);
@@ -85,7 +99,7 @@
 			public function attachGestures(event:TimerEvent):void{
 				if(Multitouch.supportsGestureEvents){
 					this.addEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
-					this.addEventListener(TouchEvent.TOUCH_ROLL_OUT, graphTypeLine);
+					this.addEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, openContextMenu);
 				}
 				timer.stop()
 			}
@@ -95,6 +109,7 @@
 				if(Multitouch.supportsGestureEvents){
 					this.removeEventListener(TransformGestureEvent.GESTURE_ROTATE, switchAxis);
 					this.removeEventListener(TouchEvent.TOUCH_ROLL_OUT, graphTypeLine);
+					this.removeEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, openContextMenu);
 				}
 			}
 			
@@ -131,6 +146,7 @@
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateGraph();
+				timeGestures();
 			}
 			
 			//Forms a line graph
@@ -138,6 +154,7 @@
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateLineGraph();
+				timeGestures();
 			}
 			
 			//Forms a pie graph **does not work currently because data input needs to be different than other chart forms**
@@ -145,6 +162,7 @@
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updatePieGraph();
+				timeGestures();
 			}
 			
 			//Forms an area graph 
@@ -152,6 +170,7 @@
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateAreaGraph();
+				timeGestures();
 			}
 			
 			//Function that controls the categories vs series view of the graph (flips them)

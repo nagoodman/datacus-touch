@@ -67,9 +67,6 @@
 				sets.addEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
 				serverStatus.addEventListener(MouseEvent.MOUSE_DOWN, Connection_Open);
 				
-				
-				//Add Context Menu
-				graph.addItemsToContextMenu();
 			}
 			
 			//Touch Handlers
