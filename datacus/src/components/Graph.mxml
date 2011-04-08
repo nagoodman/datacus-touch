@@ -49,6 +49,31 @@
 			[bindable]
 			public var timer:Timer;
 			
+			[bindable]
+			private var graphMenu:ContextMenu;
+			[bindable]
+			private var DefaultGraphType:ContextMenuItem;
+			[bindable]
+			private var LineGraphType:ContextMenuItem;
+			[bindable]
+			private var AreaGraphType:ContextMenuItem;
+			
+			public function addItemsToContextMenu():void{
+				DefaultGraphType = new ContextMenuItem('Dafault Graph',false,true,true);
+				LineGraphType = new ContextMenuItem('Line Graph',false,true,true);
+				AreaGraphType = new ContextMenuItem('Area Graph',false,true,true);
+				
+				DefaultGraphType.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, graphTypeDefaultCTM);
+				LineGraphType.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, graphTypeLineCTM);
+				AreaGraphType.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, graphTypeAreaCTM);
+				
+				graphMenu = FlexGlobals.topLevelApplication.contextMenu;
+				graphMenu.hideBuiltInItems();
+				
+				graphMenu.customItems.push(DefaultGraphType);
+				graphMenu.customItems.push(LineGraphType);
+				graphMenu.customItems.push(AreaGraphType);
+			}
 			//Slows the time for adding gestures so that Touch Screens will not register multiple events
 			private function timeGestures():void{
 				timer = new Timer(1000,0);
@@ -96,6 +121,34 @@
 			
 			//Forms an area graph 
 			public function graphTypeArea():void{
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				updateAreaGraph();
+			}
+			
+			//Forms a default column bar graph
+			public function graphTypeDefaultCTM(e:ContextMenuEvent):void{
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				updateGraph();
+			}
+			
+			//Forms a line graph
+			public function graphTypeLineCTM(e:ContextMenuEvent):void{
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				updateLineGraph();
+			}
+			
+			//Forms a pie graph **does not work currently because data input needs to be different than other chart forms**
+			public function graphTypePieCTM(e:ContextMenuEvent):void{
+				FlexGlobals.topLevelApplication.graph.removeAllElements();
+				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				updatePieGraph();
+			}
+			
+			//Forms an area graph 
+			public function graphTypeAreaCTM(e:ContextMenuEvent):void{
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateAreaGraph();
