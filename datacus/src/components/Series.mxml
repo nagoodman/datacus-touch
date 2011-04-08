@@ -63,7 +63,7 @@
 			[bindable]
 			public var listLengthPriorAdd:int = new int();
 			//handles a drop into a dropable list
-			protected function serList_dragDropHandler(event:DragEvent):void
+			public function serList_dragDropHandler(event:DragEvent):void
 			{
 				var items:Object=event.dragSource.dataForFormat("itemsByIndex") as Object;
 				var myDropTarget:List=List(event.currentTarget);

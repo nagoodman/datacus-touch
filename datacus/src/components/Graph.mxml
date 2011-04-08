@@ -113,7 +113,7 @@
 				
 				
 				for (var i:int = 0; i< oldCategoriesList.length; i++){
-					oldCategoriesList[i].number = i;
+					oldCategoriesList[i].number = FlexGlobals.topLevelApplication.categoriesList.length - 1;
 					oldCategoriesList[i].listLocation = "COLUMNS";
 					FlexGlobals.topLevelApplication.removeFromList(oldCategoriesList[i], 'ROWS');
 					if (oldCategoriesList[i].dimension != '[Measures]'){
