@@ -1,14 +1,19 @@
-*********
-*DATACUS*
-*********
-
-Sept. 7th, 2010
-
 The multi-touch data explorer
 *****************************
 
 Contributors
 ************
+Sponsored by DynamoBI Corporation (dynamobi.com)
+
+Company Contributors:
+Nicholas Goodman (ngoodman AT company)
+Kevin Secretan (ksecretan AT company)
+Madie Dunn (mdunn AT company)
+
+Original development done under sponsorship of DynamoBI 
+as a CU Senior Project 2010-2011
+http://www.cs.colorado.edu/ugrad/seniorproject/
+Student Team:
 Buck Heroux  - tmbuckheroux@gmail.com - asus g1 lnx & win7
 Ryan Daubert - ryan.daubert@colorado.edu
 Ian Smith    - ianhenrysmith@gmail.com
@@ -17,36 +22,26 @@ Matt Smith   - elementalsk816@me.com
 
 API's
 *****
-TOUCH
-  TUIO - tuio as3 lib
-	after startup need to run TUIO tracker
+TOUCH/INPUT
+  Mouse
+     Most of the application works with a plain old mouse
 
-	for 64-bit distro
-	Touch2Tuio is w7 tracker, might need to write our own
-		takes appplication window name as argument
-		(need to detect window)
-
-	udpTHing translates udp port 3333 to LocalConnection in flash
-
-	$> Touch2Tuio_x64.exe datacus
-
-	If we have Air 2.0 it supports UDP connections and don't need that bridge
-
-
-	
-
+  Native Flash Touch Events
+     - Windows 7 has comprehensive support for MT input devices
+     - OS X has some support (rotate on chart, etc) 
 
 GRAPHICS
   UI
     flex sparks library
     css
   Charts
-    flex charts?
+    flex charts
      -http://www.flex-blog.com/samples/sample13/srcview/index.html
  
 SERVER
   Server Connector
-    Saiku
+    Saiku (build 42 revision 6e80d0e212e6a781bec5f3bcebd9b1a33d543c79)
+    http://ci.analytical-labs.com/jenkins/job/saiku-server/42/
 
 FLASH
   Flash Apps: http://www.adobe.com/support/flash/applications/app_design/app_design04.html
