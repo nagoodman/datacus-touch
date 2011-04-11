@@ -39,7 +39,7 @@
 			//Adds the PressAndTapGesture to each rendered item in the list and makes this event trigger a load set
 			private function addTouchTap(event:RendererExistenceEvent):void{
 				if(Multitouch.supportsGestureEvents){
-					event.renderer.addEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, LoadOldSet); 
+					event.renderer.addEventListener(MouseEvent.DOUBLE_CLICK, LoadOldSet); 
 				}
 			}
 			
@@ -74,7 +74,7 @@
 			}
 			
 			//Clears categories and series panels as well as loads a previous graph
-			public function LoadOldSet(e:PressAndTapGestureEvent):void{
+			public function LoadOldSet(e:MouseEvent):void{
 				var obj:ObjectProxy = e.currentTarget.data;
 				if (obj != null){
 					FlexGlobals.topLevelApplication.series.serDB = new ArrayCollection;
@@ -119,7 +119,7 @@
 			alpha="0.8" alpha.Sets1="0"
 			dataProvider="{setsDB}"
 			rendererAdd="addTouchTap(event)"
-			skinClass="skins.MyDropSkin"
+			skinClass="skins.MyDropSkin" doubleClickEnabled="true"
 			itemRenderer="itemRenderers.SetItemRenderer">
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"
