@@ -167,6 +167,10 @@
 			//Attempts to create a session the specified server with login credentials
 			public function submit_conn():void{
 				try {
+					connectionArray = new ArrayCollection();
+					catalogArray = new ArrayCollection();
+					schemaArray = new ArrayCollection();
+					cubeArray = new ArrayCollection();
 					userID = serverStatus.Uname.text;
 					password = serverStatus.Passwd.text;
 					serverIDBase = serverStatus.ServerAddy.text + '/saiku/';
