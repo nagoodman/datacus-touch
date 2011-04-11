@@ -80,13 +80,23 @@
 			}
 			
 			public function pickerMove(e:MouseEvent):void {
+				trash.Trash_Close();
+				sets.Sets_Close();
+				home.Home_Close();
+				serverStatus.Connection_Close();
 				trace("in mouse move");
 				var offsetX:int = e.stageX - touchX;
 				trace(offsetX);
-				picker.x += offsetX;
+				picker.picker.x += offsetX;
 				trace(picker.width);
 				picker.width -= offsetX;
+				picker.picker.width -= offsetX;
 				trace(picker.width);
+				if (picker.picker.width == 1100){
+					picker.currentState = "State3";
+					picker.populatePicker();
+					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+				}
 				touchX = e.stageX;
 			}
 			
@@ -118,7 +128,7 @@
 			} */
 			
 			public function handleDrag(e:TransformGestureEvent):void {
-				//trace("dragged");
+				trace("dragged");
 			}
 			
 			import mx.utils.Base64Encoder;
