@@ -31,6 +31,7 @@
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
 			
+			import org.osmf.events.TimeEvent;
 			
 			import spark.components.DropDownList;
 			import spark.components.List;
@@ -49,8 +50,30 @@
 			
 			/*Variables used with touch gesture handling*/
 			public var touchX:int;
+			
+			//time for adding gestures to picker
+			[bindable]
+			public var pickerTimer:Timer;
 
-
+			//Slows the time for adding gestures so that Touch Screens will not register multiple events
+			private function timePickerGestures():void{
+				pickerTimer = new Timer(1000,0);
+				pickerTimer.addEventListener(TimerEvent.TIMER, attachPickerGestures);
+				pickerTimer.start();
+			}
+			
+			//Attaches gestures to the graphing area
+			public function attachPickerGestures(event:TimerEvent):void{
+				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
+				pickerTimer.stop()
+			}
+			
+			//Removes gestures associted with the graph component
+			public function removePickerGestures():void {
+				picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
+			}
 			
 			/*Function first initiated when software starts*/
 			protected function init():void {
@@ -60,8 +83,10 @@
 				Multitouch.inputMode = MultitouchInputMode.GESTURE;
 				
 				//Init Listeners
-				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
+				timePickerGestures();
+				//picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				//picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
+				//picker.addEventListener(MouseEvent.CLICK, Picker_Open);
 				home.addEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
 				trash.addEventListener(MouseEvent.MOUSE_DOWN, Trash_Open);
 				sets.addEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
@@ -70,15 +95,16 @@
 			}
 			
 			//Touch Handlers
+			//handles a mouse down on the picker if it is closed
 			public function pickerDown(e:MouseEvent):void {
 				trace("in mouseDown");
-
 				touchX = e.stageX;
 				this.addEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
 				this.addEventListener(MouseEvent.MOUSE_UP, pickerUp);
 
 			}
 			
+			//if picker is closed handles drag event as mouse or touch slides the picker over
 			public function pickerMove(e:MouseEvent):void {
 				trash.Trash_Close();
 				sets.Sets_Close();
@@ -93,19 +119,74 @@
 				picker.width -= offsetX;
 				picker.picker.width -= offsetX;
 				trace(picker.width);
-				if (picker.picker.width >= 1100){
-					picker.currentState = "State3";
+				if (offsetX < 0 && picker.picker.width >= 1100){
+					picker.currentState = "State2";
 					picker.populatePicker();
-					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
-					picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-					picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
+					picker.PickerClose.addEventListener(MouseEvent.CLICK, Picker_Close);
+					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, pickerDownClose);
+					removePickerGestures();
 				}
 				touchX = e.stageX;
 			}
 			
+			//handles mouse up events if the picker is closed
 			public function pickerUp(e:MouseEvent):void {
 				this.removeEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
 				this.removeEventListener(MouseEvent.MOUSE_UP, pickerUp);
+			}	
+			
+			//handles a mouse down on the picker close component if the picker is open
+			public function pickerDownClose(e:MouseEvent):void {
+				trace("in mouseDown");
+				touchX = e.stageX;
+				var offset:int = e.stageX - touchX;
+				if(offset < 100){
+					picker.currentState= "State1";
+					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+					picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
+					timePickerGestures();
+				}else{
+					picker.MembersDLContainer.visible = false;
+					picker.DimensionsDLContainer.visible = false;
+					picker.LevelsDLContainer.visible = false;
+					picker.PickerClose.visible = false;
+					this.addEventListener(MouseEvent.MOUSE_MOVE, pickerMoveClose);
+					this.addEventListener(MouseEvent.MOUSE_UP, pickerUpClose);
+				}
+			}
+			
+			//handles mouse move as draging picker when initiated on picker close area if picker is open
+			public function pickerMoveClose(e:MouseEvent):void {
+				
+				trace("in mouse move");
+				var offsetX:int = e.stageX - touchX;
+				trace(offsetX);
+				if (offsetX > 0 && picker.picker.width > 800){
+					picker.currentState= "State1";
+					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+					picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
+					timePickerGestures();
+				}else{
+					picker.picker.x += offsetX;
+					picker.PickerLabel.x += offsetX;
+					trace(picker.width);
+					picker.width -= offsetX;
+					picker.picker.width -= offsetX;
+					trace(picker.width);
+					if (offsetX > 0 && picker.picker.width <=800){
+						picker.currentState = "State1";
+						timePickerGestures();
+						picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
+						picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDownClose);
+					}
+				}
+				touchX = e.stageX;
+			}
+			
+			//handles mouse up events if the picker is open 
+			public function pickerUpClose(e:MouseEvent):void {
+				this.removeEventListener(MouseEvent.MOUSE_MOVE, pickerMoveClose);
+				this.removeEventListener(MouseEvent.MOUSE_UP, pickerUpClose);
 			}	
 			
 			//Handles a flick gesture on the picker
@@ -124,11 +205,6 @@
 				//Home_Open();
 				picker.removeEventListener(MouseEvent.ROLL_OUT, homeFlick);
 			}
-			
-			
-/* 			public function pickerFlick(e:MouseEvent):void {
-				Picker_Open();
-			} */
 			
 			public function handleDrag(e:TransformGestureEvent):void {
 				trace("dragged");
@@ -211,17 +287,12 @@
 					sets.Sets_Close();
 					home.Home_Close();
 					serverStatus.Connection_Close();
-					picker.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-					picker.removeEventListener(MouseEvent.CLICK, Picker_Open);
-					
-					if (picker.currentState == "State2"){
-						picker.currentState = "State1";	
-						picker.addEventListener(MouseEvent.CLICK, Picker_Open);
-					}else{
-						picker.currentState = "State3";
-						picker.populatePicker();
-						picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
-					}
+					removePickerGestures();
+
+					picker.currentState = "State2";
+					picker.populatePicker();
+					picker.PickerClose.addEventListener(MouseEvent.CLICK, Picker_Close);
+					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, pickerDownClose);
 				}
 				
 				
@@ -230,13 +301,12 @@
 			
 			//Closes the Picker automatically by changing the state
 			public function Picker_Close(e:MouseEvent):void{
-				if (picker.currentState == "State3"){
-					picker.currentState= "State2";
+				if (picker.currentState == "State2"){
+					picker.currentState= "State1";
 					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+					picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
 				}
-				picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-				picker.addEventListener(MouseEvent.CLICK, Picker_Open);
-				
+				timePickerGestures();				
 			}
 			
 			//Opens the home menu by changing the state

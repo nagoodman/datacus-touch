@@ -13,6 +13,9 @@
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectProxy;
 			
+			/*Variables used with touch gesture handling*/
+			public var touchX:int;
+			
 			//adds listener to close the picker when it is open by two finger swipe
 			protected function init():void{
 				if(Multitouch.supportsGestureEvents){
@@ -20,6 +23,8 @@
 				}
 				
 			}
+			
+
 		]]>
 	</fx:Script>
 

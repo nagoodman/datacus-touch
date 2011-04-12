@@ -67,11 +67,8 @@
 			<s:TextInput id="QueryName" width='200' />
 		</mx:FormItem>
 		
-		<mx:FormItem>
+		<mx:FormItem direction="horizontal">
 			<s:Button label="Create Query" id="submitQuery" click="FlexGlobals.topLevelApplication.submit_form()" />
-		</mx:FormItem>
-		
-		<mx:FormItem>
 			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />
 		</mx:FormItem>
 		
