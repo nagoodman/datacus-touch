@@ -51,11 +51,29 @@
 			/*Variables used with touch gesture handling*/
 			public var touchX:int;
 			
+			/*Function first initiated when software starts*/
+			protected function init():void {
+				//Init Touch
+				var touchSupport:Boolean = Multitouch.supportsTouchEvents;
+				var gestureSupport:Boolean = Multitouch.supportsGestureEvents;
+				Multitouch.inputMode = MultitouchInputMode.GESTURE;
+				
+				//Init Listeners
+				timePickerGestures();
+				home.addEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
+				trash.addEventListener(MouseEvent.MOUSE_DOWN, Trash_Open);
+				sets.addEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
+				serverStatus.addEventListener(MouseEvent.MOUSE_DOWN, Connection_Open);
+			}
+			
 			//time for adding gestures to picker
 			[bindable]
 			public var pickerTimer:Timer;
+			[bindable]
+			public var pickerCloseTimer:Timer;
 
-			//Slows the time for adding gestures so that Touch Screens will not register multiple events
+			//Slows the time for adding gestures to the picker
+			//so that Touch Screens will not register multiple events
 			private function timePickerGestures():void{
 				pickerTimer = new Timer(2000,0);
 				pickerTimer.addEventListener(TimerEvent.TIMER, attachPickerGestures);
@@ -81,24 +99,33 @@
 				}
 			}
 			
-			/*Function first initiated when software starts*/
-			protected function init():void {
-				//Init Touch
-				var touchSupport:Boolean = Multitouch.supportsTouchEvents;
-				var gestureSupport:Boolean = Multitouch.supportsGestureEvents;
-				Multitouch.inputMode = MultitouchInputMode.GESTURE;
-				
-				//Init Listeners
-				timePickerGestures();
-				//picker.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-				//picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, pickerDown);
-				//picker.addEventListener(MouseEvent.CLICK, Picker_Open);
-				home.addEventListener(MouseEvent.MOUSE_DOWN, Home_Open);
-				trash.addEventListener(MouseEvent.MOUSE_DOWN, Trash_Open);
-				sets.addEventListener(MouseEvent.MOUSE_DOWN, Sets_Open);
-				serverStatus.addEventListener(MouseEvent.MOUSE_DOWN, Connection_Open);
-				
+			//Slows the time for adding gestures to the picker close area 
+			//so that Touch Screens will not register multiple events
+			private function timePickerCloseGestures():void{
+				pickerCloseTimer = new Timer(2000,0);
+				pickerCloseTimer.addEventListener(TimerEvent.TIMER, attachPickerCloseGestures);
+				pickerCloseTimer.start();
 			}
+			
+			//Attaches gestures to the close area within the picker
+			public function attachPickerCloseGestures(event:TimerEvent):void{
+				picker.PickerClose.addEventListener(MouseEvent.CLICK, Picker_Close);
+				picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, pickerDownClose);
+				if(Multitouch.supportsGestureEvents){
+					picker.PickerClose.addEventListener(TransformGestureEvent.GESTURE_PAN, pickerFlickClose);
+				}
+				pickerCloseTimer.stop()
+			}
+			
+			//Removes gestures associated with the close area of the picker
+			public function removePickerCloseGestures():void {
+				picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
+				picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
+				if(Multitouch.supportsGestureEvents){
+					picker.PickerClose.removeEventListener(TransformGestureEvent.GESTURE_PAN, pickerFlick);
+				}
+			}
+			
 			
 			//Touch Handlers
 			//handles a mouse down on the picker if it is closed
@@ -126,11 +153,10 @@
 				picker.picker.width -= offsetX;
 				trace(picker.width);
 				if (offsetX < 0 && picker.picker.width >= 1100){
+					removePickerGestures();
 					picker.currentState = "State2";
 					picker.populatePicker();
-					picker.PickerClose.addEventListener(MouseEvent.CLICK, Picker_Close);
-					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, pickerDownClose);
-					removePickerGestures();
+					timePickerCloseGestures();
 				}
 				touchX = e.stageX;
 			}
@@ -147,8 +173,7 @@
 				touchX = e.stageX;
 				var offset:int = e.stageX - touchX;
 				if(offset < 100){
-					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
-					picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
+					removePickerCloseGestures();
 					picker.currentState= "State1";
 					timePickerGestures();
 				}else{
@@ -168,8 +193,7 @@
 				var offsetX:int = e.stageX - touchX;
 				trace(offsetX);
 				if (offsetX > 0 && picker.picker.width > 800){
-					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
-					picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
+					removePickerCloseGestures();
 					picker.currentState= "State1";
 					timePickerGestures();
 				}else{
@@ -180,8 +204,7 @@
 					picker.picker.width -= offsetX;
 					trace(picker.width);
 					if (offsetX > 0 && picker.picker.width <=800){
-						picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
-						picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, pickerDownClose);
+						removePickerCloseGestures();
 						picker.currentState = "State1";
 						timePickerGestures();
 					}
@@ -297,8 +320,7 @@
 					
 					picker.currentState = "State2";
 					picker.populatePicker();
-					picker.PickerClose.addEventListener(MouseEvent.CLICK, Picker_Close);
-					picker.PickerClose.addEventListener(MouseEvent.MOUSE_DOWN, pickerDownClose);
+					timePickerCloseGestures();
 				}
 				
 				
@@ -308,8 +330,7 @@
 			//Closes the Picker automatically by changing the state
 			public function Picker_Close(e:MouseEvent):void{
 				if (picker.currentState == "State2"){
-					picker.PickerClose.removeEventListener(MouseEvent.MOUSE_DOWN, Picker_Close);
-					picker.PickerClose.removeEventListener(MouseEvent.CLICK, Picker_Close);
+					removePickerCloseGestures();
 					picker.currentState= "State1";
 					timePickerGestures();
 				}			

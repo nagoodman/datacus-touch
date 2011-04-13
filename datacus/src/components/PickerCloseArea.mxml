@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="init()">
-	<fx:Script>
-		<![CDATA[
-			import flash.events.TouchEvent;
-			import flash.events.TransformGestureEvent;
-			
-			import mx.core.FlexGlobals;
-			import mx.events.FlexEvent;
-			import mx.rpc.events.ResultEvent;
-			import mx.utils.ObjectProxy;
-			
-			/*Variables used with touch gesture handling*/
-			public var touchX:int;
-			
-			//adds listener to close the picker when it is open by two finger swipe
-			protected function init():void{
-				if(Multitouch.supportsGestureEvents){
-					this.addEventListener(TransformGestureEvent.GESTURE_PAN, FlexGlobals.topLevelApplication.pickerFlickClose);
-				}
-				
-			}
-			
-
-		]]>
-	</fx:Script>
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
 
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
