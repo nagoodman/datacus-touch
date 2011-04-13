@@ -24,10 +24,6 @@
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
 				//Init state
 				currentState='State1';
-				if(Multitouch.supportsGestureEvents){
-					this.addEventListener(TransformGestureEvent.GESTURE_PAN, FlexGlobals.topLevelApplication.pickerFlick);
-				}
-				
 			}
 			
 			

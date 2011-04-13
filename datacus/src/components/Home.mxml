@@ -38,33 +38,33 @@
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="18" id="QueryMenu" tabStops="S0 S50 S100" text="Create A New Query" x="615" y="350" includeIn="Home2"/>
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="HomeLabel" tabStops="S0 S50 S100" text="Home" x="43" y="40" includeIn="Home1"/>
 	</fx:DesignLayer>	
-	<mx:Form includeIn="Home2" defaultButton="{submitQuery}" id="ConnectionForm" x='535' y='370' >
-		<mx:FormItem label='Connection:'>
-			<s:DropDownList id="connectionDropDown" width='200'>
+	<mx:Form includeIn="Home2" defaultButton="{submitQuery}" id="ConnectionForm" x='535' y='360' >
+		<mx:FormItem label='Connection:' horizontalAlign="center">
+			<s:DropDownList id="connectionDropDown" width='200' height='30'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label='Catalog:'>
-			<s:DropDownList id="catalogDropDown" width='200'>
+		<mx:FormItem label='Catalog:' horizontalAlign="center">
+			<s:DropDownList id="catalogDropDown" width='200' height='30'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label='Schema:'>
-			<s:DropDownList id="schemaDropDown" width='200'>
+		<mx:FormItem label='Schema:' horizontalAlign="center">
+			<s:DropDownList id="schemaDropDown" width='200' height='30'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label='Cube:'>
-			<s:DropDownList id="cubeDropDown" width='200'>
+		<mx:FormItem label='Cube:' horizontalAlign="center">
+			<s:DropDownList id="cubeDropDown" width='200' height='30'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true">
-			<s:TextInput id="QueryName" width='200' />
+		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true" horizontalAlign="center">
+			<s:TextInput id="QueryName" width='200' height='30' />
 		</mx:FormItem>
 		
 		<mx:FormItem direction="horizontal">
