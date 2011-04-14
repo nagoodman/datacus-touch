@@ -41,25 +41,23 @@
 		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="18" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" x="-650" y="345" includeIn="State1"/>
 	</fx:DesignLayer>	
 	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" x ='-725' y='370'>
-		<mx:FormItem label='Server Address:' required="true">
-			<s:TextInput id="ServerAddy" width='200' >
+		<mx:FormItem label='Server Address:' required="true" horizontalAlign="center">
+			<s:TextInput id="ServerAddy" width='200' height="30" >
 				http://localhost:8080
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='User Name:' required="true">
-			<s:TextInput id="Uname" width='200' >
+		<mx:FormItem label='User Name:' required="true" horizontalAlign="center">
+			<s:TextInput id="Uname" width='200' height="30" >
 				admin
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='Password:' required="true">
-			<s:TextInput id="Passwd" width='200'>
+		<mx:FormItem label='Password:' required="true" horizontalAlign="center">
+			<s:TextInput id="Passwd" width='200' height="30">
 				admin
 			</s:TextInput>
 		</mx:FormItem>		
-		<mx:FormItem>
+		<mx:FormItem direction="horizontal">
 			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" />
-		</mx:FormItem>
-		<mx:FormItem>
 			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" />
 		</mx:FormItem>
 	</mx:Form>

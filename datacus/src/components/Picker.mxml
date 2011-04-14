@@ -24,10 +24,6 @@
 			protected function Picker_creationCompleteHandler(event:FlexEvent):void{
 				//Init state
 				currentState='State1';
-				if(Multitouch.supportsGestureEvents){
-					this.addEventListener(TransformGestureEvent.GESTURE_PAN, FlexGlobals.topLevelApplication.pickerFlick);
-				}
-				
 			}
 			
 			
@@ -64,30 +60,30 @@
 	<s:states>
 		<s:State name="State1"/>
 		<s:State name="State2"/>
-		<s:State name="State3"/>
+
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="picker" height="620" height.State3="620"  x.State1="0" y.State1="0" x.State2="0" y.State2="0" width.State1="140" width.State2="140" width.State3="1240" x.State3="-1100" skinClass="skins.Panel" skinClass.State3="skins.Panel_picker_extended" />
+		<s:SkinnableContainer id="picker" height="620"  x.State1="0" y.State1="0"  width.State1="140"  width.State2="1240" x.State2="-1100" skinClass="skins.Panel" skinClass.State2="skins.Panel_picker_extended" />
 		
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x.State1="40" x.State2="40" y="300" includeIn="State1,State2" />
+		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" x.State1="40" y="300" includeIn="State1" />
 	</fx:DesignLayer>
-	<components:PickerCloseArea id="PickerClose" includeIn="State3" x.State3="-1100"/>
+	<components:PickerCloseArea id="PickerClose" includeIn="State2" x.State2="-1100"/>
 	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
-		includeIn="State3" 
+		includeIn="State2" 
 		x="-990" y="105" alpha="0.79"/>
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
-											includeIn="State3"  
+											includeIn="State2"  
 											x="-795" y="20" alpha="0.79"/>
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
-										  includeIn="State3" 
+										  includeIn="State2" 
 										  x="-795" y="100" alpha="0.79" />
 	
 	
 	<s:transitions>
-		<s:Transition autoReverse="true" fromState="State1" toState="State3">
+		<s:Transition autoReverse="true" fromState="State1" toState="State2">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>
@@ -109,77 +105,8 @@
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="State2" toState="State3">
-			<s:Parallel>
-				<s:Parallel target="{picker}">
-					<s:Move autoCenterTransform="true" duration="2500" startDelay="500"/>
-					<s:Resize duration="2500" startDelay="500"/>
-				</s:Parallel>
-				<s:Parallel target="{MembersDLContainer}">
-					<s:Fade duration="500" startDelay="3000"/>
-				</s:Parallel>
-				<s:Parallel target="{DimensionsDLContainer}">
-					<s:Fade duration="500" startDelay="3000"/>
-				</s:Parallel>
-				<s:Parallel target="{LevelsDLContainer}">
-					<s:Fade duration="500" startDelay="3000"/>
-				</s:Parallel>
-				<s:Parallel target="{PickerClose}">
-					<s:Fade duration="500" startDelay="3000"/>
-				</s:Parallel>
-				<s:Parallel target="{PickerLabel}">
-					<s:Fade duration="500" startDelay="0"/>
-				</s:Parallel>
-			</s:Parallel>
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="State3" toState="State2">
-			<s:Parallel>
-				<s:Parallel target="{picker}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>
-					<s:Resize duration="1000" startDelay="300"/>
-				</s:Parallel>
-				<s:Parallel target="{MembersDLContainer}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{DimensionsDLContainer}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{LevelsDLContainer}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{PickerClose}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{PickerLabel}">
-					<s:Fade duration="500" startDelay="1300"/>
-				</s:Parallel>
-			</s:Parallel>			
 		</s:Transition>
 		<s:Transition autoReverse="true" fromState="State2" toState="State1">
-			<s:Parallel>
-				<s:Parallel target="{picker}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>
-					<s:Resize duration="1000" startDelay="300"/>
-				</s:Parallel>
-				<s:Parallel target="{MembersDLContainer}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{DimensionsDLContainer}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{LevelsDLContainer}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{PickerClose}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{PickerLabel}">
-					<s:Fade duration="500" startDelay="1300"/>
-				</s:Parallel>
-			</s:Parallel>			
-		</s:Transition>
-		<s:Transition autoReverse="true" fromState="State3" toState="State1">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
 					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>
