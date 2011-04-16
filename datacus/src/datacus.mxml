@@ -126,11 +126,9 @@
 				}
 			}
 			
-			
 			//Touch Handlers
 			//handles a mouse down on the picker if it is closed
 			public function pickerDown(e:MouseEvent):void {
-				trace("in mouseDown");
 				touchX = e.stageX;
 				this.addEventListener(MouseEvent.MOUSE_MOVE, pickerMove);
 				this.addEventListener(MouseEvent.MOUSE_UP, pickerUp);
@@ -143,15 +141,11 @@
 				sets.Sets_Close();
 				home.Home_Close();
 				serverStatus.Connection_Close();
-				trace("in mouse move");
 				var offsetX:int = e.stageX - touchX;
-				trace(offsetX);
 				picker.picker.x += offsetX;
-				picker.PickerLabel.x += offsetX;
-				trace(picker.width);
+				//picker.PickerLabel.x += offsetX;
 				picker.width -= offsetX;
 				picker.picker.width -= offsetX;
-				trace(picker.width);
 				if (offsetX < 0 && picker.picker.width >= 1100){
 					removePickerGestures();
 					picker.currentState = "State2";
@@ -169,7 +163,6 @@
 			
 			//handles a mouse down on the picker close component if the picker is open
 			public function pickerDownClose(e:MouseEvent):void {
-				trace("in mouseDown");
 				touchX = e.stageX;
 				var offset:int = e.stageX - touchX;
 				if(offset < 100){
@@ -188,10 +181,7 @@
 			
 			//handles mouse move as draging picker when initiated on picker close area if picker is open
 			public function pickerMoveClose(e:MouseEvent):void {
-				
-				trace("in mouse move");
 				var offsetX:int = e.stageX - touchX;
-				trace(offsetX);
 				if (offsetX > 0 && picker.picker.width > 800){
 					removePickerCloseGestures();
 					picker.currentState= "State1";
@@ -199,10 +189,8 @@
 				}else{
 					picker.picker.x += offsetX;
 					picker.PickerLabel.x += offsetX;
-					trace(picker.width);
 					picker.width -= offsetX;
 					picker.picker.width -= offsetX;
-					trace(picker.width);
 					if (offsetX > 0 && picker.picker.width <=800){
 						removePickerCloseGestures();
 						picker.currentState = "State1";
@@ -228,21 +216,12 @@
 				var event:MouseEvent;
 				Picker_Close(event);
 			}
-
-			
-			public function homeFlick(e:MouseEvent):void {
-				//Home_Open();
-				picker.removeEventListener(MouseEvent.ROLL_OUT, homeFlick);
-			}
-			
-			public function handleDrag(e:TransformGestureEvent):void {
-				trace("dragged");
-			}
 			
 			import mx.utils.Base64Encoder;
 			[bindable]
 			public var password:String = new String(); // = 'admin'
 			
+			//adds the authentication header to connection request
 			private function addAuthHeader(service:HTTPService, username:String, password:String):void{
 				//add the header to request
 				var enc:Base64Encoder = new Base64Encoder();
