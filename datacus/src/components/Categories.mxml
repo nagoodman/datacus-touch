@@ -83,8 +83,17 @@
 									return;
 								}
 							}
+							if(items[k].selectionType == 'MEMBER' && myDropTarget.dataProvider[r].selectionType == 'MEMBER'){
+								if(myDropTarget.dataProvider[r].level != items[k].level){
+									FlexGlobals.topLevelApplication.error_window("You cannot graph members from different levels at one time. "
+										+"Please make your selection again.");
+									return;
+								}
+							}
 						}
 						if(myDropTarget.dataProvider[0].dimension != items[k].dimension){
+							FlexGlobals.topLevelApplication.error_window("You cannot graph two items with different dimensions on the same axis."
+								+" Please make your selection again.");
 							return;
 						}else{
 							oldList = items[k].listLocation;
