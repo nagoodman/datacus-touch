@@ -26,10 +26,10 @@
 					var dSource:DragSource = new DragSource();
 					dSource.addData(event.relatedObject, "itemsByIndex" );
 					var dEvent:DragEvent = new DragEvent(DragEvent.DRAG_DROP,false,true,null,dSource);
-					if (event.localY > 15) {
+					if (event.localY > 50) {
 						//down flick
 						FlexGlobals.topLevelApplication.categories.catList_dragDropHandler(event);
-					} else if(event.localY < -15)  {
+					} else if(event.localY < 50)  {
 						//up flick
 						FlexGlobals.topLevelApplication.series.serList_dragDropHandler(event);
 					}
