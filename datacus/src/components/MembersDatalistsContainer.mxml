@@ -20,37 +20,20 @@
 			
 			private var membersAC:ArrayCollection = new ArrayCollection();
 			
-			
-			protected function membersLevel1_dragCompleteHandler(event:DragEvent):void
-			{
+			//controls whether a member goes to the series or categories panels with a directional flick
+			protected function memberFlick(event:DragEvent):void {
 				if (event.action == "none"){
 					var dSource:DragSource = new DragSource();
 					dSource.addData(event.relatedObject, "itemsByIndex" );
 					var dEvent:DragEvent = new DragEvent(DragEvent.DRAG_DROP,false,true,null,dSource);
-					if (event.localY > 15) {
+					if (event.localY > 70) {
 						//down flick
-						FlexGlobals.topLevelApplication.categories.dispatchEvent(dEvent);
-					} else if(event.localY < -15)  {
+						FlexGlobals.topLevelApplication.categories.catList_dragDropHandler(event);
+					} else if(event.localY < 50)  {
 						//up flick
-						FlexGlobals.topLevelApplication.series.dispatchEvent(dEvent);
+						FlexGlobals.topLevelApplication.series.serList_dragDropHandler(event);
 					}
 				}
-				
-			}
-			
-			//controls whether a member goes to the series or categories panels with a directional flick
-			public function memberFlick(e:MouseEvent):void {
-				var dSource:DragSource = new DragSource();
-				dSource.addData(e.relatedObject, "itemsByIndex" );
-				var dEvent:DragEvent = new DragEvent(DragEvent.DRAG_DROP,false,true,null,dSource);
-				if (e.stageY < e.relatedObject.scaleY) {
-					//down flick
-					FlexGlobals.topLevelApplication.categories.dispatchEvent(dEvent);
-				} else {
-					//up flick
-					FlexGlobals.topLevelApplication.series.dispatchEvent(dEvent);
-				}
-				
 			}
 			
 			//forms three strings to retrieve the three levels of members initially visible within the picker
@@ -197,8 +180,6 @@
 				membersLevel4.dataProvider = membersAC;
 			}
 
-			
-
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -211,23 +192,23 @@
 	</fx:DesignLayer>
 	
 	<s:List x="10" y="10" width="900" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true"
-			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="membersLevel1_dragCompleteHandler(event)" >
+			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)" >
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
 	</s:List>
-	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" 
-			dragMoveEnabled="true" skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer">
+	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" 
+			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
 								paddingTop="0"/>
 		</s:layout>
 	</s:List>
-	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" 
-			dragMoveEnabled="true" skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer">
+	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" 
+			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"
@@ -235,8 +216,8 @@
 		</s:layout>
 	</s:List>
 	
-	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" 
-			dragMoveEnabled="true" skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer">
+	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" 
+			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
 								paddingLeft="10" paddingRight="10"

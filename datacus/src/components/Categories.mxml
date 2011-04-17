@@ -64,7 +64,7 @@
 			public function catList_dragDropHandler(event:DragEvent):void
 			{
 				var items:Object=event.dragSource.dataForFormat("itemsByIndex") as Object;
-				var myDropTarget:List=List(event.currentTarget);
+				var myDropTarget:List= catList;
 				var pos:DropLocation;
 				var oldList:String = new String();
 				if (myDropTarget.dataProvider.length != 0){
@@ -83,8 +83,17 @@
 									return;
 								}
 							}
+							if(items[k].selectionType == 'MEMBER' && myDropTarget.dataProvider[r].selectionType == 'MEMBER'){
+								if(myDropTarget.dataProvider[r].level != items[k].level){
+									FlexGlobals.topLevelApplication.error_window("You cannot graph members from different levels at one time. "
+										+"Please make your selection again.");
+									return;
+								}
+							}
 						}
 						if(myDropTarget.dataProvider[0].dimension != items[k].dimension){
+							FlexGlobals.topLevelApplication.error_window("You cannot graph two items with different dimensions on the same axis."
+								+" Please make your selection again.");
 							return;
 						}else{
 							oldList = items[k].listLocation;
@@ -99,7 +108,6 @@
 									this.catDB.addItemAt(items[x], pos.dropIndex);
 									listLengthPriorAdd++;
 								}
-								
 							}
 							else{
 								while (listLengthPriorAdd<listLength){
@@ -137,7 +145,6 @@
 						this.catDB.addItemAt(items[p], pos.dropIndex);
 					}
 					FlexGlobals.topLevelApplication.moveToRows(items);
-					
 				}
 			}		
 
