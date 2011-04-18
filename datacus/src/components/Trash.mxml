@@ -151,7 +151,7 @@
 					   includeIn="State1"
 					   alpha="0.3"
 					   />
-		<s:Button includeIn="State2" x='-440' y='-460' id="closeTrash" label="Close X" click.State2="Trash_Close()" ></s:Button>
+		<s:Button includeIn="State2" x='-440' y='-460' id="closeTrash" label="Close X" click.State2="Trash_Close()" height="30" ></s:Button>
 	</fx:DesignLayer>
 	<s:List id="trashList"
 			width="130" height="90" x="5" y="5"

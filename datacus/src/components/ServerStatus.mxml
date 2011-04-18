@@ -57,8 +57,8 @@
 			</s:TextInput>
 		</mx:FormItem>		
 		<mx:FormItem direction="horizontal">
-			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" />
-			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" />
+			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" height="30"/>
+			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" height="30"/>
 		</mx:FormItem>
 	</mx:Form>
 	
