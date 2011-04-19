@@ -30,23 +30,29 @@
 			private function SelectMeasure(e:Event):void{
 				var currentMeasure:String = FlexGlobals.topLevelApplication.currentMeasure;
 				var newMeasure:String = this.measuresList.selectedItems[0].label;
+				
+				//sets global current measure
 				currentMeasure = newMeasure;
+				
 				var items:Object = this.measuresList.selectedItems as Object;
 				var tempList:ArrayCollection = FlexGlobals.topLevelApplication.filterList;
 				for (var i:int = 0; i < tempList.length; i++){
 					FlexGlobals.topLevelApplication.removeFromGraph(tempList[i]);
 				}
 				FlexGlobals.topLevelApplication.filterList = new ArrayCollection();
+				//initiates http service to move selected itme to the filter axis
 				FlexGlobals.topLevelApplication.moveToFilter(items);
 			}
 			
 			//retrieves the first list in the dimensions array and stores in the Measures panel (consistent across cubes)
 			public function getMeasures(event:ResultEvent):void
 			{
+				//retrieves json from result event and stores as an array
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
 				
 				measuresAC = new ArrayCollection();
+				//retrieves information from json and stores within the array collection
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
@@ -59,10 +65,11 @@
 					var objProx:ObjectProxy = new ObjectProxy(obj);
 					measuresAC.addItem(objProx);	
 				}
+				//sets global variables
 				FlexGlobals.topLevelApplication.currentMeasure = measuresAC[0];
 				FlexGlobals.topLevelApplication.defaultMeasure = measuresAC[0];
+				//adds items to the measures list
 				measuresList.dataProvider = measuresAC;
-				
 			}
 			
 		]]>

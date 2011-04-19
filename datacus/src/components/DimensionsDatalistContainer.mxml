@@ -24,21 +24,26 @@
 				var newDimension:String = this.dimensionsList.selectedItems[0].label; 
 				currentDimension = newDimension;
 				
+				//initiates levels for the selected dimension
 				FlexGlobals.topLevelApplication.picker.createLevels(currentDimension, currentDimension);
-				//FlexGlobals.topLevelApplication.createLevels(currentDimension, currentDimension);
 			}
 			
 			//Populates the dimension list
 			public function getDimensions(event:ResultEvent):void
 			{
+				//retrieves json from result event and stores in an array
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
+				
+				//resets global array collections
 				FlexGlobals.topLevelApplication.dimensionsAC = new ArrayCollection();
 				FlexGlobals.topLevelApplication.measuresAC = new ArrayCollection();
+				
 				var tempDimensionsAC:ArrayCollection = FlexGlobals.topLevelApplication.dimensionsAC;
 				var tempMeasuresAC:ArrayCollection = FlexGlobals.topLevelApplication.measuresAC;
 				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
 				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDPicker;
+				//stores items from json into array collections
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					if(arr[i].caption == 'Measures'){
@@ -53,7 +58,9 @@
 						tempDimensionsAC.addItem(objProx);
 					}
 				}
+				//adds the items into the dimensions list
 				dimensionsList.dataProvider = tempDimensionsAC;
+				//sets global variables and initializes function to retrieve the levels
 				if (arr.length != 0){
 					var dimension:String = tempDimensionsAC[0].label;
 					var hierarchy:String = tempDimensionsAC[0].label;

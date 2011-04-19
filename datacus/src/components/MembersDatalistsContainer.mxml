@@ -65,7 +65,9 @@
 							FlexGlobals.topLevelApplication.callMembers4.send();
 						}
 					}
-				}else{
+				}
+				//populates members if there are less than 4 levels
+				else{
 					for (i = 0; i < levels.length; i ++){
 						if (i==0){
 							FlexGlobals.topLevelApplication.callMembers1.url= tempServerIDJSON+"dimensions/"+tempCurrentDimension+"/hierarchies/"+tempCurrentHierarchy+"/levels/"+levels[i].label;
@@ -90,10 +92,13 @@
 			//populates the first members list within the picker
 			public function getMembers1(event:ResultEvent):void
 			{
+				//retrieves json from result event and stores in array
 				var rawData:String=String(event.result);
 				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
+				
+				//adds item from json into array collection
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
@@ -104,19 +109,22 @@
 					obj.number = i;
 					obj.value = arr[i].uniqueName;
 					var objProx:ObjectProxy = new ObjectProxy(obj);
-					//objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
 					membersAC.addItem(objProx);
 				}
+				//adds items into the list
 				membersLevel1.dataProvider = membersAC;
 			}
 			
 			//populates the second members list within the picker
 			public function getMembers2(event:ResultEvent):void
 			{
+				//retrieves json from result event and stores in array
 				var rawData:String=String(event.result);
 				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
+				
+				//adds item from json into array collection
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
@@ -130,16 +138,20 @@
 					//objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
 					membersAC.addItem(objProx);	
 				}
+				//adds items into the list
 				membersLevel2.dataProvider = membersAC;
 			}
 			
 			//populates the third members list within the picker
 			public function getMembers3(event:ResultEvent):void
 			{
+				//retrieves json from result event and stores in array
 				var rawData:String=String(event.result);
 				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
+				
+				//adds item from json into array collection
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
@@ -153,17 +165,20 @@
 					//objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
 					membersAC.addItem(objProx);	
 				}
-				
+				//adds items into the list
 				membersLevel3.dataProvider = membersAC;
 			}
 			
 			//Populates the fourth level of members within the Picker
 			public function getMembers4(event:ResultEvent):void
 			{
+				//retrieves json from result event and stores in array
 				var rawData:String=String(event.result);
 				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
 				var arr:Array = (JSON.decode(rawData)as Array);
 				membersAC = new ArrayCollection();
+				
+				//adds item from json into array collection
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
@@ -177,6 +192,7 @@
 					//objProx.addEventListener(MouseEvent.ROLL_OUT,memberFlick); 
 					membersAC.addItem(objProx);	
 				}
+				//adds items into the list
 				membersLevel4.dataProvider = membersAC;
 			}
 

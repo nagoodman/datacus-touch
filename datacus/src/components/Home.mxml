@@ -19,7 +19,6 @@
 			public function Home_Close():void{
 				currentState = "Home1";
 				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Home_Open);
-				//home.addEventListener(MouseEvent.ROLL_OUT, homeFlick);
 			}
 			
 		]]>

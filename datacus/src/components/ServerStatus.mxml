@@ -9,7 +9,6 @@
 			
 			//Sets Init state
 			protected function Connection_creationCompleteHandler(event:FlexEvent):void{
-				
 				this.currentState='State1';
 
 			}
