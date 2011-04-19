@@ -61,33 +61,44 @@
 			
 			//initial function on load
 			protected function init():void{
+				//adds gestures to graph area
 				timeGestures();
+				
+				//adds options to the context menu
 				addItemsToContextMenu();
 			}
 			
 			//opens the context menu with the loaded graphs
 			private function openContextMenu(e:PressAndTapGestureEvent):void{
-				graphMenu.display(this.stage,e.stageX,e.stageY);
+				//removes gestures from graph
 				removeGestures();
+				
+				//displays the context menu where the user performed the gesture or right click
+				graphMenu.display(this.stage,e.stageX,e.stageY);
 			}
 			
 			//Adds three different chart types to the context menu
 			private function addItemsToContextMenu():void{
+				//creates new context menu items
 				DefaultGraphType = new ContextMenuItem('Dafault Graph',false,true,true);
 				LineGraphType = new ContextMenuItem('Line Graph',false,true,true);
 				AreaGraphType = new ContextMenuItem('Area Graph',false,true,true);
 				
+				//add event listeners for selecting a context menu item
 				DefaultGraphType.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, graphTypeDefaultCTM);
 				LineGraphType.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, graphTypeLineCTM);
 				AreaGraphType.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, graphTypeAreaCTM);
 				
+				//sets up a context menu
 				graphMenu = FlexGlobals.topLevelApplication.contextMenu;
 				graphMenu.hideBuiltInItems();
 				
+				//performs the graph change
 				graphMenu.customItems.push(DefaultGraphType);
 				graphMenu.customItems.push(LineGraphType);
 				graphMenu.customItems.push(AreaGraphType);
 			}
+			
 			//Slows the time for adding gestures so that Touch Screens will not register multiple events
 			private function timeGestures():void{
 				timer = new Timer(1000,0);
@@ -115,6 +126,7 @@
 			
 			//Forms a default column bar graph
 			public function graphTypeDefault():void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateGraph();
@@ -122,6 +134,7 @@
 			
 			//Forms a line graph
 			public function graphTypeLine(type:TouchEvent):void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateLineGraph();
@@ -129,6 +142,7 @@
 			
 			//Forms a pie graph **does not work currently because data input needs to be different than other chart forms**
 			public function graphTypePie(type:TransformGestureEvent):void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updatePieGraph();
@@ -136,6 +150,7 @@
 			
 			//Forms an area graph 
 			public function graphTypeArea():void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateAreaGraph();
@@ -143,39 +158,62 @@
 			
 			//Forms a default column bar graph
 			public function graphTypeDefaultCTM(e:ContextMenuEvent):void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				
+				//adds a bar chart to the graph area
 				updateGraph();
+				
+				//re-adds gestures to the graph area
 				timeGestures();
 			}
 			
 			//Forms a line graph
 			public function graphTypeLineCTM(e:ContextMenuEvent):void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				
+				//adds a line graph to the graph area
 				updateLineGraph();
+				
+				//re-adds gestures to the graph area
 				timeGestures();
 			}
 			
 			//Forms a pie graph **does not work currently because data input needs to be different than other chart forms**
 			public function graphTypePieCTM(e:ContextMenuEvent):void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				
+				//creates a pie chart... if was working
 				updatePieGraph();
+				
+				//re-adds gestures to graph
 				timeGestures();
 			}
 			
 			//Forms an area graph 
 			public function graphTypeAreaCTM(e:ContextMenuEvent):void{
+				//removes visual elements from the graph and graph legend
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
+				
+				//produces the area graph
 				updateAreaGraph();
+				
+				//re-adds the gestures to the graph
 				timeGestures();
 			}
 			
 			//Function that controls the categories vs series view of the graph (flips them)
 			public function switchAxis(e:TransformGestureEvent):void{
+				//removes the gestures from the graph so not to register multiple events
 				removeGestures();
+				
+				//variables for creating query to switch axes
 				var tempServer:String = FlexGlobals.topLevelApplication.serverIDRest;
 				var tempQuery:String = FlexGlobals.topLevelApplication.currentQueryName;
 				
@@ -183,31 +221,30 @@
 				var oldSeriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.seriesList);
 				var oldCategoriesList:Object = FlexGlobals.topLevelApplication.clone(FlexGlobals.topLevelApplication.categoriesList);
 				
-				
+				//Clear the categories list and add the members to the series list
 				for (var i:int = 0; i< oldCategoriesList.length; i++){
 					oldCategoriesList[i].number = FlexGlobals.topLevelApplication.categoriesList.length - 1;
 					oldCategoriesList[i].listLocation = "COLUMNS";
 					FlexGlobals.topLevelApplication.removeFromList(oldCategoriesList[i], 'ROWS');
-					if (oldCategoriesList[i].dimension != '[Measures]'){
-						FlexGlobals.topLevelApplication.seriesList.addItem(oldCategoriesList[i]);
-						FlexGlobals.topLevelApplication.series.serDB.addItem(oldCategoriesList[i]);
-					}
+					FlexGlobals.topLevelApplication.seriesList.addItem(oldCategoriesList[i]);
+					FlexGlobals.topLevelApplication.series.serDB.addItem(oldCategoriesList[i]);
 				}
 				
+				//Remove the old series members from the series list and add them to the categories list
 				for (var j:int = 0; j< oldSeriesList.length; j++){
-					oldSeriesList[j].number = j;
+					oldSeriesList[j].number = 0;
 					oldSeriesList[j].listLocation = "ROWS";
 					FlexGlobals.topLevelApplication.removeFromList(oldSeriesList[j], 'COLUMNS');
-					if (oldSeriesList[j].dimension != '[Measures]'){
-						FlexGlobals.topLevelApplication.categoriesList.addItem(oldSeriesList[j]);
-						FlexGlobals.topLevelApplication.categories.catDB.addItem(oldSeriesList[j]);
-					}
+					FlexGlobals.topLevelApplication.categoriesList.addItem(oldSeriesList[j]);
+					FlexGlobals.topLevelApplication.categories.catDB.addItem(oldSeriesList[j]);
 				}
 				
+				//sends the http service call to switch axis
 				FlexGlobals.topLevelApplication.switchAxis.url=tempServer+tempQuery+"/swapaxes";
 				FlexGlobals.topLevelApplication.switchAxis.headers['X-HTTP-Method-Override'] = 'PUT';
 				FlexGlobals.topLevelApplication.switchAxis.send();
 				
+				//re-adds gestures to graphing area
 				timeGestures();
 			}
 			

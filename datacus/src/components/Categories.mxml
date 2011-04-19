@@ -70,19 +70,23 @@
 				if (myDropTarget.dataProvider.length != 0){
 					for (var k:int = 0; k < items.length; k++){
 						for (var r:int = 0; r < myDropTarget.dataProvider.length; r++){
+							//verifies that the value is not already within the categories panel
 							if(myDropTarget.dataProvider[r].value == items[k].value){
 								return;
 							}
+							//prevents if a member is being added that there the level has not already been added
 							if(items[k].selectionType == 'MEMBER' && myDropTarget.dataProvider[r].selectionType == 'LEVEL'){
 								if(myDropTarget.dataProvider[r].value == items[k].level){
 									return;
 								}
 							}
+							//prevents if a level is being added that there are not members of that same level already added
 							if(items[k].selectionType == 'LEVEL' && myDropTarget.dataProvider[r].selectionType == 'MEMBER'){
 								if(myDropTarget.dataProvider[r].level == items[k].value){
 									return;
 								}
 							}
+							//prevents members of different levels to be added
 							if(items[k].selectionType == 'MEMBER' && myDropTarget.dataProvider[r].selectionType == 'MEMBER'){
 								if(myDropTarget.dataProvider[r].level != items[k].level){
 									FlexGlobals.topLevelApplication.error_window("You cannot graph members from different levels at one time. "
@@ -91,6 +95,7 @@
 								}
 							}
 						}
+						//verifies that only one dimension is added to the categories panel
 						if(myDropTarget.dataProvider[0].dimension != items[k].dimension){
 							FlexGlobals.topLevelApplication.error_window("You cannot graph two items with different dimensions on the same axis."
 								+" Please make your selection again.");
@@ -126,7 +131,9 @@
 							}
 						}
 					}
-				}else{
+				}
+				//adds item if there are no previous items within the categories panel
+				else{
 					pos=this.catList.layout.calculateDropLocation(event);
 					listLengthPriorAdd = 0;
 					var tempSerList:ArrayCollection = FlexGlobals.topLevelApplication.seriesList;
@@ -147,8 +154,6 @@
 					FlexGlobals.topLevelApplication.moveToRows(items);
 				}
 			}		
-
-			
 
 		]]>
 		

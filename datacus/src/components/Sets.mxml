@@ -51,9 +51,12 @@
 			
 			//Populates the sets list within the Active Sets Menu
 			public function getSets(event:ResultEvent):void{
+				//takes in json from returned event and stores in an array for parsing
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
 				var tempSetsAC:ArrayCollection = new ArrayCollection();
+				
+				//adds each element of the array into the array collection
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i];
@@ -63,6 +66,7 @@
 					tempSetsAC.addItem(objProx);	
 					
 				}
+				//sets the array collection to be displayed within the list
 				setsList.dataProvider = tempSetsAC;
 				
 			}
@@ -77,12 +81,16 @@
 			public function LoadOldSet(e:MouseEvent):void{
 				var obj:ObjectProxy = e.currentTarget.data;
 				if (obj != null){
+					//resets all global lists
 					FlexGlobals.topLevelApplication.series.serDB = new ArrayCollection;
 					FlexGlobals.topLevelApplication.categories.catDB = new ArrayCollection;	
 					FlexGlobals.topLevelApplication.trash.trashDB = new ArrayCollection;
 					FlexGlobals.topLevelApplication.seriesList = new ArrayCollection;
 					FlexGlobals.topLevelApplication.categoriesList = new ArrayCollection;
+					
+					//sets current query name to selected value
 					FlexGlobals.topLevelApplication.currentQueryName = obj.value;
+					//returns a graph of the new current query
 					FlexGlobals.topLevelApplication.viewResults();
 				}
 			}
@@ -110,7 +118,7 @@
 					   includeIn="Sets1"
 					   alpha="0.2"
 					   />
-		<s:Button includeIn="Sets2" x="830" y="-540" id="closeSets" label="Close X" click="Sets_Close()"></s:Button>
+		<s:Button includeIn="Sets2" x="830" y="-540" id="closeSets" label="Close X" click="Sets_Close()" height="30"></s:Button>
 	</fx:DesignLayer>
 	<s:List id="setsList" width="130" height="90" x="5" y="5" 
 			width.Sets2="300"

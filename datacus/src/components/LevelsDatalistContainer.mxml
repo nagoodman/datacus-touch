@@ -18,10 +18,14 @@
 			//populates the levels list within the picker for selection
 			public function getLevels(event:ResultEvent):void
 			{
+				//retrieves json from result event and stores in an array
 				var rawData:String=String(event.result);
 				var arr:Array = (JSON.decode(rawData)as Array);
+				//resets levels array collection
 				FlexGlobals.topLevelApplication.levelsAC = new ArrayCollection();
+				//creates a temporary collection
 				var tempLevelsAC:ArrayCollection = FlexGlobals.topLevelApplication.levelsAC;
+				//adds items from array formed by json into temp array colelction
 				for (var i:int =0; i < arr.length; i++){
 					var obj:Object = new Object;
 					obj.label = arr[i].caption;
@@ -33,11 +37,12 @@
 					var objProx:ObjectProxy = new ObjectProxy(obj);
 					tempLevelsAC.addItem(objProx);	
 				}
+				//adds array collection members to the levels list
 				levelsList.dataProvider = tempLevelsAC;
+				//calls the members for the displayed levels
 				FlexGlobals.topLevelApplication.picker.MembersDLContainer.getMembersFromLevels(tempLevelsAC);
 			}
-			
-			
+		
 		]]>
 	</fx:Script>
 	<fx:Declarations>

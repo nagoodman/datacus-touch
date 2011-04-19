@@ -38,30 +38,41 @@
 				}
 			}
 			
+			//function to re-add members on which a user performs a press and tap gesture
 			private function readdItem(e:PressAndTapGestureEvent):void{//:MouseEvent):void{
-				//this.trashList.removeEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, readdItem);
+				//retrieves the object of which user is selecting
 				var obj:ObjectProxy = e.currentTarget.data;
+				//verifies it is not null
 				if (obj != null){
 					var objects:Object = new Object();
 					var oldList:String = new String();
 					var dropIndex:int = new int();
+					//if the object came from series, re-add it
 					if (obj.listLocation == "COLUMNS"){
 						oldList = obj.newList;
 						objects[0] = obj;
 						objects.length = 1;
+						
+						//removes item from trash list
 						FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
 						obj.number = 0;
-						//FlexGlobals.topLevelApplication.seriesList.addItem(obj);
+						
+						//re-adds item to end of series list
 						dropIndex = FlexGlobals.topLevelApplication.series.serDB.length;
 						FlexGlobals.topLevelApplication.series.serDB.addItemAt(obj, dropIndex);
 						FlexGlobals.topLevelApplication.moveToColumns(objects);
-					}else if (obj.listLocation =="ROWS"){
+					}
+					//if the object came from categories, re-add it
+					else if (obj.listLocation =="ROWS"){
 						oldList = obj.newList;
 						objects[0] = obj;
 						objects.length = 1;
+						
+						//removes item from trash list
 						FlexGlobals.topLevelApplication.removeFromList(obj, oldList);
 						obj.number = 0;
-						//FlexGlobals.topLevelApplication.categoriesList.addItem(obj);
+						
+						//re-adds item to end of categories list
 						dropIndex = FlexGlobals.topLevelApplication.categories.catDB.length;
 						FlexGlobals.topLevelApplication.categories.catDB.addItemAt(obj, dropIndex);
 						FlexGlobals.topLevelApplication.moveToRows(objects);
@@ -94,6 +105,7 @@
 				var pos:DropLocation;
 				var oldList:String = new String();
 				myDropTarget.dataProvider = trashDB;
+				//if there are items in the trash can append new items to drop index
 				if (myDropTarget.dataProvider.length != 0){
 					for (var k:int = 0; k < items.length; k++){
 						oldList = items[k].listLocation;
@@ -109,20 +121,21 @@
 							}
 						}
 					}
-				}else{
+				}
+				//if trash can is empty place new item in the front
+				else{
 					pos=this.trashList.layout.calculateDropLocation(event);
-					//FlexGlobals.topLevelApplication.moveToRows(items);
 					for (var p:int=items.length - 1; p >= 0; p--)
 					{
 						oldList = items[p].listLocation;
 						items[k].newList = 'TRASH';
 						this.trashDB.addItemAt(items[p], pos.dropIndex);
 						FlexGlobals.topLevelApplication.removeFromList(items[p], oldList);
-						
 					}
 				}
 			}
 			
+			//closes the trash can by changing the state to 1 (plays transition)
 			public function Trash_Close():void{
 				currentState = "State1";
 				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Trash_Open);
@@ -151,7 +164,7 @@
 					   includeIn="State1"
 					   alpha="0.3"
 					   />
-		<s:Button includeIn="State2" x='-440' y='-460' id="closeTrash" label="Close X" click.State2="Trash_Close()" ></s:Button>
+		<s:Button includeIn="State2" x='-440' y='-460' id="closeTrash" label="Close X" click.State2="Trash_Close()" height="30" ></s:Button>
 	</fx:DesignLayer>
 	<s:List id="trashList"
 			width="130" height="90" x="5" y="5"

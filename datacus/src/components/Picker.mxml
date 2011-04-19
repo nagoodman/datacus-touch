@@ -31,26 +31,32 @@
 			public function populatePicker():void{
 				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
 				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDPicker;
+				
+				//call http service call for retrieving the list of dimensions
 				FlexGlobals.topLevelApplication.callDimensions.url= tempServerID + 'dimensions';
 				FlexGlobals.topLevelApplication.callDimensions.send()
 			}
 			
 			//forms the url string to retrieve the levels of a query
 			public function createLevels(dimension:String, hierarchy:String):void{
+				//set global variables for tracking dimension and hierarchy
 				FlexGlobals.topLevelApplication.currentDimension = dimension;
 				FlexGlobals.topLevelApplication.currentHierarchy = hierarchy;
+				
+				//temp variables for creating http service url from global values
 				var tempQueryName:String = FlexGlobals.topLevelApplication.currentQueryName;
 				var tempServerID:String = FlexGlobals.topLevelApplication.serverIDPicker;
+				
+				//resets 4 levels of members within picker
 				MembersDLContainer.membersLevel1.dataProvider = null;
 				MembersDLContainer.membersLevel2.dataProvider = null;
 				MembersDLContainer.membersLevel3.dataProvider = null;
 				MembersDLContainer.membersLevel4.dataProvider = null;
+				
+				//calls http service to retrieve list of levels
 				FlexGlobals.topLevelApplication.callLevels.url= tempServerID+"dimensions/"+dimension+"/hierarchies/"+hierarchy+"/levels";
 				FlexGlobals.topLevelApplication.callLevels.send();
 			}
-			
-
-
 			
 		]]>
 	</fx:Script>

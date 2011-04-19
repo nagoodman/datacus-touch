@@ -19,7 +19,6 @@
 			public function Home_Close():void{
 				currentState = "Home1";
 				this.addEventListener(MouseEvent.MOUSE_DOWN, FlexGlobals.topLevelApplication.Home_Open);
-				//home.addEventListener(MouseEvent.ROLL_OUT, homeFlick);
 			}
 			
 		]]>
@@ -68,8 +67,8 @@
 		</mx:FormItem>
 		
 		<mx:FormItem direction="horizontal">
-			<s:Button label="Create Query" id="submitQuery" click="FlexGlobals.topLevelApplication.submit_form()" />
-			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" />
+			<s:Button label="Create Query" id="submitQuery" click="FlexGlobals.topLevelApplication.submit_form()" height="30" />
+			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" height="30"/>
 		</mx:FormItem>
 		
 		
