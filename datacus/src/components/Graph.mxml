@@ -209,7 +209,7 @@
 			}
 			
 			//Function that controls the categories vs series view of the graph (flips them)
-			public function switchAxis(e:MouseEvent):void{
+			public function switchAxis(e:TransformGestureEvent):void{
 				//removes the gestures from the graph so not to register multiple events
 				removeGestures();
 				
