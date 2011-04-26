@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="Connection_creationCompleteHandler(event)">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="Connection_creationCompleteHandler(event)" width.State1="0">
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
@@ -27,37 +27,35 @@
 		<s:State name="State2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="status" height.State2="100" width.State2="140" skinClass="skins.Panel" width.State1="400" height.State1="250" x.State1="-750" y.State1="300"/>
+		<s:SkinnableContainer id="status" height.State2="110" width.State2="150" skinClass="skins.PanelCorner" width.State1="333" height.State1="225" x.State1="-740" y.State1="311"/>
 		<s:BitmapImage id="statusImg" includeIn="State2"
 					   source="@Embed('assets/globe.1.png')"
 					   fillMode="clip"
-					   left="30" right="0"  top="10" bottom="0"
-					   height="60"
-					   width="60"
-					   alpha="0.5"
+					   verticalCenter="0"
+					   horizontalCenter="0"
 					   />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="ConnectionMenuLabel" tabStops="S0 S50 S100" text="Connection Menu" x="-632" y="320" includeIn="State1"/>
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="18" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" x="-650" y="345" includeIn="State1"/>
+		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="12" id="ConnectionMenuLabel" tabStops="S0 S50 S100" text="Connection Menu" x="-622" y="335" includeIn="State1"/>
+		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="12" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" x="-640" y="355" includeIn="State1"/>
 	</fx:DesignLayer>	
-	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" x ='-725' y='370'>
-		<mx:FormItem label='Server Address:' required="true" horizontalAlign="center">
-			<s:TextInput id="ServerAddy" width='200' height="30" >
+	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" x ='-740' y='370'>
+		<mx:FormItem label='Server Address:' color="#eeeeee" required="true" horizontalAlign="center">
+			<s:TextInput id="ServerAddy" color="#000000" width='190' height="24" >
 				http://localhost:8080
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='User Name:' required="true" horizontalAlign="center">
-			<s:TextInput id="Uname" width='200' height="30" >
+		<mx:FormItem label='User Name:' color="#eeeeee" required="true" horizontalAlign="center">
+			<s:TextInput id="Uname" color="#000000" width='190' height="24" >
 				admin
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='Password:' required="true" horizontalAlign="center">
-			<s:TextInput id="Passwd" width='200' height="30">
+		<mx:FormItem label='Password:' color="#eeeeee" required="true" horizontalAlign="center">
+			<s:TextInput id="Passwd" color="#000000" width='190' height="24">
 				admin
 			</s:TextInput>
 		</mx:FormItem>		
 		<mx:FormItem direction="horizontal">
-			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" height="30"/>
-			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" height="30"/>
+			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" height="25"/>
+			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" height="25"/>
 		</mx:FormItem>
 	</mx:Form>
 	

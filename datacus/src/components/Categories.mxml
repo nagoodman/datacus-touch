@@ -164,17 +164,14 @@
 
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="100" width="1080" skinClass="skins.Panel" />
-		<s:RichText color="#2B4381" fontFamily="Arial" fontSize="20" id="CategoriesLabel" tabStops="S0 S50 S100" text="Categories" x="500" y="79"/>
-		<s:BitmapImage id="img"
-					   source="@Embed('assets/categories_bg.png')"
-					   fillMode="repeat"
-					   left="0" right="0"  top="0" bottom="0"/>
+		<s:SkinnableContainer height="100" width="1080" skinClass="skins.PanelH" />
+		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="CategoriesLabel" tabStops="S0 S50 S100" text="Categories" horizontalCenter="0" y="71"/>
+
 	</fx:DesignLayer>	
 	<s:List id="catList"
-			width="1070"
-			height="70"
-			x="5" y="5"
+			width="1059"
+			height="65"
+			x="10" y="10"
 			alpha="0.8"
 			dragEnabled="true"
 			dragMoveEnabled="true"

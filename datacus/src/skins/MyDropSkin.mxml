@@ -34,15 +34,6 @@
 			right="1"
 			top="1"
 			bottom="1">
-		<s:fill>
-			<!--- Defines the color of the background. The default color is 0xFFFFFF. -->
-			<s:SolidColor id="bgFill"
-						  color="0xFFFFFF"/>
-		</s:fill>
-		<s:filters>
-			<s:GlowFilter alpha="1.0" blurX="6.0" blurY="6.0" color="#173260" inner="true" knockout="false" quality="2" strength="1"/>
-			<s:DropShadowFilter alpha="0.55" angle="45.0" blurX="6" blurY="6" color="#3D37B2" distance="0" hideObject="false" inner="false" knockout="false" quality="3" strength="1"/>
-		</s:filters>
 	</s:Rect>
 
 	<!--- The Scroller component to add scroll bars to the list. -->
