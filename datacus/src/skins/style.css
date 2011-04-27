@@ -3,10 +3,10 @@
 @namespace mx "library://ns.adobe.com/flex/mx";
 
 .label{
-	background-color:#cccccc;
-	background: url(../assets/picker_panel.png);
-	color:#223355;
-	font-size:36;
+	background-color:none;
+	background: url(../assets/button.png);
+	color:#eeeeee;
+	font-size:30;
 	paddingBottom:4;
 	paddingLeft:4;
 	paddingRight:4;
@@ -15,11 +15,11 @@
 
 
 .container {
-	background-color: red;
+	background-color: none;
 }
 #border{
-	background-color: red;
+	background-color: none;
 }
 #background{
-	background-color: red;
+	background-color: none;
 }

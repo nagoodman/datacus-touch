@@ -73,19 +73,20 @@
 		
 		<s:RichText color="#ffffff" fontFamily="Lucida Grande" fontSize="18" id="PickerLabel" tabStops="S0 S50 S100" text="Picker" horizontalCenter="0" y="20" includeIn="State1" />
 	</fx:DesignLayer>
-	<components:PickerCloseArea id="PickerClose" includeIn="State2" x.State2="-1100"/>
+
+	<components:MembersDatalistsContainer id="MembersDLContainer" 
+										  includeIn="State2" 
+										  x="-930" y="0"/>
 	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State2" 
-		x="-990" y="105" alpha="0.79"/>
+		x="-22" y="-8"/>
+	
+	<components:PickerCloseArea id="PickerClose" includeIn="State2" x.State2="-1095"/>
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
 											includeIn="State2"  
-											x="-795" y="20" alpha="0.79"/>
-	
-	<components:MembersDatalistsContainer id="MembersDLContainer" 
-										  includeIn="State2" 
-										  x="-795" y="100" alpha="0.79" />
+											x="-1145" y="10"/>
 	
 	
 	<s:transitions>

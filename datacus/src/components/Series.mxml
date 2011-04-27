@@ -166,8 +166,8 @@
 	</fx:DesignLayer>	
 	<s:List id="serList"
 			width="1053"
-			height="50"
-			x="17" y="45"
+			height="67"
+			x="17" y="29"
 			alpha="0.8"
 			dragEnabled="true"
 			dragMoveEnabled="true"

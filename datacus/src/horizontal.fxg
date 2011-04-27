@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Graphic version="2.0" viewHeight="107" viewWidth="1084" ai:appVersion="15.0.0.399" ATE:version="1.0.0" flm:version="1.0.0" d:using="" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ATE="http://ns.adobe.com/ate/2009" xmlns:ai="http://ns.adobe.com/ai/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:flm="http://ns.adobe.com/flame/2008">
+<Graphic version="2.0" viewHeight="110" viewWidth="1084" ai:appVersion="15.0.2.399" ATE:version="1.0.0" flm:version="1.0.0" d:using="" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ATE="http://ns.adobe.com/ate/2009" xmlns:ai="http://ns.adobe.com/ai/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:flm="http://ns.adobe.com/flame/2008">
   <Library/>
-  <Group ai:seqID="1" d:layerType="page" d:pageHeight="107" d:pageWidth="1084" d:type="layer" d:userLabel="Artboard 1">
+  <Group ai:seqID="1" d:layerType="page" d:pageHeight="110" d:pageWidth="1084" d:type="layer" d:userLabel="Artboard 1">
     <Group ai:seqID="2" d:type="layer" d:userLabel="Layer 1">
       <Group x="206" visible="false" ai:seqID="3">
         <Rect x="0.5" y="0.5" width="772" height="106" radiusX="15.0299" radiusY="13.9778" ai:seqID="4">
@@ -26,35 +26,35 @@
         </Rect>
         <Rect x="0.5" y="0.5" width="772" height="106" radiusX="15.0299" radiusY="13.9778" ai:seqID="6">
           <stroke>
-            <SolidColorStroke weight="1" caps="none" joints="miter" miterLimit="4"/>
+            <SolidColorStroke caps="none" joints="miter" miterLimit="4"/>
           </stroke>
         </Rect>
       </Group>
-      <Group x="2" ai:seqID="7">
-        <Rect x="0.5" y="0.5" width="1079.5" height="106" radiusX="11.9806" radiusY="11.9806" ai:seqID="8">
+      <Group x="2.7002" y="0.700195" ai:seqID="7">
+        <Rect x="0.5" y="0.500244" width="1079.1" height="106.6" radiusX="11.7808" radiusY="11.8789" ai:seqID="8">
           <fill>
-            <LinearGradient x="539.75" y="0" scaleX="106" rotation="90">
-              <GradientEntry ratio="0" color="#A6A5A6"/>
-              <GradientEntry ratio="0.155726" color="#686768"/>
-              <GradientEntry ratio="0.243909" color="#535253"/>
+            <LinearGradient x="539.55" y="-0.000244141" scaleX="106.6" rotation="90">
+              <GradientEntry ratio="0" color="#A5A4A5"/>
+              <GradientEntry ratio="0.155726" color="#686668"/>
+              <GradientEntry ratio="0.243909" color="#535153"/>
               <GradientEntry ratio="0.342385" color="#454345"/>
               <GradientEntry ratio="0.567543" color="#373537"/>
               <GradientEntry ratio="1" color="#353335"/>
             </LinearGradient>
           </fill>
         </Rect>
-        <Rect x="2.5" y="2.5" width="1075.5" height="102" radiusX="9.9993" radiusY="9.9993" ai:seqID="9">
+        <Rect x="2.2998" y="2.2998" width="1075.5" height="103" radiusX="9.9993" radiusY="10.0966" ai:seqID="9">
           <fill>
-            <LinearGradient x="537.75" y="0" scaleX="102" rotation="90">
-              <GradientEntry ratio="0" color="#282829"/>
+            <LinearGradient x="537.75" y="0" scaleX="103" rotation="90">
+              <GradientEntry ratio="0" color="#232324"/>
               <GradientEntry ratio="1"/>
-              <GradientEntry ratio="1" color="#1E1D2D"/>
+              <GradientEntry ratio="1"/>
             </LinearGradient>
           </fill>
         </Rect>
-        <Rect x="0.5" y="0.5" width="1079.5" height="106" radiusX="11.9806" radiusY="11.9806" ai:seqID="10">
+        <Rect x="0.5" y="0.500244" width="1079.1" height="106.6" radiusX="11.7808" radiusY="11.8789" ai:seqID="10">
           <stroke>
-            <SolidColorStroke weight="1" caps="none" joints="miter" miterLimit="4" color="#231F20"/>
+            <SolidColorStroke caps="none" joints="miter" miterLimit="4"/>
           </stroke>
         </Rect>
       </Group>

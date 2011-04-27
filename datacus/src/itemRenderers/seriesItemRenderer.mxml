@@ -2,7 +2,7 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="false">
+				xmlns:local="*" width.normal="107" height.normal="53" width.down="107" height.down="53" width.selected="107" height.selected="53">
 	
 	<s:states>
 		<s:State name="normal" />
@@ -13,19 +13,11 @@
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle"/>
 		</s:layout>
-		<s:BorderContainer  height="50" width="105" cornerRadius="15" borderWeight="2"  >
-			<s:backgroundFill>
-				<s:LinearGradient rotation="90">
-					<s:GradientEntry color.normal="#7ca558" color.selected="#40aa7a" color.down="#40aa7a" alpha=".8" />
-					<s:GradientEntry color.normal="#93dc53" color.selected="#26E38B" color.down="#26E38B" alpha=".8" />
-					<s:GradientEntry color.normal="#93dc53" color.selected="#26E38B" color.down="#26E38B" alpha=".8" />
-					<s:GradientEntry color.normal="#7ca558" color.selected="#40aa7a" color.down="#40aa7a" alpha=".8" />
-				</s:LinearGradient>
-				
-			</s:backgroundFill>
+		<s:SkinnableContainer height="50" width="100%" backgroundAlpha="0" >
+			<local:button />
 			
-			<s:Label text="{data.label}" width="95" x="2" height="100%" textAlign="center" fontSize="14" verticalAlign="middle"/>
-		</s:BorderContainer>
+			<s:Label text="{data.label}" y="5" color="#cccccc" width="104" height="100%" textAlign="center" fontSize="12" verticalAlign="middle"  height.normal="50" y.normal="0"/>
+		</s:SkinnableContainer>
 	</s:Group>
 	
 </s:ItemRenderer>

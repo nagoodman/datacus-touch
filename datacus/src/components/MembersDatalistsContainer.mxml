@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="940" height="500" >
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="940" height="570" >
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
@@ -202,12 +202,12 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="LDLCBackground">
-		<s:Rect height="500" id="MembersDLContainerrec" width="940" x="0" y="0" alpha="0.79">
+		<s:Rect height="514" id="MembersDLContainerrec" width="940" x="0" y="-14" alpha="0.79">
 			
 		</s:Rect>
 	</fx:DesignLayer>
 	
-	<s:List x="10" y="10" width="900" height="110" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true"
+	<s:List x="0" y="-2" width="929" height="137" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true"
 			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)" >
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
@@ -215,7 +215,7 @@
 								paddingTop="0"/>
 		</s:layout>
 	</s:List>
-	<s:List x="10" y="135" width="900" height="110" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" 
+	<s:List x="0" y="131" width="930" height="135" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" 
 			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
@@ -223,7 +223,7 @@
 								paddingTop="0"/>
 		</s:layout>
 	</s:List>
-	<s:List x="10" y="260" width="900" height="110" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" 
+	<s:List x="0" y="270" width="930" height="148" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" 
 			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
@@ -232,7 +232,7 @@
 		</s:layout>
 	</s:List>
 	
-	<s:List x="10" y="380" width="900" height="110" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" 
+	<s:List x="0" y="418" width="930" height="152" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" 
 			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"

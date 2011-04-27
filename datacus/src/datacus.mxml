@@ -971,7 +971,7 @@
 		/>
 		<components:Categories id="categories"
 			x="182" y="780"
-		/>
+		 height="109"/>
 		
 		<components:Picker id="picker"
 						   x="1280" y="140"
