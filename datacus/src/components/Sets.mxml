@@ -106,9 +106,20 @@
 		<s:State name="Sets2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="setsContainer" height.Sets1="109" width.Sets1="152" x.Sets1="0" y.Sets1="0" height.Sets2="400" width.Sets2="400" x.Sets2="520" y.Sets2="-550"  skinClass="skins.PanelCorner" />
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="SetsLabel" tabStops="S0 S50 S100" text="Active Sets" x="665" y="-530" includeIn="Sets2"/>
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="SetsButtonLabel" tabStops="S0 S50 S100" text="Sets" horizontalCenter="0" y="20" includeIn="Sets1"/>
+		<s:SkinnableContainer id="setsContainer" height.Sets1="109" width.Sets1="152" x.Sets1="0" y.Sets1="0" height.Sets2="361" width.Sets2="350" x.Sets2="520" y.Sets2="-550"  skinClass="skins.PanelCorner" />
+		<s:BitmapImage source="@Embed('assets/setslabel.png')"
+					   id="SetsLabel"
+					   x="670"
+					   y="-530"
+					   includeIn="Sets2"/>
+		<s:BitmapImage source="@Embed('assets/setslabel.png')"
+					   fillMode="clip"
+					   horizontalCenter="0"
+					   y="15"
+					   id="SetsButtonLabel"
+					   includeIn="Sets1"
+					   />
+		
 		<s:BitmapImage id="setsImg"
 					   source="@Embed('assets/save.png')"
 					   fillMode="clip"
@@ -116,13 +127,13 @@
 					   horizontalCenter="0"
 					   includeIn="Sets1"
 					   />
-		<s:Button includeIn="Sets2" x="830" y="-540" id="closeSets" label="Close X" click="Sets_Close()" height="30"></s:Button>
+		<s:Label includeIn="Sets2" fontSize="20" color="#eeeeee" x="830" y="-530" click="Sets_Close()" id="closeSets" text="x"/>
 	</fx:DesignLayer>
 	<s:List id="setsList" width="130" height="90" x="5" y="5" 
 			width.Sets2="300"
 			height.Sets2="300"
-			x.Sets2="570" y.Sets2="-500"
-			alpha="0.8" alpha.Sets1="0"
+			x.Sets2="550" y.Sets2="-500"
+			alpha="1" alpha.Sets1="0"
 			dataProvider="{setsDB}"
 			rendererAdd="addTouchTap(event)"
 			skinClass="skins.MyDropSkin" doubleClickEnabled="true"
@@ -132,6 +143,7 @@
 							  paddingTop="10" paddingBottom="10"/>
 		</s:layout>
 	</s:List>
+	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="Sets1" toState="Sets2">
 			<s:Parallel>

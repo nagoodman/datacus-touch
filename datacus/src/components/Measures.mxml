@@ -80,8 +80,13 @@
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="628" width="152" skinClass="skins.PanelV" styleName="container" />
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="MeasuresLabel" tabStops="S0 S50 S100" text="Measures" horizontalCenter="0" y="20"/>
-
+		<s:BitmapImage source="@Embed('assets/measureslabel.png')"
+					   fillMode="clip"
+					   horizontalCenter="0"
+					   y="20"
+					   id="MeasuresLabel"
+					   />
+		
 	</fx:DesignLayer>
 	<s:List id="measuresList"
 			width="114"

@@ -6,7 +6,7 @@
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
 			
-			import itemRenderers.memberItemRenderer;
+			import itemRenderers.member3ItemRenderer;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
@@ -196,47 +196,54 @@
 				membersLevel4.dataProvider = membersAC;
 			}
 
+
+			
 		]]>
 	</fx:Script>
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
+		
+
 	<fx:DesignLayer id="LDLCBackground">
-		<s:Rect height="514" id="MembersDLContainerrec" width="940" x="0" y="-14" alpha="0.79">
+		<s:Rect height="514" id="MembersDLContainerrec" width="940" x="0" y="-14" alpha="1">
 			
 		</s:Rect>
 	</fx:DesignLayer>
 	
-	<s:List x="0" y="-2" width="929" height="137" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true"
-			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)" >
-		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
-								paddingLeft="10" paddingRight="10"
-								paddingTop="0"/>
-		</s:layout>
-	</s:List>
-	<s:List x="0" y="131" width="930" height="135" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" 
-			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
-		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
-								paddingLeft="10" paddingRight="10"
-								paddingTop="0"/>
-		</s:layout>
-	</s:List>
-	<s:List x="0" y="270" width="930" height="148" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" 
-			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
-		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
-								paddingLeft="10" paddingRight="10"
-								paddingTop="0"/>
-		</s:layout>
-	</s:List>
+
 	
-	<s:List x="0" y="418" width="930" height="152" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" 
-			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.memberItemRenderer" dragComplete="memberFlick(event)">
+	<s:List x="39" y="-14" width="854" height="137" id="membersLevel1" dragEnabled="true" dragMoveEnabled="true"
+			skinClass="skins.ScrollSkin" itemRenderer="itemRenderers.member1ItemRenderer" dragComplete="memberFlick(event)" >
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
-								paddingLeft="10" paddingRight="10"
+								paddingLeft="3" paddingRight="0"
+								paddingTop="0"/>
+		</s:layout>
+	</s:List>
+	<s:List x="38" y="113" width="854" height="146" id="membersLevel2" dragEnabled="true" dragMoveEnabled="true" 
+			skinClass="skins.ScrollSkin" itemRenderer="itemRenderers.member2ItemRenderer" dragComplete="memberFlick(event)" >
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
+								paddingLeft="3" paddingRight="0"
+								paddingTop="0"/>
+		</s:layout>
+	</s:List>
+
+	<s:List x="39" y="245" width="854" height="146" id="membersLevel3" dragEnabled="true" dragMoveEnabled="true" 
+			skinClass="skins.ScrollSkin" itemRenderer="itemRenderers.member3ItemRenderer" dragComplete="memberFlick(event)" >
+
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
+								paddingLeft="3" paddingRight="0"
+								paddingTop="0" />
+		</s:layout>
+
+	</s:List>
+
+	
+	<s:List x="39" y="376" width="854" height="151" id="membersLevel4" dragEnabled="true" dragMoveEnabled="true" 
+			skinClass="skins.ScrollSkin" itemRenderer="itemRenderers.member4ItemRenderer" dragComplete="memberFlick(event)" >
+		<s:layout>
+		<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center"
+								paddingLeft="3" paddingRight="0"
 								paddingTop="0"/>
 		</s:layout>
 	</s:List>

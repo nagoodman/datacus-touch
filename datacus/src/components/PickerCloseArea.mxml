@@ -8,9 +8,13 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="touchArea">
-		<s:SkinnableContainer  id="closeArea" width="150" x="-1" y="0" >
+		<s:SkinnableContainer  id="closeArea" width="155" x="-1" y="0" >
 			<local:vertical />
-			<s:Label color="#dddddd" fontFamily="Lucida Grande" fontSize="18" x="53" y="20" text="Picker"/>
+			<s:BitmapImage source="@Embed('assets/pickerlabel.png')"
+						   fillMode="clip"
+						   horizontalCenter="0"
+						   y="20"
+						   />
 		</s:SkinnableContainer>
 	</fx:DesignLayer>
 </s:Group>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009"
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+			 minWidth="112"
+			 alpha.disabled="0.5"
+			 blendMode="normal" 
+			 styleName="container" xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Metadata>
+		<![CDATA[ 
+		/** 
+		* @copy spark.skins.spark.ApplicationSkin#hostComponent
+		*/
+		[HostComponent("spark.components.List")]
+		]]>
+	</fx:Metadata>
+	
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="disabled"/>
+	</s:states>
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.core.NavigationUnit;
+			
+			protected function scrollToThere(dir:uint):void {
+				var value:Number = dataGroup.getHorizontalScrollPositionDelta(dir);
+				if (value != 0) {
+					pth.valueBy = value;
+					anim.play();
+				}
+			}
+			
+			/* 			include "../components/MembersDatalistsContainer.mxml";
+			
+			public function listcount():int {
+				var length:int = membersLevel4.dataProvider.length;
+				var lengthstring:String = String(length);
+				buttonlength.label = lengthstring;
+				return length;
+			} 
+			
+			<s:Button id="buttonlength" fontSize="30" x="79" y="11" label="yes"  x.normal="-50" y.normal="10" click="listcount() />*/
+
+		]]>
+		
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:Animate id="anim" target="{dataGroup}" duration="3000">
+			<s:motionPaths>
+				<s:SimpleMotionPath id="pth" property="horizontalScrollPosition" />
+			</s:motionPaths>
+		</s:Animate>
+		
+		<mx:Glow id="glow1" duration="100"
+				 alphaFrom="0" alphaTo="1"
+				 blurXFrom="0.0" blurXTo="6.0" 
+				 blurYFrom="0.0" blurYTo="6.0"  strength="1"
+				 color="0xFFFFFF" target="{arrowleft}"/>
+		
+		<mx:Glow id="unglow1" duration="800"  
+				 alphaFrom="1" alphaTo="0"
+				 blurXFrom="6.0" blurXTo="0.0"
+				 blurYFrom="6.0" blurYTo="0.0"  strength="1"
+				 color="0xFFFFFF" target="{arrowleft}"/>
+		
+		<mx:Glow id="glow2" duration="100"
+				 alphaFrom="0" alphaTo="1"
+				 blurXFrom="0.0" blurXTo="6.0" 
+				 blurYFrom="0.0" blurYTo="6.0"  strength="1"
+				 color="0xFFFFFF" target="{arrowright}"/>
+		
+		<mx:Glow id="unglow2" duration="800"  
+				 alphaFrom="1" alphaTo="0"
+				 blurXFrom="6.0" blurXTo="0.0"
+				 blurYFrom="6.0" blurYTo="0.0"  strength="1"
+				 color="0xFFFFFF" target="{arrowright}"/>
+		
+		
+	</fx:Declarations>
+	
+	
+	
+	<!-- fill -->
+	<!--- Defines the background appearance of the list-based component. -->
+	<s:Rect id="background"
+			left="1"
+			right="1"
+			top="1"
+			bottom="1">
+	</s:Rect>
+	
+	<!--- The Scroller component to add scroll bars to the list. -->
+	<s:Scroller 
+		left="0"
+		top="0"
+		right="0"
+		bottom="0"
+		minViewportInset="1"
+		hasFocusableChildren="false"
+		horizontalScrollPolicy="off"
+		verticalScrollPolicy="off"
+		skinClass="skins.scroll"
+		>
+		<!--- @copy spark.components.SkinnableData
+		Container#dataGroup -->
+		<s:DataGroup id="dataGroup"
+					 itemRenderer="spark.skins.spark.DefaultItemRenderer" clipAndEnableScrolling="true" x="-5" >
+
+			<s:layout>
+				<!--- The default layout is vertical and measures at least for 5 rows.
+				When switching to a different layout, HorizontalLayout for example,
+				make sure to adjust the minWidth, minHeihgt sizes of the skin -->
+				<s:VerticalLayout gap="0"
+								  horizontalAlign="contentJustify"
+								  requestedMinRowCount="5"/>
+			</s:layout>
+		</s:DataGroup>
+		
+	</s:Scroller>
+	
+
+	
+	<mx:Image id="arrowleft" source="@Embed('assets/arrow_left.png')"
+				   y="45" x="-45"
+				   mouseOver="scrollToThere(NavigationUnit.PAGE_LEFT); glow1.play();" mouseOut="unglow1.play();"
+				   />
+	
+	<mx:Image id="arrowright" source="@Embed('assets/arrow_right.png')"
+				   y="45" x="850"
+				   mouseOver="scrollToThere(NavigationUnit.PAGE_RIGHT); glow2.play();" mouseOut="unglow2.play();"
+				   />
+	
+</s:SparkSkin>
+

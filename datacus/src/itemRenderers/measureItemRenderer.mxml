@@ -10,6 +10,23 @@
 		<s:State name="down" />
 		<s:State name="selected"/>
 	</s:states>
+	
+	<fx:Declarations>
+		
+		<mx:Glow id="glow" duration="100"
+				 alphaFrom="0" alphaTo="1"
+				 blurXFrom="0.0" blurXTo="9.0" 
+				 blurYFrom="0.0" blurYTo="9.0"  strength="0.8"
+				 color="0xFFFFFF" target="{measurelabel}"/>
+		
+		<mx:Glow id="unglow" duration="800"  
+				 alphaFrom="1" alphaTo="0"
+				 blurXFrom="9.0" blurXTo="0.0"
+				 blurYFrom="9.0" blurYTo="0.0"  strength="0.8"
+				 color="0xFFFFFF" target="{measurelabel}"/>
+		
+	</fx:Declarations>
+	
 	<s:Group>
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle"
@@ -17,7 +34,8 @@
 		</s:layout>
 		<s:SkinnableContainer height="53" width="100%" backgroundAlpha="0" >
 			<local:button />
-			<s:Label text="{data.label}" color="#cccccc" height="100%" textAlign="center" fontSize="12" verticalAlign="middle" width="86" x="10"/>
+			<s:Label id="measurelabel" text="{data.label}" color="#cccccc" height="100%" textAlign="center" fontSize="12" verticalAlign="middle" width="86" x="10"
+					 mouseOver="glow.play();" mouseOut="unglow.play();" />
 		</s:SkinnableContainer>
 	</s:Group>
 	

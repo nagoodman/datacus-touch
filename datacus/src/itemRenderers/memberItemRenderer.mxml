@@ -3,7 +3,7 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				autoDrawBackground="false"
-				xmlns:local="*" height="126" width="179">
+				xmlns:local="*" height="100" width="165" >
 	
 
 		<s:states>
@@ -11,15 +11,15 @@
 			<s:State name="down" />
 			<s:State name="selected"/>
 		</s:states>
-		<s:Group x.normal="-1" y.normal="0">
+		<s:Group x="-1" y="0">
 			<s:layout>
 				<s:HorizontalLayout verticalAlign="middle"
 									paddingLeft="0"/>
 			</s:layout>
-			<s:SkinnableContainer  width="149" height="90">
-				<local:level  x.normal="5" y.normal="0"/>
+			<s:SkinnableContainer id="anim8" width="149" height="90">
+				<local:level  x="5" y="0"/>
 				
-				<s:Label text="{data.label}" color="#dddddd" width="139" height='100%' textAlign="center" fontSize="16" verticalAlign="middle" x="10" x.normal="10" y.normal="0"/>
+				<s:Label text="{data.label}" color="#dddddd" width="100%" height='100%' textAlign="center" fontSize="16" verticalAlign="middle" x="10" y="0"/>
 			</s:SkinnableContainer>
 			
 		</s:Group>

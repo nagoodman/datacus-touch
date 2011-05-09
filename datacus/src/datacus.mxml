@@ -6,9 +6,7 @@
 					   backgroundColor="#FFFFFF"
 					   minWidth="1440"
 					   minHeight="920"
-					   creationComplete="init()">  
-	<fx:Style source="datacus_1.css"/>
-					<!--make it full screen, but for now...-->
+					   creationComplete="init()">
 	
 	<fx:Script>
 		<![CDATA[
@@ -797,19 +795,24 @@
 				}
 				else{
 					for (var i:int = 0; i < arr.length; i++){
-						for (var j:int = 0; j<arr[i].length; j++){
+						for
+							
+							(var j:int = 0; j<arr[i].length; j++){
+							
 							if ((arr[i][j].type == "COLUMN_HEADER")&& (arr[i][j].value != 'null')){
-								if ((arr[i][j].value != arr[i][j-1].value) && (columnHeaderArray.length < (arr[i].length - 1))){ //arr[i].length-1 does not allow for multiple measures to be displayed at once
+								
+								if ( j == 0 ) {
+									
 									columnHeaderArray.addItem(arr[i][j]);
+									
 								}
-							}
-							if ((arr[i][j].type == "ROW_HEADER") && (arr[i][j].value != 'null')){
-								rowHeaderArray.addItem(arr[i][j]);
-							}
-							if ((arr[i][j].type == "DATA_CELL") && (arr[i][j].value != 'null')){
-								var tempItem:String = arr[i][j].value;
-								var passItem:int = int(tempItem.replace(',',''))
-								dataCellArray.addItem(passItem);
+									
+								else if ((arr[i][j].value != arr[i][j-1].value) && (columnHeaderArray.length < (arr[i].length - 1))){ //arr[i].length-1 does not allow for multiple measures to be displayed at once
+									
+									columnHeaderArray.addItem(arr[i][j]);
+									
+								}
+								
 							}
 						}
 					}
