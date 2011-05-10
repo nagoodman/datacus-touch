@@ -225,7 +225,7 @@
 				//add the header to request
 				var enc:Base64Encoder = new Base64Encoder();
 				enc.encode(username + ':' + password);
-				service.headers['Authorization'] = 'Basic' + enc.toString();
+				service.headers['Authorization'] = 'Basic ' + enc.toString();
 			}
 			
 			//Verify a connection
