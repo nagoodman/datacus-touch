@@ -4,8 +4,10 @@
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   xmlns:components="components.*"
 					   backgroundColor="#FFFFFF"
-					   minWidth="1440"
-					   minHeight="920"
+					   width="1440"
+					   height="920"
+					   minWidth="1024"
+					   minHeight="768"
 					   creationComplete="init()">
 	
 	<fx:Script>
@@ -943,8 +945,6 @@
 		<s:HTTPService id="results" resultFormat="text"
 			method="GET" result="updateGraphData(event)" />
 		
-
-		
 	</fx:Declarations>
 	<fx:DesignLayer id="background">
 		<s:Rect left="0" right="0" top="0" bottom="0">
@@ -956,6 +956,7 @@
 			</s:fill>
 		</s:Rect>
 	</fx:DesignLayer>
+	
 	<fx:DesignLayer id="panels">
 <!--		organized left to right then top to bottom		 -->
 		<components:Graph id="graph" 
@@ -966,28 +967,27 @@
 		</components:GraphLegend>
 		
 		<components:Measures id="measures"
- 			left="20" top="140"
+ 			left="20" verticalCenter="0"
 		/>
 		
-		<components:Series id="series"
-			x="182" y="20"
+		<components:Series id="series" horizontalCenter="0"
+		 y="20"
 		/>
 		<components:Categories id="categories"
-			x="182" y="780"
-		 height="109"/>
+		 horizontalCenter="0" bottom="20" />
 		
 		<components:Picker id="picker"
-						   x="1280" y="140"
+						   right="20" verticalCenter="0"
 							>
 		</components:Picker>
 		<components:Sets id="sets"
-						 x="20" y="780"
+						 x="20" bottom="20"
 		/>
 		<components:ServerStatus id="serverStatus"
-								 x="1280" y="20"
+								 right="20" top="20"
 								 />
 		<components:Trash id="trash"
-						  x="1280" y="780" />	
+						  right="20" bottom="20" />	
 		<components:Home id="home"
 						 x="20" y="20">
 

@@ -5,6 +5,7 @@
 			 minWidth="112"
 			 alpha.disabled="0.5"
 			 blendMode="normal" 
+			 xmlns:MyComps="Components.*"
 			 styleName="container" xmlns:mx="library://ns.adobe.com/flex/mx">
 	
 	<fx:Metadata>
@@ -25,6 +26,7 @@
 		<![CDATA[
 			import spark.core.NavigationUnit;
 			
+			
 			protected function scrollToThere(dir:uint):void {
 				var value:Number = dataGroup.getHorizontalScrollPositionDelta(dir);
 				if (value != 0) {
@@ -33,17 +35,17 @@
 				}
 			}
 			
-			/* 			include "../components/MembersDatalistsContainer.mxml";
+			import components.MembersDatalistsContainer;
+			import mx.core.FlexGlobals
 			
+			/*var ml4:Object = mx.core.FlexGlobals.topLevelApplication.membersLevel4;
+		
 			public function listcount():int {
-				var length:int = membersLevel4.dataProvider.length;
-				var lengthstring:String = String(length);
-				buttonlength.label = lengthstring;
-				return length;
-			} 
-			
-			<s:Button id="buttonlength" fontSize="30" x="79" y="11" label="yes"  x.normal="-50" y.normal="10" click="listcount() />*/
-
+						var length:int = ml4.dataProvider.length;
+						var lengthstring:String = String(length);
+						buttonlength.label = lengthstring;
+						return length;
+			} <s:Button id="buttonlength" x="79" y="11" label="yes"  x.normal="-50" y.normal="10" click="listcount()" />*/
 		]]>
 		
 	</fx:Script>
@@ -113,7 +115,7 @@
 			<s:layout>
 				<!--- The default layout is vertical and measures at least for 5 rows.
 				When switching to a different layout, HorizontalLayout for example,
-				make sure to adjust the minWidth, minHeihgt sizes of the skin -->
+				make sure to adjust the minWidth, minHeight sizes of the skin -->
 				<s:VerticalLayout gap="0"
 								  horizontalAlign="contentJustify"
 								  requestedMinRowCount="5"/>
@@ -133,6 +135,8 @@
 				   y="45" x="850"
 				   mouseOver="scrollToThere(NavigationUnit.PAGE_RIGHT); glow2.play();" mouseOut="unglow2.play();"
 				   />
+	
+	
 	
 </s:SparkSkin>
 

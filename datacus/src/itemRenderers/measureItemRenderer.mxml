@@ -3,7 +3,7 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				autoDrawBackground="false"
-				xmlns:local="*" width.normal="107" height.normal="53" width.down="107" height.down="53" width.selected="107" height.selected="53">
+				xmlns:local="*" height="100%" width="100%" >
 	
 	<s:states>
 		<s:State name="normal" />
@@ -30,10 +30,10 @@
 	<s:Group>
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle"
-								paddingLeft="0"/>
+								paddingLeft="0" />
 		</s:layout>
-		<s:SkinnableContainer height="53" width="100%" backgroundAlpha="0" >
-			<local:button />
+		<s:SkinnableContainer height="100%" width="100%" backgroundAlpha="0" >
+			<local:button height="100%" width="100%" />
 			<s:Label id="measurelabel" text="{data.label}" color="#cccccc" height="100%" textAlign="center" fontSize="12" verticalAlign="middle" width="86" x="10"
 					 mouseOver="glow.play();" mouseOut="unglow.play();" />
 		</s:SkinnableContainer>

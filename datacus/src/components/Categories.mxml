@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 height="12.1%" width="75%" >
 	<fx:Script>
 		<![CDATA[
 			//imports classes and libraries need for component
@@ -159,12 +160,11 @@
 		
 		
 	</fx:Script>
-	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="110" width="1080" skinClass="skins.PanelH" />
+		<s:SkinnableContainer height="100%" width="100%" skinClass="skins.PanelH" />
 		<s:BitmapImage source="@Embed('assets/categorieslabel.png')"
 					   fillMode="clip"
 					   horizontalCenter="0"
@@ -173,9 +173,9 @@
 					   />
 	</fx:DesignLayer>	
 	<s:List id="catList"
-			width="1027"
-			height="74"
-			x="21" y="10"
+			width="95%"
+			height="70%"
+			horizontalCenter="-20"
 			alpha="1"
 			dragEnabled="true"
 			dragMoveEnabled="true"
@@ -185,7 +185,7 @@
 			dragOver="catList_dragOverHandler(event)"
 			dragDrop="catList_dragDropHandler(event)"
 			skinClass="skins.MyDropSkin"
-			itemRenderer="itemRenderers.categoryItemRenderer">
+			itemRenderer="itemRenderers.categoryItemRenderer" >
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"
 								paddingLeft="12"

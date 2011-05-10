@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="152" height="628">	
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="10.6%" height="70%">	
 	<fx:Script>
 		<![CDATA[
 			//behavior: select measures type via tap or scroll if too many displayed
@@ -79,7 +79,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="628" width="152" skinClass="skins.PanelV" styleName="container" />
+		<s:SkinnableContainer height="100%" width="100%" skinClass="skins.PanelV" styleName="container" />
 		<s:BitmapImage source="@Embed('assets/measureslabel.png')"
 					   fillMode="clip"
 					   horizontalCenter="0"
@@ -89,12 +89,11 @@
 		
 	</fx:DesignLayer>
 	<s:List id="measuresList"
-			width="114"
-			height="537"
-			x="19" y="59"
+			width="100%"
+			height="100%"
 			rendererAdd="addClick(event)"
 			styleName="container"
-			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.measureItemRenderer">
+			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.measureItemRenderer" >
 		
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"

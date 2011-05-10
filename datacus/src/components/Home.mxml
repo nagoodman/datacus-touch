@@ -4,7 +4,7 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 xmlns:components="components.*"
 		 creationComplete="Home_creationCompleteHandler(event)"
-		 xmlns:local="*" height.Home1="110" width.Home1="153">
+		 xmlns:local="*" height.Home1="12%" width.Home1="10.5%">
 	<fx:Script>
 		<![CDATA[
 			//imports classes needed for component
@@ -32,20 +32,20 @@
 	</s:states>
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="home" height.Home2="243" x.Home2="541" y.Home2="317" width.Home2="320"
-							   skinClass="skins.PanelCorner" width.Home1="154" height.Home1="110"/>
+							   skinClass="skins.PanelCorner" width.Home1="100%" height.Home1="100%"/>
 		<s:RichText color="#eeeeee" fontSize="14" id="QueryMenu" tabStops="S0 S50 S100" text="Create A New Query" x="640" y="339" includeIn="Home2"/>
 
 		<s:BitmapImage source="@Embed('assets/homelabel.png')"
 					   fillMode="clip"
 					   horizontalCenter="0"
-					   y="15"
+					   verticalCenter="-25"
 					   id="HomeLabel"
 					   includeIn="Home1"
 					   />
 		<s:BitmapImage source="@Embed('assets/home.png')"
 					   fillMode="clip"
 					   horizontalCenter="0"
-					   top="50"
+					   verticalCenter="15"
 					   includeIn="Home1"
 					   />
 	</fx:DesignLayer>	

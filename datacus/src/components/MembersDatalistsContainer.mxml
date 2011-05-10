@@ -194,10 +194,8 @@
 				}
 				//adds items into the list
 				membersLevel4.dataProvider = membersAC;
-			}
+			}		
 
-
-			
 		]]>
 	</fx:Script>
 		

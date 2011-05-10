@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width.State1="150" height.State1="108">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width.State1="10.4%" height.State1="12%">
 	<fx:Script>
 		<![CDATA[
 			//imports classes and libraries need for component
@@ -153,7 +153,7 @@
 		<s:State name="State2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="trash" height.State1="108" width.State1="150" height.State2="239" width.State2="312" x.State2="-721" y.State2="-470"  skinClass="skins.PanelCorner" />
+		<s:SkinnableContainer id="trash" height.State1="100%" width.State1="100%" height.State2="239" width.State2="312" x.State2="-721" y.State2="-470"  skinClass="skins.PanelCorner" />
 		<s:RichText color="#eeeeee" fontSize="16" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-600" y="-450" includeIn="State2"/>
 		<s:BitmapImage id="trashIcon"
 					   source="@Embed('assets/trash.png')"
@@ -176,7 +176,7 @@
 			dragOver="trashList_dragOverHandler(event)"
 			dragDrop="trashList_dragDropHandler(event)"
 			skinClass="skins.MyDropSkin"
-			itemRenderer="itemRenderers.trashItemRenderer" width.State1="150" height.State1="109" x.State1="0" y.State1="0">
+			itemRenderer="itemRenderers.trashItemRenderer" width.State1="100%" height.State1="100%" x.State1="0" y.State1="0">
 		<s:layout>
 			<s:VerticalLayout horizontalAlign="center"
 								paddingLeft="0"

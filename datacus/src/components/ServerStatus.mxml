@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="Connection_creationCompleteHandler(event)" width.State1="0">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="Connection_creationCompleteHandler(event)" 
+		 height.State2="12%" width.State2="10.4%" width.State1="20%" height.State1="20%">
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
@@ -27,27 +28,27 @@
 		<s:State name="State2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="status" height.State2="110" width.State2="150" skinClass="skins.PanelCorner" width.State1="333" height.State1="200" x.State1="-740" y.State1="330"/>
+		<s:SkinnableContainer id="status" height.State2="100%" width.State2="100%" skinClass="skins.PanelCorner" width.State1="100%" height.State1="100%" verticalCenter.State1="0" horizontalCenter.State1="0"/>
 		<s:BitmapImage id="statusImg" includeIn="State2"
 					   source="@Embed('assets/globe.1.png')"
 					   fillMode="clip"
-					   verticalCenter="0"
-					   horizontalCenter="0"
+					   verticalCenter.State2="0"
+					   horizontalCenter.State2="0"
 					   />
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="13" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" x="-640" y="355" includeIn="State1"/>
+		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="13" id="ConnectionMenu" tabStops="S0 S50 S100" text="Connect To Your Server" horizontalCenter.State1="0" verticalCenter.State1="-70" includeIn="State1"/>
 	</fx:DesignLayer>	
-	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" x ='-740' y='370'>
-		<mx:FormItem label='Server Address:' color="#eeeeee" horizontalAlign="center">
+	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" horizontalCenter.State1="0" verticalCenter.State1="10">
+		<mx:FormItem label='Server Address:' fontSize="11" color="#eeeeee" horizontalAlign="center">
 			<s:TextInput id="ServerAddy" color="#000000" width='190' height="24" >
-				http://localhost:8080
+				http://demo.analytical-labs.com
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='User Name:' color="#eeeeee" horizontalAlign="center">
+		<mx:FormItem label='User Name:' fontSize="11" color="#eeeeee" horizontalAlign="center">
 			<s:TextInput id="Uname" color="#000000" width='190' height="24" >
 				admin
 			</s:TextInput>
 		</mx:FormItem>
-		<mx:FormItem label='Password:' color="#eeeeee" horizontalAlign="center">
+		<mx:FormItem label='Password:' fontSize="11" color="#eeeeee" horizontalAlign="center">
 			<s:TextInput id="Passwd" color="#000000" width='190' height="24">
 				admin
 			</s:TextInput>

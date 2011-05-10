@@ -4,7 +4,7 @@
 	xmlns:mx="library://ns.adobe.com/flex/mx" 
 	xmlns:s="library://ns.adobe.com/flex/spark" 
 	alpha.disabled="0.5"
-	xmlns:local="*">
+	xmlns:local="*" height="100%" width="100%">
 	
 	<fx:Metadata>
 		[HostComponent("spark.components.SkinnableContainer")]
@@ -19,6 +19,6 @@
 		
 	</fx:Declarations>
 	
-	<local:vertical />
+	<local:vertical height="100%" width="100%" />
 	
 </s:Skin>

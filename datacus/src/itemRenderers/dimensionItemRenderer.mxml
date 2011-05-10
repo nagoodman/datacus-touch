@@ -31,8 +31,8 @@
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle"/>
 		</s:layout>
-		<s:SkinnableContainer height="30" width="100%" >
-			<local:buttonsmall />
+		<s:SkinnableContainer height="100%" width="100%" >
+			<local:buttonsmall height="100%" width="100%" />
 			
 			<s:Label id="dimensionlabel" text="{data.label}" color="#dddddd" width="100%" height="100%" textAlign="center" fontSize="11" verticalAlign="middle"
 					 mouseOver="glow.play();" mouseOut="unglow.play();" />
