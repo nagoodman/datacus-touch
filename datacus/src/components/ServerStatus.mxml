@@ -39,7 +39,7 @@
 	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" x ='-740' y='370'>
 		<mx:FormItem label='Server Address:' color="#eeeeee" horizontalAlign="center">
 			<s:TextInput id="ServerAddy" color="#000000" width='190' height="24" >
-				http://localhost:8080
+				http://demo.analytical-labs.com
 			</s:TextInput>
 		</mx:FormItem>
 		<mx:FormItem label='User Name:' color="#eeeeee" horizontalAlign="center">
