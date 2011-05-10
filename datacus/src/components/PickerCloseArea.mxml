@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="153"
+		 xmlns:local="*" height="628">
 
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="touchArea">
-		<s:SkinnableContainer height="620" id="closeArea" width="100" x="0" y="0" />
-		<s:BitmapImage id="closeImg"
-					   source="@Embed('assets/close_arrow.png')"
-					   fillMode="clip"
-					   left="10" right="0"  top="210" bottom="0"
-					   height="191"
-					   width="90"
-					   alpha="0.8"
-					   />
+		<s:SkinnableContainer  id="closeArea" width="155" x="-1" y="0" >
+			<local:vertical />
+			<s:BitmapImage source="@Embed('assets/pickerlabel.png')"
+						   fillMode="clip"
+						   horizontalCenter="0"
+						   y="20"
+						   />
+		</s:SkinnableContainer>
 	</fx:DesignLayer>
 </s:Group>

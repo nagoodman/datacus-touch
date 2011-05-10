@@ -17,6 +17,7 @@
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
+  <theme themeIsDefault="false" themeIsSDK="false" themeLocation="${EXTERNAL_THEME_DIR}/Style"/>
   <applications>
     <application path="datacus.mxml">
       <airExcludes/>

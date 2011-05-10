@@ -153,8 +153,8 @@
 		<s:State name="State2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="trash" height.State1="108" width.State1="150" height.State2="400" width.State2="400" x.State2="-750" y.State2="-470"  skinClass="skins.PanelCorner" />
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-598" y="-450" includeIn="State2"/>
+		<s:SkinnableContainer id="trash" height.State1="108" width.State1="150" height.State2="239" width.State2="312" x.State2="-721" y.State2="-470"  skinClass="skins.PanelCorner" />
+		<s:RichText color="#eeeeee" fontSize="16" id="TrashLabel" tabStops="S0 S50 S100" text="Trash Can" x="-600" y="-450" includeIn="State2"/>
 		<s:BitmapImage id="trashIcon"
 					   source="@Embed('assets/trash.png')"
 					   fillMode="clip"
@@ -162,14 +162,14 @@
 					   verticalCenter="0"
 					   includeIn="State1"
 					   />
-		<s:Button includeIn="State2" x='-440' y='-460' id="closeTrash" label="Close X" click.State2="Trash_Close()" height="30" ></s:Button>
+		<s:Label includeIn="State2" fontSize="20" color="#cccccc" x='-440' y='-450' click.State2="Trash_Close()" id="closeTrash" text="x"/>
 	</fx:DesignLayer>
 	<s:List id="trashList"
 			width="130" height="90" x="5" y="5"
 			width.State2="300"
 			height.State2="300"
 			x.State2="-700" y.State2="-420"
-			alpha="0.8" alpha.State1="0"
+			alpha="1" alpha.State1="0"
 			rendererAdd="addTouchTap(event)"
 			dataProvider = "{trashDB}"
 			dragEnter="trashList_dragEnterHandler(event)"

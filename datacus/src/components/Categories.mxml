@@ -164,15 +164,19 @@
 
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="100" width="1080" skinClass="skins.PanelH" />
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="CategoriesLabel" tabStops="S0 S50 S100" text="Categories" horizontalCenter="0" y="71"/>
-
+		<s:SkinnableContainer height="110" width="1080" skinClass="skins.PanelH" />
+		<s:BitmapImage source="@Embed('assets/categorieslabel.png')"
+					   fillMode="clip"
+					   horizontalCenter="0"
+					   bottom="15"
+					   id="CategoriesLabel"
+					   />
 	</fx:DesignLayer>	
 	<s:List id="catList"
-			width="1059"
-			height="65"
-			x="10" y="10"
-			alpha="0.8"
+			width="1027"
+			height="74"
+			x="21" y="10"
+			alpha="1"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			dragComplete="catList_dragCompleteHandler(event)"
@@ -180,7 +184,7 @@
 			dragEnter="catList_dragEnterHandler(event)"
 			dragOver="catList_dragOverHandler(event)"
 			dragDrop="catList_dragDropHandler(event)"
-			skinClass="skins.MyDropSkin" borderAlpha="0.2"
+			skinClass="skins.MyDropSkin"
 			itemRenderer="itemRenderers.categoryItemRenderer">
 		<s:layout>
 			<s:HorizontalLayout horizontalAlign="left"

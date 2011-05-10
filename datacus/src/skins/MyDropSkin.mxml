@@ -16,15 +16,13 @@
     ]]>
 	</fx:Metadata>
 
-
 	<s:states>
 		<s:State name="normal"/>
 		<s:State name="disabled"/>
 	</s:states>
-	<fx:Style source="../skins/style.css" />
+
 	<fx:Declarations>
 
-		
 	</fx:Declarations>
 
 	<!-- fill -->
@@ -37,13 +35,17 @@
 	</s:Rect>
 
 	<!--- The Scroller component to add scroll bars to the list. -->
-	<s:Scroller left="0"
+	<s:Scroller 
+				left="0"
 				top="0"
 				right="0"
 				bottom="0"
-				id="scroller"
 				minViewportInset="1"
-				hasFocusableChildren="false">
+				hasFocusableChildren="false"
+				horizontalScrollPolicy="auto"
+				verticalScrollPolicy="off"
+				skinClass="skins.scroll"
+				>
 		<!--- @copy spark.components.SkinnableDataContainer#dataGroup -->
 		<s:DataGroup id="dataGroup"
 					 itemRenderer="spark.skins.spark.DefaultItemRenderer">

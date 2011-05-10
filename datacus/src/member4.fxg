@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="2.0" viewHeight="100" viewWidth="167" ai:appVersion="15.0.2.399" ATE:version="1.0.0" flm:version="1.0.0" d:using="" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ATE="http://ns.adobe.com/ate/2009" xmlns:ai="http://ns.adobe.com/ai/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:flm="http://ns.adobe.com/flame/2008">
+  <Library/>
+  <Group ai:seqID="1" d:layerType="page" d:pageHeight="100" d:pageWidth="167" d:type="layer" d:userLabel="Artboard 1">
+    <Group ai:seqID="2" d:type="layer" d:userLabel="Layer 1">
+      <Group x="2.5" y="2" ai:seqID="3" flm:knockout="false">
+        <Path winding="nonZero" ai:seqID="4" data="M149 1C156.168 1 162 6.83154 162 14L162 82C162 89.168 156.168 95 149 95L14 95C6.83154 95 1 89.168 1 82L1 14C1 6.83154 6.83154 1 14 1L149 1M149 0 14 0C6.28027 0 0 6.28027 0 14L0 82C0 89.7197 6.28027 96 14 96L149 96C156.72 96 163 89.7197 163 82
+L163 14C163 6.28027 156.72 0 149 0L149 0Z">
+          <fill>
+            <SolidColor color="#A36CAE"/>
+          </fill>
+        </Path>
+        <Rect x="1" y="1" width="161" height="94" radiusX="12.9796" radiusY="12.9796" ai:seqID="5">
+          <fill>
+            <LinearGradient x="80.5005" y="94" scaleX="93.9995" rotation="270">
+              <GradientEntry ratio="0" color="#C592C2"/>
+              <GradientEntry ratio="0.284006" color="#DCBEDA"/>
+              <GradientEntry ratio="0.551297" color="#EEDFED"/>
+              <GradientEntry ratio="0.798665" color="#FAF6FA"/>
+              <GradientEntry ratio="1" color="#FFFFFF"/>
+            </LinearGradient>
+          </fill>
+        </Rect>
+        <Rect x="2" y="2" width="159" height="92" radiusX="11.9992" radiusY="11.9992" ai:seqID="6">
+          <fill>
+            <LinearGradient x="79.5005" y="92" scaleX="91.9995" rotation="270">
+              <GradientEntry ratio="0" color="#9166AC"/>
+              <GradientEntry ratio="1" color="#D8B9D8"/>
+            </LinearGradient>
+          </fill>
+        </Rect>
+      </Group>
+    </Group>
+  </Group>
+  <Private/>
+</Graphic>

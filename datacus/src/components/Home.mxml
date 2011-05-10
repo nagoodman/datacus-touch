@@ -31,49 +31,56 @@
 		<s:State name="Home2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="home" x="0" y="0" height.Home2="300" x.Home2="500" y.Home2="300" width.Home2="400"
-							   height="100" width="140" skinClass="skins.PanelCorner"  width.Home1="154" height.Home1="110"/>
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="HomeMenuLabel" tabStops="S0 S50 S100" text="Home Menu" x="645" y="320" includeIn="Home2"/>
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="QueryMenu" tabStops="S0 S50 S100" text="Create A New Query" x="615" y="350" includeIn="Home2"/>
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="HomeLabel" tabStops="S0 S50 S100" text="Home" horizontalCenter="0" y="20" includeIn="Home1"/>
+		<s:SkinnableContainer id="home" height.Home2="243" x.Home2="541" y.Home2="317" width.Home2="320"
+							   skinClass="skins.PanelCorner" width.Home1="154" height.Home1="110"/>
+		<s:RichText color="#eeeeee" fontSize="14" id="QueryMenu" tabStops="S0 S50 S100" text="Create A New Query" x="640" y="339" includeIn="Home2"/>
+
+		<s:BitmapImage source="@Embed('assets/homelabel.png')"
+					   fillMode="clip"
+					   horizontalCenter="0"
+					   y="15"
+					   id="HomeLabel"
+					   includeIn="Home1"
+					   />
 		<s:BitmapImage source="@Embed('assets/home.png')"
 					   fillMode="clip"
 					   horizontalCenter="0"
 					   top="50"
+					   includeIn="Home1"
 					   />
 	</fx:DesignLayer>	
-	<mx:Form includeIn="Home2" defaultButton="{submitQuery}" id="ConnectionForm" x='535' y='360' >
-		<mx:FormItem label='Connection:' horizontalAlign="center">
-			<s:DropDownList id="connectionDropDown" width='200' height='30'>
+	<mx:Form includeIn="Home2" defaultButton="{submitQuery}" id="ConnectionForm" y="347" x="541">
+		<mx:FormItem color="#eeeeee" label='Connection:' horizontalAlign="center">
+			<s:DropDownList color="#000000" id="connectionDropDown" width='190' height='25'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label='Catalog:' horizontalAlign="center">
-			<s:DropDownList id="catalogDropDown" width='200' height='30'>
+		<mx:FormItem color="#eeeeee" label='Catalog:' horizontalAlign="center">
+			<s:DropDownList id="catalogDropDown" color="#000000" width='190' height='25'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label='Schema:' horizontalAlign="center">
-			<s:DropDownList id="schemaDropDown" width='200' height='30'>
+		<mx:FormItem color="#eeeeee" label='Schema:' horizontalAlign="center">
+			<s:DropDownList id="schemaDropDown" color="#000000" width='190' height='25'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label='Cube:' horizontalAlign="center">
-			<s:DropDownList id="cubeDropDown" width='200' height='30'>
+		<mx:FormItem color="#eeeeee" label='Cube:' horizontalAlign="center">
+			<s:DropDownList id="cubeDropDown" color="#000000" width='190' height='25'>
 				
 			</s:DropDownList>
 		</mx:FormItem>
 		
-		<mx:FormItem label="Query Name" id="QueryNameLabel" required="true" horizontalAlign="center">
-			<s:TextInput id="QueryName" width='200' height='30' />
+		<mx:FormItem color="#eeeeee" label="Query Name:" id="QueryNameLabel" horizontalAlign="center">
+			<s:TextInput id="QueryName" color="#000000" width='190' height='25' />
 		</mx:FormItem>
 		
 		<mx:FormItem direction="horizontal">
-			<s:Button label="Create Query" id="submitQuery" click="FlexGlobals.topLevelApplication.submit_form()" height="30" />
-			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" height="30"/>
+			<s:Button label="Create Query" id="submitQuery" click="FlexGlobals.topLevelApplication.submit_form()" height="25" />
+			<s:Button label="Cancel" id="cancelNewQuery" click="Home_Close()" height="25"/>
 		</mx:FormItem>
 		
 		
@@ -93,9 +100,6 @@
 				<s:Parallel target="{QueryMenu}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
-				<s:Parallel target="{HomeMenuLabel}">
-					<s:Fade duration="500" startDelay="1600"/>
-				</s:Parallel>
 				<s:Parallel target="{ConnectionForm}">
 					<s:Fade duration="500" startDelay="1600"/>
 				</s:Parallel>
@@ -111,9 +115,6 @@
 					<s:Fade duration="500" startDelay="1100"/>
 				</s:Parallel>
 				<s:Parallel target="{QueryMenu}">
-					<s:Fade duration="300" startDelay="0"/>
-				</s:Parallel>
-				<s:Parallel target="{HomeMenuLabel}">
 					<s:Fade duration="300" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{ConnectionForm}">

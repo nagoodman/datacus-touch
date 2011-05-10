@@ -156,19 +156,23 @@
 		
 		
 	</fx:Script>
-	<fx:Style source="../skins/style.css" />
 	<fx:Declarations>
 		
 	</fx:Declarations>
 	<fx:DesignLayer>
 		<s:SkinnableContainer height="109" width="1080" skinClass="skins.PanelH" />
-		<s:RichText color="#eeeeee" fontFamily="Lucida Grande" fontSize="18" id="SeriesLabel" tabStops="S0 S50 S100" text="Series" horizontalCenter="0" y="15" />
+		<s:BitmapImage source="@Embed('assets/serieslabel.png')"
+					   fillMode="clip"
+					   horizontalCenter="0"
+					   y="10"
+					   id="SeriesLabel"
+					   />
 	</fx:DesignLayer>	
 	<s:List id="serList"
-			width="1053"
-			height="50"
-			x="17" y="45"
-			alpha="0.8"
+			width="1024"
+			height="72"
+			x="22" y="31"
+			alpha="1"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			dataProvider="{serDB}" 

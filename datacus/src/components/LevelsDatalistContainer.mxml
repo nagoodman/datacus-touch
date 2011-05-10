@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="197" height="544" y="-100">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
@@ -49,17 +49,17 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:DesignLayer id="LDLCBackground">
-		<s:Rect height="500" id="LevelsDLContainer" width="195" x="0" y="0">
+		<s:Rect height="600" id="LevelsDLContainer" width="195" x="0" y="0">
 		</s:Rect>
 	</fx:DesignLayer>
 	
 	<s:List id="levelsList"
 			width="185"
-			height="480"
+			height="689"
 			dragEnabled="true"
 			dragMoveEnabled="true"
 			allowMultipleSelection="true"
-			x="5" y="5"
+			x="5"
 			skinClass="skins.MyDropSkin" 
 			itemRenderer="itemRenderers.levelItemRenderer">
 		
