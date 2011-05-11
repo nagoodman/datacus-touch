@@ -253,50 +253,34 @@
 			{
 				/*Retrieve data from variables in main file*/
 				tempChartData = FlexGlobals.topLevelApplication.chartData;
-				tempColHeadArray = FlexGlobals.topLevelApplication.columnHeaderArray;
-				tempRowHeadArray = FlexGlobals.topLevelApplication.rowHeaderArray;
-				tempDataCellArray = FlexGlobals.topLevelApplication.dataCellArray;
+				var tempSeriesNames:ArrayCollection = FlexGlobals.topLevelApplication.seriesNames;
 				
 				/*Create Chart and set basic properties*/
 				myChart = new ColumnChart(); 
 				myChart.showDataTips = true;
-				myChart.dataProvider = tempChartData;
+				myChart.dataProvider = FlexGlobals.topLevelApplication.chartData;
 				myChart.height = 550;
 				myChart.width = 1070;
 				
 				/*Define the category axis */
 				var hAxis:CategoryAxis = new CategoryAxis();
-				if (tempChartData[0].ROW_HEADER){
-					hAxis.categoryField = "ROW_HEADER";
-				}else{
-					hAxis.categoryField = "COLUMN_HEADER";
-				}
-				hAxis.dataProvider = tempChartData;
+				hAxis.categoryField = "category";
+				hAxis.dataProvider = FlexGlobals.topLevelApplication.chartData;
+				
+				
 				myChart.horizontalAxis = hAxis;
 				
-				var tempSeriesCol:ColumnSeries;
-				var tempSeriesRow:ColumnSeries;
+				var tempSeries:ColumnSeries;
 				var mySeries:Array=new Array();
 				
 				/*Add the series*/
-				if (tempChartData[0].ROW_HEADER){
-					for( var j:int=0; j< tempColHeadArray.length; j++){
-						tempSeriesCol = new ColumnSeries();
-						tempSeriesCol.dataProvider = tempChartData;
-						tempSeriesCol.yField=tempColHeadArray[j].value;
-						tempSeriesCol.xField = "ROW_HEADER";
-						tempSeriesCol.displayName=tempColHeadArray[j].value;
-						mySeries.push(tempSeriesCol);
-					}
-				}else{
-					for( var k:int=0; k< tempColHeadArray.length; k++){
-						tempSeriesRow = new ColumnSeries();
-						tempSeriesRow.dataProvider = tempChartData;
-						tempSeriesRow.yField=tempColHeadArray[k].value;
-						tempSeriesRow.xField = "COLUMN_HEADER";
-						tempSeriesRow.displayName=tempColHeadArray[k].value;
-						mySeries.push(tempSeriesRow);
-					}
+				for( var j:int=0; j< tempSeriesNames.length; j++){
+					tempSeries = new ColumnSeries();
+					tempSeries.dataProvider = FlexGlobals.topLevelApplication.chartData;
+					tempSeries.yField =  tempSeriesNames[j];
+					tempSeries.xField = "category";
+					tempSeries.displayName = tempSeriesNames[j];
+					mySeries.push(tempSeries);
 				}
 				
 				
