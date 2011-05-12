@@ -2,7 +2,9 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="init()">
+		 creationComplete="init()" height="100%" width="100%" >
+
+	
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
@@ -18,8 +20,6 @@
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
-			import mx.graphics.SolidColorStroke;
-			import mx.graphics.Stroke;
 			
 			import org.osmf.events.TimeEvent;
 			
@@ -80,7 +80,7 @@
 			//Adds three different chart types to the context menu
 			private function addItemsToContextMenu():void{
 				//creates new context menu items
-				DefaultGraphType = new ContextMenuItem('Dafault Graph',false,true,true);
+				DefaultGraphType = new ContextMenuItem('Default Graph',false,true,true);
 				LineGraphType = new ContextMenuItem('Line Graph',false,true,true);
 				AreaGraphType = new ContextMenuItem('Area Graph',false,true,true);
 				
@@ -255,21 +255,26 @@
 				tempChartData = FlexGlobals.topLevelApplication.chartData;
 				var tempSeriesNames:ArrayCollection = FlexGlobals.topLevelApplication.seriesNames;
 				
+				
 				/*Create Chart and set basic properties*/
-				myChart = new ColumnChart(); 
+				myChart = new ColumnChart();
 				myChart.showDataTips = true;
 				myChart.dataProvider = FlexGlobals.topLevelApplication.chartData;
-				myChart.height = 550;
-				myChart.width = 1070;
+				myChart.percentHeight = 75;
+				myChart.percentWidth = 80;
+				myChart.horizontalCenter = -100;
+				myChart.verticalCenter = -80;
+				myChart.setStyle("color", 0xFFFFFF);
+				myChart.setStyle("fontSize", 12);
 				
 				/*Define the category axis */
 				var hAxis:CategoryAxis = new CategoryAxis();
 				hAxis.categoryField = "category";
+				hAxis.ticksBetweenLabels = false;
 				hAxis.dataProvider = FlexGlobals.topLevelApplication.chartData;
 				
-				
 				myChart.horizontalAxis = hAxis;
-				
+
 				var tempSeries:ColumnSeries;
 				var mySeries:Array=new Array();
 				
@@ -290,9 +295,12 @@
 				legend1 = new Legend();
 				legend1.dataProvider = myChart;
 				legend1.direction = "horizontal";
-				legend1.width = 1070;
-				legend1.height = 60;
+				legend1.percentWidth = 50;
+				legend1.percentHeight = 20;
 				legend1.x = 30;
+				legend1.setStyle("color", 0xFFFFFF);
+				legend1.setStyle("fontSize", 12);
+				
 				
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
@@ -513,11 +521,11 @@
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		<s:SolidColor color="blue" >
+		<s:SolidColor color="red" >
 			
 		</s:SolidColor>
 	</fx:Declarations>
 	<fx:DesignLayer>
-		<s:SkinnableContainer height="550" width="1070"  />
+		<s:SkinnableContainer height="70%" width="70%"  />
 	</fx:DesignLayer>
 </s:Group>

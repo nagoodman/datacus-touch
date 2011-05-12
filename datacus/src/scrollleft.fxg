@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="2.0" viewHeight="52" viewWidth="45" ai:appVersion="15.0.2.399" ATE:version="1.0.0" flm:version="1.0.0" d:using="" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ATE="http://ns.adobe.com/ate/2009" xmlns:ai="http://ns.adobe.com/ai/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:flm="http://ns.adobe.com/flame/2008">
+  <Library/>
+  <Group ai:seqID="1" d:layerType="page" d:pageHeight="52" d:pageWidth="45" d:type="layer" d:userLabel="Artboard 1">
+    <Group ai:seqID="2" d:type="layer" d:userLabel="Layer 2">
+      <Group x="6.29346" y="4.75" ai:seqID="3">
+        <Path x="0.331543" y="0.25" ai:seqID="4" data="M32.792 0C25.542 0 25.542 0 19 0 9.125 11 9.125 11 0 22 9.19678 32.0215 8.76221 31.7041 18 42 22.666 42 27.333 42 32 42 23.5586 31.8848 23.5586 31.8848 15 21 21.9912 11.9756 22.4082 11.6006 32.792 0Z">
+          <fill>
+            <LinearGradient x="16.396" y="0" scaleX="42.0005" rotation="90">
+              <GradientEntry ratio="0" color="#FFFFFF"/>
+              <GradientEntry ratio="1" color="#B9B9B9"/>
+            </LinearGradient>
+          </fill>
+          <stroke>
+            <SolidColorStroke weight="0.5" caps="none" joints="miter" miterLimit="10" color="#FFFFFF"/>
+          </stroke>
+        </Path>
+      </Group>
+    </Group>
+  </Group>
+  <Private/>
+</Graphic>

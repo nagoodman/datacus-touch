@@ -69,7 +69,10 @@
 
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="picker" height="620"  x.State1="0" y.State1="0"  width.State1="100%" height.State1="100%" width.State2="100%" horizontalCenter.State2="0" skinClass="skins.PanelV" skinClass.State2="skins.Panel_picker_extended"  height.State2="100%"/>
+		<s:SkinnableContainer id="picker" x.State1="0" y.State1="0" width.State1="100%" 
+							  height.State1="100%" width.State2="100%" horizontalCenter.State2="0" 
+							  skinClass="skins.PanelV" skinClass.State2="skins.Panel_picker_extended" 
+							  height.State2="100%"/>
 			
 	</fx:DesignLayer>
 	
@@ -83,17 +86,17 @@
 	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State2" 
-		right="0" verticalCenter="0" width="10.6%" height="70%" />
+		right="0" verticalCenter="0" width="10.5%" height="70%" />
 	
 	<components:PickerCloseArea id="PickerClose" includeIn="State2" width="10.6%" height="70%" verticalCenter="0" x="{width*0.125}" />
 	
 	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
-											includeIn="State2" x="{width*0.135}"
-											y="{height*0.2}" />
+											includeIn="State2" height="60%" width="10%" 
+											 />
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
 										  includeIn="State2" 
-										  x="{width*0.24}" verticalCenter="0" height="518"/>
+										  x="{width*0.26}" verticalCenter="0" width="61%" height="60%"/>
 	
 	
 	<s:transitions>

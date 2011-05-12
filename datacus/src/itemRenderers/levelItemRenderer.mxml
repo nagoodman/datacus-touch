@@ -23,15 +23,15 @@
 				 color="0xFFFFFF" target="{levellabel}"/>
 		
 	</fx:Declarations>
-	<s:Group>
+	<s:Group height="100%" width="100%">
 		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle" />
+			<s:HorizontalLayout verticalAlign="middle" paddingBottom="6" />
 		</s:layout>
 		<s:SkinnableContainer height="100%" width="100%" backgroundAlpha="0" >
 			<local:level width="100%" height="100%" />
 			
-			<s:Label id="levellabel" text="{data.label}" color="#dddddd" width="90%" height='100%' textAlign="center" fontSize="16" verticalAlign="middle"
-					 mouseOver="glow.play();" mouseOut="unglow.play();" x="10"/>
+			<s:Label id="levellabel" text="{data.label}" color="#dddddd" horizontalCenter="0" verticalCenter="0" fontSize="16"
+					 mouseOver="glow.play();" mouseOut="unglow.play();" />
 		</s:SkinnableContainer>
 	</s:Group>
 </s:ItemRenderer>

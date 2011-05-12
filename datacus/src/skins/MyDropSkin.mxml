@@ -3,7 +3,7 @@
 			 xmlns:s="library://ns.adobe.com/flex/spark"
 			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
 			 blendMode="normal" 
-			 styleName="container">
+			 styleName="container" width="100%" height="100%">
 
 	<fx:Metadata>
 		<![CDATA[ 
@@ -25,12 +25,6 @@
 
 	<!-- fill -->
 	<!--- Defines the background appearance of the list-based component. -->
-	<s:Rect id="background"
-			left="1"
-			right="1"
-			top="1"
-			bottom="1">
-	</s:Rect>
 
 	<!--- The Scroller component to add scroll bars to the list. -->
 	<s:Scroller 
@@ -40,18 +34,18 @@
 				bottom="0"
 				minViewportInset="1"
 				hasFocusableChildren="false"
-				horizontalScrollPolicy="auto"
+				horizontalScrollPolicy="off"
 				verticalScrollPolicy="off"
 				skinClass="skins.scroll"
 				>
 		<!--- @copy spark.components.SkinnableDataContainer#dataGroup -->
 		<s:DataGroup id="dataGroup"
-					 itemRenderer="spark.skins.spark.DefaultItemRenderer">
+					 itemRenderer="spark.skins.spark.DefaultItemRenderer" width="100%" height="100%">
 			<s:layout>
 				<!--- The default layout is vertical and measures at least for 5 rows.
 					 When switching to a different layout, HorizontalLayout for example,
 					 make sure to adjust the minWidth, minHeihgt sizes of the skin -->
-				<s:VerticalLayout gap="0"
+				<s:VerticalLayout gap="10"
 								  horizontalAlign="contentJustify"
 								  requestedMinRowCount="5"/>
 			</s:layout>
