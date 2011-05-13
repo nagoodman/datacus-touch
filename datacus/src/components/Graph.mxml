@@ -210,8 +210,16 @@
 			
 			//Function that controls the categories vs series view of the graph (flips them)
 			public function switchAxis(e:TransformGestureEvent):void{
-				//removes the gestures from the graph so not to register multiple events
-				removeGestures();
+				var rotateMatrix:Matrix = myChart.transform.matrix;
+				var rotatePoint:Point = rotateMatrix.transformPoint(
+					new Point((myChart.width/2), (myChart.height/2)));
+				
+					rotateMatrix.translate(-rotatePoint.x, -rotatePoint.y);
+					rotateMatrix.rotate(e.rotation*(Math.PI/180));
+					rotateMatrix.translate(rotatePoint.x, rotatePoint.y);
+					myChart.transform.matrix = rotateMatrix ;
+					if ( e.phase != 'end')
+						return;
 				
 				//variables for creating query to switch axes
 				var tempServer:String = FlexGlobals.topLevelApplication.serverIDRest;
