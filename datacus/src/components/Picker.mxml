@@ -70,9 +70,9 @@
 	</s:states>
 	<fx:DesignLayer>
 		<s:SkinnableContainer id="picker" x.State1="0" y.State1="0" width.State1="100%" 
-							  height.State1="100%" width.State2="100%" horizontalCenter.State2="0" 
+							  height.State1="100%" width.State2="100%" verticalCenter.State2="0" horizontalCenter.State2="0" 
 							  skinClass="skins.PanelV" skinClass.State2="skins.Panel_picker_extended" 
-							  height.State2="100%"/>
+							  height.State2="90%"/>
 			
 	</fx:DesignLayer>
 	
@@ -84,26 +84,27 @@
 				   includeIn="State1"
 				   />
 	
+	<components:PickerCloseArea id="PickerClose" includeIn="State2" width="10.6%" height="70%" verticalCenter="0" x="{width*0.125}" />
+	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State2" 
 		right="0" verticalCenter="0" width="10.5%" height="70%" />
 	
-	<components:PickerCloseArea id="PickerClose" includeIn="State2" width="10.6%" height="70%" verticalCenter="0" x="{width*0.125}" />
+
 	
-	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
-											includeIn="State2" height="60%" width="10%" 
+	<components:DimensionsDatalistContainer id="DimensionsDLContainer" x="10"
+											includeIn="State2" height="60%" width="10%" verticalCenter.State2="0"
 											 />
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
 										  includeIn="State2" 
 										  x="{width*0.26}" verticalCenter="0" width="61%" height="60%"/>
 	
-	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="State1" toState="State2">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>
+					<s:Move duration="1000" startDelay="300"/>
 					<s:Resize duration="1000" startDelay="300"/>
 				</s:Parallel>
 				<s:Parallel target="{MembersDLContainer}">
@@ -126,7 +127,7 @@
 		<s:Transition autoReverse="true" fromState="State2" toState="State1">
 			<s:Parallel>
 				<s:Parallel target="{picker}">
-					<s:Move autoCenterTransform="true" duration="1000" startDelay="300"/>
+					<s:Move duration="1000" startDelay="300"/>
 					<s:Resize duration="1000" startDelay="300"/>
 				</s:Parallel>
 				<s:Parallel target="{MembersDLContainer}">

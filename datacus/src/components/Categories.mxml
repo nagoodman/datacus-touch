@@ -173,9 +173,8 @@
 					   />
 	</fx:DesignLayer>	
 	<s:List id="catList"
-			width="95%"
-			height="70%"
-			horizontalCenter="-20"
+			width="100%"
+			height="80%"
 			alpha="1"
 			dragEnabled="true"
 			dragMoveEnabled="true"

@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="Connection_creationCompleteHandler(event)" 
-		 height.State2="12%" width.State2="10.4%" width.State1="20%" height.State1="20%">
+		 height.State2="12%" width.State2="10.4%" verticalCenter.State1="0" horizontalCenter.State1="0" width.State1="20%" height.State1="20%">
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
@@ -40,7 +40,7 @@
 	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" horizontalCenter.State1="0" verticalCenter.State1="10">
 		<mx:FormItem label='Server Address:' fontSize="11" color="#eeeeee" horizontalAlign="center">
 			<s:TextInput id="ServerAddy" color="#000000" width='190' height="24" >
-				http://demo.analytical-labs.com
+				http://localhost:8080<!-- http://demo.analytical-labs.com -->
 			</s:TextInput>
 		</mx:FormItem>
 		<mx:FormItem label='User Name:' fontSize="11" color="#eeeeee" horizontalAlign="center">
@@ -84,13 +84,13 @@
 					<s:Resize duration="900" startDelay="600"/>
 				</s:Parallel>
 				<s:Parallel target="{statusImg}">
-					<s:Fade duration="500" startDelay="0"/>
+					<s:Fade duration="0" startDelay="0"/>
 				</s:Parallel>
 				<s:Parallel target="{ConnectionMenu}">
-					<s:Fade duration="500" startDelay="1600"/>
+					<s:Fade duration="0" startDelay="1600"/>
 				</s:Parallel>
 				<s:Parallel target="{ServerForm}">
-					<s:Fade duration="500" startDelay="1600"/>
+					<s:Fade duration="0" startDelay="1600"/>
 				</s:Parallel>
 			</s:Parallel>
 		</s:Transition>
