@@ -4,8 +4,8 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 creationComplete="init()" height="100%" width="100%" >
 
-	
 	<fx:Script>
+		
 		<![CDATA[
 			import com.adobe.serialization.json.JSON;
 			
@@ -274,6 +274,7 @@
 				myChart.verticalCenter = -80;
 				myChart.setStyle("color", 0xFFFFFF);
 				myChart.setStyle("fontSize", 12);
+					
 				
 				/*Define the category axis */
 				var hAxis:CategoryAxis = new CategoryAxis();
@@ -286,12 +287,14 @@
 				var tempSeries:ColumnSeries;
 				var mySeries:Array=new Array();
 				
+				
 				/*Add the series*/
 				for( var j:int=0; j< tempSeriesNames.length; j++){
 					tempSeries = new ColumnSeries();
 					tempSeries.dataProvider = FlexGlobals.topLevelApplication.chartData;
 					tempSeries.yField =  tempSeriesNames[j];
 					tempSeries.xField = "category";
+					tempSeries.styleName="hi";
 					tempSeries.displayName = tempSeriesNames[j];
 					mySeries.push(tempSeries);
 				}

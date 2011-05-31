@@ -64,7 +64,7 @@
 			itemRenderer="itemRenderers.levelItemRenderer">
 		
 		<s:layout>
-			<s:VerticalLayout horizontalAlign="center" paddingTop="10" paddingBottom="10" />
+			<s:VerticalLayout horizontalAlign="center" paddingTop="10" paddingBottom="30" />
 		</s:layout>
 
 		

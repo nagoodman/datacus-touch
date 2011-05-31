@@ -91,7 +91,7 @@
 		
 	</fx:DesignLayer>
 	<s:List id="measuresList"
-			x="{width*0.04}" y="{height*0.08}"
+			x="{width*0.1}" y="{height*0.08}"
 			rendererAdd="addClick(event)"
 			styleName="container"
 			skinClass="skins.MyDropSkin" itemRenderer="itemRenderers.measureItemRenderer" 

@@ -84,7 +84,7 @@
 				   includeIn="State1"
 				   />
 	
-	<components:PickerCloseArea id="PickerClose" includeIn="State2" width="10.6%" height="70%" verticalCenter="0" x="{width*0.125}" />
+	<components:PickerCloseArea id="PickerClose" includeIn="State2" width="10.6%" height="70%" verticalCenter="0" x="{width*0.127}" />
 	
 	<components:LevelsDatalistContainer id="LevelsDLContainer" 
 		includeIn="State2" 
@@ -92,13 +92,13 @@
 	
 
 	
-	<components:DimensionsDatalistContainer id="DimensionsDLContainer" x="10"
-											includeIn="State2" height="60%" width="10%" verticalCenter.State2="0"
+	<components:DimensionsDatalistContainer id="DimensionsDLContainer" 
+											includeIn="State2" height="60%" width="9%" 
 											 />
 	
 	<components:MembersDatalistsContainer id="MembersDLContainer" 
 										  includeIn="State2" 
-										  x="{width*0.26}" verticalCenter="0" width="61%" height="60%"/>
+										  x="{width*0.26}" y="{height*0.16}" width="60.5%" height="60%"/>
 	
 	<s:transitions>
 		<s:Transition autoReverse="true" fromState="State1" toState="State2">

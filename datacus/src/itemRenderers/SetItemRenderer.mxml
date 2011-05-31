@@ -11,7 +11,7 @@
 	</s:states>
 	<s:Group>
 		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle"/>
+			<s:HorizontalLayout verticalAlign="middle" paddingBottom="20" />
 		</s:layout>
 		<s:SkinnableContainer height="50" width="100%" backgroundAlpha="0" >
 			<local:button />

@@ -32,10 +32,10 @@
 			<s:HorizontalLayout verticalAlign="middle"
 								paddingLeft="0"/>
 		</s:layout>
-		<s:SkinnableContainer height="100%" width="100%" >
+		<s:SkinnableContainer height="100%" width="95%" >
 			<local:member1 height="100%" width="100%" x="0" y="0"/>
 			
-			<s:Label id="memberlabel" text="{data.label}" color="#111111" width="100%" textAlign="center" fontWeight="bold" fontSize="20" 
+			<s:Label id="memberlabel" text="{data.label}" color="#111111" width="90%" textAlign="center" fontWeight="bold" fontSize="20" 
 					 horizontalCenter="0" verticalCenter="0"
 					 mouseOver="glow.play();" mouseOut="unglow.play();" />
 		</s:SkinnableContainer>

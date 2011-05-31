@@ -106,11 +106,11 @@
 		<s:State name="Sets2"/>
 	</s:states>
 	<fx:DesignLayer>
-		<s:SkinnableContainer id="setsContainer" height.Sets1="100%" width.Sets1="100%" includeIn="Sets1"
-							  width.Sets2="0%" x.Sets2="520" y.Sets2="-550" skinClass="skins.PanelCorner" />
+		<s:SkinnableContainer id="setsContainer" height.Sets1="100%" width.Sets1="100%" 
+							  width.Sets2="10.6%" height.Sets2="70%"  x.Sets2="635" y.Sets2="140" skinClass.Sets1="skins.PanelCorner" skinClass.Sets2="skins.PanelV"/>
 		<s:BitmapImage source="@Embed('assets/setslabel.png')"
 					   id="SetsLabel"
-					   verticalCenter="-150"
+					   y="160"
 					   horizontalCenter="0"
 					   includeIn="Sets2"/>
 		<s:BitmapImage source="@Embed('assets/setslabel.png')"
@@ -128,12 +128,12 @@
 					   horizontalCenter="0"
 					   includeIn="Sets1"
 					   />
-		<s:Label includeIn="Sets2" fontSize="20" color="#eeeeee" horizontalCenter="100" verticalCenter="-150" click="Sets_Close()" id="closeSets" text="x"/>
+		<s:Label includeIn="Sets2" fontSize="18" color="#eeeeee" horizontalCenter="50" y="166" click="Sets_Close()" id="closeSets" text="x"/>
 	</fx:DesignLayer>
 	<s:List id="setsList" includeIn="Sets2"
 			width.Sets2="200"
-			height.Sets2="300"
-			horizontalCenter="0" verticalCenter="25"
+			height.Sets2="520"
+			horizontalCenter="0" y="190"
 			dataProvider="{setsDB}"
 			rendererAdd="addTouchTap(event)"
 			skinClass="skins.MyDropSkin" doubleClickEnabled="true"

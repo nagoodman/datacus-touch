@@ -108,10 +108,10 @@
 		</s:DataGroup>
 		
 	
-	<local:scrollright id="arrowright" height="40%" width="5%" verticalCenter="0" right="-40"
+	<local:scrollright id="arrowright" height="45%" width="5%" verticalCenter="0" right="-40"
 				 mouseOver="scrollToThere(NavigationUnit.PAGE_RIGHT); glow2.play();" mouseOut="unglow2.play();" />
 	
-	<local:scrollleft id="arrowleft" height="40%" width="5%" verticalCenter="0" left="-40"
+	<local:scrollleft id="arrowleft" height="45%" width="5%" verticalCenter="0" left="-40"
 					  mouseOver="scrollToThere(NavigationUnit.PAGE_LEFT); glow1.play();" mouseOut="unglow1.play();"
 					  />
 				   

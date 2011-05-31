@@ -27,12 +27,12 @@
 		
 	</fx:Declarations>
 	
-	<s:Group height="100%" width="90%">
+	<s:Group height="100%" width="100%">
 		<s:layout>
 			<s:HorizontalLayout verticalAlign="middle"
-								paddingLeft="0" />
+								paddingLeft="0" paddingBottom="12" />
 		</s:layout>
-		<s:SkinnableContainer height="100%" width="100%" backgroundAlpha="0" >
+		<s:SkinnableContainer height="100%" width="90%" backgroundAlpha="0" >
 			<local:button height="100%" width="100%" />
 			<s:Label id="measurelabel" text="{data.label}" textAlign="center" width="90%" color="#cccccc" verticalCenter="0" horizontalCenter="0" fontSize="12"
 					 mouseOver="glow.play();" mouseOut="unglow.play();" />

@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="Connection_creationCompleteHandler(event)" 
-		 height.State2="12%" width.State2="10.4%" verticalCenter.State1="0" horizontalCenter.State1="0" width.State1="20%" height.State1="20%">
+		 height.State2="12%" width.State2="10.4%" verticalCenter.State1="0" horizontalCenter.State1="0" width.State1="20%" height.State1="22%">
 	<fx:Script>
 		<![CDATA[
 			import mx.core.FlexGlobals;
@@ -39,23 +39,23 @@
 	</fx:DesignLayer>	
 	<mx:Form includeIn="State1" defaultButton="{submitConnection}" id="ServerForm" horizontalCenter.State1="0" verticalCenter.State1="10">
 		<mx:FormItem label='Server Address:' fontSize="11" color="#eeeeee" horizontalAlign="center">
-			<s:TextInput id="ServerAddy" color="#000000" width='190' height="24" >
+			<s:TextInput id="ServerAddy" paddingLeft="6" skinClass="skins.roundedtextInput" borderColor="#000000" color="#000000" width='190' height="24" >
 				http://localhost:8080<!-- http://demo.analytical-labs.com -->
 			</s:TextInput>
 		</mx:FormItem>
 		<mx:FormItem label='User Name:' fontSize="11" color="#eeeeee" horizontalAlign="center">
-			<s:TextInput id="Uname" color="#000000" width='190' height="24" >
+			<s:TextInput id="Uname" paddingLeft="6" skinClass="skins.roundedtextInput" borderColor="#000000" color="#000000" width='190' height="24" >
 				admin
 			</s:TextInput>
 		</mx:FormItem>
 		<mx:FormItem label='Password:' fontSize="11" color="#eeeeee" horizontalAlign="center">
-			<s:TextInput id="Passwd" color="#000000" width='190' height="24">
+			<s:TextInput id="Passwd"  paddingLeft="6" skinClass="skins.roundedtextInput" borderColor="#000000" color="#000000" width='190' height="24">
 				admin
 			</s:TextInput>
 		</mx:FormItem>		
 		<mx:FormItem direction="horizontal">
-			<s:Button label="Connect" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" height="25"/>
-			<s:Button label="Cancel" id="cancelNewConnection" click="Connection_Close()" height="25"/>
+			<s:Button label="Connect" cornerRadius="4" fontSize="11" id="submitConnection" click="FlexGlobals.topLevelApplication.submit_conn()" height="25"/>
+			<s:Button label="Cancel"  cornerRadius="4" fontSize="11" id="cancelNewConnection" click="Connection_Close()" height="25"/>
 		</mx:FormItem>
 	</mx:Form>
 	
