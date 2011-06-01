@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="init()" height="100%" width="100%" >
+		 creationComplete="init()" height="100%" width="100%" xmlns:local="*" >
 
 	<fx:Script>
 		
@@ -20,6 +20,7 @@
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
+			import mx.graphics.LinearGradient;
 			
 			import org.osmf.events.TimeEvent;
 			
@@ -66,6 +67,8 @@
 				
 				//adds options to the context menu
 				addItemsToContextMenu();
+				
+				
 			}
 			
 			//opens the context menu with the loaded graphs
@@ -130,6 +133,7 @@
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
 				FlexGlobals.topLevelApplication.graphLegend.removeAllElements();
 				updateGraph();
+				
 			}
 			
 			//Forms a line graph
@@ -165,8 +169,11 @@
 				//adds a bar chart to the graph area
 				updateGraph();
 				
+				
 				//re-adds gestures to the graph area
 				timeGestures();
+				
+				
 			}
 			
 			//Forms a line graph
@@ -256,6 +263,7 @@
 				timeGestures();
 			}
 			
+			
 			//produces the data for the column bar graph
 			public function updateGraph():void
 			{
@@ -274,6 +282,7 @@
 				myChart.verticalCenter = -80;
 				myChart.setStyle("color", 0xFFFFFF);
 				myChart.setStyle("fontSize", 12);
+				legendbg.visible = true;
 					
 				
 				/*Define the category axis */
@@ -282,11 +291,13 @@
 				hAxis.ticksBetweenLabels = false;
 				hAxis.dataProvider = FlexGlobals.topLevelApplication.chartData;
 				
+				
 				myChart.horizontalAxis = hAxis;
 
 				var tempSeries:ColumnSeries;
 				var mySeries:Array=new Array();
 				
+				import mx.charts.renderers.ShadowBoxItemRenderer;
 				
 				/*Add the series*/
 				for( var j:int=0; j< tempSeriesNames.length; j++){
@@ -294,9 +305,11 @@
 					tempSeries.dataProvider = FlexGlobals.topLevelApplication.chartData;
 					tempSeries.yField =  tempSeriesNames[j];
 					tempSeries.xField = "category";
-					tempSeries.styleName="hi";
+					//tempSeries.setStyle("fill", 0x66CCFF);
+					tempSeries.setStyle("itemRenderer", new ClassFactory(ShadowBoxItemRenderer));
 					tempSeries.displayName = tempSeriesNames[j];
 					mySeries.push(tempSeries);
+					
 				}
 				
 				
@@ -310,7 +323,8 @@
 				legend1.percentHeight = 20;
 				legend1.x = 30;
 				legend1.setStyle("color", 0xFFFFFF);
-				legend1.setStyle("fontSize", 12);
+				legend1.setStyle("fontSize", 14);
+				
 				
 				
 				FlexGlobals.topLevelApplication.graph.removeAllElements();
@@ -537,6 +551,8 @@
 		</s:SolidColor>
 	</fx:Declarations>
 	<fx:DesignLayer>
+		<local:legend id="legendbg" x="180" y="140" visible="false" />
 		<s:SkinnableContainer height="70%" width="70%"  />
+		
 	</fx:DesignLayer>
 </s:Group>

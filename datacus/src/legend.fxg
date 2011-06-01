@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="2.0" viewHeight="40" viewWidth="156" ai:appVersion="15.0.2.399" ATE:version="1.0.0" flm:version="1.0.0" d:id="1" d:using="" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ATE="http://ns.adobe.com/ate/2009" xmlns:ai="http://ns.adobe.com/ai/2009" xmlns:d="http://ns.adobe.com/fxg/2008/dt" xmlns:flm="http://ns.adobe.com/flame/2008">
+  <Library/>
+  <Group ai:artboardActive="1" ai:artboardIndex="0" ai:seqID="1" d:layerType="page" d:pageHeight="40" d:pageWidth="156" d:type="layer" d:userLabel="Artboard 1">
+    <Group ai:objID="755a580" ai:seqID="2" d:id="2" d:type="layer" d:userLabel="Layer 1">
+      <Group x="4" y="4" ai:objID="ead0380" ai:seqID="3" d:id="3">
+        <Rect x="0.5" y="0.5" width="145" height="32" radiusX="8.98522" radiusY="8.98522" ai:objID="edbeb00" ai:seqID="4" flm:variant="1" d:id="4">
+          <fill>
+            <LinearGradient x="72.5" y="0" scaleX="32" rotation="90">
+              <GradientEntry ratio="0" color="#A6A4A5"/>
+              <GradientEntry ratio="0.155726" color="#686668"/>
+              <GradientEntry ratio="0.243909" color="#535153"/>
+              <GradientEntry ratio="0.342385" color="#454345"/>
+              <GradientEntry ratio="0.567543" color="#373537"/>
+              <GradientEntry ratio="1" color="#353335"/>
+            </LinearGradient>
+          </fill>
+        </Rect>
+        <Rect x="1.5" y="1.5" width="143" height="30" radiusX="7.99944" radiusY="7.99944" ai:objID="ea96180" ai:seqID="5" flm:variant="2" d:id="5">
+          <fill>
+            <LinearGradient x="71.5" y="0" scaleX="30" rotation="90">
+              <GradientEntry ratio="0" color="#232324"/>
+              <GradientEntry ratio="1"/>
+              <GradientEntry ratio="1"/>
+            </LinearGradient>
+          </fill>
+        </Rect>
+        <Rect x="0.5" y="0.5" width="145" height="32" radiusX="8.98522" radiusY="8.98522" ai:objID="ea90c00" ai:seqID="6">
+          <stroke>
+            <SolidColorStroke caps="none" joints="miter" miterLimit="4" color="#231F20"/>
+          </stroke>
+        </Rect>
+      </Group>
+    </Group>
+  </Group>
+  <Private variant:using="" mngo:using="" xmlns:mngo="http://ns.adobe.com/flamingo/apd" xmlns:variant="http://ns.adobe.com/flame/2008/apd">
+    <mngo:VariantContent fpdNS="http://ns.adobe.com/flame/2008/apd" fpdPRE="variant" flm:hashcode="72F1C9B9192DB7315D4CBE769A799312" flm:original="1" d:ref="#4">
+      <variant:Rect x="0.5" y="0.5" width="145" height="32" radiusX="8.98522" radiusY="8.98522" ai:objID="edbeb00" ai:seqID="4">
+        <variant:fill>
+          <variant:LinearGradient x="72.5" y="0" scaleX="32" rotation="90">
+            <variant:GradientEntry ratio="0" color="#A6A4A5" flm:midpoint="0.13754599571228"/>
+            <variant:GradientEntry ratio="1" color="#353335"/>
+          </variant:LinearGradient>
+        </variant:fill>
+      </variant:Rect>
+    </mngo:VariantContent>
+    <mngo:VariantContent fpdNS="http://ns.adobe.com/flame/2008/apd" fpdPRE="variant" flm:hashcode="DD5B3E6414E5287A26241773F5B9231B" flm:original="2" d:ref="#5">
+      <variant:Rect x="1.5" y="1.5" width="143" height="30" radiusX="7.99944" radiusY="7.99944" ai:objID="ea96180" ai:seqID="5">
+        <variant:fill>
+          <variant:LinearGradient x="71.5" y="0" scaleX="30" rotation="90">
+            <variant:GradientEntry ratio="0" color="#232324" flm:midpoint="0.515151977539063"/>
+            <variant:GradientEntry ratio="1"/>
+            <variant:GradientEntry ratio="1"/>
+          </variant:LinearGradient>
+        </variant:fill>
+      </variant:Rect>
+    </mngo:VariantContent>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dict data="B writeImages 1 B includeXMP 0 B includeSymbol 0 B aiEditCap 1 I versionKey 2 I expandBlendsOption 1 B downsampleLinkedImages 0 I rasterizeResolution 72 I preserveGradientPolicy 4 I preserveFilterPolicy 2 I preserveTextPolicy 4 B includeObjectOutsideArtboard 0 "/>
+      </ai:SaveOptions>
+      <ai:DocData base="legend.assets/images" rulerCanvasDiffH="156.5" rulerCanvasDiffV="196.5">
+        <ai:DocRasterSettings>
+          <ai:Dict data="R padd 36 B mask 0 B spot 1 B alis 0 I dpi. 300 I colr 5 "/>
+        </ai:DocRasterSettings>
+      </ai:DocData>
+      <ai:AutoGenImageList>
+        <ai:Dict/>
+      </ai:AutoGenImageList>
+    </ai:PrivateElement>
+    <ai:PrivateElement flm:hashcode="117A3434B728B3BE7AD6DBF05DD37FBB" d:ref="#2">
+      <ai:LayerOptions color="5 79.31 257 128.502"/>
+    </ai:PrivateElement>
+    <ai:PrivateElement alternate="1" flm:hashcode="9E353AF1839F3C5571072EFAA6933ADE" d:ref="#3">
+      <ai:Rect height="30" radiusX="7.999" radiusY="7.999" width="143" x="5.5" y="5.5">
+        <ai:ArtStyle>
+          <ai:PaintFields>
+            <ai:Stroke color="1 0.698 0.675 0.639 0.74" focus="1" miterLimit="4" weight="1">
+              <ai:LiveEffects>
+                <ai:LiveEffect index="0" major="1" minor="0" name="Adobe Offset Path">
+                  <ai:Dict data="I jntp 2 R mlim 4 R ofst 1 "/>
+                </ai:LiveEffect>
+              </ai:LiveEffects>
+            </ai:Stroke>
+            <ai:Fill color="4">
+              <ai:Gradient angle="-90" gradientType="linear" length="30" originX="71.5" originY="0">
+                <ai:GradientStops>
+                  <ai:GradientStop color="1 0.72 0.661 0.636 0.712" midPoint="51.515" rampPoint="0"/>
+                  <ai:GradientStop color="1 0.75 0.68 0.67 0.902" rampPoint="100"/>
+                  <ai:GradientStop color="1 0.75 0.68 0.67 0.902" rampPoint="100"/>
+                </ai:GradientStops>
+              </ai:Gradient>
+            </ai:Fill>
+            <ai:Fill color="4" focus="1">
+              <ai:Gradient angle="-90" gradientType="linear" length="30" originX="71.5" originY="0">
+                <ai:GradientStops>
+                  <ai:GradientStop color="1 0.371 0.306 0.302 0.001" midPoint="13.755" rampPoint="0"/>
+                  <ai:GradientStop color="1 0.692 0.646 0.604 0.57" rampPoint="100"/>
+                </ai:GradientStops>
+              </ai:Gradient>
+              <ai:LiveEffects>
+                <ai:LiveEffect index="0" major="1" minor="0" name="Adobe Offset Path">
+                  <ai:Dict data="I jntp 2 R mlim 4 R ofst 1 "/>
+                </ai:LiveEffect>
+              </ai:LiveEffects>
+            </ai:Fill>
+          </ai:PaintFields>
+        </ai:ArtStyle>
+      </ai:Rect>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

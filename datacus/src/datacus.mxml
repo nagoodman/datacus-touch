@@ -822,7 +822,13 @@
 					o.category = currRow[0].value;
 					// Iterate over remaining columns (using SeriesNames has the column name)
 					for ( var colNum:int = 1; colNum < currRow.length ; colNum ++ ) {
-						 o[seriesNames[colNum - 1]] = currRow[colNum].value;
+						 // NG: Superhack
+						// Remove when we have access to an unformatted .value from 
+						// JSON services
+						 var tmpString:String = currRow[colNum].value;
+						 tmpString = tmpString.replace(",", "");
+						 tmpString = tmpString.replace("$", "");
+						 o[seriesNames[colNum - 1]] = tmpString;
 					}
 					
 					chartData.addItem(o);
